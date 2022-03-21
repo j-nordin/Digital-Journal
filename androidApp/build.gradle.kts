@@ -44,4 +44,8 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     implementation("androidx.compose.ui:ui-test-junit4:$compose_version")
     implementation ("androidx.compose.material:material-icons-extended:$compose_version")
+
+    //Preview Composables
+    debugImplementation ("androidx.compose.ui:ui-tooling:1.1.1")
+    implementation ("androidx.compose.ui:ui-tooling-preview:1.1.1")
 }
