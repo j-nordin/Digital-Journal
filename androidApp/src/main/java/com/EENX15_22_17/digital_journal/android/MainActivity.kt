@@ -7,7 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import com.EENX15_22_17.digital_journal.Greeting
+import androidx.compose.ui.res.stringResource
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,14 +18,10 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-fun greet(): String {
-    return Greeting().greeting()
-}
-
 @Composable
 fun HelloWorld() {
     return Row() {
-        Text(text = "Hello World!")
+        Text(stringResource(R.string.helloworld))
     }
 }
 
