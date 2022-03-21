@@ -15,7 +15,7 @@ class CurrentPatientItemIntrumentalTest {
     val composeTestRule = createAndroidComposeRule<MainActivity>()
 
     @Test
-    fun testHelloWorld() {
+    fun testPatientItem() {
         composeTestRule.onNodeWithText("This is a card")
     }
 }

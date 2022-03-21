@@ -16,7 +16,7 @@ class MainActivityKtInstrumentalTest {
     @Test
     fun testHelloWorld() {
         composeTestRule.onNodeWithText("Hello World!")
-            .assertExists();
+            .assertExists()
     }
 
 }

@@ -15,7 +15,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             //HelloWorld()
-            CurrentPatientItem().PatientCard()
+            CurrentPatientItem().PatientCard(name = "PatientNamn",
+                securityNumber = "19990502-xxxx")
         }
     }
 }
