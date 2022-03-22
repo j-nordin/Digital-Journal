@@ -15,16 +15,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            CurrentPatientsList().Patientslist()
+            CurrentPatientsList().PatientsList()
         }
     }
 }
-
-@Composable
-fun HelloWorld() {
-    return Row() {
-        Text(stringResource(R.string.helloworld))
-    }
-}
-
-

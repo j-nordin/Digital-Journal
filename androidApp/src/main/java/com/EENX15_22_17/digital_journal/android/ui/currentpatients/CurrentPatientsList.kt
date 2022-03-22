@@ -4,9 +4,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 
-class CurrentPatientsList() {
+class CurrentPatientsList {
 
-    val patients: List<CurrentPatientsData> = listOf(
+    // Temporary data before backend is implemented
+    private val patients: List<CurrentPatientsData> = listOf(
         CurrentPatientsData(
             patientId = "1",
             patientName ="Erik Karlsson",
@@ -25,23 +26,15 @@ class CurrentPatientsList() {
     )
 
     @Composable
-    fun Patientslist() {
+    fun PatientsList() {
         Column {
             for (patient in patients) {
                 CurrentPatientItem().PatientCard(
                     patientId= patient.patientId,
                     name = patient.patientName,
-                    securityNumber = patient.patientSecurityNumber,
-                    showComments = { println(it)}
+                    securityNumber = patient.patientSecurityNumber
                 )
             }
         }
     }
-
-    @Composable
-    fun showOverviewTest(patientId: String) {
-        Text(text = patientId)
-    }
-
-
 }
