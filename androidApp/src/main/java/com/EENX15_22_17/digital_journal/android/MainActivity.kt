@@ -31,6 +31,7 @@ sealed class Screen(val route: String) {
     object NotIndex: Screen(route = "notIndex")
 }
 
+@Preview
 @Composable
 fun NavigationApp() {
     val navController = rememberNavController()
