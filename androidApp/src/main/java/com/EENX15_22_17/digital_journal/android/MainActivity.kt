@@ -16,8 +16,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.compose.runtime.Composable
-import androidx.compose.foundation.layout.Row
-import androidx.compose.ui.res.stringResource
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +24,11 @@ class MainActivity : ComponentActivity() {
             NavigationApp()
         }
     }
+}
+
+sealed class Screen(val route: String) {
+    object Index: Screen(route ="index")
+    object NotIndex: Screen(route = "notIndex")
 }
 
 @Composable
@@ -37,11 +40,6 @@ fun NavigationApp() {
     }
 }
 
-sealed class Screen(val route: String) {
-    object Index: Screen(route ="index")
-    object NotIndex: Screen(route = "notIndex")
-}
-
 private fun NavGraphBuilder.addIndexGraph(navController: NavController) {
     composable(route = Screen.Index.route) {
         IndexScreen(navToNotIndex = { navController.navigate(Screen.NotIndex.route) })
@@ -51,14 +49,6 @@ private fun NavGraphBuilder.addIndexGraph(navController: NavController) {
 private fun NavGraphBuilder.addNotIndexGraph(navController: NavController) {
     composable(route = Screen.NotIndex.route) {
         NotIndexScreen(navToIndex = { navController.navigate(Screen.Index.route) })
-    }
-}
-
-
-@Composable
-fun HelloWorld() {
-    return Row() {
-        Text(stringResource(R.string.helloworld))
     }
 }
 
