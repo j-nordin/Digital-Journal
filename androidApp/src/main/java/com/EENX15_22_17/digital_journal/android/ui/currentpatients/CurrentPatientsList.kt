@@ -3,11 +3,13 @@ package com.EENX15_22_17.digital_journal.android.ui.currentpatients
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 
 class CurrentPatientsList {
 
     // Temporary data before backend is implemented
-    private val patients: List<CurrentPatientsData> = listOf(
+    private val defaultPatients: List<CurrentPatientsData> = listOf(
         CurrentPatientsData(
             patientId = "1",
             patientName ="Erik Karlsson",
@@ -25,8 +27,10 @@ class CurrentPatientsList {
         )
     )
 
+    @Preview
     @Composable
-    fun PatientsList() {
+    fun PatientsList(@PreviewParameter(SampleCurrentPatientsProvider::class)
+                     patients: List<CurrentPatientsData> = defaultPatients) {
         Column {
             for (patient in patients) {
                 CurrentPatientItem().PatientCard(
