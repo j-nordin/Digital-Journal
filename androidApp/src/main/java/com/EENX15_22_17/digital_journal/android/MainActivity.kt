@@ -40,6 +40,12 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+sealed class Screen(val route: String) {
+    object Index: Screen(route ="index")
+    object NotIndex: Screen(route = "notIndex")
+}
+
+@Preview
 @Composable
 fun NavigationApp() {
     val navController = rememberNavController()
@@ -47,11 +53,6 @@ fun NavigationApp() {
         addIndexGraph(navController = navController)
         addNotIndexGraph(navController = navController)
     }
-}
-
-sealed class Screen(val route: String) {
-    object Index: Screen(route ="index")
-    object NotIndex: Screen(route = "notIndex")
 }
 
 private fun NavGraphBuilder.addIndexGraph(navController: NavController) {
@@ -83,3 +84,5 @@ fun NotIndexScreen(@PreviewParameter(NotIndexScreenProvider::class) navToIndex: 
         Text("Click for index")
     }
 }
+
+
