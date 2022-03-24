@@ -1,3 +1,47 @@
 package com.EENX15_22_17.digital_journal.android.ui.arrivalpage
 
-data class ArrivalDataClass()
+import java.util.*
+
+data class ArrivalDataClass(
+    val date: Date,
+    var timestamp: String,
+    val ess: Int,
+    val secrecy: YesAndNoAndNoAnswer,
+    val reservation: String,
+    val confirmedIdentity: Boolean,
+    val samsa: Boolean,
+    val relativeName: String,
+    val relativePhoneNumber: String,
+    val children: Array<Int>,
+    val concernReport: Boolean,
+    val arrivalMethod: ArrivalMethod,
+    val law: Law
+)
+
+enum class YesAndNoAndNoAnswer {
+    YES,
+    NO,
+    NO_ANSWER
+}
+
+enum class ArrivalMethod {
+    OWN_INITIATIVE,
+    RELATIVE,
+    REMISS,
+    MEDICINE,
+    ALONE,
+    AMBULANCE,
+    POLICE,
+    OTHER,
+    UNKNOWN
+}
+
+enum class Law {
+    HSL,
+    LPT,
+    FORTYSEVEN,
+    VI,
+    LRV,
+    LVM,
+    UNKNOWN
+}
