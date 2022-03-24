@@ -1,5 +1,8 @@
-import androidx.compose.ui.test.*
+
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.onAllNodesWithContentDescription
+import androidx.compose.ui.test.onNodeWithText
 import com.EENX15_22_17.digital_journal.android.MainActivity
 import org.junit.Rule
 import org.junit.Test
@@ -30,12 +33,12 @@ class MainActivityKtInstrumentalTest {
     @Test
     fun testIconButtons() {
         // TODO: When backend comes we need mockdata to get the length
-        val currentPatientslength = 3
+        val currentPatientsLength = 3
         composeTestRule.onAllNodesWithContentDescription("Comments")
-            .assertCountEquals(currentPatientslength)
+            .assertCountEquals(currentPatientsLength)
         composeTestRule.onAllNodesWithContentDescription("Overview")
-            .assertCountEquals(currentPatientslength)
+            .assertCountEquals(currentPatientsLength)
         composeTestRule.onAllNodesWithContentDescription("Warnings")
-            .assertCountEquals(currentPatientslength)
+            .assertCountEquals(currentPatientsLength)
     }
 }
