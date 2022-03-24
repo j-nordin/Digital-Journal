@@ -16,6 +16,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.unit.dp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,47 +28,49 @@ class MainActivity : ComponentActivity() {
 }
 
 sealed class Screen(val route: String) {
-    object Index: Screen(route ="index")
-    object NotIndex: Screen(route = "notIndex")
+    object Overview: Screen(route ="overview")
+    /*TODO: should take a patientId as parameter*/
+    object PatientMeeting: Screen(route = "patientMeeting")
 }
 
 @Preview
 @Composable
 fun NavigationApp() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = Screen.Index.route) {
-        addIndexGraph(navController = navController)
-        addNotIndexGraph(navController = navController)
+    NavHost(navController = navController, startDestination = Screen.Overview.route) {
+        addOverviewGraph(navController = navController)
+        addPatientMeetingGraph(navController = navController)
     }
 }
 
-private fun NavGraphBuilder.addIndexGraph(navController: NavController) {
-    composable(route = Screen.Index.route) {
-        IndexScreen(navToNotIndex = { navController.navigate(Screen.NotIndex.route) })
+private fun NavGraphBuilder.addOverviewGraph(navController: NavController) {
+    composable(route = Screen.Overview.route) {
+        OverviewScreen(navToPatientMeeting = { navController.navigate(Screen.PatientMeeting.route) })
     }
 }
 
-private fun NavGraphBuilder.addNotIndexGraph(navController: NavController) {
-    composable(route = Screen.NotIndex.route) {
-        NotIndexScreen(navToIndex = { navController.navigate(Screen.Index.route) })
+private fun NavGraphBuilder.addPatientMeetingGraph(navController: NavController) {
+    composable(route = Screen.PatientMeeting.route) {
+        /*TODO patientmeeting screen should take a patient id as argument, the argument comes from the given route*/
+        PatientMeetingScreen(navToOverview = { navController.navigate(Screen.Overview.route) })
     }
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
-fun IndexScreen(@PreviewParameter(NotIndexScreenProvider::class) navToNotIndex: () -> Unit) {
-    Column(modifier = Modifier.fillMaxWidth()) {
-        Button(onClick = navToNotIndex) {
-            Text("Click for notTndex")
+fun OverviewScreen(@PreviewParameter(OverviewScreenProvider::class) navToPatientMeeting: () -> Unit) {
+    Column(modifier = Modifier.fillMaxWidth().padding(40.dp)) {
+        Button(onClick = navToPatientMeeting) {
+            Text("Click for PatientMeeting")
         }
     }
 }
 
 @Preview
 @Composable
-fun NotIndexScreen(@PreviewParameter(NotIndexScreenProvider::class) navToIndex: () -> Unit) {
-    Button(onClick = navToIndex) {
-        Text("Click for index")
+fun PatientMeetingScreen(@PreviewParameter(OverviewScreenProvider::class) navToOverview: () -> Unit) {
+    Button(onClick = navToOverview) {
+        Text("Click for overview")
     }
 }
 
