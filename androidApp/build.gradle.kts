@@ -1,3 +1,4 @@
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -37,6 +38,12 @@ dependencies {
     implementation("androidx.compose.material:material:1.2.0-alpha03")
     implementation("androidx.compose.ui:ui:1.2.0-alpha03")
     implementation("androidx.activity:activity-compose:1.5.0-alpha02")
+    implementation("androidx.navigation:navigation-compose:2.4.1")
+    implementation("androidx.compose.ui:ui-tooling:1.2.0-alpha03")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.6.10")
+    implementation("androidx.navigation:navigation-compose:2.4.1")
+    implementation("androidx.compose.ui:ui-tooling:1.2.0-alpha03")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.6.10")
     androidTestImplementation("junit:junit:4.13.2")
     debugImplementation("androidx.compose.ui:ui-test-manifest:1.2.0-alpha05")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
