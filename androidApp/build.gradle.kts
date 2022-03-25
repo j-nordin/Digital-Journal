@@ -37,8 +37,8 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.4.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.3")
     implementation("androidx.compose.material:material:$compose_version")
-    implementation("androidx.compose.ui:ui:1.2.0-alpha03")
-    implementation("androidx.activity:activity-compose:1.5.0-alpha02")
+    implementation("androidx.compose.ui:ui:1.2.0-alpha05")
+    implementation("androidx.activity:activity-compose:1.5.0-alpha03")
     androidTestImplementation("junit:junit:4.13.2")
     debugImplementation("androidx.compose.ui:ui-test-manifest:$compose_version")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
@@ -48,4 +48,7 @@ dependencies {
     //Preview Composables
     debugImplementation ("androidx.compose.ui:ui-tooling:1.1.1")
     implementation ("androidx.compose.ui:ui-tooling-preview:1.1.1")
+
+    //material dialogs components
+    implementation ("io.github.vanpra.compose-material-dialogs:datetime:0.7.0")
 }

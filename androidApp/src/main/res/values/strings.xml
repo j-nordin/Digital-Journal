@@ -2,4 +2,5 @@
 <resources>
     <string name="helloworld">Hello World!</string>
     <string name="arrivalTime">Ankomsttid</string>
+    <string name="essNumber">ESS</string>
 </resources>

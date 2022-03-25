@@ -5,7 +5,7 @@ import java.util.*
 data class ArrivalDataClass(
     val date: Date,
     var timestamp: String,
-    val ess: Int,
+    var ess: String,
     val secrecy: YesAndNoAndNoAnswer,
     val reservation: String,
     val confirmedIdentity: Boolean,
@@ -21,7 +21,8 @@ data class ArrivalDataClass(
 enum class YesAndNoAndNoAnswer {
     YES,
     NO,
-    NO_ANSWER
+    NO_ANSWER,
+    UNKOWN
 }
 
 enum class ArrivalMethod {
