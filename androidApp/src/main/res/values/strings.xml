@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="helloworld">Hello World!</string>
+    <string name="arrivalCard">Ankomst</string>
+    <string name="hazardCard">Farlighetsbedömning</string>
 </resources>
