@@ -54,4 +54,7 @@ dependencies {
     //Preview Composables
     debugImplementation ("androidx.compose.ui:ui-tooling:1.1.1")
     implementation ("androidx.compose.ui:ui-tooling-preview:1.1.1")
+
+    //material dialogs components
+    implementation ("io.github.vanpra.compose-material-dialogs:datetime:0.7.0")
 }
