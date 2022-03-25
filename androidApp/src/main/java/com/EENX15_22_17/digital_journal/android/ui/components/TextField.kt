@@ -9,6 +9,7 @@ import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.text.TextStyle
@@ -23,8 +24,9 @@ import androidx.compose.ui.unit.sp
 fun TitledTextField(
     title: String,
     onChangeText: (textValue: String) -> Unit = {},
+    textValue: String
 ) {
-    var text by remember { mutableStateOf("") }
+    var text by rememberSaveable { mutableStateOf(textValue) }
     Box {
         OutlinedTextField(
             value = text,
@@ -48,8 +50,9 @@ fun TitledTextField(
 fun TitledTextFieldDigitKeyboard(
     title: String,
     onChangeText: (textValue: String) -> Unit = {},
+    textValue: String
 ) {
-    var text by remember { mutableStateOf("") }
+    var text by rememberSaveable { mutableStateOf(textValue)}
     Box {
         OutlinedTextField(
             value = text,

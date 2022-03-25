@@ -14,30 +14,33 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.text.isDigitsOnly
 import com.EENX15_22_17.digital_journal.android.R
-import com.EENX15_22_17.digital_journal.android.ui.components.TitledTextField
 import com.EENX15_22_17.digital_journal.android.ui.components.TitledTextFieldDigitKeyboard
 
 @Composable
-fun ArrivalContent(arrivalViewModel: ArrivalViewModel = ArrivalViewModel()) {
+fun ArrivalContent(
+    arrivalViewModel: ArrivalViewModel = ArrivalViewModel()
+) {
     Row(
         Modifier.padding(16.dp),
         horizontalArrangement = Arrangement.SpaceBetween
-    )
-    {
+    ) {
         DateField(
             date = arrivalViewModel.getTimestamp())
         ArrivalTime(
             setTimestamp =  {
                 arrivalViewModel.arrivalStates.timestamp = it
                 println( arrivalViewModel.arrivalStates.timestamp)
-            }
+            },
+            timeStamp = arrivalViewModel.arrivalStates.timestamp
         )
-        EssNumber(setEssNumber = {
+        EssNumber(
+            setEssNumber = {
             arrivalViewModel.arrivalStates.ess = it
-            println( arrivalViewModel.arrivalStates.ess)
-        })
+            println(arrivalViewModel.arrivalStates.ess)
+        },
+            arrivalViewModel.arrivalStates.ess
+        )
     }
 }
 
@@ -60,7 +63,7 @@ fun DateField(date : String) {
 }
 
 @Composable
-fun ArrivalTime(setTimestamp: (ts: String) -> Unit ) {
+fun ArrivalTime(setTimestamp: (ts: String) -> Unit, timeStamp: String) {
     Row(
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -73,18 +76,20 @@ fun ArrivalTime(setTimestamp: (ts: String) -> Unit ) {
             title = stringResource(id = R.string.arrivalTime),
             onChangeText = {
                  setTimestamp(it)
-            }
+            },
+            textValue = timeStamp
         )
     }
 }
 
 @Composable
-fun EssNumber(setEssNumber: (ess: String) -> Unit) {
+fun EssNumber(setEssNumber: (ess: String) -> Unit, essNumber: String) {
     TitledTextFieldDigitKeyboard(
         title = stringResource(id = R.string.essNumber),
         onChangeText = {
             //TODO: Fix so ess not a string
             setEssNumber(it)
-        }
+        },
+        textValue = essNumber
     )
 }
