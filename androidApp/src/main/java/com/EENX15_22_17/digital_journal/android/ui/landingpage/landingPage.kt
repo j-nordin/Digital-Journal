@@ -12,33 +12,47 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.EENX15_22_17.digital_journal.android.R
+import com.EENX15_22_17.digital_journal.android.ui.theme.lineFourColor
 import com.EENX15_22_17.digital_journal.android.ui.theme.lineOneCard
 import com.EENX15_22_17.digital_journal.android.ui.theme.lineTwoCard
 
 class landingPage {
 
     enum class NavigationEnum {
-        ARRIVAL, DANGER, CONTACT_REASON, PREVIOUS_CARE, HEALTH_HISTORY, HEALTH_NOW
+        ARRIVAL, DANGER, CONTACT_REASON, PREVIOUS_CARE, HEALTH_HISTORY, HEALTH_NOW, SUICIDE_ASSESSMENT, NURSING_NEED, MEDICAL_ORDER, INTERIM_JOURNAL
     }
 
     object ModifierProvider {
 
-        fun lineOneModifier(
+        fun cardModifier(
             NavigationTarget: NavigationEnum,
             navigateToForm: (nav: NavigationEnum) -> Unit = {}
         ): Modifier {
             return if (NavigationTarget == NavigationEnum.ARRIVAL || NavigationTarget == NavigationEnum.DANGER) {
                 Modifier
-                    .height(100.dp)
+                    .height(90.dp)
                     .width(170.dp)
                     .clickable { navigateToForm(NavigationTarget) }
             } else if (NavigationTarget == NavigationEnum.CONTACT_REASON || NavigationTarget == NavigationEnum.PREVIOUS_CARE || NavigationTarget == NavigationEnum.HEALTH_HISTORY) {
                 return Modifier
+                    .height(90.dp)
                     .width(110.dp)
-                    .height(100.dp)
+                    .clickable { navigateToForm(NavigationTarget) }
+            } else if (NavigationTarget == NavigationEnum.HEALTH_NOW || NavigationTarget == NavigationEnum.SUICIDE_ASSESSMENT) {
+                return Modifier
+                    .height(90.dp)
+                    .width(160.dp)
+                    .clickable { navigateToForm(NavigationTarget) }
+            } else if (NavigationTarget == NavigationEnum.NURSING_NEED || NavigationTarget == NavigationEnum.MEDICAL_ORDER) {
+                return Modifier
+                    .height(90.dp)
+                    .width(160.dp)
                     .clickable { navigateToForm(NavigationTarget) }
             } else {
-                return Modifier.width(100.dp)
+                Modifier
+                    .height(90.dp)
+                    .width(350.dp)
+                    .clickable { navigateToForm(NavigationTarget) }
             }
         }
     }
@@ -59,14 +73,21 @@ class landingPage {
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 navigationCard(
+                    label =
                     R.string.arrivalCard,
-                    lineOneCard,
-                    ModifierProvider.lineOneModifier(NavigationEnum.ARRIVAL, navigateToForm)
+                    backgroundCol = lineOneCard,
+                    modifier = ModifierProvider.cardModifier(
+                        NavigationEnum.ARRIVAL,
+                        navigateToForm
+                    )
                 )
                 navigationCard(
-                    R.string.hazardCard,
-                    lineOneCard,
-                    ModifierProvider.lineOneModifier(NavigationEnum.DANGER, navigateToForm)
+                    label = R.string.hazardCard,
+                    backgroundCol = lineOneCard,
+                    modifier = ModifierProvider.cardModifier(
+                        NavigationEnum.DANGER,
+                        navigateToForm
+                    )
                 )
             }
             Row(
@@ -77,19 +98,28 @@ class landingPage {
             )
             {
                 navigationCard(
-                    R.string.contactReason,
-                    lineTwoCard,
-                    ModifierProvider.lineOneModifier(NavigationEnum.CONTACT_REASON, navigateToForm)
+                    label = R.string.contactReason,
+                    backgroundCol = lineTwoCard,
+                    modifier = ModifierProvider.cardModifier(
+                        NavigationEnum.CONTACT_REASON,
+                        navigateToForm
+                    )
                 )
                 navigationCard(
-                    R.string.previousCare,
-                    lineTwoCard,
-                    ModifierProvider.lineOneModifier(NavigationEnum.PREVIOUS_CARE, navigateToForm)
+                    label = R.string.previousCare,
+                    backgroundCol = lineTwoCard,
+                    modifier = ModifierProvider.cardModifier(
+                        NavigationEnum.PREVIOUS_CARE,
+                        navigateToForm
+                    )
                 )
                 navigationCard(
-                    R.string.healthHistory,
-                    lineTwoCard,
-                    ModifierProvider.lineOneModifier(NavigationEnum.HEALTH_HISTORY, navigateToForm)
+                    label = R.string.healthHistory,
+                    backgroundCol = lineTwoCard,
+                    modifier = ModifierProvider.cardModifier(
+                        NavigationEnum.HEALTH_HISTORY,
+                        navigateToForm
+                    )
                 )
             }
             Row(
@@ -99,6 +129,60 @@ class landingPage {
                 horizontalArrangement = Arrangement.SpaceEvenly
             )
             {
+                navigationCard(
+                    label = R.string.healthNow,
+                    backgroundCol = lineTwoCard,
+                    modifier = ModifierProvider.cardModifier(
+                        NavigationEnum.HEALTH_NOW,
+                        navigateToForm
+                    )
+                )
+                navigationCard(
+                    label = R.string.suicideAssessment,
+                    backgroundCol = lineTwoCard,
+                    modifier = ModifierProvider.cardModifier(
+                        NavigationEnum.SUICIDE_ASSESSMENT,
+                        navigateToForm
+                    )
+                )
+            }
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 10.dp),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                navigationCard(
+                    label = R.string.nursingNeed,
+                    backgroundCol = lineFourColor,
+                    modifier = ModifierProvider.cardModifier(
+                        NavigationEnum.NURSING_NEED,
+                        navigateToForm
+                    )
+                )
+                navigationCard(
+                    label = R.string.medicalOrder,
+                    backgroundCol = lineFourColor,
+                    modifier = ModifierProvider.cardModifier(
+                        NavigationEnum.MEDICAL_ORDER,
+                        navigateToForm
+                    )
+                )
+            }
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 10.dp),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                navigationCard(
+                    label = R.string.interimJournal,
+                    backgroundCol = lineFourColor,
+                    modifier = ModifierProvider.cardModifier(
+                        NavigationEnum.INTERIM_JOURNAL,
+                        navigateToForm
+                    )
+                )
             }
         }
     }
@@ -131,7 +215,7 @@ class landingPage {
     ) {
         Card(
             modifier = modifier,
-            backgroundColor = backgroundCol
+            backgroundColor = backgroundCol,
         ) {
             Text(stringResource(label), fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
         }

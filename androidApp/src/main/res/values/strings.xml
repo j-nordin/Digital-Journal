@@ -7,4 +7,8 @@
     <string name="previousCare">TIDIGARE VÅRD</string>
     <string name="healthHistory">HÄLSA HISTORIK </string>
     <string name="healthNow">HÄLSA NU</string>
+    <string name="suicideAssessment">SUICIDBEDÖMNING</string>
+    <string name="nursingNeed">OMV. BEDÖM / ÅTGÄRD</string>
+    <string name="medicalOrder">LÄKARORDINATION</string>
+    <string name="interimJournal">INTERIMJOURNAL</string>
 </resources>
