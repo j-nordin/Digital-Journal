@@ -15,23 +15,8 @@ import androidx.compose.ui.unit.dp
 class CurrentPatientsList {
 
     // Temporary data before backend is implemented
-    private val defaultPatients: List<CurrentPatientsData> = listOf(
-        CurrentPatientsData(
-            patientId = "1",
-            patientName = "Erik Karlsson",
-            patientSecurityNumber = "1999-05-02-xxxx"
-        ),
-        CurrentPatientsData(
-            patientId = "2",
-            patientName = "Ebba Eriksson",
-            patientSecurityNumber = "1990-01-02-xxxx"
-        ),
-        CurrentPatientsData(
-            patientId = "3",
-            patientName = "Felicia Adams",
-            patientSecurityNumber = "1993-12-15-xxxx"
-        ),
-    )
+    //TODO: Fetch data from API instead of using sampledata from the preview-provider
+    private val defaultPatients: List<CurrentPatientsData> = SampleCurrentPatientsProvider().values.toList()[0]
 
     @Preview
     @Composable
