@@ -6,9 +6,9 @@ data class ArrivalDataClass(
     val date: Date,
     var timestamp: String,
     var ess: String,
-    val secrecy: YesAndNoAndNoAnswer,
-    val reservation: String,
-    val confirmedIdentity: Boolean,
+    var secrecy: YesAndNoAndNoAnswer,
+    var reservation: String,
+    var confirmedIdentity: Boolean,
     val samsa: Boolean,
     val relativeName: String,
     val relativePhoneNumber: String,
@@ -22,7 +22,7 @@ enum class YesAndNoAndNoAnswer {
     YES,
     NO,
     NO_ANSWER,
-    UNKOWN
+    UNKOWN;
 }
 
 enum class ArrivalMethod {
