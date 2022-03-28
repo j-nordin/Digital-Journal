@@ -22,6 +22,7 @@ import com.EENX15_22_17.digital_journal.android.ui.theme.primaryColor
 class CurrentPatientItem {
 
     @Composable
+    // TODO: Replace default parameter-values with PreviewParameter-annotations when tooling is less buggy.
     fun PatientCard(
         patientId: String = "1",
         name: String = "PatientName",
