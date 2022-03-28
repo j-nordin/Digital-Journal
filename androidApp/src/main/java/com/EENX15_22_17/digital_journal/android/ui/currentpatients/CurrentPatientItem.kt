@@ -28,6 +28,7 @@ fun PatientCard(
     navigateSelectedPatient: (patientId: String) -> Unit = {},
     showOverview: (patientId: String) -> Unit = {}
 ) {
+    //TODO: use navigation to show these
     var showWarning by remember { mutableStateOf(false) }
     var showComments by remember { mutableStateOf(false) }
     Card(
