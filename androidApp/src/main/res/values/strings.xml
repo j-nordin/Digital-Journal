@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="helloworld">Hello World!</string>
-    <string name="arrivalCard">Ankomst</string>
-    <string name="hazardCard">Farlighetsbedömning</string>
+    <string name="arrivalCard">ANKOMST</string>
+    <string name="hazardCard">FARLIGHETSBEDÖMNING</string>
+    <string name="contactReason">KONTAKTORSAK</string>
+    <string name="previousCare">TIDIGARE VÅRD</string>
+    <string name="healthHistory">HÄLSA HISTORIK </string>
+    <string name="healthNow">HÄLSA NU</string>
 </resources>
