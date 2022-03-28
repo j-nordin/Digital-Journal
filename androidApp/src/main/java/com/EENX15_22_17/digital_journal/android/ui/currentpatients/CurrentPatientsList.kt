@@ -12,35 +12,33 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 
-class CurrentPatientsList {
+// Temporary data before backend is implemented
+//TODO: Fetch data from API instead of using sampledata from the preview-provider
+private val defaultPatients: List<CurrentPatientsData> =
+    SampleCurrentPatientsProvider().values.toList()[0]
 
-    // Temporary data before backend is implemented
-    //TODO: Fetch data from API instead of using sampledata from the preview-provider
-    private val defaultPatients: List<CurrentPatientsData> = SampleCurrentPatientsProvider().values.toList()[0]
-
-    @Preview
-    @Composable
-    fun PatientsList(
-        @PreviewParameter(SampleCurrentPatientsProvider::class)
-        patients: List<CurrentPatientsData> = defaultPatients
+@Preview
+@Composable
+fun PatientsList(
+    @PreviewParameter(SampleCurrentPatientsProvider::class)
+    patients: List<CurrentPatientsData> = defaultPatients
+) {
+    val scrollState = rememberScrollState()
+    Box(
+        Modifier
+            .height(400.dp)
+            .padding(top = 100.dp)
     ) {
-        val scrollState = rememberScrollState()
-        Box(
-            Modifier
-                .height(400.dp)
-                .padding(top = 100.dp)) {
-            Column(
-                Modifier.verticalScroll(scrollState)
-            ) {
-                for (patient in patients) {
-                    CurrentPatientItem().PatientCard(
-                        patientId = patient.patientId,
-                        name = patient.patientName,
-                        securityNumber = patient.patientSecurityNumber
-                    )
-                }
+        Column(
+            Modifier.verticalScroll(scrollState)
+        ) {
+            for (patient in patients) {
+                PatientCard(
+                    patientId = patient.patientId,
+                    name = patient.patientName,
+                    securityNumber = patient.patientSecurityNumber
+                )
             }
         }
-
     }
 }
