@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun TitledTextField(
     title: String,
-    onChangeText: (textValue: String) -> Unit = {},
+    onChangeText: (textValue: String) -> Unit,
     textValue: String
 ) {
     var text by rememberSaveable { mutableStateOf(textValue) }

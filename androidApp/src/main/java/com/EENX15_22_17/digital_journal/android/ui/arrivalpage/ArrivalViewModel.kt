@@ -13,7 +13,7 @@ class ArrivalViewModel : ViewModel() {
             date = Date(),
             timestamp = "",
             ess = "",
-            secrecy = YesAndNoAndNoAnswer.NO_ANSWER,
+            secrecy = YesAndNoAndNoAnswer.NO,
             reservation = "",
             confirmedIdentity = false,
             samsa = false,
@@ -30,5 +30,29 @@ class ArrivalViewModel : ViewModel() {
     fun getTimestamp(): String {
         val dateToFormat = this.arrivalStates.date.toString()
         return dateToFormat.subSequence(0, 10).toString()
+    }
+
+    // TODO: Check whether we need this method or not, just a temporary fix
+    fun getEnumType(text: String): YesAndNoAndNoAnswer {
+        return when (text) {
+            "Ja" -> YesAndNoAndNoAnswer.YES
+            "Nej" -> YesAndNoAndNoAnswer.NO
+            "Inget svar" -> YesAndNoAndNoAnswer.NO_ANSWER
+            else -> YesAndNoAndNoAnswer.UNKOWN
+        }
+    }
+
+    // TODO: Check whether we need this method or not, just a temporary fix
+    fun getEnumString(yesAndNoAndNoAnswer: YesAndNoAndNoAnswer): String {
+        return when (yesAndNoAndNoAnswer) {
+            YesAndNoAndNoAnswer.YES -> "Ja"
+            YesAndNoAndNoAnswer.NO -> "Nej"
+            YesAndNoAndNoAnswer.NO_ANSWER -> "Inget svar"
+            else -> "Unknown"
+        }
+    }
+
+    fun getBooleanValue(value: String): Boolean {
+        return value == "Ja"
     }
 }

@@ -3,4 +3,7 @@
     <string name="helloworld">Hello World!</string>
     <string name="arrivalTime">Ankomsttid</string>
     <string name="essNumber">ESS</string>
+    <string name="reservation">Förbehåll</string>
+    <string name="secrecy">Sekretess</string>
+    <string name="identity">Identitet styrkt</string>
 </resources>
