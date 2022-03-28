@@ -90,6 +90,7 @@ fun PatientCard(
 
 @Composable
 fun WarningContent(patientId: String) {
+    //TODO: Get font sizes (and other theme-related stuff) from the theme
     Surface(
         modifier = Modifier
             .width(300.dp)
