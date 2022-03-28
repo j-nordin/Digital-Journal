@@ -6,19 +6,19 @@ class SampleCurrentPatientsProvider : PreviewParameterProvider<List<CurrentPatie
     override val values = sequenceOf(
         listOf(
             CurrentPatientsData(
-                patientId = "1",
-                patientName = "Erik Karlsson",
-                patientSecurityNumber = "1999-05-02-xxxx"
+                id = "1",
+                name = "Erik Karlsson",
+                securityNumber = "1999-05-02-xxxx"
             ),
             CurrentPatientsData(
-                patientId = "2",
-                patientName = "Ebba Eriksson",
-                patientSecurityNumber = "1990-01-02-xxxx"
+                id = "2",
+                name = "Ebba Eriksson",
+                securityNumber = "1990-01-02-xxxx"
             ),
             CurrentPatientsData(
-                patientId = "3",
-                patientName = "Felicia Adams",
-                patientSecurityNumber = "1993-12-15-xxxx"
+                id = "3",
+                name = "Felicia Adams",
+                securityNumber = "1993-12-15-xxxx"
             )
         )
     )

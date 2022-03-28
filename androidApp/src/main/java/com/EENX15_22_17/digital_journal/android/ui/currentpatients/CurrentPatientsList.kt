@@ -34,9 +34,9 @@ fun PatientsList(
         ) {
             for (patient in patients) {
                 PatientCard(
-                    patientId = patient.patientId,
-                    name = patient.patientName,
-                    securityNumber = patient.patientSecurityNumber
+                    patientId = patient.id,
+                    name = patient.name,
+                    securityNumber = patient.securityNumber
                 )
             }
         }
