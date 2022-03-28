@@ -9,40 +9,43 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
-import androidx.navigation.navigation
+import androidx.navigation.*
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             NavigationApp()
+            println(PatientMeetingScreens.MainScreen.route)
         }
     }
 }
 
 sealed class Screen(val route: String) {
     object Overview : Screen(route = "overview")
-    object PatientMeeting : Screen(route = "patientMeeting/{meetingId}") {
-        fun createRoute(meetingId : String) = "patientMeeting/$meetingId"
-    }
+    object PatientMeeting : Screen(route = "patientMeeting")
 }
 
-sealed class PatientMeetingScreens(open val route: String) {
-    abstract class MeetingSubPage(val sub: String) : PatientMeetingScreens(sub) {
-        override val route = Screen.PatientMeeting.route + "/" + sub
-        fun createRoute(id : String) = Screen.PatientMeeting.createRoute(id) + "/" + sub
+sealed class PatientMeetingScreens(val route: String) {
+    //For creating routes to composables
+    fun createRoute(root: Screen) = "${root.route}/$route"
+
+    object MainScreen : PatientMeetingScreens("{meetingId}") {
+        // Overloads and creates a route with a specific id
+        fun createRoute(meetingId: String, root: Screen) = "${root.route}/$meetingId"
     }
 
-    object MainScreen : MeetingSubPage("mainScreen")
-    object Arrival : MeetingSubPage("arrival")
-    object HazardAssessment : MeetingSubPage("hazardAssessment")
+    object Arrival : PatientMeetingScreens("{meetingId}/arrival") {
+        fun createRoute(meetingId: String, root: Screen) = "${root.route}/$meetingId/arrival"
+    }
+
+    // TODO: Implement routes to rest of the cards
+    object HazardAssessment : PatientMeetingScreens("{meetingId}/hazardAssessment")
 }
 
 @Composable
@@ -58,26 +61,37 @@ fun NavigationApp() {
 }
 
 private fun NavGraphBuilder.addPatientMeetingGraph(
-    navController: NavController
+    navController: NavController,
 ) {
     navigation(
         route = Screen.PatientMeeting.route,
         startDestination = PatientMeetingScreens.MainScreen.route
     ) {
-        composable(route = PatientMeetingScreens.MainScreen.route) { backStackEntry ->
+        composable(
+            route = PatientMeetingScreens.MainScreen.createRoute(root = Screen.PatientMeeting)
+        ) { backStackEntry ->
             val meetingId = backStackEntry.arguments?.getString("meetingId")
 
             /*TODO: Handle meeting id not provided, ex show alert*/
             requireNotNull(meetingId) { "No meeting id provided" }
 
             /*TODO: replace with real patient meeting screen*/
-            PatientMeetingScreen(
+            PatientMeetingLandingScreen(
                 navToOverview = { navController.navigate(Screen.Overview.route) },
-                navToArrival = { navController.navigate(PatientMeetingScreens.Arrival.createRoute(meetingId)) },
+                navToArrival = {
+                    navController.navigate(
+                        PatientMeetingScreens.Arrival.createRoute(
+                            meetingId,
+                            root = Screen.PatientMeeting
+                        )
+                    )
+                },
                 meetingId = meetingId
             )
         }
-        composable(route = PatientMeetingScreens.Arrival.route) { backStackEntry ->
+        composable(
+            route = PatientMeetingScreens.Arrival.createRoute(root = Screen.PatientMeeting)
+        ) { backStackEntry ->
             val meetingId = backStackEntry.arguments?.getString("meetingId")
             requireNotNull(meetingId) { "No meeting id provided" }
             ArrivalScreen(meetingId)
@@ -92,7 +106,12 @@ private fun NavGraphBuilder.addOverviewGraph(
         /*TODO: replace with real overview screen*/
         OverviewScreen(
             navToPatientMeeting = { id ->
-                navController.navigate(Screen.PatientMeeting.createRoute(id))
+                navController.navigate(
+                    PatientMeetingScreens.MainScreen.createRoute(
+                        id,
+                        Screen.PatientMeeting
+                    )
+                )
             },
             goBack = { navController.popBackStack() }
         )
@@ -143,7 +162,7 @@ fun OverviewScreen(
 
 
 @Composable
-fun PatientMeetingScreen(
+fun PatientMeetingLandingScreen(
     @PreviewParameter(OverviewScreenProvider::class) navToOverview: () -> Unit,
     navToArrival: () -> Unit,
     meetingId: String = "0"
