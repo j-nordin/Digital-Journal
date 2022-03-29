@@ -10,11 +10,9 @@ import androidx.compose.material.RadioButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.EENX15_22_17.digital_journal.android.ui.arrivalpage.YesAndNoAndNoAnswer
 import com.EENX15_22_17.digital_journal.android.ui.theme.primaryColor
 
 
@@ -24,24 +22,24 @@ fun RadioButtonComponent(
     setRadioValue: (a: String) -> Unit,
     radioStringValue: String
 ) {
-    var test by remember { mutableStateOf(radioStringValue) }
+    var radioText by remember { mutableStateOf(radioStringValue) }
     Column {
         Row {
             radioOptions.forEach { value ->
                 Box(
                     Modifier
                         .clickable {
-                            test = value
+                            radioText = value
                             setRadioValue(value)
                         }
                         .padding(horizontal = 16.dp)
                         .background(primaryColor, CircleShape)
                 ) {
                     RadioButton(
-                        selected = (value == test),
+                        selected = (value == radioText),
                         modifier = Modifier.padding(all = Dp(value = 8F)),
                         onClick = {
-                            test = value
+                            radioText = value
                             setRadioValue(value)
                         }
                     )
@@ -57,13 +55,12 @@ fun RadioButtonComponent(
 
 
 // TODO: Make one general RadioButtongroup
+// TODO: setRadioValue now takes a String instead of boolean, this because i compare with textValue
 @Composable
 fun RadioButtonComponentBoolean(
     radioOptions: List<String>,
-    setRadioValue: (a: String) -> Unit,
-    radioBooleanValue: Boolean
+    setRadioValue: (a: String) -> Unit
 ) {
-    val selected by rememberSaveable { mutableStateOf(radioBooleanValue) }
     val (selectedVal, setSelectedVal) = rememberSaveable { mutableStateOf(radioOptions[1])}
     Column {
         Row {
@@ -96,4 +93,24 @@ fun RadioButtonComponentBoolean(
             }
         }
     }
+}
+
+
+
+@Composable
+fun YesRadio (state: Boolean) {
+    var currentVal by remember { mutableStateOf(state) }
+    RadioButton(
+        selected = currentVal,
+        onClick = { currentVal = true}
+    )
+}
+
+@Composable
+fun NoRadio (state: Boolean) {
+    var currentVal by remember { mutableStateOf(state) }
+    RadioButton(
+        selected = currentVal,
+        onClick = { currentVal = false}
+    )
 }
