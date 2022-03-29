@@ -3,6 +3,7 @@ package com.EENX15_22_17.digital_journal.android.ui.landingpage
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
+import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -15,8 +16,10 @@ import com.EENX15_22_17.digital_journal.android.R
 import com.EENX15_22_17.digital_journal.android.ui.theme.lineFourColor
 import com.EENX15_22_17.digital_journal.android.ui.theme.lineOneCard
 import com.EENX15_22_17.digital_journal.android.ui.theme.lineTwoCard
+import androidx.compose.material.icons.Icons
+import androidx.compose.ui.Alignment
 
-class landingPage {
+class LandingPage {
 
     enum class NavigationEnum {
         ARRIVAL, DANGER, CONTACT_REASON, PREVIOUS_CARE, HEALTH_HISTORY, HEALTH_NOW, SUICIDE_ASSESSMENT, NURSING_NEED, MEDICAL_ORDER, INTERIM_JOURNAL
@@ -25,7 +28,8 @@ class landingPage {
 
     @Composable
     fun landingPage(
-        navigateToForm: (nav: NavigationEnum) -> Unit = {}
+        navigateToForm: (nav: NavigationEnum) -> Unit = {},
+        showOverview: (patientId: String) -> Unit = {}
     ) {
         Column(
             modifier = Modifier,
@@ -42,7 +46,6 @@ class landingPage {
                     label = R.string.arrivalCard,
                     backgroundCol = lineOneCard,
                     modifier = Modifier
-                        .height(90.dp)
                         .width(170.dp),
                     navTarget = NavigationEnum.ARRIVAL,
                     navigateToForm = navigateToForm
@@ -51,7 +54,6 @@ class landingPage {
                     label = R.string.hazardCard,
                     backgroundCol = lineOneCard,
                     modifier = Modifier
-                        .height(90.dp)
                         .width(170.dp),
                     navTarget = NavigationEnum.DANGER,
                     navigateToForm = navigateToForm
@@ -68,7 +70,6 @@ class landingPage {
                     label = R.string.contactReason,
                     backgroundCol = lineTwoCard,
                     modifier = Modifier
-                        .height(90.dp)
                         .width(110.dp),
                     navTarget = NavigationEnum.CONTACT_REASON,
                     navigateToForm = navigateToForm
@@ -77,7 +78,6 @@ class landingPage {
                     label = R.string.previousCare,
                     backgroundCol = lineTwoCard,
                     modifier = Modifier
-                        .height(90.dp)
                         .width(110.dp),
                     navTarget = NavigationEnum.PREVIOUS_CARE,
                     navigateToForm = navigateToForm
@@ -86,7 +86,6 @@ class landingPage {
                     label = R.string.healthHistory,
                     backgroundCol = lineTwoCard,
                     modifier = Modifier
-                        .height(90.dp)
                         .width(110.dp),
                     navTarget = NavigationEnum.HEALTH_HISTORY,
                     navigateToForm = navigateToForm
@@ -103,16 +102,14 @@ class landingPage {
                     label = R.string.healthNow,
                     backgroundCol = lineTwoCard,
                     modifier = Modifier
-                        .height(90.dp)
                         .width(160.dp),
                     navTarget = NavigationEnum.HEALTH_NOW,
                     navigateToForm = navigateToForm
-                    )
+                )
                 navigationCard(
                     label = R.string.suicideAssessment,
                     backgroundCol = lineTwoCard,
                     modifier = Modifier
-                        .height(90.dp)
                         .width(160.dp),
                     navTarget = NavigationEnum.SUICIDE_ASSESSMENT,
                     navigateToForm = navigateToForm
@@ -128,7 +125,6 @@ class landingPage {
                     label = R.string.nursingNeed,
                     backgroundCol = lineFourColor,
                     modifier = Modifier
-                        .height(90.dp)
                         .width(160.dp),
                     navTarget = NavigationEnum.NURSING_NEED,
                     navigateToForm = navigateToForm
@@ -137,7 +133,6 @@ class landingPage {
                     label = R.string.medicalOrder,
                     backgroundCol = lineFourColor,
                     modifier = Modifier
-                        .height(90.dp)
                         .width(160.dp),
                     navTarget = NavigationEnum.MEDICAL_ORDER,
                     navigateToForm = navigateToForm
@@ -153,11 +148,17 @@ class landingPage {
                     label = R.string.interimJournal,
                     backgroundCol = lineFourColor,
                     modifier = Modifier
-                        .height(90.dp)
                         .width(350.dp),
                     navTarget = NavigationEnum.INTERIM_JOURNAL,
                     navigateToForm = navigateToForm
                 )
+            }
+            Row(
+                horizontalArrangement = Arrangement.End,
+                verticalAlignment = Alignment.Bottom
+            )
+            {
+                overViewButton(showOverview = showOverview)
             }
         }
     }
@@ -172,13 +173,13 @@ class landingPage {
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 5.dp, start = 5.dp, end = 5.dp, top = 5.dp),
-                elevation = 5.dp
-            ) {
-                Row() {
-                    Text("Namn: Erik Bengtsson", textAlign = TextAlign.Start)
-                    Text("Personnummer: 1997001122-XXXX", textAlign = TextAlign.End)
-                }
+                    .padding(bottom = 10.dp, start = 20.dp, end = 20.dp, top = 10.dp)
+                    .height(90.dp),
+                elevation = 10.dp
+            )
+            {
+                Text("Namn: Erik Bengtsson", textAlign = TextAlign.Start)
+                Text("ID: 1997001122-XXXX", textAlign = TextAlign.End)
             }
         }
     }
@@ -192,10 +193,22 @@ class landingPage {
         navigateToForm: (nav: NavigationEnum) -> Unit
     ) {
         Card(
-            modifier = modifier.clickable { navigateToForm(navTarget) },
+            modifier = modifier
+                .height(80.dp)
+                .clickable { navigateToForm(navTarget) },
             backgroundColor = backgroundCol,
         ) {
             Text(stringResource(label), fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
+        }
+    }
+
+    @Composable
+    fun overViewButton(
+        showOverview: (patientId: String) -> Unit = {}
+    ) {
+        IconButton(onClick = { /*TODO*/ }) {
+
+
         }
     }
 }
