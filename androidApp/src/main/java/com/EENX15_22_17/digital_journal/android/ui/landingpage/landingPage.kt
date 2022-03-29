@@ -22,40 +22,6 @@ class landingPage {
         ARRIVAL, DANGER, CONTACT_REASON, PREVIOUS_CARE, HEALTH_HISTORY, HEALTH_NOW, SUICIDE_ASSESSMENT, NURSING_NEED, MEDICAL_ORDER, INTERIM_JOURNAL
     }
 
-    object ModifierProvider {
-
-        fun cardModifier(
-            NavigationTarget: NavigationEnum,
-            navigateToForm: (nav: NavigationEnum) -> Unit = {}
-        ): Modifier {
-            return if (NavigationTarget == NavigationEnum.ARRIVAL || NavigationTarget == NavigationEnum.DANGER) {
-                Modifier
-                    .height(90.dp)
-                    .width(170.dp)
-                    .clickable { navigateToForm(NavigationTarget) }
-            } else if (NavigationTarget == NavigationEnum.CONTACT_REASON || NavigationTarget == NavigationEnum.PREVIOUS_CARE || NavigationTarget == NavigationEnum.HEALTH_HISTORY) {
-                return Modifier
-                    .height(90.dp)
-                    .width(110.dp)
-                    .clickable { navigateToForm(NavigationTarget) }
-            } else if (NavigationTarget == NavigationEnum.HEALTH_NOW || NavigationTarget == NavigationEnum.SUICIDE_ASSESSMENT) {
-                return Modifier
-                    .height(90.dp)
-                    .width(160.dp)
-                    .clickable { navigateToForm(NavigationTarget) }
-            } else if (NavigationTarget == NavigationEnum.NURSING_NEED || NavigationTarget == NavigationEnum.MEDICAL_ORDER) {
-                return Modifier
-                    .height(90.dp)
-                    .width(160.dp)
-                    .clickable { navigateToForm(NavigationTarget) }
-            } else {
-                Modifier
-                    .height(90.dp)
-                    .width(350.dp)
-                    .clickable { navigateToForm(NavigationTarget) }
-            }
-        }
-    }
 
     @Composable
     fun landingPage(
@@ -73,21 +39,22 @@ class landingPage {
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 navigationCard(
-                    label =
-                    R.string.arrivalCard,
+                    label = R.string.arrivalCard,
                     backgroundCol = lineOneCard,
-                    modifier = ModifierProvider.cardModifier(
-                        NavigationEnum.ARRIVAL,
-                        navigateToForm
-                    )
+                    modifier = Modifier
+                        .height(90.dp)
+                        .width(170.dp),
+                    navTarget = NavigationEnum.ARRIVAL,
+                    navigateToForm = navigateToForm
                 )
                 navigationCard(
                     label = R.string.hazardCard,
                     backgroundCol = lineOneCard,
-                    modifier = ModifierProvider.cardModifier(
-                        NavigationEnum.DANGER,
-                        navigateToForm
-                    )
+                    modifier = Modifier
+                        .height(90.dp)
+                        .width(170.dp),
+                    navTarget = NavigationEnum.DANGER,
+                    navigateToForm = navigateToForm
                 )
             }
             Row(
@@ -100,26 +67,29 @@ class landingPage {
                 navigationCard(
                     label = R.string.contactReason,
                     backgroundCol = lineTwoCard,
-                    modifier = ModifierProvider.cardModifier(
-                        NavigationEnum.CONTACT_REASON,
-                        navigateToForm
-                    )
+                    modifier = Modifier
+                        .height(90.dp)
+                        .width(110.dp),
+                    navTarget = NavigationEnum.CONTACT_REASON,
+                    navigateToForm = navigateToForm
                 )
                 navigationCard(
                     label = R.string.previousCare,
                     backgroundCol = lineTwoCard,
-                    modifier = ModifierProvider.cardModifier(
-                        NavigationEnum.PREVIOUS_CARE,
-                        navigateToForm
-                    )
+                    modifier = Modifier
+                        .height(90.dp)
+                        .width(110.dp),
+                    navTarget = NavigationEnum.PREVIOUS_CARE,
+                    navigateToForm = navigateToForm
                 )
                 navigationCard(
                     label = R.string.healthHistory,
                     backgroundCol = lineTwoCard,
-                    modifier = ModifierProvider.cardModifier(
-                        NavigationEnum.HEALTH_HISTORY,
-                        navigateToForm
-                    )
+                    modifier = Modifier
+                        .height(90.dp)
+                        .width(110.dp),
+                    navTarget = NavigationEnum.HEALTH_HISTORY,
+                    navigateToForm = navigateToForm
                 )
             }
             Row(
@@ -132,18 +102,20 @@ class landingPage {
                 navigationCard(
                     label = R.string.healthNow,
                     backgroundCol = lineTwoCard,
-                    modifier = ModifierProvider.cardModifier(
-                        NavigationEnum.HEALTH_NOW,
-                        navigateToForm
+                    modifier = Modifier
+                        .height(90.dp)
+                        .width(160.dp),
+                    navTarget = NavigationEnum.HEALTH_NOW,
+                    navigateToForm = navigateToForm
                     )
-                )
                 navigationCard(
                     label = R.string.suicideAssessment,
                     backgroundCol = lineTwoCard,
-                    modifier = ModifierProvider.cardModifier(
-                        NavigationEnum.SUICIDE_ASSESSMENT,
-                        navigateToForm
-                    )
+                    modifier = Modifier
+                        .height(90.dp)
+                        .width(160.dp),
+                    navTarget = NavigationEnum.SUICIDE_ASSESSMENT,
+                    navigateToForm = navigateToForm
                 )
             }
             Row(
@@ -155,18 +127,20 @@ class landingPage {
                 navigationCard(
                     label = R.string.nursingNeed,
                     backgroundCol = lineFourColor,
-                    modifier = ModifierProvider.cardModifier(
-                        NavigationEnum.NURSING_NEED,
-                        navigateToForm
-                    )
+                    modifier = Modifier
+                        .height(90.dp)
+                        .width(160.dp),
+                    navTarget = NavigationEnum.NURSING_NEED,
+                    navigateToForm = navigateToForm
                 )
                 navigationCard(
                     label = R.string.medicalOrder,
                     backgroundCol = lineFourColor,
-                    modifier = ModifierProvider.cardModifier(
-                        NavigationEnum.MEDICAL_ORDER,
-                        navigateToForm
-                    )
+                    modifier = Modifier
+                        .height(90.dp)
+                        .width(160.dp),
+                    navTarget = NavigationEnum.MEDICAL_ORDER,
+                    navigateToForm = navigateToForm
                 )
             }
             Row(
@@ -178,10 +152,11 @@ class landingPage {
                 navigationCard(
                     label = R.string.interimJournal,
                     backgroundCol = lineFourColor,
-                    modifier = ModifierProvider.cardModifier(
-                        NavigationEnum.INTERIM_JOURNAL,
-                        navigateToForm
-                    )
+                    modifier = Modifier
+                        .height(90.dp)
+                        .width(350.dp),
+                    navTarget = NavigationEnum.INTERIM_JOURNAL,
+                    navigateToForm = navigateToForm
                 )
             }
         }
@@ -197,7 +172,8 @@ class landingPage {
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 5.dp, start = 5.dp, end = 5.dp, top = 5.dp)
+                    .padding(bottom = 5.dp, start = 5.dp, end = 5.dp, top = 5.dp),
+                elevation = 5.dp
             ) {
                 Row() {
                     Text("Namn: Erik Bengtsson", textAlign = TextAlign.Start)
@@ -211,10 +187,12 @@ class landingPage {
     fun navigationCard(
         label: Int,
         backgroundCol: Color,
-        modifier: Modifier
+        modifier: Modifier,
+        navTarget: NavigationEnum,
+        navigateToForm: (nav: NavigationEnum) -> Unit
     ) {
         Card(
-            modifier = modifier,
+            modifier = modifier.clickable { navigateToForm(navTarget) },
             backgroundColor = backgroundCol,
         ) {
             Text(stringResource(label), fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
