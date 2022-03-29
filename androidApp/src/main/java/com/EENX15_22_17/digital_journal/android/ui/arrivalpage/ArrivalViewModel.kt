@@ -32,6 +32,9 @@ class ArrivalViewModel : ViewModel() {
         return dateToFormat.subSequence(0, 10).toString()
     }
 
+
+    //TODO: Fråga Rickard. Dessa metoder (om dem nu är bra) ska användas mer än bara i arrival.
+    // Kanske skulle vara bra att samla i någon Utils eller liknande.
     // TODO: Check whether we need this method or not, just a temporary fix
     fun getEnumType(text: String): YesAndNoAndNoAnswer {
         return when (text) {

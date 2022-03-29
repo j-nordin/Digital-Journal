@@ -6,4 +6,8 @@
     <string name="reservation">Förbehåll</string>
     <string name="secrecy">Sekretess</string>
     <string name="identity">Identitet styrkt</string>
+    <string name="samsa">Samsa</string>
+    <string name="relative">Närmast anhörig</string>
+    <string name="relativeName">Namn</string>
+    <string name="relativePhoneNumber">Telefonnummer</string>
 </resources>
