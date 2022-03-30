@@ -16,12 +16,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import androidx.navigation.*
 import com.EENX15_22_17.digital_journal.android.ui.currentpatients.PatientsList
+import com.EENX15_22_17.digital_journal.android.ui.theme.DigitalJournalTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            NavigationApp()
+            DigitalJournalTheme {
+                NavigationApp()
+            }
         }
     }
 }
