@@ -24,7 +24,8 @@ import androidx.compose.ui.unit.sp
 fun TitledTextField(
     title: String,
     onChangeText: (textValue: String) -> Unit,
-    textValue: String
+    textValue: String,
+    modifier: Modifier = Modifier
 ) {
     var text by rememberSaveable { mutableStateOf(textValue) }
     Box {
@@ -32,9 +33,9 @@ fun TitledTextField(
             value = text,
             onValueChange = { text = it; onChangeText(it) },
             textStyle = TextStyle(fontSize = 25.sp),
-            modifier = Modifier
+            modifier = modifier
                 .padding(top = 10.dp)
-                .width(160.dp),
+                .width(200.dp),
             label = {
                 Text(
                     text = title,

@@ -17,12 +17,88 @@ import com.EENX15_22_17.digital_journal.android.ui.theme.primaryColor
 
 
 @Composable
+fun <E : Enum<*>> EnumRadioButtonsHorizontal(
+    choices: Array<E>,
+    labels: Map<E, String>,
+    currentChoice: E,
+    onSelection: (choice: E) -> Unit
+) {
+    //var selection by rememberSaveable { mutableStateOf(currentChoice) }
+
+    Row {
+        EnumRadioButtons(
+            choices = choices,
+            labels = labels,
+            currentChoice = currentChoice,
+            onSelection = onSelection
+        )
+
+    }
+}
+
+@Composable
+fun <E : Enum<*>> EnumRadioButtonsVertical(
+    choices: Array<E>,
+    labels: Map<E, String>,
+    currentChoice: E,
+    onSelection: (choice: E) -> Unit
+) {
+
+    Column {
+        EnumRadioButtons(
+            choices = choices,
+            labels = labels,
+            currentChoice = currentChoice,
+            onSelection = onSelection
+        )
+
+    }
+}
+
+
+@Composable
+fun <E : Enum<*>> EnumRadioButtons(
+    choices: Array<E>,
+    labels: Map<E, String>,
+    currentChoice: E,
+    onSelection: (choice: E) -> Unit
+) {
+    var selection by rememberSaveable { mutableStateOf(currentChoice) }
+
+    choices.forEach { choice ->
+        Box(
+            Modifier
+                .clickable {
+                    selection = choice
+                    onSelection(choice)
+                }
+                .padding(horizontal = 16.dp)
+                .background(primaryColor, CircleShape)
+        ) {
+            RadioButton(
+                selected = (choice == selection),
+                modifier = Modifier.padding(all = Dp(value = 8F)),
+                onClick = {
+                    selection = choice
+                    onSelection(choice)
+                }
+            )
+            Text(
+                text = labels[choice] ?: choice.name,
+                modifier = Modifier.padding(start = 16.dp)
+            )
+        }
+    }
+}
+
+
+@Composable
 fun RadioButtonComponent(
     radioOptions: List<String>,
     setRadioValue: (a: String) -> Unit,
     radioStringValue: String
 ) {
-    var radioText by remember { mutableStateOf(radioStringValue) }
+    var radioText by rememberSaveable { mutableStateOf(radioStringValue) }
     Column {
         Row {
             radioOptions.forEach { value ->
@@ -61,7 +137,7 @@ fun RadioButtonComponentBoolean(
     radioOptions: List<String>,
     setRadioValue: (a: String) -> Unit
 ) {
-    val (selectedVal, setSelectedVal) = rememberSaveable { mutableStateOf(radioOptions[1])}
+    val (selectedVal, setSelectedVal) = rememberSaveable { mutableStateOf(radioOptions[1]) }
     Column {
         Row {
             radioOptions.forEach { value ->
@@ -97,20 +173,4 @@ fun RadioButtonComponentBoolean(
 
 
 
-@Composable
-fun YesRadio (state: Boolean) {
-    var currentVal by remember { mutableStateOf(state) }
-    RadioButton(
-        selected = currentVal,
-        onClick = { currentVal = true}
-    )
-}
 
-@Composable
-fun NoRadio (state: Boolean) {
-    var currentVal by remember { mutableStateOf(state) }
-    RadioButton(
-        selected = currentVal,
-        onClick = { currentVal = false}
-    )
-}

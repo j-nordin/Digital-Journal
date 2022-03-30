@@ -8,14 +8,14 @@ data class ArrivalDataClass(
     var ess: String,
     var secrecy: YesAndNoAndNoAnswer,
     var reservation: String,
-    var confirmedIdentity: Boolean,
-    var samsa: Boolean,
+    var confirmedIdentity: YesNo,
+    var samsa: YesNo,
     var relativeName: String,
     var relativePhoneNumber: String,
-    val children: Array<Int>,
-    val concernReport: Boolean,
-    val arrivalMethod: ArrivalMethod,
-    val law: Law
+    var children: MutableList<Int>,
+    var concernReport: YesNo,
+    var arrivalMethod: ArrivalMethod,
+    var law: Law
 )
 
 enum class YesAndNoAndNoAnswer {
@@ -24,6 +24,12 @@ enum class YesAndNoAndNoAnswer {
     NO_ANSWER,
     UNKOWN;
 }
+
+val yesNoNoAnswerLabels = mapOf<YesAndNoAndNoAnswer, String>(
+    YesAndNoAndNoAnswer.YES to "Ja",
+    YesAndNoAndNoAnswer.NO to "Nej",
+    YesAndNoAndNoAnswer.NO_ANSWER to "Inget svar"
+)
 
 enum class ArrivalMethod {
     OWN_INITIATIVE,
@@ -36,6 +42,28 @@ enum class ArrivalMethod {
     OTHER,
     UNKNOWN
 }
+
+val arrivalMethods = mapOf<ArrivalMethod, String>(
+    ArrivalMethod.OWN_INITIATIVE to "Eget intiativ",
+    ArrivalMethod.RELATIVE to "Med Anhörig",
+    ArrivalMethod.REMISS to "Med Remiss",
+    ArrivalMethod.MEDICINE to "Från Medicininstag",
+    ArrivalMethod.ALONE to "Ensam",
+    ArrivalMethod.AMBULANCE to "Med Ambulans",
+    ArrivalMethod.POLICE to "Med Polis",
+    ArrivalMethod.OTHER to "Annat"
+)
+
+enum class YesNo {
+    YES,
+    NO,
+    UNKOWN
+}
+
+val yesNoLabels = mapOf<YesNo, String>(
+    YesNo.YES to "Ja",
+    YesNo.NO to "Nej"
+)
 
 enum class Law {
     HSL,

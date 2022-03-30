@@ -10,4 +10,9 @@
     <string name="relative">Närmast anhörig</string>
     <string name="relativeName">Namn</string>
     <string name="relativePhoneNumber">Telefonnummer</string>
+    <string name="childrenInHouseHold">Barn i hushåll</string>
+    <string name="childrenAge">Ålder</string>
+    <string name="addChild">Lägg till barn</string>
+    <string name="concernReport">Orosanmälan</string>
+    <string name="arrivalType">Ankomst till akutmottagningen</string>
 </resources>

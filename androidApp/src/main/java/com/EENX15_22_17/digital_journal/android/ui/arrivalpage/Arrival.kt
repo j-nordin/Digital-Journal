@@ -15,7 +15,7 @@ fun ArrivalPage(
 ) {
     val rowModifier: Modifier = Modifier
         .fillMaxWidth()
-        .padding(16.dp)
+        .padding(10.dp)
         .border(
             border = BorderStroke(
                 2.dp,
@@ -54,12 +54,8 @@ fun ArrivalPage(
             horizontalArrangement = Arrangement.spacedBy(30.dp)
         ) {
             Secrecy(
-                setRadioValue = {
-                    //TODO: Fråga Rickard
-                    arrivalViewModel.arrivalStates.secrecy = arrivalViewModel.getEnumType(it)
-                },
-                //TODO: Fråga Rickard
-                radioStringValue = arrivalViewModel.getEnumString(arrivalViewModel.arrivalStates.secrecy)
+                value = arrivalViewModel.arrivalStates.secrecy,
+                onChange = { arrivalViewModel.arrivalStates.secrecy = it }
             )
 
             SecrecyReservation(
@@ -82,12 +78,8 @@ fun ArrivalPage(
                     .padding(20.dp)
             ) {
                 Identity(
-                    setIdentity = {
-                        //TODO: Fråga Rickard
-                        arrivalViewModel.arrivalStates.confirmedIdentity =
-                            arrivalViewModel.getBooleanValue(it)
-                        println(arrivalViewModel.arrivalStates.confirmedIdentity)
-                    }
+                    value = arrivalViewModel.arrivalStates.confirmedIdentity,
+                    onChange = { arrivalViewModel.arrivalStates.confirmedIdentity = it}
                 )
             }
             Box(
@@ -104,16 +96,16 @@ fun ArrivalPage(
                     .padding(20.dp)
             ) {
                 Samsa(
-                    setSamsa = {
-                        arrivalViewModel.arrivalStates.samsa =
-                            arrivalViewModel.getBooleanValue(it)
-                        println(arrivalViewModel.arrivalStates.samsa)
+                    value = arrivalViewModel.arrivalStates.samsa,
+                    onChange = {
+                        arrivalViewModel.arrivalStates.samsa = it
+                        println(arrivalViewModel.arrivalStates.samsa.name)
                     }
                 )
             }
         }
         Row(
-            modifier = rowModifier
+            modifier = rowModifier,
         ) {
             Relative(
                 setRelativeName = { arrivalViewModel.arrivalStates.relativeName = it },
@@ -122,6 +114,25 @@ fun ArrivalPage(
                 relativePhoneNumber = arrivalViewModel.arrivalStates.relativePhoneNumber
             )
         }
+        Row(
+            modifier = rowModifier
+        ) {
+            ChildrenInHouseHold(
+                onChange = { arrivalViewModel.arrivalStates.children = it.toMutableList()},
+                values = arrivalViewModel.arrivalStates.children,
+                onConcernReportChange = { arrivalViewModel.arrivalStates.concernReport = it},
+                concernReport = arrivalViewModel.arrivalStates.concernReport
+            )
+        }
+        Row(
+            modifier = rowModifier
+        ) {
+            ArrivalType(
+                value = arrivalViewModel.arrivalStates.arrivalMethod,
+                onChange = { arrivalViewModel.arrivalStates.arrivalMethod = it}
+            )
+        }
     }
+
 }
 
