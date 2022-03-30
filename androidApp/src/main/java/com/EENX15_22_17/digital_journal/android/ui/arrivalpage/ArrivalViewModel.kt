@@ -13,14 +13,14 @@ class ArrivalViewModel : ViewModel() {
             date = Date(),
             timestamp = "",
             ess = "",
-            secrecy = YesAndNoAndNoAnswer.NO,
+            secrecy = YesAndNoAndNoAnswer.NO_ANSWER,
             reservation = "",
-            confirmedIdentity = false,
-            samsa = false,
+            confirmedIdentity = YesNo.UNKOWN,
+            samsa = YesNo.UNKOWN,
             relativeName = "",
             relativePhoneNumber = "",
-            children = arrayOf(0),
-            concernReport = false,
+            children = mutableListOf(),
+            concernReport = YesNo.UNKOWN,
             arrivalMethod = ArrivalMethod.UNKNOWN,
             law = Law.UNKNOWN
         )
@@ -30,32 +30,5 @@ class ArrivalViewModel : ViewModel() {
     fun getTimestamp(): String {
         val dateToFormat = this.arrivalStates.date.toString()
         return dateToFormat.subSequence(0, 10).toString()
-    }
-
-
-    //TODO: Fråga Rickard. Dessa metoder (om dem nu är bra) ska användas mer än bara i arrival.
-    // Kanske skulle vara bra att samla i någon Utils eller liknande.
-    // TODO: Check whether we need this method or not, just a temporary fix
-    fun getEnumType(text: String): YesAndNoAndNoAnswer {
-        return when (text) {
-            "Ja" -> YesAndNoAndNoAnswer.YES
-            "Nej" -> YesAndNoAndNoAnswer.NO
-            "Inget svar" -> YesAndNoAndNoAnswer.NO_ANSWER
-            else -> YesAndNoAndNoAnswer.UNKOWN
-        }
-    }
-
-    // TODO: Check whether we need this method or not, just a temporary fix
-    fun getEnumString(yesAndNoAndNoAnswer: YesAndNoAndNoAnswer): String {
-        return when (yesAndNoAndNoAnswer) {
-            YesAndNoAndNoAnswer.YES -> "Ja"
-            YesAndNoAndNoAnswer.NO -> "Nej"
-            YesAndNoAndNoAnswer.NO_ANSWER -> "Inget svar"
-            else -> "Unknown"
-        }
-    }
-
-    fun getBooleanValue(value: String): Boolean {
-        return value == "Ja"
     }
 }
