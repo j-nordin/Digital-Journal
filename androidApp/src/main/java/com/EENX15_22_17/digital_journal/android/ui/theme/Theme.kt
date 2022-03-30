@@ -25,6 +25,7 @@ fun DigitalJournalTheme(
     MaterialTheme(
         colors = LightThemeColors,
         typography = DigitalJournalTypograhy,
-        content = content
+        content = content,
+        shapes = DigitalJournalShapes
     )
 }
