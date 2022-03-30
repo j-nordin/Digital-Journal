@@ -15,13 +15,13 @@ import androidx.navigation.compose.rememberNavController
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import androidx.navigation.*
+import com.EENX15_22_17.digital_journal.android.ui.currentpatients.PatientsList
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             NavigationApp()
-            println(PatientMeetingScreens.MainScreen.route)
         }
     }
 }
@@ -29,23 +29,26 @@ class MainActivity : ComponentActivity() {
 sealed class Screen(val route: String) {
     object Overview : Screen(route = "overview")
     object PatientMeeting : Screen(route = "patientMeeting")
+    object PatientOverview : Screen(route = "patientOverview/{visitId}") {
+        fun createRoute(visitId: String) = "patientOverview/$visitId"
+    }
 }
 
 sealed class PatientMeetingScreens(val route: String) {
     //For creating routes to composables
     fun createRoute(root: Screen) = "${root.route}/$route"
 
-    object MainScreen : PatientMeetingScreens("{meetingId}") {
+    object MainScreen : PatientMeetingScreens("{visitId}") {
         // Overloads and creates a route with a specific id
-        fun createRoute(meetingId: String, root: Screen) = "${root.route}/$meetingId"
+        fun createRoute(visitId: String, root: Screen) = "${root.route}/$visitId"
     }
 
-    object Arrival : PatientMeetingScreens("{meetingId}/arrival") {
-        fun createRoute(meetingId: String, root: Screen) = "${root.route}/$meetingId/arrival"
+    object Arrival : PatientMeetingScreens("{visitId}/arrival") {
+        fun createRoute(visitId: String, root: Screen) = "${root.route}/$visitId/arrival"
     }
 
     // TODO: Implement routes to rest of the cards
-    object HazardAssessment : PatientMeetingScreens("{meetingId}/hazardAssessment")
+    object HazardAssessment : PatientMeetingScreens("{visitId}/hazardAssessment")
 }
 
 @Composable
@@ -55,7 +58,7 @@ fun NavigationApp() {
         navController = navController,
         startDestination = Screen.Overview.route
     ) {
-        addOverviewGraph(navController = navController)
+        addCurrentBoardGraph(navController = navController)
         addPatientMeetingGraph(navController = navController)
     }
 }
@@ -70,10 +73,10 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
         composable(
             route = PatientMeetingScreens.MainScreen.createRoute(root = Screen.PatientMeeting)
         ) { backStackEntry ->
-            val meetingId = backStackEntry.arguments?.getString("meetingId")
+            val visitId = backStackEntry.arguments?.getString("visitId")
 
             /*TODO: Handle meeting id not provided, ex show alert*/
-            requireNotNull(meetingId) { "No meeting id provided" }
+            requireNotNull(visitId) { "No meeting id provided" }
 
             /*TODO: replace with real patient meeting screen*/
             PatientMeetingLandingScreen(
@@ -81,103 +84,103 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
                 navToArrival = {
                     navController.navigate(
                         PatientMeetingScreens.Arrival.createRoute(
-                            meetingId,
+                            visitId = visitId,
                             root = Screen.PatientMeeting
                         )
                     )
                 },
-                meetingId = meetingId
+                visitId = visitId
             )
         }
         composable(
             route = PatientMeetingScreens.Arrival.createRoute(root = Screen.PatientMeeting)
         ) { backStackEntry ->
-            val meetingId = backStackEntry.arguments?.getString("meetingId")
-            requireNotNull(meetingId) { "No meeting id provided" }
-            ArrivalScreen(meetingId)
+            val visitId = backStackEntry.arguments?.getString("visitId")
+            requireNotNull(visitId) { "No patient id provided" }
+            ArrivalScreen(visitId)
         }
     }
 }
 
-private fun NavGraphBuilder.addOverviewGraph(
+private fun NavGraphBuilder.addCurrentBoardGraph(
     navController: NavController
 ) {
+    /*TODO: Replace with real overview page */
+    composable(route = Screen.PatientOverview.route) { backStackEntry ->
+        val visitId = backStackEntry.arguments?.getString("visitId")
+        requireNotNull(visitId) { "No patient id provided" }
+        PatientOverviewPage(
+            visitId = visitId,
+            navBack = { navController.popBackStack() }
+        )
+    }
     composable(route = Screen.Overview.route) {
         /*TODO: replace with real overview screen*/
-        OverviewScreen(
-            navToPatientMeeting = { id ->
+        /*TODO. Rename this so this not is the overview, should be startPage; Ask Jonas*/
+
+        PatientsList(
+            navigateSpecificPatient = { id ->
                 navController.navigate(
                     PatientMeetingScreens.MainScreen.createRoute(
-                        id,
-                        Screen.PatientMeeting
+                        visitId = id,
+                        root = Screen.PatientMeeting
                     )
                 )
             },
-            goBack = { navController.popBackStack() }
+            navigateSpecificOverviewPage = { id ->
+                println(id)
+                navController.navigate(
+                    Screen.PatientOverview.createRoute(
+                        visitId = id
+                    )
+                )
+            }
         )
     }
 }
 
 @Composable
-fun ArrivalScreen(meetingId: String) {
+fun ArrivalScreen(visitId: String) {
     Column() {
-        Text(text = "This is the arrival screen for meetingid $meetingId")
+        Text(text = "This is the arrival screen for visitId $visitId")
     }
 }
 
 @Composable
-fun HazardScreen(meetingId: String) {
+fun HazardScreen(visitId: String) {
     Column() {
-        Text(text = "This is the hazerd screen for meetingid $meetingId")
+        Text(text = "This is the hazerd screen for visitId $visitId")
     }
 }
-
-@Composable
-fun OverviewScreen(
-    @PreviewParameter(OverviewScreenProvider::class) navToPatientMeeting: (String) -> Unit,
-    goBack: () -> Unit = {}
-) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(40.dp)
-    ) {
-        Button(
-            onClick = { navToPatientMeeting("1") }
-        ) {
-            Text("Click for PatientMeeting 1")
-        }
-        Button(
-            onClick = { navToPatientMeeting("2") }
-        ) {
-            Text("Click for PatientMeeting 2")
-        }
-        Button(
-            onClick = goBack
-        ) {
-            Text(text = "Go back")
-        }
-    }
-}
-
 
 @Composable
 fun PatientMeetingLandingScreen(
     @PreviewParameter(OverviewScreenProvider::class) navToOverview: () -> Unit,
     navToArrival: () -> Unit,
-    meetingId: String = "0"
+    visitId: String = "0"
 ) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(40.dp)
     ) {
-        Text(text = "This is patient meeting with id: $meetingId")
+        Text(text = "This is patient meeting with id: $visitId")
         Button(onClick = navToOverview) {
-            Text("Click for overview")
+            Text("Click to get pack to current board")
         }
         Button(onClick = navToArrival) {
             Text("Go to arrival page for patient")
         }
+    }
+}
+
+@Composable
+fun PatientOverviewPage(
+    visitId: String,
+    navBack: () -> Unit
+) {
+    Text(text = "The overviewPage for patient: $visitId")
+    Button(onClick = navBack) {
+        Text(text = "Nav back")
     }
 }

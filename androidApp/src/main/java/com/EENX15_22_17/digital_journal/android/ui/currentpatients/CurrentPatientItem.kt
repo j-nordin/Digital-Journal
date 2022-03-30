@@ -22,11 +22,11 @@ import com.EENX15_22_17.digital_journal.android.ui.theme.primaryColor
 @Composable
 // TODO: Replace default parameter-values with PreviewParameter-annotations when tooling is less buggy.
 fun PatientCard(
-    patientId: String = "1",
+    visitId: String = "1",
     name: String = "PatientName",
     securityNumber: String = "00000000",
-    navigateSelectedPatient: (patientId: String) -> Unit = {},
-    showOverview: (patientId: String) -> Unit = {}
+    navigateSelectedPatient: (visitId: String) -> Unit = {},
+    showOverview: (visitId: String) -> Unit = {}
 ) {
     //TODO: use navigation to show these
     var showWarning by remember { mutableStateOf(false) }
@@ -35,7 +35,7 @@ fun PatientCard(
         modifier = Modifier
             .padding(horizontal = 120.dp, vertical = 2.dp)
             .fillMaxWidth()
-            .clickable { navigateSelectedPatient(patientId) },
+            .clickable { navigateSelectedPatient(visitId) },
         backgroundColor = primaryColor
     ) {
         Row(horizontalArrangement = Arrangement.SpaceBetween) {
@@ -51,7 +51,7 @@ fun PatientCard(
                 fontSize = 20.sp
             )
             Row(horizontalArrangement = Arrangement.End) {
-                IconButton(onClick = { showOverview(patientId) }) {
+                IconButton(onClick = { showOverview(visitId) }) {
                     Icon(
                         imageVector = Icons.Rounded.Info,
                         contentDescription = "Overview",
@@ -76,21 +76,21 @@ fun PatientCard(
                 }
                 if (showWarning) {
                     Dialog(onDismissRequest = { showWarning = false }) {
-                        WarningContent(patientId = patientId)
+                        WarningContent(visitId = visitId)
                     }
                 } else if (showComments) {
                     Dialog(onDismissRequest = { showComments = false }) {
-                        CommentsContent(patientId = patientId)
+                        CommentsContent(visitId = visitId)
                     }
                 }
             }
         }
     }
-
 }
 
+//TODO: Replace with the real warningContent
 @Composable
-fun WarningContent(patientId: String) {
+fun WarningContent(visitId: String) {
     //TODO: Get font sizes (and other theme-related stuff) from the theme
     Surface(
         modifier = Modifier
@@ -104,7 +104,7 @@ fun WarningContent(patientId: String) {
                 fontSize = 20.sp
             )
             Text(
-                text = patientId,
+                text = visitId,
                 modifier = Modifier
                     .fillMaxHeight()
                     .fillMaxWidth(),
@@ -115,8 +115,9 @@ fun WarningContent(patientId: String) {
     }
 }
 
+//TODO: Replace with the real commentContent
 @Composable
-fun CommentsContent(patientId: String) {
+fun CommentsContent(visitId: String) {
     Surface(
         modifier = Modifier
             .width(300.dp)
@@ -129,7 +130,7 @@ fun CommentsContent(patientId: String) {
                 fontSize = 30.sp
             )
             Text(
-                text = patientId,
+                text = visitId,
                 modifier = Modifier
                     .fillMaxHeight()
                     .fillMaxWidth(),

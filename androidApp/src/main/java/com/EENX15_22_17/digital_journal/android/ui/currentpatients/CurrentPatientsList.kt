@@ -21,7 +21,9 @@ private val defaultPatients: List<CurrentPatientsData> =
 @Composable
 fun PatientsList(
     @PreviewParameter(SampleCurrentPatientsProvider::class)
-    patients: List<CurrentPatientsData> = defaultPatients
+    patients: List<CurrentPatientsData> = defaultPatients,
+    navigateSpecificPatient: (visitId: String) -> Unit = {},
+    navigateSpecificOverviewPage: (visitId: String) -> Unit = {}
 ) {
     val scrollState = rememberScrollState()
     Box(
@@ -34,9 +36,11 @@ fun PatientsList(
         ) {
             for (patient in patients) {
                 PatientCard(
-                    patientId = patient.id,
+                    visitId = patient.id,
                     name = patient.name,
-                    securityNumber = patient.securityNumber
+                    securityNumber = patient.securityNumber,
+                    showOverview = { navigateSpecificOverviewPage(it) },
+                    navigateSelectedPatient = { navigateSpecificPatient(it) }
                 )
             }
         }
