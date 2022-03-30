@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 private val themeColors = lightColors(
-    primary = Blue90,
+    primary = Blue40,
     onPrimary = Color.White,
     secondary = DarkBlue40,
     onSecondary = Color.White,
