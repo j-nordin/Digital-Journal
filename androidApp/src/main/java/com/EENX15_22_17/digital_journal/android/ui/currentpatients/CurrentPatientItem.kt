@@ -36,7 +36,7 @@ fun PatientCard(
             .padding(horizontal = 120.dp, vertical = 2.dp)
             .fillMaxWidth()
             .clickable { navigateSelectedPatient(visitId) },
-        backgroundColor = primaryColor
+        backgroundColor = MaterialTheme.colors.primary
     ) {
         Row(horizontalArrangement = Arrangement.SpaceBetween) {
             Text(
