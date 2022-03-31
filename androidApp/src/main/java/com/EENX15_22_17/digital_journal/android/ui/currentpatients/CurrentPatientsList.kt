@@ -12,50 +12,37 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 
-class CurrentPatientsList {
+// Temporary data before backend is implemented
+//TODO: Fetch data from API instead of using sampledata from the preview-provider
+private val defaultPatients: List<CurrentPatientsData> =
+    SampleCurrentPatientsProvider().values.toList()[0]
 
-    // Temporary data before backend is implemented
-    private val defaultPatients: List<CurrentPatientsData> = listOf(
-        CurrentPatientsData(
-            patientId = "1",
-            patientName = "Erik Karlsson",
-            patientSecurityNumber = "1999-05-02-xxxx"
-        ),
-        CurrentPatientsData(
-            patientId = "2",
-            patientName = "Ebba Eriksson",
-            patientSecurityNumber = "1990-01-02-xxxx"
-        ),
-        CurrentPatientsData(
-            patientId = "3",
-            patientName = "Felicia Adams",
-            patientSecurityNumber = "1993-12-15-xxxx"
-        ),
-    )
-
-    @Preview
-    @Composable
-    fun PatientsList(
-        @PreviewParameter(SampleCurrentPatientsProvider::class)
-        patients: List<CurrentPatientsData> = defaultPatients
+@Preview
+@Composable
+fun PatientsList(
+    @PreviewParameter(SampleCurrentPatientsProvider::class)
+    patients: List<CurrentPatientsData> = defaultPatients,
+    navigateSpecificPatient: (visitId: String) -> Unit = {},
+    navigateSpecificOverviewPage: (visitId: String) -> Unit = {}
+) {
+    val scrollState = rememberScrollState()
+    Box(
+        Modifier
+            .height(400.dp)
+            .padding(top = 100.dp)
     ) {
-        val scrollState = rememberScrollState()
-        Box(
-            Modifier
-                .height(400.dp)
-                .padding(top = 100.dp)) {
-            Column(
-                Modifier.verticalScroll(scrollState)
-            ) {
-                for (patient in patients) {
-                    CurrentPatientItem().PatientCard(
-                        patientId = patient.patientId,
-                        name = patient.patientName,
-                        securityNumber = patient.patientSecurityNumber
-                    )
-                }
+        Column(
+            Modifier.verticalScroll(scrollState)
+        ) {
+            for (patient in patients) {
+                PatientCard(
+                    visitId = patient.id,
+                    name = patient.name,
+                    securityNumber = patient.securityNumber,
+                    showOverview = { navigateSpecificOverviewPage(it) },
+                    navigateSelectedPatient = { navigateSpecificPatient(it) }
+                )
             }
         }
-
     }
 }
