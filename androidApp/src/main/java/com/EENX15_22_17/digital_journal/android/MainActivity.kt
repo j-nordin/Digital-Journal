@@ -13,15 +13,19 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.compose.runtime.Composable
+
 import androidx.compose.ui.unit.dp
 import androidx.navigation.*
 import com.EENX15_22_17.digital_journal.android.ui.currentpatients.PatientsList
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+
             NavigationApp()
+
         }
     }
 }
