@@ -16,10 +16,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import androidx.navigation.*
 import com.EENX15_22_17.digital_journal.android.ui.currentpatients.PatientsList
-import androidx.compose.ui.res.stringResource
-import com.EENX15_22_17.digital_journal.android.ui.currentpatients.CurrentPatientItem
-import com.EENX15_22_17.digital_journal.android.ui.currentpatients.CurrentPatientsList
-import com.EENX15_22_17.digital_journal.android.ui.landingpage.LandingPage
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
