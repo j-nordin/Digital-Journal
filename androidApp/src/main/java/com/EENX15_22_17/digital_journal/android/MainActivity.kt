@@ -3,9 +3,10 @@ package com.EENX15_22_17.digital_journal.android
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import com.EENX15_22_17.digital_journal.android.ui.arrivalpage.ArrivalPage
 import androidx.compose.material.Text
 import androidx.compose.ui.Modifier
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -117,7 +118,6 @@ private fun NavGraphBuilder.addCurrentBoardGraph(
     }
     composable(route = Screen.Overview.route) {
         /*TODO: replace with real overview screen*/
-        /*TODO. Rename this so this not is the overview, should be startPage; Ask Jonas*/
 
         PatientsList(
             navigateSpecificPatient = { id ->
