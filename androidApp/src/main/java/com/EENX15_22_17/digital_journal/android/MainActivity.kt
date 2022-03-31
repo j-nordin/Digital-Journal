@@ -27,7 +27,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             NavigationApp()
             // CurrentPatientsList().PatientsList()
-            LandingPage().landingPage()
         }
     }
 }
