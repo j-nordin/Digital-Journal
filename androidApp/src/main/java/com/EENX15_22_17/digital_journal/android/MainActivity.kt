@@ -15,6 +15,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import androidx.navigation.*
+import com.EENX15_22_17.digital_journal.android.ui.arrivalpage.ArrivalPage
 import com.EENX15_22_17.digital_journal.android.ui.currentpatients.PatientsList
 
 class MainActivity : ComponentActivity() {
@@ -141,9 +142,7 @@ private fun NavGraphBuilder.addCurrentBoardGraph(
 
 @Composable
 fun ArrivalScreen(visitId: String) {
-    Column() {
-        Text(text = "This is the arrival screen for visitId $visitId")
-    }
+    ArrivalPage(visitId = visitId)
 }
 
 @Composable

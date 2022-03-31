@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -11,7 +12,8 @@ import com.EENX15_22_17.digital_journal.android.ui.theme.borderColor
 
 @Composable
 fun ArrivalPage(
-    arrivalViewModel: ArrivalViewModel = ArrivalViewModel()
+    arrivalViewModel: ArrivalViewModel = ArrivalViewModel(),
+    visitId: String
 ) {
     val rowModifier: Modifier = Modifier
         .fillMaxWidth()
@@ -26,6 +28,7 @@ fun ArrivalPage(
         .padding(20.dp)
 
     Column(modifier = Modifier.fillMaxWidth()) {
+        Text(text = "Ankomst sidan för patient: $visitId")
         Row(
             modifier = rowModifier,
             horizontalArrangement = Arrangement.spacedBy(30.dp)
