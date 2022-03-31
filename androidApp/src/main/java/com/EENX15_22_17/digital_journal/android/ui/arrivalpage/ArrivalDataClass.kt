@@ -74,3 +74,12 @@ enum class Law {
     LVM,
     UNKNOWN
 }
+
+val laws = mapOf<Law, String>(
+    Law.HSL to "HSL",
+    Law.LPT to "LPT",
+    Law.FORTYSEVEN to "$ 47",
+    Law.VI to "VI",
+    Law.LRV to "LRV",
+    Law.LVM to "LVM",
+)

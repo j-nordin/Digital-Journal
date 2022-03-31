@@ -1,23 +1,27 @@
 package com.EENX15_22_17.digital_journal.android.ui.arrivalpage
 
+import android.os.Bundle
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.SavedStateHandle
 import com.EENX15_22_17.digital_journal.android.ui.theme.borderColor
 
 @Composable
 fun ArrivalPage(
     arrivalViewModel: ArrivalViewModel = ArrivalViewModel(),
-    visitId: String
+    visitId: String,
+    navBack: () -> Unit
 ) {
     val rowModifier: Modifier = Modifier
         .fillMaxWidth()
-        .padding(10.dp)
+        .padding(vertical = 6.dp, horizontal = 2.dp)
         .border(
             border = BorderStroke(
                 2.dp,
@@ -25,10 +29,13 @@ fun ArrivalPage(
             ),
             shape = RoundedCornerShape(8.dp)
         )
-        .padding(20.dp)
+        .padding(horizontal = 16.dp, vertical = 12.dp)
 
     Column(modifier = Modifier.fillMaxWidth()) {
         Text(text = "Ankomst sidan för patient: $visitId")
+        Button(onClick = navBack ) {
+            Text(text = "Gå tillbaka")
+        }
         Row(
             modifier = rowModifier,
             horizontalArrangement = Arrangement.spacedBy(30.dp)
@@ -70,7 +77,7 @@ fun ArrivalPage(
             Box(
                 modifier = Modifier
                     .fillMaxWidth(0.5f)
-                    .padding(16.dp)
+                    .padding(vertical = 6.dp, horizontal = 2.dp)
                     .border(
                         border = BorderStroke(
                             2.dp,
@@ -78,17 +85,17 @@ fun ArrivalPage(
                         ),
                         shape = RoundedCornerShape(8.dp)
                     )
-                    .padding(20.dp)
+                    .padding(horizontal = 16.dp, vertical = 12.dp)
             ) {
                 Identity(
                     value = arrivalViewModel.arrivalStates.confirmedIdentity,
-                    onChange = { arrivalViewModel.arrivalStates.confirmedIdentity = it}
+                    onChange = { arrivalViewModel.arrivalStates.confirmedIdentity = it }
                 )
             }
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp)
+                    .padding(vertical = 6.dp, horizontal = 2.dp)
                     .border(
                         border = BorderStroke(
                             2.dp,
@@ -96,7 +103,7 @@ fun ArrivalPage(
                         ),
                         shape = RoundedCornerShape(8.dp)
                     )
-                    .padding(20.dp)
+                    .padding(horizontal = 16.dp, vertical = 12.dp)
             ) {
                 Samsa(
                     value = arrivalViewModel.arrivalStates.samsa,
@@ -112,7 +119,9 @@ fun ArrivalPage(
         ) {
             Relative(
                 setRelativeName = { arrivalViewModel.arrivalStates.relativeName = it },
-                setRelativePhoneNumber = { arrivalViewModel.arrivalStates.relativePhoneNumber = it },
+                setRelativePhoneNumber = {
+                    arrivalViewModel.arrivalStates.relativePhoneNumber = it
+                },
                 relativeName = arrivalViewModel.arrivalStates.relativeName,
                 relativePhoneNumber = arrivalViewModel.arrivalStates.relativePhoneNumber
             )
@@ -121,21 +130,50 @@ fun ArrivalPage(
             modifier = rowModifier
         ) {
             ChildrenInHouseHold(
-                onChange = { arrivalViewModel.arrivalStates.children = it.toMutableList()},
+                onChange = { arrivalViewModel.arrivalStates.children = it.toMutableList() },
                 values = arrivalViewModel.arrivalStates.children,
-                onConcernReportChange = { arrivalViewModel.arrivalStates.concernReport = it},
+                onConcernReportChange = { arrivalViewModel.arrivalStates.concernReport = it },
                 concernReport = arrivalViewModel.arrivalStates.concernReport
             )
         }
-        Row(
-            modifier = rowModifier
-        ) {
-            ArrivalType(
-                value = arrivalViewModel.arrivalStates.arrivalMethod,
-                onChange = { arrivalViewModel.arrivalStates.arrivalMethod = it}
-            )
+        Row {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth(0.6f)
+                    .padding(vertical = 6.dp, horizontal = 2.dp)
+                    .border(
+                        border = BorderStroke(
+                            2.dp,
+                            borderColor
+                        ),
+                        shape = RoundedCornerShape(8.dp)
+                    )
+                    .padding(horizontal = 16.dp, vertical = 12.dp)
+            ) {
+                ArrivalType(
+                    value = arrivalViewModel.arrivalStates.arrivalMethod,
+                    onChange = { arrivalViewModel.arrivalStates.arrivalMethod = it }
+                )
+            }
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 6.dp, horizontal = 2.dp)
+                    .border(
+                        border = BorderStroke(
+                            2.dp,
+                            borderColor
+                        ),
+                        shape = RoundedCornerShape(8.dp)
+                    )
+                    .padding(horizontal = 16.dp, vertical = 12.dp)
+            ) {
+                Laws(
+                    value = arrivalViewModel.arrivalStates.law,
+                    onChange = { arrivalViewModel.arrivalStates.law = it}
+                )
+            }
         }
     }
-
 }
 

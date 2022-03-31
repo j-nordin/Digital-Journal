@@ -32,7 +32,6 @@ fun <E : Enum<*>> EnumRadioButtonsHorizontal(
             currentChoice = currentChoice,
             onSelection = onSelection
         )
-
     }
 }
 
@@ -51,7 +50,6 @@ fun <E : Enum<*>> EnumRadioButtonsVertical(
             currentChoice = currentChoice,
             onSelection = onSelection
         )
-
     }
 }
 
@@ -72,7 +70,7 @@ fun <E : Enum<*>> EnumRadioButtons(
                     selection = choice
                     onSelection(choice)
                 }
-                .padding(horizontal = 16.dp)
+                .padding(horizontal = 12.dp)
                 .background(primaryColor, CircleShape)
         ) {
             RadioButton(

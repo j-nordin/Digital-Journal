@@ -15,4 +15,5 @@
     <string name="addChild">Lägg till barn</string>
     <string name="concernReport">Orosanmälan</string>
     <string name="arrivalType">Ankomst till akutmottagningen</string>
+    <string name="laws">Lagar</string>
 </resources>

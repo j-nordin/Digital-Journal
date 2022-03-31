@@ -1,10 +1,7 @@
 package com.EENX15_22_17.digital_journal.android.ui.arrivalpage
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.CalendarToday
 import androidx.compose.material.icons.rounded.Timer
@@ -12,6 +9,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -338,19 +336,63 @@ fun ArrivalType(
     value: ArrivalMethod,
     onChange: (value: ArrivalMethod) -> Unit
 ) {
-    Text(
-        text = stringResource(id = R.string.arrivalType),
-        fontSize = 20.sp,
-        fontWeight = FontWeight.Bold,
-        modifier = Modifier.padding(vertical = 16.dp)
-    )
-    Box() {
-        
+    Column {
+        Text(
+            text = stringResource(id = R.string.arrivalType),
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(vertical = 16.dp)
+        )
+        // TODO: Fråga Rikard: Nu kan många bli selectade samtidigt
+        Row {
+            EnumRadioButtonsVertical(
+                choices = arrivalMethods.keys.toTypedArray().sliceArray(0..2),
+                labels = arrivalMethods,
+                currentChoice = value,
+                onSelection = onChange
+            )
+            EnumRadioButtonsVertical(
+                choices = arrivalMethods.keys.toTypedArray().sliceArray(3..5),
+                labels = arrivalMethods,
+                currentChoice = value,
+                onSelection = onChange
+            )
+            EnumRadioButtonsVertical(
+                choices = arrivalMethods.keys.toTypedArray().sliceArray(6..7),
+                labels = arrivalMethods,
+                currentChoice = value,
+                onSelection = onChange
+            )
+        }
     }
-    EnumRadioButtonsHorizontal(
-        choices = arrivalMethods.keys.toTypedArray(),
-        labels = arrivalMethods,
-        currentChoice = value,
-        onSelection = onChange
-    )
+}
+
+@Composable
+fun Laws (
+    value: Law,
+    onChange: (value: Law) -> Unit
+) {
+    Column {
+        Text(
+            text = stringResource(id = R.string.laws),
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(vertical = 16.dp)
+        )
+        Row {
+            EnumRadioButtonsVertical(
+                choices = laws.keys.toTypedArray().sliceArray(0..2),
+                labels = laws,
+                currentChoice = value,
+                onSelection = onChange
+            )
+            EnumRadioButtonsVertical(
+                choices = laws.keys.toTypedArray().sliceArray(3..5),
+                labels = laws,
+                currentChoice = value,
+                onSelection = onChange
+            )
+        }
+
+    }
 }
