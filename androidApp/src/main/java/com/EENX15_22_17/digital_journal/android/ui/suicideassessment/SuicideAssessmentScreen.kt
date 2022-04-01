@@ -10,6 +10,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.EENX15_22_17.digital_journal.android.ui.components_beta.CheckBoxData
+import com.EENX15_22_17.digital_journal.android.ui.components_beta.TemplateSection
 
 @Composable
 fun SuicideAssessmentScreen() {
@@ -23,6 +25,7 @@ fun SuicideAssessmentScreen() {
             modifier = Modifier.verticalScroll(scrollState),
             verticalArrangement = Arrangement.Center
         ) {
+            // Page title
             Text(
                 text = "SUICIDBEDÖMNING",
                 style = TextStyle(fontSize = 36.sp, fontWeight = FontWeight.ExtraBold),
@@ -30,9 +33,15 @@ fun SuicideAssessmentScreen() {
                 modifier = Modifier.padding(top = 40.dp, start = 15.dp, end = 20.dp),
 
                 )
-
-            SuicideStepsList()
-
+            //Header checkbox
+            Column(Modifier.padding(start = 40.dp, top = 10.dp)) {
+                DrawCheckBoxes(items = listOf(
+                    CheckBoxData("Medveten suicidbenägenhet framgår inte vid ankomstsamtal", false),
+                    CheckBoxData("Patienten svarar inte på frågor", false),
+                ))
+            }
+            //Suicid steps
+            TemplateSection("Suicidstegen") { SuicideStepsList() }
 
 
         }

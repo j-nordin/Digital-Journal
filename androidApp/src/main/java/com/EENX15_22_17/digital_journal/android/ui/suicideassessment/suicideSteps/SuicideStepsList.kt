@@ -1,41 +1,42 @@
 package com.EENX15_22_17.digital_journal.android.ui.suicideassessment
 
 import androidx.compose.runtime.Composable
-import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.suicideSteps.SuicideStepsData
+import com.EENX15_22_17.digital_journal.android.ui.components_beta.CheckBoxData
 
 @Composable
 fun SuicideStepsList()  {
-    return SuicideStepSection(items = listOf(
-        SuicideStepsData(
+    return SuicideStepsItem(items = listOf(
+        CheckBoxData(
             checkBoxName = "1. Nedstämdhet",
             checkBoxValue = false,
         ),
-        SuicideStepsData(
+        CheckBoxData(
             checkBoxName = "2. Livsleda, dödstankar",
             checkBoxValue = false,
         ),
-        SuicideStepsData(
+        CheckBoxData(
             checkBoxName = "3. Dödsönskan",
             checkBoxValue = false,
         ),
-        SuicideStepsData(
+        CheckBoxData(
             checkBoxName = "4. Suicidtankar",
             checkBoxValue = false,
         ),
-        SuicideStepsData(
+        CheckBoxData(
             checkBoxName = "5. Suicidimpulser",
             checkBoxValue = false,
         ),
-        SuicideStepsData(
+        CheckBoxData(
             checkBoxName = "6. Suicidala avsikter eller planer",
             checkBoxValue = false,
         ),
-        SuicideStepsData(
+        CheckBoxData(
             checkBoxName = "7. Suicidhandling",
             checkBoxValue = false,
         ),
 
-        ))
+        )
+    )
 }
 
 
