@@ -16,6 +16,7 @@
     <string name="concernReport">Orosanmälan</string>
     <string name="arrivalType">Ankomst till akutmottagningen</string>
     <string name="laws">Lagar</string>
+    <string name="hazardActionTaken">Vidtagen åtgärd</string>
     <string name="arrivalCard">ANKOMST</string>
     <string name="hazardCard">FARLIGHETSBEDÖMNING</string>
     <string name="contactReason">KONTAKTORSAK</string>
