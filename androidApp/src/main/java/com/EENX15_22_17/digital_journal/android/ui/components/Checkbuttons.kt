@@ -1,85 +1,86 @@
 package com.EENX15_22_17.digital_journal.android.ui.components
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Checkbox
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.EENX15_22_17.digital_journal.android.ui.arrivalpage.ArrivalMethod
-import com.EENX15_22_17.digital_journal.android.ui.theme.checkBoxColor
-
-@Composable
-fun CheckButton(
-    isEnabled: Boolean = true,
-    handleSelected: (isChecked: Boolean) -> Unit = { }
-) {
-    var checked by remember { mutableStateOf(false) }
-    Checkbox(
-        checked = checked,
-        onCheckedChange = { checked = !checked; handleSelected(checked) },
-        modifier = Modifier
-            .size(50.dp)
-            .border(BorderStroke(2.dp, checkBoxColor), CircleShape)
-            .background(checkBoxColor, CircleShape),
-        enabled = isEnabled
-    )
-}
-
-@Composable
-fun CheckButtonWithText(
-    isEnabled: Boolean = true,
-    text: String,
-    handleSelected: (isChecked: Boolean) -> Unit = { }
-) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        CheckButton(
-            isEnabled = isEnabled,
-            handleSelected = handleSelected
-        )
-        Text(text = text)
-    }
-}
-
+import com.EENX15_22_17.digital_journal.android.ui.theme.primaryColor
 
 @Composable
 fun <E : Enum<*>> EnumCheckBox(
     choices: Array<E>,
     onSelectionChanged: (selected: Set<E>) -> Unit,
-    currentSelected: MutableSet<E>
+    currentSelected: MutableSet<E>,
+    labels: Map<E, String>
 ) {
-    val selection: MutableSet<E> = rememberSaveable { currentSelected }
-
     Column {
-        choices.forEach { choice  ->
-            Box {
+        choices.forEach { choice ->
+            var isChecked by rememberSaveable { mutableStateOf(choice in currentSelected) }
+            Text(text = labels[choice] ?: choice.name, textAlign = TextAlign.Center)
+            Box(
+                modifier = Modifier.background(primaryColor, CircleShape)
+            ) {
                 Checkbox(
-                    checked = (choice in selection.toSet()),
+                    checked = isChecked,
                     onCheckedChange = {
-                        println(it)
-                        when(it) {
-                            false -> selection.remove(choice)
-                            true -> selection.add(choice)
+                        isChecked = when (it) {
+                            false -> {
+                                currentSelected.remove(choice)
+                                false
+                            }
+                            true -> {
+                                currentSelected.add(choice)
+                                true
+                            }
                         }
-                        onSelectionChanged(selection.toSet())
+                        onSelectionChanged(currentSelected.toSet())
                     }
                 )
-
-                Text(text = choice.name)
             }
         }
     }
+}
 
+@Composable
+fun <E : Enum<*>> EnumCheckBoxHorizontal(
+    choices: Array<E>,
+    onSelectionChanged: (selected: Set<E>) -> Unit,
+    currentSelected: MutableSet<E>,
+    labels: Map<E, String>
+) {
+    Row(modifier = Modifier.padding(2.dp)) {
+        EnumCheckBox(
+            choices = choices,
+            onSelectionChanged = onSelectionChanged,
+            currentSelected = currentSelected,
+            labels = labels
+        )
+    }
+}
 
+@Composable
+fun <E : Enum<*>> EnumCheckBoxVertical(
+    choices: Array<E>,
+    onSelectionChanged: (selected: Set<E>) -> Unit,
+    currentSelected: MutableSet<E>,
+    labels: Map<E, String>
+) {
+    Column(modifier = Modifier.padding(2.dp)) {
+        EnumCheckBox(
+            choices = choices,
+            onSelectionChanged = onSelectionChanged,
+            currentSelected = currentSelected,
+            labels = labels
+        )
+    }
 }
 

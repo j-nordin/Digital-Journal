@@ -21,7 +21,7 @@ class ArrivalViewModel : ViewModel() {
             children = mutableListOf(),
             concernReport = YesNo.UNKOWN,
             arrivalMethod = setOf<ArrivalMethod>(),
-            law = Law.UNKNOWN
+            law = setOf<Law>()
         )
     )
         private set

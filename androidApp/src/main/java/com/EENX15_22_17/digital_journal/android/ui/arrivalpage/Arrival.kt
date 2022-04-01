@@ -31,7 +31,7 @@ fun ArrivalPage(
 
     Column(modifier = Modifier.fillMaxWidth()) {
         Text(text = "Ankomst sidan för patient: $visitId")
-        Button(onClick = navBack ) {
+        Button(onClick = navBack) {
             Text(text = "Gå tillbaka")
         }
         Row(
@@ -148,9 +148,10 @@ fun ArrivalPage(
                     )
                     .padding(horizontal = 16.dp, vertical = 12.dp)
             ) {
-                ArrivalType2(
+                ArrivalType(
                     values = arrivalViewModel.arrivalStates.arrivalMethod.toMutableSet(),
-                    onChange = { arrivalViewModel.arrivalStates.arrivalMethod = it}
+                    onChange = { arrivalViewModel.arrivalStates.arrivalMethod = it },
+                    modifier = Modifier.padding(2.dp)
                 )
             }
             Box(
@@ -166,12 +167,12 @@ fun ArrivalPage(
                     )
                     .padding(horizontal = 16.dp, vertical = 12.dp)
             ) {
+
                 Laws(
-                    value = arrivalViewModel.arrivalStates.law,
-                    onChange = { arrivalViewModel.arrivalStates.law = it}
+                    values = arrivalViewModel.arrivalStates.law.toMutableSet(),
+                    onChange = { arrivalViewModel.arrivalStates.law = it }
                 )
             }
         }
     }
 }
-

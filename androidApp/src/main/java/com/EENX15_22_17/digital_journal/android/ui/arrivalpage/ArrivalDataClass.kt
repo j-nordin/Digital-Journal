@@ -15,7 +15,7 @@ data class ArrivalDataClass(
     var children: MutableList<Int>,
     var concernReport: YesNo,
     var arrivalMethod: Set<ArrivalMethod>,
-    var law: Law
+    var law: Set<Law>
 )
 
 enum class YesAndNoAndNoAnswer {

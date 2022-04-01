@@ -332,45 +332,9 @@ fun ConcernReport(
 }
 
 @Composable
-fun ArrivalType(
-    value: ArrivalMethod,
-    onChange: (value: ArrivalMethod) -> Unit
-) {
-    Column {
-        Text(
-            text = stringResource(id = R.string.arrivalType),
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(vertical = 16.dp)
-        )
-        // TODO: Fråga Rikard: Nu kan många bli selectade samtidigt
-        Row {
-            EnumRadioButtonsVertical(
-                choices = arrivalMethods.keys.toTypedArray().sliceArray(0..2),
-                labels = arrivalMethods,
-                currentChoice = value,
-                onSelection = onChange
-            )
-            EnumRadioButtonsVertical(
-                choices = arrivalMethods.keys.toTypedArray().sliceArray(3..5),
-                labels = arrivalMethods,
-                currentChoice = value,
-                onSelection = onChange
-            )
-            EnumRadioButtonsVertical(
-                choices = arrivalMethods.keys.toTypedArray().sliceArray(6..7),
-                labels = arrivalMethods,
-                currentChoice = value,
-                onSelection = onChange
-            )
-        }
-    }
-}
-
-@Composable
-fun Laws (
-    value: Law,
-    onChange: (value: Law) -> Unit
+fun Laws(
+    values: MutableSet<Law>,
+    onChange: (values: Set<Law>) -> Unit,
 ) {
     Column {
         Text(
@@ -379,32 +343,63 @@ fun Laws (
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(vertical = 16.dp)
         )
-        Row {
-            EnumRadioButtonsVertical(
+        Row(
+            modifier = Modifier.padding(2.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            EnumCheckBoxVertical(
                 choices = laws.keys.toTypedArray().sliceArray(0..2),
-                labels = laws,
-                currentChoice = value,
-                onSelection = onChange
+                onSelectionChanged = onChange,
+                currentSelected = values,
+                labels = laws
             )
-            EnumRadioButtonsVertical(
+            EnumCheckBoxVertical(
                 choices = laws.keys.toTypedArray().sliceArray(3..5),
-                labels = laws,
-                currentChoice = value,
-                onSelection = onChange
+                onSelectionChanged = onChange,
+                currentSelected = values,
+                labels = laws
             )
         }
-
     }
 }
 
 @Composable
-fun ArrivalType2 (
+fun ArrivalType(
     values: MutableSet<ArrivalMethod>,
-    onChange: (values: Set<ArrivalMethod>) -> Unit
+    onChange: (values: Set<ArrivalMethod>) -> Unit,
+    modifier: Modifier = Modifier
 ) {
-    EnumCheckBox(
-        choices = arrivalMethods.keys.toTypedArray(),
-        onSelectionChanged = onChange,
-        currentSelected = values
-    )
+    Column {
+        Text(
+            text = stringResource(id = R.string.arrivalType),
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(vertical = 16.dp)
+        )
+        Row(
+            modifier = modifier,
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            EnumCheckBoxVertical(
+                choices = arrivalMethods.keys.toTypedArray().sliceArray(0..2),
+                onSelectionChanged = onChange,
+                currentSelected = values,
+                labels = arrivalMethods
+            )
+            EnumCheckBoxVertical(
+                choices = arrivalMethods.keys.toTypedArray().sliceArray(3..5),
+                onSelectionChanged = onChange,
+                currentSelected = values,
+                labels = arrivalMethods
+            )
+            EnumCheckBoxVertical(
+                choices = arrivalMethods.keys.toTypedArray().sliceArray(6..7),
+                onSelectionChanged = onChange,
+                currentSelected = values,
+                labels = arrivalMethods
+            )
+        }
+    }
+
+
 }
