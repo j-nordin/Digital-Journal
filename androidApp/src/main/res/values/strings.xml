@@ -16,4 +16,5 @@
     <string name="concernReport">Orosanmälan</string>
     <string name="arrivalType">Ankomst till akutmottagningen</string>
     <string name="laws">Lagar</string>
+    <string name="hazardActionTaken">Vidtagen åtgärd</string>
 </resources>

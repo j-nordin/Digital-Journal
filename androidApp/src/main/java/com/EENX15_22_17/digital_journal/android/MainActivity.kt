@@ -101,7 +101,7 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
             requireNotNull(visitId) { "No patient id provided" }
             ArrivalScreen(
                 visitId,
-                navBack = { navController.popBackStack()}
+                navBack = { navController.popBackStack() }
             )
         }
     }
@@ -150,7 +150,7 @@ fun ArrivalScreen(
 ) {
     ArrivalPage(
         visitId = visitId,
-        navBack= navBack
+        navBack = navBack
     )
 }
 
