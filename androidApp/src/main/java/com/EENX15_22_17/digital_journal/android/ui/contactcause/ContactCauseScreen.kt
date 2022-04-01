@@ -41,35 +41,24 @@ fun ContactCauseScreen() {
                 TextFieldContent(
                     "Situation",
                     "Information kopplat till situation",
-                )
-            ))
-
-            TextFieldSection(items = listOf(
+                ),
                 TextFieldContent(
                     "Bakgrund",
                     "Information kopplat till bakgrund",
-                )
-            ))
-
-            TextFieldSection(items = listOf(
+                ),
                 TextFieldContent(
                     "Aktuellt tillstånd",
                     "Information kopplat till aktuellt tillstånd",
-                )
-            ))
-
-            TextFieldSection(items = listOf(
+                ),
                 TextFieldContent(
                     "Rekommendation",
                     "Information kopplat till rekommendation",
-                )
-            ))
-
-            TextFieldSection(items = listOf(
+                ),
                 TextFieldContent(
                     "Övrigt",
                     "Övrig information",
                 )
+
             ))
 
             RettsClickableSection( items = mutableListOf(

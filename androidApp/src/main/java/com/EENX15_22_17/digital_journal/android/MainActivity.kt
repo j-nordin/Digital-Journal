@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import androidx.navigation.*
 import com.EENX15_22_17.digital_journal.android.ui.currentpatients.PatientsList
+import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.SuicideAssessmentScreen
 
 
 class MainActivity : ComponentActivity() {
@@ -24,7 +25,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 
-            NavigationApp()
+            //NavigationApp()
+            SuicideAssessmentScreen()
 
         }
     }
