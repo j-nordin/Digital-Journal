@@ -1,6 +1,5 @@
 package com.EENX15_22_17.digital_journal.android.ui.arrivalpage
 
-import android.os.Bundle
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -10,7 +9,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.SavedStateHandle
 import com.EENX15_22_17.digital_journal.android.ui.theme.borderColor
 
 @Composable
@@ -150,9 +148,9 @@ fun ArrivalPage(
                     )
                     .padding(horizontal = 16.dp, vertical = 12.dp)
             ) {
-                ArrivalType(
-                    value = arrivalViewModel.arrivalStates.arrivalMethod,
-                    onChange = { arrivalViewModel.arrivalStates.arrivalMethod = it }
+                ArrivalType2(
+                    values = arrivalViewModel.arrivalStates.arrivalMethod.toMutableSet(),
+                    onChange = { arrivalViewModel.arrivalStates.arrivalMethod = it}
                 )
             }
             Box(

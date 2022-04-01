@@ -396,3 +396,15 @@ fun Laws (
 
     }
 }
+
+@Composable
+fun ArrivalType2 (
+    values: MutableSet<ArrivalMethod>,
+    onChange: (values: Set<ArrivalMethod>) -> Unit
+) {
+    EnumCheckBox(
+        choices = arrivalMethods.keys.toTypedArray(),
+        onSelectionChanged = onChange,
+        currentSelected = values
+    )
+}

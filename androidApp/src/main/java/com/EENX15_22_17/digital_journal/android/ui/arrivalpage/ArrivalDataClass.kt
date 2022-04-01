@@ -14,7 +14,7 @@ data class ArrivalDataClass(
     var relativePhoneNumber: String,
     var children: MutableList<Int>,
     var concernReport: YesNo,
-    var arrivalMethod: ArrivalMethod,
+    var arrivalMethod: Set<ArrivalMethod>,
     var law: Law
 )
 
