@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import com.EENX15_22_17.digital_journal.android.ui.currentpatients.PatientsList
+import com.EENX15_22_17.digital_journal.android.ui.screen.ContactCauseScreen
 
 sealed class Screen(val route: String) {
     object Overview : Screen(route = "overview")
@@ -28,6 +29,10 @@ sealed class PatientMeetingScreens(val route: String) {
 
     object Arrival : PatientMeetingScreens("{visitId}/arrival") {
         fun createRoute(visitId: String, root: Screen) = "${root.route}/$visitId/arrival"
+    }
+    // Contact cause
+    object ContactCause : PatientMeetingScreens("{visitId}/contactCause") {
+        fun createRoute(visitId: String, root: Screen) = "${root.route}/$visitId/contactCause"
     }
 
     // TODO: Implement routes to rest of the cards
@@ -73,6 +78,14 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
                         )
                     )
                 },
+                navToContactCause = {
+                    navController.navigate(
+                        PatientMeetingScreens.ContactCause.createRoute(
+                            visitId= visitId,
+                            root = Screen.PatientMeeting
+                        )
+                    )
+                },
                 visitId = visitId
             )
         }
@@ -82,6 +95,13 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient id provided" }
             ArrivalScreen(visitId)
+        }
+        // Contact cause
+        composable(route = PatientMeetingScreens.ContactCause.createRoute(root = Screen.PatientMeeting)
+        ){
+            val visitId = it.arguments?.getString("visitId")
+            requireNotNull(visitId)
+            ContactCauseScreen()
         }
     }
 }

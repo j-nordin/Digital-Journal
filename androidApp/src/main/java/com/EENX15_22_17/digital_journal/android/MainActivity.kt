@@ -48,6 +48,7 @@ fun HazardScreen(visitId: String) {
 fun PatientMeetingLandingScreen(
     @PreviewParameter(OverviewScreenProvider::class) navToOverview: () -> Unit,
     navToArrival: () -> Unit,
+    navToContactCause: () -> Unit,
     visitId: String = "0"
 ) {
     Column(
@@ -61,6 +62,10 @@ fun PatientMeetingLandingScreen(
         }
         Button(onClick = navToArrival) {
             Text("Go to arrival page for patient")
+        }
+        // Contact cause
+        Button(onClick = navToContactCause) {
+            Text("Go to contact cause")
         }
     }
 }
