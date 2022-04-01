@@ -13,9 +13,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.EENX15_22_17.digital_journal.android.R
-import com.EENX15_22_17.digital_journal.android.ui.theme.lineFourColor
-import com.EENX15_22_17.digital_journal.android.ui.theme.lineOneCard
-import com.EENX15_22_17.digital_journal.android.ui.theme.lineTwoCard
+import com.EENX15_22_17.digital_journal.android.ui.theme.rettsLineFourNavigationCard
+import com.EENX15_22_17.digital_journal.android.ui.theme.rettsLineOneNavigationCard
+import com.EENX15_22_17.digital_journal.android.ui.theme.rettsLineTwoNavigationCard
 import androidx.compose.material.icons.Icons
 import androidx.compose.ui.Alignment
 import androidx.compose.material.*
@@ -26,6 +26,9 @@ import com.EENX15_22_17.digital_journal.android.ui.theme.colorIcon
 
 class LandingPage {
 
+    /*
+    TODO: refactor these to own file
+     */
     enum class NavigationEnum {
         ARRIVAL, DANGER, CONTACT_REASON, PREVIOUS_CARE, HEALTH_HISTORY, HEALTH_NOW, SUICIDE_ASSESSMENT, NURSING_NEED, MEDICAL_ORDER, INTERIM_JOURNAL
     }
@@ -49,14 +52,14 @@ class LandingPage {
             ) {
                 navigationCard(
                     label = R.string.arrivalCard,
-                    backgroundCol = lineOneCard,
+                    backgroundCol = rettsLineOneNavigationCard,
                     modifier = Modifier.width(370.dp),
                     navTarget = NavigationEnum.ARRIVAL,
                     navigateToForm = navigateToForm
                 )
                 navigationCard(
                     label = R.string.hazardCard,
-                    backgroundCol = lineOneCard,
+                    backgroundCol = rettsLineOneNavigationCard,
                     modifier = Modifier.width(370.dp),
                     navTarget = NavigationEnum.DANGER,
                     navigateToForm = navigateToForm
@@ -71,7 +74,7 @@ class LandingPage {
             {
                 navigationCard(
                     label = R.string.contactReason,
-                    backgroundCol = lineTwoCard,
+                    backgroundCol = rettsLineTwoNavigationCard,
                     modifier = Modifier
                         .width(240.dp),
                     navTarget = NavigationEnum.CONTACT_REASON,
@@ -79,7 +82,7 @@ class LandingPage {
                 )
                 navigationCard(
                     label = R.string.previousCare,
-                    backgroundCol = lineTwoCard,
+                    backgroundCol = rettsLineTwoNavigationCard,
                     modifier = Modifier
                         .width(240.dp),
                     navTarget = NavigationEnum.PREVIOUS_CARE,
@@ -87,7 +90,7 @@ class LandingPage {
                 )
                 navigationCard(
                     label = R.string.healthHistory,
-                    backgroundCol = lineTwoCard,
+                    backgroundCol = rettsLineTwoNavigationCard,
                     modifier = Modifier
                         .width(240.dp),
                     navTarget = NavigationEnum.HEALTH_HISTORY,
@@ -103,7 +106,7 @@ class LandingPage {
             {
                 navigationCard(
                     label = R.string.healthNow,
-                    backgroundCol = lineTwoCard,
+                    backgroundCol = rettsLineTwoNavigationCard,
                     modifier = Modifier
                         .width(370.dp),
                     navTarget = NavigationEnum.HEALTH_NOW,
@@ -111,7 +114,7 @@ class LandingPage {
                 )
                 navigationCard(
                     label = R.string.suicideAssessment,
-                    backgroundCol = lineTwoCard,
+                    backgroundCol = rettsLineTwoNavigationCard,
                     modifier = Modifier
                         .width(370.dp),
                     navTarget = NavigationEnum.SUICIDE_ASSESSMENT,
@@ -126,7 +129,7 @@ class LandingPage {
             ) {
                 navigationCard(
                     label = R.string.nursingNeed,
-                    backgroundCol = lineFourColor,
+                    backgroundCol = rettsLineFourNavigationCard,
                     modifier = Modifier
                         .width(370.dp),
                     navTarget = NavigationEnum.NURSING_NEED,
@@ -134,7 +137,7 @@ class LandingPage {
                 )
                 navigationCard(
                     label = R.string.medicalOrder,
-                    backgroundCol = lineFourColor,
+                    backgroundCol = rettsLineFourNavigationCard,
                     modifier = Modifier
                         .width(370.dp),
                     navTarget = NavigationEnum.MEDICAL_ORDER,
@@ -149,7 +152,7 @@ class LandingPage {
             ) {
                 navigationCard(
                     label = R.string.interimJournal,
-                    backgroundCol = lineFourColor,
+                    backgroundCol = rettsLineFourNavigationCard,
                     modifier = Modifier
                         .width(760.dp),
                     navTarget = NavigationEnum.INTERIM_JOURNAL,
