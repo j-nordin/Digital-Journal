@@ -12,6 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.EENX15_22_17.digital_journal.android.ui.components_beta.CheckBoxData
 import com.EENX15_22_17.digital_journal.android.ui.components_beta.TemplateSection
+import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.statisticalriskfactors.StatisticalRiskFactorsList
 
 @Composable
 fun SuicideAssessmentScreen() {
@@ -42,6 +43,8 @@ fun SuicideAssessmentScreen() {
             }
             //Suicid steps
             TemplateSection("Suicidstegen") { SuicideStepsList() }
+            // Statistical Risk Factors
+            TemplateSection("Statistiska riskfaktorer") { StatisticalRiskFactorsList() }
 
 
         }

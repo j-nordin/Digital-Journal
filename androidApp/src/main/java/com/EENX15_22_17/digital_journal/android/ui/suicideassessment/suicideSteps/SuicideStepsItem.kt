@@ -17,8 +17,9 @@ import com.EENX15_22_17.digital_journal.android.ui.theme.colorTextBlackLight
 @Composable
 fun SuicideStepsItem(items : List<CheckBoxData>,
 ) {
-    val itemsListOne : List<CheckBoxData> = items.subList(0, 3)
-    val itemsListTwo : List<CheckBoxData> = items.subList(4, 6)
+    //TODO: Try to make division in a more dynamic way
+    val itemsListOne : List<CheckBoxData> = items.subList(0, 4)
+    val itemsListTwo : List<CheckBoxData> = items.subList(4, 7)
     Row (
         horizontalArrangement = Arrangement.Start,
         verticalAlignment = Alignment.Top,
