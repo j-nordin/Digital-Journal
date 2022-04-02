@@ -43,8 +43,8 @@ fun SuicideAssessmentScreen() {
             //Header checkbox
             Column(Modifier.padding(start = 40.dp, top = 10.dp)) {
                 DrawCheckBoxes(items = listOf(
-                    CheckBoxData("Medveten suicidbenägenhet framgår inte vid ankomstsamtal", false),
-                    CheckBoxData("Patienten svarar inte på frågor", false),
+                    CheckBoxData("Medveten suicidbenägenhet framgår inte vid ankomstsamtal", false, "Conscious_suicidal_tendencies"),
+                    CheckBoxData("Patienten svarar inte på frågor", false, "no_answer"),
                 ))
             }
             //Suicid steps
