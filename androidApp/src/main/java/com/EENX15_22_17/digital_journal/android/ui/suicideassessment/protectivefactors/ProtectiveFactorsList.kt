@@ -2,11 +2,10 @@ package com.EENX15_22_17.digital_journal.android.ui.suicideassessment.protective
 
 import androidx.compose.runtime.Composable
 import com.EENX15_22_17.digital_journal.android.ui.components_beta.CheckBoxData
-import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.statisticalriskfactors.StatisticalRiskFactorsItem
 
-@Composable
-fun ProtectiveFactorsList()  {
-    return ProtectiveFactorsItem(items = listOf(
+
+fun ProtectiveFactorsList(): List<CheckBoxData> {
+    return listOf(
         CheckBoxData(
             checkBoxName = "Personell resurs, t. ex. god samtalskontakt",
             checkBoxValue = false,
@@ -23,5 +22,5 @@ fun ProtectiveFactorsList()  {
             checkBoxName = "Nej",
             checkBoxValue = false,
         )
-    ))
+    )
 }

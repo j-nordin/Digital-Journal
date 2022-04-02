@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import com.EENX15_22_17.digital_journal.android.ui.theme.colorCheckBoxBeta
 
 @Composable
-fun getCheckBoxBtn(value : Boolean, onValueChange : ((Boolean) -> Unit)? ) {
+fun CheckBoxBtn(value : Boolean, onValueChange : ((Boolean) -> Unit)? ) {
     Box(modifier = Modifier
         .padding(2.dp)
         .clip(shape = CircleShape)

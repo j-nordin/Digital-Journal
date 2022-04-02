@@ -12,8 +12,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.EENX15_22_17.digital_journal.android.ui.components_beta.CheckBoxData
+import com.EENX15_22_17.digital_journal.android.ui.components_beta.DrawCheckBoxes
 import com.EENX15_22_17.digital_journal.android.ui.components_beta.TemplateSection
+import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.protectivefactors.ProtectiveFactorsItem
 import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.protectivefactors.ProtectiveFactorsList
+import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.statisticalriskfactors.StatisticalRiskFactorsItem
 import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.statisticalriskfactors.StatisticalRiskFactorsList
 import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.summarysuicidesection.SummarySuicide
 
@@ -45,9 +48,9 @@ fun SuicideAssessmentScreen() {
                 ))
             }
             //Suicid steps
-            TemplateSection("Suicidstegen") { SuicideStepsList() }
+            TemplateSection("Suicidstegen") { SuicideStepsItem(items = SuicideStepsList()) }
             // Statistical Risk Factors
-            TemplateSection("Statistiska riskfaktorer") { StatisticalRiskFactorsList() }
+            TemplateSection("Statistiska riskfaktorer") { StatisticalRiskFactorsItem(items = StatisticalRiskFactorsList()) }
             // Protective factors & Summary of suicide assessment
             Row (
                 horizontalArrangement = Arrangement.Start,
@@ -60,7 +63,7 @@ fun SuicideAssessmentScreen() {
                 Column(
                     modifier = Modifier.fillMaxWidth(0.50f)
                 ) {
-                    TemplateSection(title = "Skyddande faktorer") { ProtectiveFactorsList() }
+                    TemplateSection(title = "Skyddande faktorer") { ProtectiveFactorsItem(items = ProtectiveFactorsList()) }
                 }
                 Column(
 

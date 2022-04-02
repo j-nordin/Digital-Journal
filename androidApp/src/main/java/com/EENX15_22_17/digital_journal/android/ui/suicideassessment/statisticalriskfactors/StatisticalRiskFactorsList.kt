@@ -1,11 +1,10 @@
 package com.EENX15_22_17.digital_journal.android.ui.suicideassessment.statisticalriskfactors
 
-import androidx.compose.runtime.Composable
 import com.EENX15_22_17.digital_journal.android.ui.components_beta.CheckBoxData
 
-@Composable
-fun StatisticalRiskFactorsList()  {
-    return StatisticalRiskFactorsItem(items = listOf(
+
+fun StatisticalRiskFactorsList(): List<CheckBoxData> {
+    return listOf(
         CheckBoxData(
             checkBoxName = "Man och mellan 19 och 45 år",
             checkBoxValue = false,
@@ -47,6 +46,5 @@ fun StatisticalRiskFactorsList()  {
             checkBoxValue = false,
         ),
 
-        )
     )
 }

@@ -10,7 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.EENX15_22_17.digital_journal.android.ui.components_beta.CheckBoxData
-import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.DrawCheckBoxes
+import com.EENX15_22_17.digital_journal.android.ui.components_beta.DrawCheckBoxes
 
 @Composable
 fun StatisticalRiskFactorsItem(items : List<CheckBoxData>,

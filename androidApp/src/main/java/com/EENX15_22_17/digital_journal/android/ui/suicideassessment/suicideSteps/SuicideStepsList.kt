@@ -3,9 +3,9 @@ package com.EENX15_22_17.digital_journal.android.ui.suicideassessment
 import androidx.compose.runtime.Composable
 import com.EENX15_22_17.digital_journal.android.ui.components_beta.CheckBoxData
 
-@Composable
-fun SuicideStepsList()  {
-    return SuicideStepsItem(items = listOf(
+
+fun SuicideStepsList(): List<CheckBoxData> {
+    return listOf(
         CheckBoxData(
             checkBoxName = "1. Nedstämdhet",
             checkBoxValue = false,
@@ -35,7 +35,6 @@ fun SuicideStepsList()  {
             checkBoxValue = false,
         ),
 
-        )
     )
 }
 
