@@ -2,8 +2,8 @@ package com.EENX15_22_17.digital_journal.android.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val primaryColor = Color(0xFFE4E2DE)
-val danger = Color(0xFFFD0B0B)
+/*TODO: Refactor to not use top level colors */
+val danger = Color(0xFFCD9A50)
 val colorIcon = Color(0xFF989383)
 val colorTextFieldGray = Color(0xFFBDBDBD)
 val colorTextGray = Color(0xFFA2A2A2)
@@ -14,7 +14,7 @@ val borderColor = Color(0xFF1F1F1F)
 
 
 /* TODO: Set these theme colors */
-val primary = Color(0xFF1546F6)
+val primary = Color(0xFFE4E2DE)
 
 val secondary = Color(0xFF3648EA)
 
