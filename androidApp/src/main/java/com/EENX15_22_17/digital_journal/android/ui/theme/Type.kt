@@ -8,6 +8,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.EENX15_22_17.digital_journal.android.R
 
+
+/**
+ * This typography is taken from the JetNews compose sample app
+ * https://github.com/android/compose-samples/blob/main/JetNews/app/src/main/java/com/example/jetnews/ui/theme/Type.kt
+ */
+
 val Roboto = FontFamily(
     Font(R.font.roboto_regular),
     Font(R.font.roboto_bold, FontWeight.Bold)
