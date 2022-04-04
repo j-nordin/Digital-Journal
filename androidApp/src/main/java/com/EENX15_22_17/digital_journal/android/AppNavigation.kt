@@ -3,6 +3,7 @@ package com.EENX15_22_17.digital_journal.android
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
@@ -35,8 +36,9 @@ sealed class PatientMeetingScreens(val route: String) {
 
 
 @Composable
-fun NavigationApp() {
-    val navController = rememberNavController()
+fun NavigationApp(
+    navController: NavHostController
+) {
     NavHost(
         navController = navController,
         startDestination = Screen.Overview.route
