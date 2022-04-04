@@ -16,7 +16,7 @@ val borderColor = Color(0xFF1F1F1F)
 /* TODO: Set these theme colors */
 val primary = Color(0xFF295BC0)
 
-val secondary = Color(0xFF3648EA)
+val secondary = Color(0x92F5AB72)
 
 val error = Color(0xFFBA1B1B)
 

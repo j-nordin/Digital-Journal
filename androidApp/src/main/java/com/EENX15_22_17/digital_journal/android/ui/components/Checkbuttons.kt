@@ -27,7 +27,7 @@ fun <E : Enum<*>> EnumCheckBox(
             var isChecked by rememberSaveable { mutableStateOf(choice in currentSelected) }
             Text(text = labels[choice] ?: choice.name, textAlign = TextAlign.Center)
             Box(
-                modifier = Modifier.background(MaterialTheme.colors.primary, CircleShape)
+                modifier = Modifier.background(MaterialTheme.colors.secondary, CircleShape)
             ) {
                 Checkbox(
                     checked = isChecked,

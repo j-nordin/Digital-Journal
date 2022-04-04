@@ -71,7 +71,7 @@ fun <E : Enum<*>> EnumRadioButtons(
                     onSelection(choice)
                 }
                 .padding(horizontal = 12.dp)
-                .background(MaterialTheme.colors.primary, CircleShape)
+                .background(MaterialTheme.colors.secondary, CircleShape)
         ) {
             RadioButton(
                 selected = (choice == selection),
