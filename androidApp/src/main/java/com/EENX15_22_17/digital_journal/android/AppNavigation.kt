@@ -81,7 +81,10 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
         ) { backStackEntry ->
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient id provided" }
-            ArrivalScreen(visitId)
+            ArrivalScreen(
+                visitId = visitId,
+                navBack = { navController.popBackStack() }
+            )
         }
     }
 }

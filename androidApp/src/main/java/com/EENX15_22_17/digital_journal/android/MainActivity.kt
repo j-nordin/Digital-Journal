@@ -3,38 +3,35 @@ package com.EENX15_22_17.digital_journal.android
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import com.EENX15_22_17.digital_journal.android.ui.arrivalpage.ArrivalPage
 import androidx.compose.material.Text
 import androidx.compose.ui.Modifier
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import androidx.compose.runtime.Composable
-
 import androidx.compose.ui.unit.dp
-import androidx.navigation.*
-import com.EENX15_22_17.digital_journal.android.ui.currentpatients.PatientsList
 
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-
             NavigationApp()
-
         }
     }
 }
 
 @Composable
-fun ArrivalScreen(visitId: String) {
-    Column() {
-        Text(text = "This is the arrival screen for visitId $visitId")
-    }
+fun ArrivalScreen(
+    visitId: String,
+    navBack: () -> Unit
+) {
+    ArrivalPage(
+        visitId = visitId,
+        navBack = navBack
+    )
 }
 
 @Composable
