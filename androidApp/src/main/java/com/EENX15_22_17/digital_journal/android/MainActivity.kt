@@ -16,6 +16,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
+import com.EENX15_22_17.digital_journal.android.ui.theme.DigitalJournalTheme
 
 
 class MainActivity : ComponentActivity() {
@@ -27,42 +28,6 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-}
-
-sealed class Screen(val route: String) {
-    object Overview : Screen(route = "overview")
-    object PatientMeeting : Screen(route = "patientMeeting")
-    object PatientOverview : Screen(route = "patientOverview/{visitId}") {
-        fun createRoute(visitId: String) = "patientOverview/$visitId"
-    }
-}
-
-sealed class PatientMeetingScreens(val route: String) {
-    //For creating routes to composables
-    fun createRoute(root: Screen) = "${root.route}/$route"
-
-    object MainScreen : PatientMeetingScreens("{visitId}") {
-        // Overloads and creates a route with a specific id
-        fun createRoute(visitId: String, root: Screen) = "${root.route}/$visitId"
-    }
-
-    object Arrival : PatientMeetingScreens("{visitId}/arrival") {
-        fun createRoute(visitId: String, root: Screen) = "${root.route}/$visitId/arrival"
-    }
-
-    // TODO: Implement routes to rest of the cards
-    object HazardAssessment : PatientMeetingScreens("{visitId}/hazardAssessment")
-}
-
-@Composable
-fun ArrivalScreen(
-    visitId: String,
-    navBack: () -> Unit
-) {
-    ArrivalPage(
-        visitId = visitId,
-        navBack = navBack
-    )
 }
 
 @Composable
