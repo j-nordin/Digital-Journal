@@ -7,13 +7,13 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Checkbox
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.EENX15_22_17.digital_journal.android.ui.theme.primaryColor
 
 @Composable
 fun <E : Enum<*>> EnumCheckBox(
@@ -27,7 +27,7 @@ fun <E : Enum<*>> EnumCheckBox(
             var isChecked by rememberSaveable { mutableStateOf(choice in currentSelected) }
             Text(text = labels[choice] ?: choice.name, textAlign = TextAlign.Center)
             Box(
-                modifier = Modifier.background(primaryColor, CircleShape)
+                modifier = Modifier.background(MaterialTheme.colors.primary, CircleShape)
             ) {
                 Checkbox(
                     checked = isChecked,

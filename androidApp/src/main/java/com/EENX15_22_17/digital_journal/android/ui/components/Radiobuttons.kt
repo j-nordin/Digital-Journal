@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.RadioButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
@@ -13,7 +14,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.EENX15_22_17.digital_journal.android.ui.theme.primaryColor
 
 
 @Composable
@@ -71,7 +71,7 @@ fun <E : Enum<*>> EnumRadioButtons(
                     onSelection(choice)
                 }
                 .padding(horizontal = 12.dp)
-                .background(primaryColor, CircleShape)
+                .background(MaterialTheme.colors.primary, CircleShape)
         ) {
             RadioButton(
                 selected = (choice == selection),

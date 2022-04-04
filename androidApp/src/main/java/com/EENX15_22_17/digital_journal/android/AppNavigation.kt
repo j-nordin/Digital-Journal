@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
+import com.EENX15_22_17.digital_journal.android.ui.arrivalpage.ArrivalPage
 import com.EENX15_22_17.digital_journal.android.ui.currentpatients.PatientsList
 
 sealed class Screen(val route: String) {
@@ -81,7 +82,7 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
         ) { backStackEntry ->
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient id provided" }
-            ArrivalScreen(
+            ArrivalPage(
                 visitId = visitId,
                 navBack = { navController.popBackStack() }
             )
