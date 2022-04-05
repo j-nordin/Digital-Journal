@@ -1,9 +1,8 @@
-package com.EENX15_22_17.digital_journal.android.ui.currentpatients
+package com.EENX15_22_17.digital_journal.android.ui.current.currentpatients
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -20,6 +19,7 @@ private val defaultPatients: List<CurrentPatientsData> =
 @Preview
 @Composable
 fun PatientsList(
+    modifier: Modifier = Modifier,
     @PreviewParameter(SampleCurrentPatientsProvider::class)
     patients: List<CurrentPatientsData> = defaultPatients,
     navigateSpecificPatient: (visitId: String) -> Unit = {},
@@ -27,9 +27,8 @@ fun PatientsList(
 ) {
     val scrollState = rememberScrollState()
     Box(
-        Modifier
+        modifier
             .height(400.dp)
-            .padding(top = 100.dp)
     ) {
         Column(
             Modifier.verticalScroll(scrollState)

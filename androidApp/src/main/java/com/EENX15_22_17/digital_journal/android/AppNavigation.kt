@@ -7,7 +7,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
-import com.EENX15_22_17.digital_journal.android.ui.currentpatients.PatientsList
+import com.EENX15_22_17.digital_journal.android.ui.current.CurrentScreen
+import com.EENX15_22_17.digital_journal.android.ui.arrivalpage.ArrivalPage
 
 sealed class Screen(val route: String) {
     object Overview : Screen(route = "overview")
@@ -81,7 +82,10 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
         ) { backStackEntry ->
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient id provided" }
-            ArrivalScreen(visitId)
+            ArrivalPage(
+                visitId = visitId,
+                navBack = { navController.popBackStack() }
+            )
         }
     }
 }
@@ -103,7 +107,7 @@ private fun NavGraphBuilder.addCurrentBoardGraph(
         /*TODO: replace with real overview screen*/
         /*TODO. Rename this so this not is the overview, should be startPage; Ask Jonas*/
 
-        PatientsList(
+        CurrentScreen(
             navigateSpecificPatient = { id ->
                 navController.navigate(
                     PatientMeetingScreens.MainScreen.createRoute(
