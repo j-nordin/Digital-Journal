@@ -26,6 +26,7 @@ import com.EENX15_22_17.digital_journal.android.ui.theme.colorIcon
 
 @Composable
 fun LandingPage(
+    visitId: String,
     showOverview: (patientId: String) -> Unit = {},
     navToArrival: () -> Unit = {},
     navToHazard: () -> Unit = {},
@@ -37,7 +38,6 @@ fun LandingPage(
     navToNursingNeed: () -> Unit = {},
     navToMedicalOrder: () -> Unit = {},
     navToInterimJournal: () -> Unit = {}
-
 ) {
     Column(
         modifier = Modifier,
@@ -50,18 +50,16 @@ fun LandingPage(
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            navigationCard(
+            NavigationCard(
                 label = R.string.arrivalCard,
                 backgroundCol = rettsLineOneNavigationCard,
                 modifier = Modifier.width(370.dp),
-                navTarget = NavigationEnum.ARRIVAL,
                 navigateToForm = navToArrival
             )
-            navigationCard(
+            NavigationCard(
                 label = R.string.hazardCard,
                 backgroundCol = rettsLineOneNavigationCard,
                 modifier = Modifier.width(370.dp),
-                navTarget = NavigationEnum.DANGER,
                 navigateToForm = navToHazard
             )
         }
@@ -72,28 +70,25 @@ fun LandingPage(
             horizontalArrangement = Arrangement.SpaceEvenly
         )
         {
-            navigationCard(
+            NavigationCard(
                 label = R.string.contactReason,
                 backgroundCol = rettsLineTwoNavigationCard,
                 modifier = Modifier
                     .width(240.dp),
-                navTarget = NavigationEnum.CONTACT_REASON,
                 navigateToForm = navToContactReason
             )
-            navigationCard(
+            NavigationCard(
                 label = R.string.previousCare,
                 backgroundCol = rettsLineTwoNavigationCard,
                 modifier = Modifier
                     .width(240.dp),
-                navTarget = NavigationEnum.PREVIOUS_CARE,
                 navigateToForm = navToPreviousCare
             )
-            navigationCard(
+            NavigationCard(
                 label = R.string.healthHistory,
                 backgroundCol = rettsLineTwoNavigationCard,
                 modifier = Modifier
                     .width(240.dp),
-                navTarget = NavigationEnum.HEALTH_HISTORY,
                 navigateToForm = navToHealthHistory
             )
         }
@@ -104,20 +99,18 @@ fun LandingPage(
             horizontalArrangement = Arrangement.SpaceEvenly
         )
         {
-            navigationCard(
+            NavigationCard(
                 label = R.string.healthNow,
                 backgroundCol = rettsLineTwoNavigationCard,
                 modifier = Modifier
                     .width(370.dp),
-                navTarget = NavigationEnum.HEALTH_NOW,
                 navigateToForm = navToHealthNow
             )
-            navigationCard(
+            NavigationCard(
                 label = R.string.suicideAssessment,
                 backgroundCol = rettsLineTwoNavigationCard,
                 modifier = Modifier
                     .width(370.dp),
-                navTarget = NavigationEnum.SUICIDE_ASSESSMENT,
                 navigateToForm = navToSuicideAssessment
             )
         }
@@ -127,20 +120,18 @@ fun LandingPage(
                 .padding(top = 10.dp),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            navigationCard(
+            NavigationCard(
                 label = R.string.nursingNeed,
                 backgroundCol = rettsLineFourNavigationCard,
                 modifier = Modifier
                     .width(370.dp),
-                navTarget = NavigationEnum.NURSING_NEED,
                 navigateToForm = navToNursingNeed
             )
-            navigationCard(
+            NavigationCard(
                 label = R.string.medicalOrder,
                 backgroundCol = rettsLineFourNavigationCard,
                 modifier = Modifier
                     .width(370.dp),
-                navTarget = NavigationEnum.MEDICAL_ORDER,
                 navigateToForm = navToMedicalOrder
             )
         }
@@ -150,12 +141,11 @@ fun LandingPage(
                 .padding(top = 10.dp),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            navigationCard(
+            NavigationCard(
                 label = R.string.interimJournal,
                 backgroundCol = rettsLineFourNavigationCard,
                 modifier = Modifier
                     .width(760.dp),
-                navTarget = NavigationEnum.INTERIM_JOURNAL,
                 navigateToForm = navToInterimJournal
             )
         }
@@ -163,16 +153,9 @@ fun LandingPage(
             horizontalArrangement = Arrangement.End,
             verticalAlignment = Alignment.Bottom
         ) {
-            overViewButton(showOverview = showOverview)
+            OverViewButton(showOverview = { showOverview(visitId) })
         }
     }
-}
-
-/*
-  TODO: refactor these to own file
-   */
-enum class NavigationEnum {
-    ARRIVAL, DANGER, CONTACT_REASON, PREVIOUS_CARE, HEALTH_HISTORY, HEALTH_NOW, SUICIDE_ASSESSMENT, NURSING_NEED, MEDICAL_ORDER, INTERIM_JOURNAL
 }
 
 
@@ -202,11 +185,10 @@ fun InfoDisplay() {
 
 
 @Composable
-fun navigationCard(
+fun NavigationCard(
     label: Int,
     backgroundCol: Color,
     modifier: Modifier,
-    navTarget: NavigationEnum,
     navigateToForm: () -> Unit
 ) {
     Card(
@@ -225,7 +207,7 @@ fun navigationCard(
 }
 
 @Composable
-fun overViewButton(
+fun OverViewButton(
     showOverview: (patientId: String) -> Unit = {}
 ) {
     IconButton(
