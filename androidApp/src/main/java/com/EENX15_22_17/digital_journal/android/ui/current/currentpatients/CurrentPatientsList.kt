@@ -3,7 +3,6 @@ package com.EENX15_22_17.digital_journal.android.ui.current.currentpatients
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -14,7 +13,7 @@ import androidx.compose.ui.unit.dp
 
 // Temporary data before backend is implemented
 //TODO: Fetch data from API instead of using sampledata from the preview-provider
-private val defaultPatients: List<PatientsData> =
+private val defaultPatients: List<CurrentPatientsData> =
     SampleCurrentPatientsProvider().values.toList()[0]
 
 @Preview
@@ -22,7 +21,7 @@ private val defaultPatients: List<PatientsData> =
 fun PatientsList(
     modifier: Modifier = Modifier,
     @PreviewParameter(SampleCurrentPatientsProvider::class)
-    patients: List<PatientsData> = defaultPatients,
+    patients: List<CurrentPatientsData> = defaultPatients,
     navigateSpecificPatient: (visitId: String) -> Unit = {},
     navigateSpecificOverviewPage: (visitId: String) -> Unit = {}
 ) {
