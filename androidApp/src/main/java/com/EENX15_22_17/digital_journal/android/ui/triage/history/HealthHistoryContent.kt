@@ -2,6 +2,7 @@ package com.EENX15_22_17.digital_journal.android.ui.triage.history
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -14,7 +15,6 @@ import com.EENX15_22_17.digital_journal.android.R
 import com.EENX15_22_17.digital_journal.android.ui.components.EnumCheckBoxLazyGrid
 
 
-//FIXME: When having multiple EnumChecbox groups the value is resetting if we click on new group.
 @Composable
 fun <E : Enum<*>> SomaticHealth(
     modifier: Modifier = Modifier,
@@ -35,7 +35,8 @@ fun <E : Enum<*>> SomaticHealth(
             choices = choices,
             onSelectionChanged = onChange,
             currentSelected = currentSelected,
-            labels =labels
+            labels = labels,
+            gridLayout = GridCells.Adaptive(300.dp)
         )
     }
 }

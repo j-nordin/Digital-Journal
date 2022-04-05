@@ -96,12 +96,13 @@ fun <E : Enum<*>> EnumCheckBoxLazyGrid(
     choices: Array<E>,
     onSelectionChanged: (selected: Set<E>) -> Unit,
     currentSelected: Set<E>,
-    labels: Map<E, String>
+    labels: Map<E, String>,
+    gridLayout: GridCells
 ) {
     val currentSelection: MutableSet<E> = currentSelected.toMutableSet()
 
     LazyVerticalGrid(
-        columns = GridCells.Adaptive(300.dp),
+        columns = gridLayout,
         content = {
             items(choices.size) { index ->
                 var isChecked by rememberSaveable { mutableStateOf(choices[index] in currentSelection) }
@@ -131,13 +132,11 @@ fun <E : Enum<*>> EnumCheckBoxLazyGrid(
                     }
                     Text(
                         text = labels[choices[index]] ?: choices[index].name,
-                        textAlign = TextAlign.Right,
+                        textAlign = TextAlign.Start,
                         modifier = Modifier.padding(start = 4.dp),
                         fontSize = 20.sp
                     )
                 }
-
-
             }
         }
     )
