@@ -26,4 +26,7 @@
     <string name="nursingNeed">OMV. BEDÖM / ÅTGÄRD</string>
     <string name="medicalOrder">LÄKARORDINATION</string>
     <string name="interimJournal">INTERIMJOURNAL</string>
+    <string name="somaticHealth">Somatisk Hälsa</string>
+    <string name="bloodInfection">Blodsmitta</string>
+    <string name="bloodInfectionType">Typ av blodsmitta</string>
 </resources>
