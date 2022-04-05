@@ -28,5 +28,10 @@
     <string name="interimJournal">INTERIMJOURNAL</string>
     <string name="somaticHealth">Somatisk Hälsa</string>
     <string name="bloodInfection">Blodsmitta</string>
-    <string name="bloodInfectionType">Typ av blodsmitta</string>
+    <string name="bloodInfectionType">Vilken?</string>
+    <string name="hypersensitivity">Överkänslighet</string>
+    <string name="hypersensitivityType">Vilken?</string>
+    <string name="multiresistant">Multiresistans misstanke</string>
+    <string name="suspicionGE">Misstanke om GE</string>
+    <string name="nursesNeeds">Omvårdnadsbehov</string>
 </resources>
