@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="helloworld">Hello World!</string>
+    <string name="arrivalTime">Ankomsttid</string>
+    <string name="essNumber">ESS</string>
+    <string name="reservation">Förbehåll</string>
+    <string name="secrecy">Sekretess</string>
+    <string name="identity">Identitet styrkt</string>
+    <string name="samsa">Samsa</string>
+    <string name="relative">Närmast anhörig</string>
+    <string name="relativeName">Namn</string>
+    <string name="relativePhoneNumber">Telefonnummer</string>
+    <string name="childrenInHouseHold">Barn i hushåll</string>
+    <string name="childrenAge">Ålder</string>
+    <string name="addChild">Lägg till barn</string>
+    <string name="concernReport">Orosanmälan</string>
+    <string name="arrivalType">Ankomst till akutmottagningen</string>
+    <string name="laws">Lagar</string>
 </resources>
