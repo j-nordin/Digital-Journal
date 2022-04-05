@@ -1,10 +1,7 @@
 package com.EENX15_22_17.digital_journal.android.ui.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Checkbox
 import androidx.compose.material.Text
@@ -22,33 +19,32 @@ fun <E : Enum<*>> EnumCheckBox(
     currentSelected: MutableSet<E>,
     labels: Map<E, String>
 ) {
-    Column {
-        choices.forEach { choice ->
-            var isChecked by rememberSaveable { mutableStateOf(choice in currentSelected) }
-            Text(text = labels[choice] ?: choice.name, textAlign = TextAlign.Center)
-            Box(
-                modifier = Modifier.background(primaryColor, CircleShape)
-            ) {
-                Checkbox(
-                    checked = isChecked,
-                    onCheckedChange = {
-                        isChecked = when (it) {
-                            false -> {
-                                currentSelected.remove(choice)
-                                false
-                            }
-                            true -> {
-                                currentSelected.add(choice)
-                                true
-                            }
+    choices.forEach { choice ->
+        var isChecked by rememberSaveable { mutableStateOf(choice in currentSelected) }
+        Text(text = labels[choice] ?: choice.name, textAlign = TextAlign.Center)
+        Box(
+            modifier = Modifier.background(primaryColor, CircleShape)
+        ) {
+            Checkbox(
+                checked = isChecked,
+                onCheckedChange = {
+                    isChecked = when (it) {
+                        false -> {
+                            currentSelected.remove(choice)
+                            false
                         }
-                        onSelectionChanged(currentSelected.toSet())
+                        true -> {
+                            currentSelected.add(choice)
+                            true
+                        }
                     }
-                )
-            }
+                    onSelectionChanged(currentSelected.toSet())
+                }
+            )
         }
     }
 }
+
 
 @Composable
 fun <E : Enum<*>> EnumCheckBoxHorizontal(
@@ -57,7 +53,7 @@ fun <E : Enum<*>> EnumCheckBoxHorizontal(
     currentSelected: MutableSet<E>,
     labels: Map<E, String>
 ) {
-    Row(modifier = Modifier.padding(2.dp)) {
+    Row(modifier = Modifier.padding(2.dp), horizontalArrangement = Arrangement.SpaceEvenly) {
         EnumCheckBox(
             choices = choices,
             onSelectionChanged = onSelectionChanged,
