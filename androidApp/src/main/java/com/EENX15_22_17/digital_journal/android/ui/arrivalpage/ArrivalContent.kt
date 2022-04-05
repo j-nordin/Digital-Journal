@@ -1,6 +1,7 @@
 package com.EENX15_22_17.digital_journal.android.ui.arrivalpage
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.CalendarToday
@@ -333,73 +334,77 @@ fun ConcernReport(
 
 @Composable
 fun Laws(
-    values: MutableSet<Law>,
+    modifier: Modifier = Modifier,
+    choices: Array<Law>,
     onChange: (values: Set<Law>) -> Unit,
-) {
-    Column {
+    currentSelected: Set<Law>,
+    labels: Map<Law, String>,
+
+    ) {
+    Column(
+        modifier = modifier
+    ) {
         Text(
             text = stringResource(id = R.string.laws),
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(vertical = 16.dp)
         )
-        Row(
-            modifier = Modifier.padding(2.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            EnumCheckBoxVertical(
-                choices = laws.keys.toTypedArray().sliceArray(0..2),
-                onSelectionChanged = onChange,
-                currentSelected = values,
-                labels = laws
-            )
-            EnumCheckBoxVertical(
-                choices = laws.keys.toTypedArray().sliceArray(3..5),
-                onSelectionChanged = onChange,
-                currentSelected = values,
-                labels = laws
-            )
-        }
+
+        EnumCheckBoxLazyGrid(
+            choices = choices,
+            onSelectionChanged = onChange,
+            currentSelected = currentSelected,
+            labels = labels,
+            gridLayout = GridCells.Adaptive(100.dp)
+        )
     }
 }
 
 @Composable
 fun ArrivalType(
-    values: MutableSet<ArrivalMethod>,
+    modifier: Modifier = Modifier,
+    choices: Array<ArrivalMethod>,
     onChange: (values: Set<ArrivalMethod>) -> Unit,
-    modifier: Modifier = Modifier
+    currentSelected: Set<ArrivalMethod>,
+    labels: Map<ArrivalMethod, String>,
 ) {
-    Column {
+    Column(
+        modifier = modifier
+    ) {
         Text(
             text = stringResource(id = R.string.arrivalType),
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(vertical = 16.dp)
         )
-        Row(
-            modifier = modifier,
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
-            EnumCheckBoxVertical(
-                choices = arrivalMethods.keys.toTypedArray().sliceArray(0..2),
-                onSelectionChanged = onChange,
-                currentSelected = values,
-                labels = arrivalMethods
-            )
-            EnumCheckBoxVertical(
-                choices = arrivalMethods.keys.toTypedArray().sliceArray(3..5),
-                onSelectionChanged = onChange,
-                currentSelected = values,
-                labels = arrivalMethods
-            )
-            EnumCheckBoxVertical(
-                choices = arrivalMethods.keys.toTypedArray().sliceArray(6..7),
-                onSelectionChanged = onChange,
-                currentSelected = values,
-                labels = arrivalMethods
-            )
-        }
+        EnumCheckBoxLazyGrid(
+            choices = choices,
+            onSelectionChanged = onChange,
+            currentSelected = currentSelected,
+            labels = labels,
+            gridLayout = GridCells.Adaptive(200.dp)
+        )
+
+        /*
+        EnumCheckBoxVertical(
+            choices = arrivalMethods.keys.toTypedArray().sliceArray(0..2),
+            onSelectionChanged = onChange,
+            currentSelected = values,
+            labels = arrivalMethods
+        )
+        EnumCheckBoxVertical(
+            choices = arrivalMethods.keys.toTypedArray().sliceArray(3..5),
+            onSelectionChanged = onChange,
+            currentSelected = values,
+            labels = arrivalMethods
+        )
+        EnumCheckBoxVertical(
+            choices = arrivalMethods.keys.toTypedArray().sliceArray(6..7),
+            onSelectionChanged = onChange,
+            currentSelected = values,
+            labels = arrivalMethods
+        )*/
+
     }
-
-
 }
