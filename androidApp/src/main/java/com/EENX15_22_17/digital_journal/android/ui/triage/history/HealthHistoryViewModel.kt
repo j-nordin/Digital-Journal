@@ -2,7 +2,7 @@ package com.EENX15_22_17.digital_journal.android.ui.triage.history
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-
+import com.EENX15_22_17.digital_journal.android.dataModel.YesNo
 
 class HealthHistoryViewModel : ViewModel() {
 

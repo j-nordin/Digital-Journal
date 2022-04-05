@@ -10,10 +10,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.MutableLiveData
 import com.EENX15_22_17.digital_journal.android.R
 import com.EENX15_22_17.digital_journal.android.ui.components.EnumCheckBoxLazyGrid
-
+import com.EENX15_22_17.digital_journal.android.ui.components.EnumRadioButtonsHorizontal
+import com.EENX15_22_17.digital_journal.android.dataModel.YesNo
+import com.EENX15_22_17.digital_journal.android.dataModel.yesNoLabels
 
 @Composable
 fun <E : Enum<*>> SomaticHealth(
@@ -43,13 +44,25 @@ fun <E : Enum<*>> SomaticHealth(
 
 @Composable
 fun BloodInfection(
-    isBloodInfection: MutableLiveData<YesNo>,
+    modifier: Modifier = Modifier,
+    isBloodInfection: YesNo,
     onBloodInfection: (value: YesNo) -> Unit,
 ) {
-    Text(
-        text = stringResource(id = R.string.bloodInfection),
-        fontSize = 20.sp,
-        fontWeight = FontWeight.Bold,
-        modifier = Modifier.padding(vertical = 16.dp)
-    )
+    Column(
+        modifier = modifier
+    ) {
+        Text(
+            text = stringResource(id = R.string.bloodInfection),
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(vertical = 16.dp)
+        )
+        EnumRadioButtonsHorizontal(
+            choices = yesNoLabels.keys.toTypedArray(),
+            labels = yesNoLabels,
+            currentChoice = isBloodInfection,
+            onSelection = onBloodInfection
+        )
+    }
+
 }
