@@ -1,4 +1,4 @@
-package com.EENX15_22_17.digital_journal.android.ui.currentpatients
+package com.EENX15_22_17.digital_journal.android.ui.current.currentpatients
 
 
 import androidx.compose.foundation.clickable

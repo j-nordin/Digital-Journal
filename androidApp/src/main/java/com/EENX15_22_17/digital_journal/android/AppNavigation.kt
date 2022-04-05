@@ -7,8 +7,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
+import com.EENX15_22_17.digital_journal.android.ui.current.CurrentScreen
 import com.EENX15_22_17.digital_journal.android.ui.arrivalpage.ArrivalPage
-import com.EENX15_22_17.digital_journal.android.ui.currentpatients.PatientsList
 
 sealed class Screen(val route: String) {
     object Overview : Screen(route = "overview")
@@ -107,7 +107,7 @@ private fun NavGraphBuilder.addCurrentBoardGraph(
         /*TODO: replace with real overview screen*/
         /*TODO. Rename this so this not is the overview, should be startPage; Ask Jonas*/
 
-        PatientsList(
+        CurrentScreen(
             navigateSpecificPatient = { id ->
                 navController.navigate(
                     PatientMeetingScreens.MainScreen.createRoute(
