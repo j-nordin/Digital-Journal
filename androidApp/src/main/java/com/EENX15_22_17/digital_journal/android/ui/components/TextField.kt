@@ -15,6 +15,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -25,7 +26,7 @@ fun TitledTextField(
     title: String,
     onChangeText: (textValue: String) -> Unit,
     textValue: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     var text by rememberSaveable { mutableStateOf(textValue) }
     Box {
@@ -53,7 +54,7 @@ fun TitledTextFieldDigitKeyboard(
     onChangeText: (textValue: String) -> Unit = {},
     textValue: String
 ) {
-    var text by rememberSaveable { mutableStateOf(textValue)}
+    var text by rememberSaveable { mutableStateOf(textValue) }
     Box {
         OutlinedTextField(
             value = text,
