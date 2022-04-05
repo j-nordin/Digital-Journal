@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.EENX15_22_17.digital_journal.android.ui.hazardassesment.*
 import com.EENX15_22_17.digital_journal.android.R
+import com.EENX15_22_17.digital_journal.android.ui.arrivalpage.ArrivalViewModel
 import com.EENX15_22_17.digital_journal.android.ui.theme.borderColor
 import com.EENX15_22_17.digital_journal.android.ui.components.EnumCheckBoxLazyGrid
 import com.EENX15_22_17.digital_journal.android.ui.components.TitledTextField
