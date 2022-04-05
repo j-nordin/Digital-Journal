@@ -15,13 +15,15 @@ import kotlinx.coroutines.launch
 fun rememberAppState(
     scaffoldState: ScaffoldState = rememberScaffoldState(),
     navController: NavHostController = rememberNavController(),
+    coroutineScope: CoroutineScope = rememberCoroutineScope()
 ) =
     remember(scaffoldState, navController) {
-        AppState(scaffoldState, navController)
+        AppState(scaffoldState, navController, coroutineScope)
     }
 
 
 class AppState(
     val scaffoldState: ScaffoldState,
     val navController: NavHostController,
+    val coroutineScope: CoroutineScope
 )

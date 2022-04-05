@@ -10,7 +10,7 @@ import androidx.navigation.navigation
 import com.EENX15_22_17.digital_journal.android.ui.current.CurrentScreen
 
 sealed class Screen(val route: String) {
-    object Overview : Screen(route = "overview")
+    object Current : Screen(route = "current")
     object PatientMeeting : Screen(route = "patientMeeting")
     object PatientOverview : Screen(route = "patientOverview/{visitId}") {
         fun createRoute(visitId: String) = "patientOverview/$visitId"
@@ -37,13 +37,14 @@ sealed class PatientMeetingScreens(val route: String) {
 
 @Composable
 fun NavigationApp(
-    navController: NavHostController
+    navController: NavHostController,
+    switchScaffoldDrawerState : () -> Unit
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Overview.route
+        startDestination = Screen.Current.route
     ) {
-        addCurrentBoardGraph(navController = navController)
+        addCurrentBoardGraph(navController = navController, switchScaffoldDrawerState = switchScaffoldDrawerState)
         addPatientMeetingGraph(navController = navController)
     }
 }
@@ -65,7 +66,7 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
 
             /*TODO: replace with real patient meeting screen*/
             PatientMeetingLandingScreen(
-                navToOverview = { navController.navigate(Screen.Overview.route) },
+                navToOverview = { navController.navigate(Screen.Current.route) },
                 navToArrival = {
                     navController.navigate(
                         PatientMeetingScreens.Arrival.createRoute(
@@ -89,7 +90,8 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
 
 
 private fun NavGraphBuilder.addCurrentBoardGraph(
-    navController: NavController
+    navController: NavController,
+    switchScaffoldDrawerState: () -> Unit
 ) {
     /*TODO: Replace with real overview page */
     composable(route = Screen.PatientOverview.route) { backStackEntry ->
@@ -100,10 +102,7 @@ private fun NavGraphBuilder.addCurrentBoardGraph(
             navBack = { navController.popBackStack() }
         )
     }
-    composable(route = Screen.Overview.route) {
-        /*TODO: replace with real overview screen*/
-        /*TODO. Rename this so this not is the overview, should be startPage; Ask Jonas*/
-
+    composable(route = Screen.Current.route) {
         CurrentScreen(
             navigateSpecificPatient = { id ->
                 navController.navigate(
@@ -120,7 +119,8 @@ private fun NavGraphBuilder.addCurrentBoardGraph(
                         visitId = id
                     )
                 )
-            }
+            },
+            switchScaffoldDrawerState = switchScaffoldDrawerState
         )
     }
 }

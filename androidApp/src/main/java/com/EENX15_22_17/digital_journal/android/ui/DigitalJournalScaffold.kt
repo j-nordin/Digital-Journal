@@ -16,7 +16,7 @@ fun DigitalJournalScaffold(
 ) {
     Scaffold(
         scaffoldState = scaffoldState,
-        modifier = Modifier.statusBarsPadding(),
+        /*modifier = Modifier.statusBarsPadding(),*/
         drawerContent = {
             DrawerMenu()
         },

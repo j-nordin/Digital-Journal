@@ -2,7 +2,6 @@ package com.EENX15_22_17.digital_journal.android.ui.drawer
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ScaffoldState
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -13,6 +12,8 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+
+/* TODO: implement real drawer */
 
 private val screens = listOf("Find Trips", "My Trips", "Saved Trips", "Price Alerts", "My Account")
 

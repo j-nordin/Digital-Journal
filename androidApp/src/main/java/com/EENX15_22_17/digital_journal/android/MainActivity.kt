@@ -8,10 +8,13 @@ import androidx.compose.ui.Modifier
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
+import androidx.compose.material.ScaffoldState
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import com.EENX15_22_17.digital_journal.android.ui.DigitalJournalScaffold
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 
 class MainActivity : ComponentActivity() {
@@ -20,9 +23,28 @@ class MainActivity : ComponentActivity() {
         setContent {
             val appState = rememberAppState()
             DigitalJournalScaffold(scaffoldState = appState.scaffoldState) {
-                NavigationApp(navController = appState.navController)
+                /* TODO: Scaffold state should be accessed by the components by using DI instead*/
+                NavigationApp(
+                    navController = appState.navController,
+                    switchScaffoldDrawerState = {
+                        switchScaffoldDrawerState(
+                            scaffoldState = appState.scaffoldState,
+                            coroutineScope = appState.coroutineScope
+                        )
+                    }
+                )
             }
         }
+    }
+}
+
+fun switchScaffoldDrawerState(
+    scaffoldState: ScaffoldState,
+    coroutineScope: CoroutineScope
+) {
+    val dr = scaffoldState.drawerState
+    coroutineScope.launch {
+        if (dr.isOpen) dr.close() else dr.open()
     }
 }
 
