@@ -26,7 +26,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             //NavigationApp()
-            HazardAss(navBack = {})
+            HazardAssessment(navBack = {}, visitId = "")
         }
     }
 }

@@ -10,6 +10,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.EENX15_22_17.digital_journal.android.ui.hazardassesment.DangerType
 import com.EENX15_22_17.digital_journal.android.ui.theme.primaryColor
 
 @Composable
