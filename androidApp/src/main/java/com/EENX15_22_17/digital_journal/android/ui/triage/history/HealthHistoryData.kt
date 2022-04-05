@@ -39,3 +39,9 @@ val somaticHealthValues = mapOf<SomaticHealthData, String>(
     SomaticHealthData.OTHER to "Övrigt"
 )
 
+enum class YesNo {
+    YES,
+    NO,
+    UNKOWN
+}
+

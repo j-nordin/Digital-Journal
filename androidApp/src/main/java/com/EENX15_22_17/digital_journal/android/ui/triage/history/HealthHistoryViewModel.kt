@@ -11,6 +11,14 @@ class HealthHistoryViewModel : ViewModel() {
         MutableLiveData<Set<SomaticHealthData>>(setOf<SomaticHealthData>())
     }
 
+    val isBloodInfection: MutableLiveData<YesNo> by lazy {
+        MutableLiveData<YesNo>(YesNo.UNKOWN)
+    }
+
+    val bloodInfectionType: MutableLiveData<String> by lazy {
+        MutableLiveData<String>("")
+    }
+
 
    /* val earlierHealthy: MutableLiveData<YesNo> by lazy { MutableLiveData<YesNo>() }
     val delirium: MutableLiveData<YesNo> by lazy { MutableLiveData<YesNo>() }
@@ -27,7 +35,7 @@ class HealthHistoryViewModel : ViewModel() {
     val insulin: MutableLiveData<YesNo> by lazy { MutableLiveData<YesNo>() }
     val bleedingDisorder: MutableLiveData<YesNo> by lazy { MutableLiveData<YesNo>() }
     val malignancy: MutableLiveData<YesNo> by lazy { MutableLiveData<YesNo>() }
-    val other: MutableLiveData<YesNo> by lazy { MutableLiveData<YesNo>() }*/
+    val other: MutableLiveData<YesNo> by lazy { MutableLiveData<YesNo>()*/
 }
 
 

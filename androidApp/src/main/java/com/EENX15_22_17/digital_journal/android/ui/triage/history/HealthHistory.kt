@@ -41,14 +41,12 @@ fun HealthHistoryPage(
         Row(modifier = rowModifier) {
             healthHistoryViewModel.somaticHealth.value?.let { somaticHealth ->
                 SomaticHealth(
-                    currentValues = somaticHealth,
-                    onChange = {
-                        healthHistoryViewModel.somaticHealth.value = it
-                        println(healthHistoryViewModel.somaticHealth.value)
-                    }
+                    choices = somaticHealthValues.keys.toTypedArray(),
+                    onChange = { healthHistoryViewModel.somaticHealth.value = it },
+                    currentSelected = healthHistoryViewModel.somaticHealth.value ?: emptySet(),
+                    labels = somaticHealthValues
                 )
             }
         }
     }
-
 }
