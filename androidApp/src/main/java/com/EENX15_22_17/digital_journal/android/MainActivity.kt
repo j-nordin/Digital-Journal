@@ -16,10 +16,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             //NavigationApp()
-            //HealthHistoryPage()
-            ArrivalScreen(visitId = "1") {
-                
-            }
+            HealthHistoryPage()
+
         }
     }
 }
