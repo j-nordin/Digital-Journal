@@ -37,7 +37,7 @@ fun SuicideAssessmentScreen() {
                 text = "SUICIDBEDÖMNING",
                 style = TextStyle(fontSize = 36.sp, fontWeight = FontWeight.ExtraBold),
                 color = Color.Black,
-                modifier = Modifier.padding(top = 40.dp, start = 15.dp, end = 20.dp),
+                modifier = Modifier.padding(top = 40.dp, start = 40.dp, end = 20.dp),
 
                 )
             //Header checkbox

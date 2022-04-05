@@ -19,6 +19,6 @@ fun SummarySuicide() {
             color = colorTextBlackLight,
         )
 
-        Box(modifier = Modifier.size(width = 20.dp, height = 230.dp))
+        Box(modifier = Modifier.size(width = 20.dp, height = 209.dp))
     }
 }

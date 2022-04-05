@@ -29,7 +29,7 @@ fun DrawCheckBoxes(items: List<CheckBoxData> ) {
                 )
             }
             println("Label ${item.checkBoxName} : ${item.checkBoxValue}")
-            Box(modifier = Modifier.size(width = 20.dp, height = 10.dp))
+            Box(modifier = Modifier.size(width = 20.dp, height = 5.dp))
         }
 
 

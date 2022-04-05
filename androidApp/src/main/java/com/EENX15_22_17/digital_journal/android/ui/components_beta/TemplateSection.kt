@@ -20,18 +20,18 @@ fun TemplateSection(title: String, body: @Composable() () -> Unit ) {
     Box (
         Modifier
             .fillMaxWidth()
-            .padding(20.dp) ){
+            .padding(start = 20.dp, end = 20.dp, bottom = 10.dp, top = 10.dp) ){
         Box(
             Modifier
                 .fillMaxWidth()
-                .padding(top = 16.dp)
+                .padding(top = 15.dp)
 
         ) {
             Box(
                 Modifier
                     .fillMaxWidth()
                     .border(BorderStroke(1.dp, colorTextGray), shape = RoundedCornerShape(5))
-                    .padding(top = 20.dp)) {
+                    .padding(top = 10.dp)) {
                 // Content
                 Column(
                     Modifier.padding(20.dp)
@@ -49,7 +49,7 @@ fun TemplateSection(title: String, body: @Composable() () -> Unit ) {
                 .background(Color.White)) {
                 Text(
                     text = " $title ",
-                    style = TextStyle(fontSize = 26.sp, fontWeight = FontWeight.ExtraBold),
+                    style = TextStyle(fontSize = 26.sp, fontWeight = FontWeight.SemiBold),
                     color = Color.Black,
 
                     )
