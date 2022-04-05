@@ -1,6 +1,5 @@
 package com.EENX15_22_17.digital_journal.android
 
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -10,8 +9,6 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import com.EENX15_22_17.digital_journal.android.ui.current.CurrentScreen
 import com.EENX15_22_17.digital_journal.android.ui.arrivalpage.ArrivalPage
-import com.EENX15_22_17.digital_journal.android.ui.landingpage.LandingPage
-import com.EENX15_22_17.digital_journal.android.ui.screen.ContactCauseScreen
 
 sealed class Screen(val route: String) {
     object Overview : Screen(route = "overview")
@@ -327,6 +324,29 @@ fun navToInterimJournal(navController: NavController,visitId: String){
             root = Screen.PatientMeeting
         )
     )
+}
+
+enum class NavigationEnum {
+    ARRIVAL, DANGER, CONTACT_REASON, PREVIOUS_CARE, HEALTH_HISTORY, HEALTH_NOW, SUICIDE_ASSESSMENT, NURSING_NEED, MEDICAL_ORDER, INTERIM_JOURNAL
+}
+
+
+enum class PatientMeetingForms {
+    ARRIVAL {
+        override fun createRoute(id: String) =
+            PatientMeetingScreens.Arrival.createRoute(root = Screen.PatientMeeting, visitId = id)
+    },
+    LANDING {
+        override fun createRoute(id: String) =
+            PatientMeetingScreens.MainScreen.createRoute(root = Screen.PatientMeeting, visitId = id)
+    };
+
+    abstract fun createRoute(id: String): String
+}
+
+
+fun navToPatientForm(navController: NavController, visitId: String, patientMeetingForms: PatientMeetingForms) {
+    navController.navigate(patientMeetingForms.createRoute(visitId))
 }
 
 
