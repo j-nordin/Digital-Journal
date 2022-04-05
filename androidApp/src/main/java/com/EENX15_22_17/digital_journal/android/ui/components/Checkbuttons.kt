@@ -2,6 +2,7 @@ package com.EENX15_22_17.digital_journal.android.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.CircleShape
@@ -54,7 +55,6 @@ fun <E : Enum<*>> EnumCheckBox(
     }
 }
 
-
 @Composable
 fun <E : Enum<*>> EnumCheckBoxHorizontal(
     choices: Array<E>,
@@ -62,7 +62,7 @@ fun <E : Enum<*>> EnumCheckBoxHorizontal(
     currentSelected: MutableSet<E>,
     labels: Map<E, String>
 ) {
-    Row(modifier = Modifier.padding(2.dp)) {
+    Row(modifier = Modifier.padding(2.dp), horizontalArrangement = Arrangement.SpaceEvenly) {
         EnumCheckBox(
             choices = choices,
             onSelectionChanged = onSelectionChanged,
