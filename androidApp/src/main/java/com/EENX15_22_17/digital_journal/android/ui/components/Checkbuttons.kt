@@ -114,16 +114,11 @@ fun <E : Enum<*>> EnumCheckBoxLazyGrid(
                     ) {
                         Checkbox(
                             checked = isChecked,
-                            onCheckedChange = {
-                                isChecked = when (it) {
-                                    false -> {
-                                        currentSelection.remove(choices[index])
-                                        false
-                                    }
-                                    true -> {
-                                        currentSelection.add(choices[index])
-                                        true
-                                    }
+                            onCheckedChange = { checked ->
+                                isChecked = checked
+                                when(checked) {
+                                    false -> currentSelection.remove(choices[index])
+                                    true -> currentSelection.add(choices[index])
                                 }
                                 onSelectionChanged(currentSelection.toSet())
                             }
