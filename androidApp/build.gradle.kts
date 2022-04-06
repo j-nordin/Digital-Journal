@@ -3,6 +3,7 @@ val compose_version: String by project
 plugins {
     id("com.android.application")
     kotlin("android")
+    id("net.linguica.maven-settings")
 }
 
 android {
@@ -32,6 +33,9 @@ android {
 }
 
 dependencies {
+    // PREDICARE LIBS
+    implementation("se.predicare:core-data:0+")
+    implementation("se.predicare:journal-lib:0+")
     implementation(project(":shared"))
     implementation("com.google.android.material:material:1.5.0")
     implementation("androidx.appcompat:appcompat:1.4.1")
