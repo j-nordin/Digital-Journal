@@ -149,9 +149,10 @@ fun ArrivalPage(
                     .padding(horizontal = 16.dp, vertical = 12.dp)
             ) {
                 ArrivalType(
-                    values = arrivalViewModel.arrivalStates.arrivalMethod.toMutableSet(),
-                    onChange = { arrivalViewModel.arrivalStates.arrivalMethod = it },
-                    modifier = Modifier.padding(2.dp)
+                    choices = arrivalMethods.keys.toTypedArray(),
+                    onChange = { arrivalViewModel.arrivalStates.arrivalMethod = it},
+                    currentSelected = arrivalViewModel.arrivalStates.arrivalMethod,
+                    labels = arrivalMethods
                 )
             }
             Box(
@@ -167,10 +168,11 @@ fun ArrivalPage(
                     )
                     .padding(horizontal = 16.dp, vertical = 12.dp)
             ) {
-
                 Laws(
-                    values = arrivalViewModel.arrivalStates.law.toMutableSet(),
-                    onChange = { arrivalViewModel.arrivalStates.law = it }
+                    choices = laws.keys.toTypedArray(),
+                    onChange = { arrivalViewModel.arrivalStates.law = it},
+                    currentSelected = arrivalViewModel.arrivalStates.law,
+                    labels = laws
                 )
             }
         }

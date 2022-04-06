@@ -14,6 +14,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.EENX15_22_17.digital_journal.android.ui.theme.checkBoxColor
 
 
 @Composable
@@ -23,8 +24,6 @@ fun <E : Enum<*>> EnumRadioButtonsHorizontal(
     currentChoice: E,
     onSelection: (choice: E) -> Unit
 ) {
-    //var selection by rememberSaveable { mutableStateOf(currentChoice) }
-
     Row {
         EnumRadioButtons(
             choices = choices,
@@ -42,7 +41,6 @@ fun <E : Enum<*>> EnumRadioButtonsVertical(
     currentChoice: E,
     onSelection: (choice: E) -> Unit
 ) {
-
     Column {
         EnumRadioButtons(
             choices = choices,
@@ -71,7 +69,7 @@ fun <E : Enum<*>> EnumRadioButtons(
                     onSelection(choice)
                 }
                 .padding(horizontal = 12.dp)
-                .background(MaterialTheme.colors.secondary, CircleShape)
+                .background(checkBoxColor, CircleShape)
         ) {
             RadioButton(
                 selected = (choice == selection),
