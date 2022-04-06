@@ -28,48 +28,50 @@ sealed class PatientMeetingScreen(val route: String) {
 
     object Landing : PatientMeetingScreen("{visitId}") {
         // Overloads and creates a route with a specific id
-        fun createRoute(visitId: String) = "$root/$visitId"
+        override fun createRoute(visitId: String) = "$root/$visitId"
     }
 
     object Arrival : PatientMeetingScreen("{visitId}/arrival") {
-        fun createRoute(visitId: String) = "$root/$visitId/arrival"
+        override fun createRoute(visitId: String) = "$root/$visitId/arrival"
     }
 
     object HazardAssessment : PatientMeetingScreen("{visitId}/hazardAssessment") {
-        fun createRoute(visitId: String) = "$root/$visitId/hazardAssessment"
+        override fun createRoute(visitId: String) = "$root/$visitId/hazardAssessment"
     }
 
     object ContactReason : PatientMeetingScreen("{visitId}/contactReason") {
-        fun createRoute(visitId: String) = "$root/$visitId/contactReason"
+        override fun createRoute(visitId: String) = "$root/$visitId/contactReason"
     }
 
     object PreviousCare : PatientMeetingScreen("{visitId}/previousCare") {
-        fun createRoute(visitId: String) = "$root/$visitId/previousCare"
+        override fun createRoute(visitId: String) = "$root/$visitId/previousCare"
     }
 
     object HealthHistory : PatientMeetingScreen("{visitId}/healthHistory") {
-        fun createRoute(visitId: String) = "$root/$visitId/healthHistory"
+        override fun createRoute(visitId: String) = "$root/$visitId/healthHistory"
     }
 
     object HealthNow : PatientMeetingScreen("{visitId}/healthNow") {
-        fun createRoute(visitId: String) = "$root/$visitId/healthNow"
+        override fun createRoute(visitId: String) = "$root/$visitId/healthNow"
     }
 
     object SuicideAssessment : PatientMeetingScreen("{visitId}/suicideAssessment") {
-        fun createRoute(visitId: String) = "$root/$visitId/suicideAssessment"
+        override fun createRoute(visitId: String) = "$root/$visitId/suicideAssessment"
     }
 
     object NursingNeed : PatientMeetingScreen("{visitId}/nursingNeed") {
-        fun createRoute(visitId: String) = "$root/$visitId/nursingNeed"
+        override fun createRoute(visitId: String) = "$root/$visitId/nursingNeed"
     }
 
     object MedicalOrder : PatientMeetingScreen("{visitId}/medicalOrder") {
-        fun createRoute(visitId: String) = "$root/$visitId/medicalOrder"
+        override fun createRoute(visitId: String) = "$root/$visitId/medicalOrder"
     }
 
     object InterimJournal : PatientMeetingScreen("{visitId}/interimJournal") {
-        fun createRoute(visitId: String) = "$root/$visitId/interimJournal"
+        override fun createRoute(visitId: String) = "$root/$visitId/interimJournal"
     }
+
+    abstract fun createRoute(visitId: String): String
 }
 
 
@@ -100,20 +102,20 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
             /*TODO: Handle meeting id not provided, ex show alert*/
             requireNotNull(visitId) { "No meeting id provided" }
 
-            fun navTo(form : PatientMeetingFormRoute) = navToPatientMeetingForm(navController, visitId, form)
+            fun navTo(form : PatientMeetingScreen) = navController.navToPatientMeetingForm(visitId, form)
 
             LandingPage(
                 visitId = visitId,
-                navToArrival = { navTo(PatientMeetingFormRoute.ARRIVAL) },
-                navToHazard = { navTo(PatientMeetingFormRoute.HAZARD) },
-                navToContactReason = { navTo(PatientMeetingFormRoute.CONTACT_REASON) },
-                navToPreviousCare = { navTo(PatientMeetingFormRoute.PREVIOUS_CARE) },
-                navToHealthHistory = { navTo(PatientMeetingFormRoute.HEALTH_HISTORY) },
-                navToHealthNow = { navTo(PatientMeetingFormRoute.HEALTH_NOW) },
-                navToSuicideAssessment = { navTo(PatientMeetingFormRoute.SUICIDE_ASSESSMENT) },
-                navToNursingNeed = { navTo(PatientMeetingFormRoute.NURSING_NEED) },
-                navToMedicalOrder = { navTo(PatientMeetingFormRoute.MEDICAL_ORDER) },
-                navToInterimJournal = { navTo(PatientMeetingFormRoute.INTERIM_JOURNAL) },
+                navToArrival = { navTo(PatientMeetingScreen.Arrival) },
+                navToHazard = { navTo(PatientMeetingScreen.HazardAssessment) },
+                navToContactReason = { navTo(PatientMeetingScreen.ContactReason) },
+                navToPreviousCare = { navTo(PatientMeetingScreen.PreviousCare) },
+                navToHealthHistory = { navTo(PatientMeetingScreen.HealthHistory) },
+                navToHealthNow = { navTo(PatientMeetingScreen.HealthNow) },
+                navToSuicideAssessment = { navTo(PatientMeetingScreen.SuicideAssessment) },
+                navToNursingNeed = { navTo(PatientMeetingScreen.NursingNeed) },
+                navToMedicalOrder = { navTo(PatientMeetingScreen.MedicalOrder) },
+                navToInterimJournal = { navTo(PatientMeetingScreen.InterimJournal) },
                 showOverview = { id ->
                     navController.navigate(Screen.PatientOverview.createRoute(visitId = id))
                 }
@@ -196,62 +198,11 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
     }
 }
 
-enum class PatientMeetingFormRoute {
-    ARRIVAL {
-        override fun createRoute(id: String) =
-            PatientMeetingScreen.Arrival.createRoute(visitId = id)
-    },
-    LANDING {
-        override fun createRoute(id: String) =
-            PatientMeetingScreen.Landing.createRoute(visitId = id)
-    },
-    CONTACT_REASON {
-        override fun createRoute(id: String) =
-            PatientMeetingScreen.ContactReason.createRoute(visitId = id)
-    },
-    HAZARD {
-        override fun createRoute(id: String) =
-            PatientMeetingScreen.HazardAssessment.createRoute(visitId = id)
-    },
-    PREVIOUS_CARE {
-        override fun createRoute(id: String) =
-            PatientMeetingScreen.PreviousCare.createRoute(visitId = id)
-    },
-    HEALTH_HISTORY {
-        override fun createRoute(id: String) =
-            PatientMeetingScreen.HealthHistory.createRoute(visitId = id)
-    },
-    HEALTH_NOW {
-        override fun createRoute(id: String) =
-            PatientMeetingScreen.HealthNow.createRoute(visitId = id)
-    },
-    SUICIDE_ASSESSMENT {
-        override fun createRoute(id: String) =
-            PatientMeetingScreen.SuicideAssessment.createRoute(visitId = id)
-    },
-    NURSING_NEED {
-        override fun createRoute(id: String) =
-            PatientMeetingScreen.NursingNeed.createRoute(visitId = id)
-    },
-    MEDICAL_ORDER {
-        override fun createRoute(id: String) =
-            PatientMeetingScreen.MedicalOrder.createRoute(visitId = id)
-    },
-    INTERIM_JOURNAL {
-        override fun createRoute(id: String) =
-            PatientMeetingScreen.InterimJournal.createRoute(visitId = id)
-    };
-
-    abstract fun createRoute(id: String): String
-}
-
-
-fun navToPatientMeetingForm(
-    navController: NavController,
+fun NavController.navToPatientMeetingForm(
     visitId: String,
-    patientMeetingFormRoute: PatientMeetingFormRoute
+    patientMeetingScreen: PatientMeetingScreen
 ) {
-    navController.navigate(patientMeetingFormRoute.createRoute(visitId))
+    this.navigate(patientMeetingScreen.createRoute(visitId))
 }
 
 
