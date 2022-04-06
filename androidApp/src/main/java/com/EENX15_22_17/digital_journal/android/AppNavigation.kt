@@ -9,6 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import com.EENX15_22_17.digital_journal.android.ui.currentpatients.PatientsList
 import com.EENX15_22_17.digital_journal.android.ui.screen.ContactCauseScreen
+import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.SuicideAssessmentScreen
 
 sealed class Screen(val route: String) {
     object Overview : Screen(route = "overview")
@@ -33,6 +34,11 @@ sealed class PatientMeetingScreens(val route: String) {
     // Contact cause
     object ContactCause : PatientMeetingScreens("{visitId}/contactCause") {
         fun createRoute(visitId: String, root: Screen) = "${root.route}/$visitId/contactCause"
+    }
+
+    // Suicide Assessment
+    object SuicideAssessment : PatientMeetingScreens("{visitId}/suicideAssessment") {
+        fun createRoute(visitId: String, root: Screen) = "${root.route}/$visitId/suicideAssessment"
     }
 
     // TODO: Implement routes to rest of the cards
@@ -86,6 +92,14 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
                         )
                     )
                 },
+                navToSuicideAssessment = {
+                    navController.navigate(
+                        PatientMeetingScreens.SuicideAssessment.createRoute(
+                            visitId= visitId,
+                            root = Screen.PatientMeeting
+                        )
+                    )
+                },
                 visitId = visitId
             )
         }
@@ -102,6 +116,14 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
             val visitId = it.arguments?.getString("visitId")
             requireNotNull(visitId)
             ContactCauseScreen()
+            //SuicideAssessmentScreen()
+        }
+        // Suicide Assessment
+        composable(route = PatientMeetingScreens.SuicideAssessment.createRoute(root = Screen.PatientMeeting)
+        ){
+            val visitId = it.arguments?.getString("visitId")
+            requireNotNull(visitId)
+            SuicideAssessmentScreen()
         }
     }
 }

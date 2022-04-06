@@ -25,8 +25,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 
-            //NavigationApp()
-            SuicideAssessmentScreen()
+            NavigationApp()
 
         }
     }
@@ -51,6 +50,7 @@ fun PatientMeetingLandingScreen(
     @PreviewParameter(OverviewScreenProvider::class) navToOverview: () -> Unit,
     navToArrival: () -> Unit,
     navToContactCause: () -> Unit,
+    navToSuicideAssessment: () -> Unit,
     visitId: String = "0"
 ) {
     Column(
@@ -68,6 +68,10 @@ fun PatientMeetingLandingScreen(
         // Contact cause
         Button(onClick = navToContactCause) {
             Text("Go to contact cause")
+        }
+        // Suicide Assessment
+        Button(onClick = navToSuicideAssessment) {
+            Text("Go to suicide assessment")
         }
     }
 }
