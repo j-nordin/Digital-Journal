@@ -15,21 +15,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.EENX15_22_17.digital_journal.android.ui.theme.background
 import com.EENX15_22_17.digital_journal.android.ui.theme.checkBoxColor
 
 @Composable
 fun <E : Enum<*>> EnumCheckBox(
     choices: Array<E>,
     onSelectionChanged: (selected: Set<E>) -> Unit,
-    currentSelected: Set<E>,
+    selection: Set<E>,
     labels: Map<E, String>
 ) {
 
-    val currentSelection: MutableSet<E> = currentSelected.toMutableSet()
+    val currentSelection: MutableSet<E> = selection.toMutableSet()
     Column {
         choices.forEach { choice ->
-            var isChecked by rememberSaveable { mutableStateOf(choice in currentSelected) }
+            var isChecked by rememberSaveable { mutableStateOf(choice in selection) }
             Text(text = labels[choice] ?: choice.name, textAlign = TextAlign.Center)
             Box(
                 modifier = Modifier.background(MaterialTheme.colors.secondary, CircleShape)
@@ -47,7 +46,7 @@ fun <E : Enum<*>> EnumCheckBox(
                                 true
                             }
                         }
-                        onSelectionChanged(currentSelected.toSet())
+                        onSelectionChanged(selection.toSet())
                     }
                 )
             }
@@ -67,7 +66,7 @@ fun <E : Enum<*>> EnumCheckBoxHorizontal(
         EnumCheckBox(
             choices = choices,
             onSelectionChanged = onSelectionChanged,
-            currentSelected = currentSelected,
+            selection = currentSelected,
             labels = labels
         )
     }
@@ -84,7 +83,7 @@ fun <E : Enum<*>> EnumCheckBoxVertical(
         EnumCheckBox(
             choices = choices,
             onSelectionChanged = onSelectionChanged,
-            currentSelected = currentSelected,
+            selection = currentSelected,
             labels = labels
         )
     }
