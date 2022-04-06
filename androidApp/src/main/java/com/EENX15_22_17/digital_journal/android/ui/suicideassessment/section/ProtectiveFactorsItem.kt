@@ -7,5 +7,5 @@ import com.EENX15_22_17.digital_journal.android.ui.components_beta.DrawCheckBoxe
 @Composable
 fun ProtectiveFactorsItem(items : List<CheckBoxData>,
 ) {
-    DrawCheckBoxes(items = items)
+    DrawCheckBoxes(items = items, whichSection = "protectivefactors")
 }

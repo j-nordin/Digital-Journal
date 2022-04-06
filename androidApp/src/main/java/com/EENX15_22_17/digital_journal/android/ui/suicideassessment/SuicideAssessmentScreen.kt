@@ -18,7 +18,7 @@ import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.protectivef
 import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.protectivefactors.ProtectiveFactorsList
 import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.statisticalriskfactors.StatisticalRiskFactorsItem
 import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.statisticalriskfactors.StatisticalRiskFactorsList
-import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.summarysuicidesection.SummarySuicide
+import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.summarysuicidesection.SummarySection
 
 @Composable
 fun SuicideAssessmentScreen() {
@@ -45,7 +45,9 @@ fun SuicideAssessmentScreen() {
                 DrawCheckBoxes(items = listOf(
                     CheckBoxData("Medveten suicidbenägenhet framgår inte vid ankomstsamtal", false, "Conscious_suicidal_tendencies"),
                     CheckBoxData("Patienten svarar inte på frågor", false, "no_answer"),
-                ))
+                ),
+                    whichSection = "header"
+                )
             }
             //Suicid steps
             TemplateSection("Suicidstegen") { SuicideStepsItem(items = SuicideStepsList()) }
@@ -68,7 +70,7 @@ fun SuicideAssessmentScreen() {
                 Column(
 
                 ) {
-                    TemplateSection(title = "Summering") { SummarySuicide() }
+                    TemplateSection(title = "Summering") { SummarySection() }
                 }
             }
 

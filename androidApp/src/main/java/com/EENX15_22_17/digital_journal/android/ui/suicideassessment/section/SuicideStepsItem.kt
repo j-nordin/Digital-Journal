@@ -26,12 +26,12 @@ fun SuicideStepsItem(items : List<CheckBoxData>,
         Column(
             modifier = Modifier.fillMaxWidth(0.39f)
         ) {
-            DrawCheckBoxes(items = itemsListOne)
+            DrawCheckBoxes(items = itemsListOne, whichSection = "suicidesteps")
         }
         Column(
             modifier = Modifier.fillMaxWidth(0.65f)
         ) {
-            DrawCheckBoxes(items = itemsListTwo)
+            DrawCheckBoxes(items = itemsListTwo, whichSection = "suicidesteps")
         }
     }
 }

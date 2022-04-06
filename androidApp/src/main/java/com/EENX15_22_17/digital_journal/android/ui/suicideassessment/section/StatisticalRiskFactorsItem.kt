@@ -29,12 +29,12 @@ fun StatisticalRiskFactorsItem(items : List<CheckBoxData>,
         Column(
             modifier = Modifier.fillMaxWidth(0.33f)
         ) {
-            DrawCheckBoxes(items = itemsListOne)
+            DrawCheckBoxes(items = itemsListOne, whichSection = "riskfactors")
         }
         Column(
             modifier = Modifier.fillMaxWidth(0.90f)
         ) {
-            DrawCheckBoxes(items = itemsListTwo)
+            DrawCheckBoxes(items = itemsListTwo, whichSection = "riskfactors")
         }
     }
 }

@@ -8,11 +8,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.service.SummaryService
 import com.EENX15_22_17.digital_journal.android.ui.theme.colorTextBlackLight
 
+// Suicideassessment "ViewModel"
 @Composable
-fun DrawCheckBoxes(items: List<CheckBoxData> ) {
-    items.forEachIndexed { index, item ->
+fun DrawCheckBoxes(items: List<CheckBoxData>, whichSection : String ) {
+    val summaryService = SummaryService;
+    items.forEachIndexed { _, item ->
 
         var checkBoxState by remember {
             mutableStateOf(false) }
@@ -21,7 +24,17 @@ fun DrawCheckBoxes(items: List<CheckBoxData> ) {
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                CheckBoxBtn(value = checkBoxState, onValueChange = { checkBoxState = it; item.checkBoxValue = it })
+                CheckBoxBtn(
+                    value = checkBoxState,
+                    onValueChange = {
+                        checkBoxState = it
+                        item.checkBoxValue = it
+                        summaryService.
+                        updateSummaryValue(
+                            whichSection = whichSection,
+                            checkBoxValue = item.checkBoxValue)
+                    }
+                )
                 Text(
                     text = " " + item.checkBoxName,
                     style = TextStyle(fontSize = 16.sp),
