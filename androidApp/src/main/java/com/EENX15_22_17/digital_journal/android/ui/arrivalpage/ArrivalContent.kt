@@ -387,26 +387,5 @@ fun ArrivalType(
             labels = labels,
             gridLayout = GridCells.Adaptive(200.dp)
         )
-
-        /*
-        EnumCheckBoxVertical(
-            choices = arrivalMethods.keys.toTypedArray().sliceArray(0..2),
-            onSelectionChanged = onChange,
-            currentSelected = values,
-            labels = arrivalMethods
-        )
-        EnumCheckBoxVertical(
-            choices = arrivalMethods.keys.toTypedArray().sliceArray(3..5),
-            onSelectionChanged = onChange,
-            currentSelected = values,
-            labels = arrivalMethods
-        )
-        EnumCheckBoxVertical(
-            choices = arrivalMethods.keys.toTypedArray().sliceArray(6..7),
-            onSelectionChanged = onChange,
-            currentSelected = values,
-            labels = arrivalMethods
-        )*/
-
     }
 }
