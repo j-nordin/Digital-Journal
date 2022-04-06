@@ -158,7 +158,6 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
         ) { backStackEntry ->
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient meeting" }
-            // TODO add HealthHistory composable
             HealthHistoryPage(
                 visitId = visitId,
                 navBack = { navController.popBackStack() }
