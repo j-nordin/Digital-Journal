@@ -9,6 +9,7 @@ data class HazardDataClass(
     var initialAssessment: Set<DangerType>,
     var specifiedBehavior: Set<DangerBehaviors>,
     val takenActions: String,
+    var nrOfBVC: Int
 )
 
 enum class DangerType {
@@ -30,7 +31,7 @@ val dangerTypes = mapOf<DangerType, String>(
     DangerType.NOT_AGRESSIVE to "Ej förekomst av farligt beteende",
     DangerType.PREVIOUSLY_AGRESSIVE to "Tidigare våldsam",
     DangerType.DRUG_AFFECTED to "Verkar drogpåverkad"
-    )
+)
 
 val dangerBehaviors = mapOf<DangerBehaviors, String>(
     DangerBehaviors.ATTACKING_BEHAVIOUR to "Attackerar föremål",
