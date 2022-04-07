@@ -6,20 +6,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import java.util.*
 
-
-
 class HazardViewModel : ViewModel() {
     var hazardStates by mutableStateOf(
         HazardDataClass(
             initialAssessment = setOf<DangerType>(),
             specifiedBehavior = setOf<DangerBehaviors>(),
-            takenActions = "",
-            nrOfBVC = 0
+            takenActions = ""
         )
     )
 
-
-    fun updateBVC(spec : Set<DangerBehaviors>){
+   /* fun updateBVC(spec: Set<DangerBehaviors>) {
         this.hazardStates.nrOfBVC = spec.size
-    }
+    }*/
 }
