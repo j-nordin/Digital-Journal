@@ -13,13 +13,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import com.EENX15_22_17.digital_journal.android.ui.theme.colorTextGray
 
+
 @Composable
-fun TitledSection(title: String, content: @Composable() () -> Unit) {
+@Preview(showBackground = true)
+fun TitledSection(
+    @PreviewParameter(SampleTitledSectionProvider::class)
+    title: String = "Title", content: @Composable () -> Unit = { Box() {
+        Text(text = "Content")
+    }}
+) {
 
     Box(
         Modifier
@@ -52,4 +62,19 @@ fun TitledSection(title: String, content: @Composable() () -> Unit) {
             )
         }
     }
+}
+
+data class TitledSectionDataClass(
+    val title: String,
+    val content: @Composable () -> Unit
+)
+
+class SampleTitledSectionProvider : PreviewParameterProvider<TitledSectionDataClass> {
+    override val values: Sequence<TitledSectionDataClass> = sequenceOf(
+        TitledSectionDataClass(title = "Här är en titel", content = {
+            Box(modifier = Modifier.background(Color.Red)) {
+                Text(text = "Här finns all content")
+            }
+        })
+    )
 }
