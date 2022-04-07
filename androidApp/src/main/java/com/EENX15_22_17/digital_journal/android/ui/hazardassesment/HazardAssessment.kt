@@ -127,6 +127,26 @@ fun HazardAssessment(
                 HazardousBehaviours(values = dangerBehaviors.keys.toMutableSet(), onChange = {})
             }
             Row() {
+        Row(modifier = rowModifier) {
+            InitialHazardAssessmentCheckboxes(
+                choices = dangerTypes.keys.toTypedArray(),
+                onSelectionChange = { hazardViewModel.hazardStates.initialAssessment = it },
+                currentSelected = hazardViewModel.hazardStates.initialAssessment,
+                labels = dangerTypes
+            )
+        }
+        Text(stringResource(id = R.string.BVC))
+        Row(modifier = rowModifier) {
+            HazardousBehaviours(
+                choices = dangerBehaviors.keys.toTypedArray(),
+                onChange = { hazardViewModel.hazardStates.specifiedBehavior = it },
+                currentSelected = hazardViewModel.hazardStates.specifiedBehavior,
+                labels = dangerBehaviors
+            )
+        }
+        Row() {
+            Text("Number of BVC: ${hazardViewModel.hazardStates.specifiedBehavior.size}")
+            if (hazardViewModel.hazardStates.specifiedBehavior.size > 1) {
                 ActionTakenTextField(setActionTaken = {}, actionTaken = "")
             }
         }

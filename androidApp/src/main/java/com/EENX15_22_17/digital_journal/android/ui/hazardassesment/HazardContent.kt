@@ -1,6 +1,7 @@
 package com.EENX15_22_17.digital_journal.android.ui.hazardassesment
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,29 +27,37 @@ fun ActionTakenTextField(
 
 @Composable
 fun InitialHazardAssessmentCheckboxes(
-    values: MutableSet<DangerType>,
-    onChange: (values: Set<DangerType>) -> Unit
+    choices: Array<DangerType>,
+    onSelectionChange: (values: Set<DangerType>) -> Unit,
+    currentSelected: Set<DangerType>,
+    labels: Map<DangerType, String>
+
 ) {
     Row(horizontalArrangement = Arrangement.Start, verticalAlignment = Alignment.Top) {
-        EnumCheckBoxHorizontal(
-            choices = dangerTypes.keys.toTypedArray(),
-            onSelectionChanged = onChange,
-            currentSelected = values,
-            labels = dangerTypes
+        EnumCheckBoxLazyGrid(
+            choices = choices,
+            onSelectionChanged = onSelectionChange,
+            currentSelected = currentSelected,
+            labels = labels,
+            gridLayout = GridCells.Adaptive(200.dp)
         )
     }
 }
 
 @Composable
 fun HazardousBehaviours(
-    values: MutableSet<DangerBehaviors>,
-    onChange: (values: Set<DangerBehaviors>) -> Unit
+    choices: Array<DangerBehaviors>,
+    onChange: (values: Set<DangerBehaviors>) -> Unit,
+    currentSelected: Set<DangerBehaviors>,
+    labels: Map<DangerBehaviors, String>
+
 ) {
-    EnumCheckBoxHorizontal(
-        choices = dangerBehaviors.keys.toTypedArray(),
+    EnumCheckBoxLazyGrid(
+        choices = choices,
         onSelectionChanged = onChange,
-        currentSelected = values,
-        labels = dangerBehaviors
+        currentSelected = currentSelected,
+        labels = labels,
+        gridLayout = GridCells.Adaptive(300.dp)
     )
 }
 
