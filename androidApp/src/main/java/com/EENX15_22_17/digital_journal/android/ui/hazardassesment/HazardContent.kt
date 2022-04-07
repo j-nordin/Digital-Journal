@@ -60,9 +60,7 @@ fun HazardousBehaviours(
     onChange: (values: Set<DangerBehaviors>) -> Unit,
     currentSelected: Set<DangerBehaviors>,
     labels: Map<DangerBehaviors, String>,
-    bvcCounter: Int
 ) {
-    var updatedBvcCount by rememberSaveable { mutableStateOf(bvcCounter) }
     EnumCheckBoxLazyGrid(
         choices = choices,
         onSelectionChanged = onChange,
@@ -73,7 +71,7 @@ fun HazardousBehaviours(
 }
 
 @Composable
-fun BVCfield(
+fun bvcSummary(
     BVC: Int
 ) {
     Box(
