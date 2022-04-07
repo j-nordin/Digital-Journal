@@ -20,4 +20,22 @@
     <string name="dangerAssessmentHeader">FARLIGHETSBEDÖMNING</string>
     <string name="BVC">Om BVC > 2 ska åtgärder vidtas</string>
 
+    <string name="arrivalCard">ANKOMST</string>
+    <string name="hazardCard">FARLIGHETSBEDÖMNING</string>
+    <string name="contactReason">KONTAKTORSAK</string>
+    <string name="previousCare">TIDIGARE VÅRD</string>
+    <string name="healthHistory">HÄLSA HISTORIK </string>
+    <string name="healthNow">HÄLSA NU</string>
+    <string name="suicideAssessment">SUICIDBEDÖMNING</string>
+    <string name="nursingNeed">OMV. BEDÖM / ÅTGÄRD</string>
+    <string name="medicalOrder">LÄKARORDINATION</string>
+    <string name="interimJournal">INTERIMJOURNAL</string>
+    <string name="somaticHealth">Somatisk Hälsa</string>
+    <string name="bloodInfection">Blodsmitta</string>
+    <string name="bloodInfectionType">Vilken?</string>
+    <string name="hypersensitivity">Överkänslighet</string>
+    <string name="hypersensitivityType">Vilken?</string>
+    <string name="multiresistant">Multiresistans misstanke</string>
+    <string name="suspicionGE">Misstanke om GE</string>
+    <string name="nursesNeeds">Omvårdnadsbehov</string>
 </resources>

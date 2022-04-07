@@ -1,5 +1,6 @@
 package com.EENX15_22_17.digital_journal.android.ui.arrivalpage
 
+import com.EENX15_22_17.digital_journal.android.dataModel.YesNo
 import java.util.*
 
 data class ArrivalDataClass(
@@ -54,16 +55,6 @@ val arrivalMethods = mapOf<ArrivalMethod, String>(
     ArrivalMethod.OTHER to "Annat"
 )
 
-enum class YesNo {
-    YES,
-    NO,
-    UNKOWN
-}
-
-val yesNoLabels = mapOf<YesNo, String>(
-    YesNo.YES to "Ja",
-    YesNo.NO to "Nej"
-)
 
 enum class Law {
     HSL,
