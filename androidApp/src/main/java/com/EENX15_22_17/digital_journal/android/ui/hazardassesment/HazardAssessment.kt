@@ -25,7 +25,7 @@ fun HazardAssessment(
     navBack: () -> Unit,
     hazardViewModel: HazardViewModel = HazardViewModel(),
     visitId: String
-    ) {
+) {
     val rowModifier: Modifier = Modifier
         .fillMaxWidth()
         .padding(vertical = 6.dp, horizontal = 2.dp)
@@ -48,13 +48,20 @@ fun HazardAssessment(
         )
         Row(modifier = rowModifier) {
             InitialHazardAssessmentCheckboxes(
-                values = dangerTypes.keys.toMutableSet(),
-                onChange = {hazardViewModel.hazardStates.initialAssessment = it}
+                choices = dangerTypes.keys.toTypedArray(),
+                onSelectionChange = { hazardViewModel.hazardStates.initialAssessment = it },
+                currentSelected = hazardViewModel.hazardStates.initialAssessment,
+                labels = dangerTypes
             )
         }
         Text(stringResource(id = R.string.BVC))
         Row(modifier = rowModifier) {
-            HazardousBehaviours(values = dangerBehaviors.keys.toMutableSet(), onChange = {})
+            HazardousBehaviours(
+                choices = dangerBehaviors.keys.toTypedArray(),
+                onChange = { hazardViewModel.hazardStates.specifiedBehavior = it },
+                currentSelected = hazardViewModel.hazardStates.specifiedBehavior,
+                labels = dangerBehaviors
+            )
         }
         Row() {
             Text("Number of BVC: ${hazardViewModel.hazardStates.specifiedBehavior.size}")
