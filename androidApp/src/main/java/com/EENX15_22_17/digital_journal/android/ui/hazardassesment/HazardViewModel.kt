@@ -11,13 +11,11 @@ class HazardViewModel : ViewModel() {
         HazardDataClass(
             initialAssessment = setOf<DangerType>(),
             specifiedBehavior = setOf<DangerBehaviors>(),
-            takenActions = "",
-            nrOfBVC = 0
+            takenActions = ""
         )
     )
 
-
-    fun updateBVC(spec : Set<DangerBehaviors>){
+   /* fun updateBVC(spec: Set<DangerBehaviors>) {
         this.hazardStates.nrOfBVC = spec.size
-    }
+    }*/
 }
