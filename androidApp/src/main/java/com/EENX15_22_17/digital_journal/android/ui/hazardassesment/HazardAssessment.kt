@@ -139,15 +139,18 @@ fun HazardAssessment(
         Row(modifier = rowModifier) {
             HazardousBehaviours(
                 choices = dangerBehaviors.keys.toTypedArray(),
-                onChange = { hazardViewModel.hazardStates.specifiedBehavior = it },
+                onChange = { hazardViewModel.hazardStates.specifiedBehavior = it
+                           hazardViewModel.updateBVC(hazardViewModel.hazardStates.specifiedBehavior)
+                           println(hazardViewModel.hazardStates.nrOfBVC)},
                 currentSelected = hazardViewModel.hazardStates.specifiedBehavior,
-                labels = dangerBehaviors
+                labels = dangerBehaviors,
+                bvcCounter = hazardViewModel.hazardStates.nrOfBVC
             )
         }
         Row() {
-            Text("Number of BVC: ${hazardViewModel.hazardStates.specifiedBehavior.size}")
-            if (hazardViewModel.hazardStates.specifiedBehavior.size > 1) {
-                ActionTakenTextField(setActionTaken = {}, actionTaken = "")
+            BVCfield(BVC = hazardViewModel.hazardStates.nrOfBVC)
+            if (hazardViewModel.hazardStates.nrOfBVC > 1) {
+                ActionTakenTextField(setActionTaken = {}, actionTaken = hazardViewModel.hazardStates.takenActions)
             }
         }
     }
