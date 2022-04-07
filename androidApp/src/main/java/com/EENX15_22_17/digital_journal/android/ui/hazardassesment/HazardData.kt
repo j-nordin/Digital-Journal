@@ -9,7 +9,6 @@ data class HazardDataClass(
     var initialAssessment: Set<DangerType>,
     var specifiedBehavior: Set<DangerBehaviors>,
     val takenActions: String,
-    var nrOfBVC: Int
 )
 
 enum class DangerType {

@@ -7,8 +7,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -26,9 +28,11 @@ import com.EENX15_22_17.digital_journal.android.ui.theme.borderColor
 @Composable
 fun HazardAssessment(
     navBack: () -> Unit,
+    // FIXME - This creates a new viewModel each conf. change which is not good. Will need to solve later
     hazardViewModel: HazardViewModel = HazardViewModel(),
     visitId: String
 ) {
+    var bvcNr by rememberSaveable { mutableStateOf(0) }
     val rowModifier: Modifier = Modifier
         .fillMaxWidth()
         .padding(vertical = 6.dp, horizontal = 2.dp)
@@ -61,18 +65,24 @@ fun HazardAssessment(
         Row(modifier = rowModifier) {
             HazardousBehaviours(
                 choices = dangerBehaviors.keys.toTypedArray(),
-                onChange = { hazardViewModel.hazardStates.specifiedBehavior = it
-                           hazardViewModel.updateBVC(hazardViewModel.hazardStates.specifiedBehavior)
-                           println(hazardViewModel.hazardStates.nrOfBVC)},
+                onChange = {
+                    hazardViewModel.hazardStates.specifiedBehavior = it
+                    println(it)
+                    println(hazardViewModel.hazardStates.specifiedBehavior.size)
+                    bvcNr = hazardViewModel.hazardStates.specifiedBehavior.size
+                },
                 currentSelected = hazardViewModel.hazardStates.specifiedBehavior,
                 labels = dangerBehaviors
                 //bvcCounter = hazardViewModel.hazardStates.nrOfBVC
             )
         }
         Row() {
-            bvcSummary(BVC = hazardViewModel.hazardStates.nrOfBVC)
-            if (hazardViewModel.hazardStates.nrOfBVC > 1) {
-                ActionTakenTextField(setActionTaken = {}, actionTaken = hazardViewModel.hazardStates.takenActions)
+            Text(text = "Number of BVC: $bvcNr")
+            if (bvcNr > 1) {
+                ActionTakenTextField(
+                    setActionTaken = {},
+                    actionTaken = hazardViewModel.hazardStates.takenActions
+                )
             }
         }
         Button(onClick = navBack) {
