@@ -23,12 +23,9 @@ import com.EENX15_22_17.digital_journal.android.ui.theme.colorTextGray
 
 
 @Composable
-@Preview(showBackground = true)
 fun TitledSection(
-    @PreviewParameter(SampleTitledSectionProvider::class)
-    title: String = "Title", content: @Composable () -> Unit = { Box() {
-        Text(text = "Content")
-    }}
+    title: String,
+    content: @Composable () -> Unit
 ) {
 
     Box(
@@ -64,17 +61,15 @@ fun TitledSection(
     }
 }
 
-data class TitledSectionDataClass(
-    val title: String,
-    val content: @Composable () -> Unit
-)
 
-class SampleTitledSectionProvider : PreviewParameterProvider<TitledSectionDataClass> {
-    override val values: Sequence<TitledSectionDataClass> = sequenceOf(
-        TitledSectionDataClass(title = "Här är en titel", content = {
-            Box(modifier = Modifier.background(Color.Red)) {
-                Text(text = "Här finns all content")
-            }
-        })
-    )
+@Composable
+@Preview(showBackground = true)
+private fun PreviewTitledSection() {
+    TitledSection(title = "Titel") {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color.Gray)
+        )
+    }
 }
