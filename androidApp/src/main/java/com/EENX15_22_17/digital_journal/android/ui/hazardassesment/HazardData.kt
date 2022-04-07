@@ -7,7 +7,7 @@ import java.util.*
 
 data class HazardDataClass(
     var initialAssessment: Set<DangerType>,
-    val specifiedBehavior: Set<DangerBehaviors>,
+    var specifiedBehavior: Set<DangerBehaviors>,
     val takenActions: String,
 )
 
