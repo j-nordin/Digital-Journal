@@ -7,7 +7,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.EENX15_22_17.digital_journal.android.ui.components_beta.CheckBoxData
-import com.EENX15_22_17.digital_journal.android.ui.components_beta.DrawCheckBoxes
+import com.EENX15_22_17.digital_journal.android.ui.components_beta.CheckboxSection
 
 @Composable
 fun SuicideStepsItem(items : List<CheckBoxData>,
@@ -26,12 +26,12 @@ fun SuicideStepsItem(items : List<CheckBoxData>,
         Column(
             modifier = Modifier.fillMaxWidth(0.39f)
         ) {
-            DrawCheckBoxes(items = itemsListOne, whichSection = "suicidesteps")
+            CheckboxSection(items = itemsListOne, whichSection = "suicidesteps")
         }
         Column(
             modifier = Modifier.fillMaxWidth(0.65f)
         ) {
-            DrawCheckBoxes(items = itemsListTwo, whichSection = "suicidesteps")
+            CheckboxSection(items = itemsListTwo, whichSection = "suicidesteps")
         }
     }
 }

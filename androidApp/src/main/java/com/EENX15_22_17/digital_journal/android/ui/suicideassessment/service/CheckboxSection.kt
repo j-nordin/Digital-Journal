@@ -13,7 +13,7 @@ import com.EENX15_22_17.digital_journal.android.ui.theme.colorTextBlackLight
 
 // Suicideassessment "ViewModel"
 @Composable
-fun DrawCheckBoxes(items: List<CheckBoxData>, whichSection : String ) {
+fun CheckboxSection(items: List<CheckBoxData>, whichSection : String ) {
     val summaryService = SummaryService;
     items.forEachIndexed { _, item ->
 

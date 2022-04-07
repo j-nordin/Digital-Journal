@@ -12,7 +12,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.EENX15_22_17.digital_journal.android.ui.components_beta.CheckBoxData
-import com.EENX15_22_17.digital_journal.android.ui.components_beta.DrawCheckBoxes
+import com.EENX15_22_17.digital_journal.android.ui.components_beta.CheckboxSection
 import com.EENX15_22_17.digital_journal.android.ui.components_beta.TemplateSection
 import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.protectivefactors.ProtectiveFactorsItem
 import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.protectivefactors.ProtectiveFactorsList
@@ -22,16 +22,8 @@ import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.summarysuic
 
 @Composable
 fun SuicideAssessmentScreen() {
-    val scrollState = rememberScrollState()
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .background(Color.White),
-
-        ) {
-        Column (
-            modifier = Modifier.verticalScroll(scrollState),
-            verticalArrangement = Arrangement.Center
-        ) {
+    Box( modifier = Modifier.fillMaxSize().background(Color.White) ) {
+        Column (verticalArrangement = Arrangement.Center) {
             // Page title
             Text(
                 text = "SUICIDBEDÖMNING",
@@ -42,7 +34,7 @@ fun SuicideAssessmentScreen() {
                 )
             //Header checkbox
             Column(Modifier.padding(start = 40.dp, top = 10.dp)) {
-                DrawCheckBoxes(items = listOf(
+                CheckboxSection(items = listOf(
                     CheckBoxData("Medveten suicidbenägenhet framgår inte vid ankomstsamtal", false, "Conscious_suicidal_tendencies"),
                     CheckBoxData("Patienten svarar inte på frågor", false, "no_answer"),
                 ),
@@ -57,19 +49,13 @@ fun SuicideAssessmentScreen() {
             Row (
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.Top,
-                modifier = Modifier
-                    .background(Color.White)
-                    .fillMaxWidth()
+                modifier = Modifier.background(Color.White).fillMaxWidth()
             ) {
 
-                Column(
-                    modifier = Modifier.fillMaxWidth(0.50f)
-                ) {
+                Column( modifier = Modifier.fillMaxWidth(0.50f)) {
                     TemplateSection(title = "Skyddande faktorer") { ProtectiveFactorsItem(items = ProtectiveFactorsList()) }
                 }
-                Column(
-
-                ) {
+                Column {
                     TemplateSection(title = "Summering") { SummarySection() }
                 }
             }
