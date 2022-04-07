@@ -13,16 +13,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.EENX15_22_17.digital_journal.android.ui.components_beta.CheckBoxData
 import com.EENX15_22_17.digital_journal.android.ui.components_beta.CheckboxSection
-import com.EENX15_22_17.digital_journal.android.ui.components_beta.TemplateSection
-import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.protectivefactors.ProtectiveFactorsItem
-import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.protectivefactors.ProtectiveFactorsList
+import com.EENX15_22_17.digital_journal.android.ui.components_beta.TitledSectionTemp
+import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.section.ProtectiveFactorsContent
 import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.statisticalriskfactors.StatisticalRiskFactorsItem
 import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.statisticalriskfactors.StatisticalRiskFactorsList
 import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.summarysuicidesection.SummarySection
 
 @Composable
 fun SuicideAssessmentScreen() {
-    Box( modifier = Modifier.fillMaxSize().background(Color.White) ) {
+    Box( modifier = Modifier
+        .fillMaxSize()
+        .background(Color.White) ) {
         Column (verticalArrangement = Arrangement.Center) {
             // Page title
             Text(
@@ -42,21 +43,23 @@ fun SuicideAssessmentScreen() {
                 )
             }
             //Suicid steps
-            TemplateSection("Suicidstegen") { SuicideStepsItem(items = SuicideStepsList()) }
+            TitledSectionTemp("Suicidstegen") { SuicideStepsItem(items = SuicideStepsList()) }
             // Statistical Risk Factors
-            TemplateSection("Statistiska riskfaktorer") { StatisticalRiskFactorsItem(items = StatisticalRiskFactorsList()) }
+            TitledSectionTemp("Statistiska riskfaktorer") { StatisticalRiskFactorsItem(items = StatisticalRiskFactorsList()) }
             // Protective factors & Summary of suicide assessment
             Row (
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.Top,
-                modifier = Modifier.background(Color.White).fillMaxWidth()
+                modifier = Modifier
+                    .background(Color.White)
+                    .fillMaxWidth()
             ) {
 
                 Column( modifier = Modifier.fillMaxWidth(0.50f)) {
-                    TemplateSection(title = "Skyddande faktorer") { ProtectiveFactorsItem(items = ProtectiveFactorsList()) }
+                    TitledSectionTemp(title = "Skyddande faktorer") { ProtectiveFactorsContent() }
                 }
                 Column {
-                    TemplateSection(title = "Summering") { SummarySection() }
+                    TitledSectionTemp(title = "Summering") { SummarySection() }
                 }
             }
 

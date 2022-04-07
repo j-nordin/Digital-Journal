@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.sp
 import com.EENX15_22_17.digital_journal.android.ui.theme.colorTextGray
 
 @Composable
-fun TemplateSection(title: String, body: @Composable() () -> Unit ) {
+fun TitledSectionTemp(title: String, body: @Composable() () -> Unit ) {
     Box (
         Modifier
             .fillMaxWidth()
@@ -42,7 +42,7 @@ fun TemplateSection(title: String, body: @Composable() () -> Unit ) {
 
             }
         }
-        // Title
+        //TODO Title on top : This issue is solved by Axel. (Wait for merge)
         Column(modifier = Modifier
             .padding(start = 20.dp)) {
             Column(modifier = Modifier
