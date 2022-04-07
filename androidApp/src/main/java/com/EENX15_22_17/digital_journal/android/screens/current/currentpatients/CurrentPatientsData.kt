@@ -1,4 +1,4 @@
-package com.EENX15_22_17.digital_journal.android.ui.current.currentpatients
+package com.EENX15_22_17.digital_journal.android.screens.current.currentpatients
 
 // Temporary dataclass before backend is implemented
 data class CurrentPatientsData(
@@ -6,7 +6,3 @@ data class CurrentPatientsData(
     val id: String,
     val securityNumber: String
 )
-
-
-
-

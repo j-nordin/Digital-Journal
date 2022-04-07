@@ -2,12 +2,11 @@ package com.EENX15_22_17.digital_journal.android.ui.current
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
-import androidx.compose.material.DrawerState
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.EENX15_22_17.digital_journal.android.ui.current.currentpatients.PatientsList
+import com.EENX15_22_17.digital_journal.android.screens.current.currentpatients.PatientsList
 
 @Composable
 fun CurrentScreen(

@@ -1,4 +1,4 @@
-package com.EENX15_22_17.digital_journal.android.ui.current.currentpatients
+package com.EENX15_22_17.digital_journal.android.screens.current.currentpatients
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 
