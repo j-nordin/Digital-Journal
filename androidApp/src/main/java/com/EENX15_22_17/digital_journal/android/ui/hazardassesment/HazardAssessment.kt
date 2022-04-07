@@ -12,6 +12,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -19,6 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.EENX15_22_17.digital_journal.android.ui.hazardassesment.*
 import com.EENX15_22_17.digital_journal.android.R
 import com.EENX15_22_17.digital_journal.android.ui.arrivalpage.ArrivalViewModel
@@ -127,30 +130,37 @@ fun HazardAssessment(
                 HazardousBehaviours(values = dangerBehaviors.keys.toMutableSet(), onChange = {})
             }
             Row() {
-        Row(modifier = rowModifier) {
-            InitialHazardAssessmentCheckboxes(
-                choices = dangerTypes.keys.toTypedArray(),
-                onSelectionChange = { hazardViewModel.hazardStates.initialAssessment = it },
-                currentSelected = hazardViewModel.hazardStates.initialAssessment,
-                labels = dangerTypes
-            )
-        }
-        Text(stringResource(id = R.string.BVC))
-        Row(modifier = rowModifier) {
-            HazardousBehaviours(
-                choices = dangerBehaviors.keys.toTypedArray(),
-                onChange = { hazardViewModel.hazardStates.specifiedBehavior = it
-                           hazardViewModel.updateBVC(hazardViewModel.hazardStates.specifiedBehavior)
-                           println(hazardViewModel.hazardStates.nrOfBVC)},
-                currentSelected = hazardViewModel.hazardStates.specifiedBehavior,
-                labels = dangerBehaviors,
-                bvcCounter = hazardViewModel.hazardStates.nrOfBVC
-            )
-        }
-        Row() {
-            BVCfield(BVC = hazardViewModel.hazardStates.nrOfBVC)
-            if (hazardViewModel.hazardStates.nrOfBVC > 1) {
-                ActionTakenTextField(setActionTaken = {}, actionTaken = hazardViewModel.hazardStates.takenActions)
+                Row(modifier = rowModifier) {
+                    InitialHazardAssessmentCheckboxes(
+                        choices = dangerTypes.keys.toTypedArray(),
+                        onSelectionChange = { hazardViewModel.hazardStates.initialAssessment = it },
+                        currentSelected = hazardViewModel.hazardStates.initialAssessment,
+                        labels = dangerTypes
+                    )
+                }
+                Text(stringResource(id = R.string.BVC))
+                Row(modifier = rowModifier) {
+                    HazardousBehaviours(
+                        choices = dangerBehaviors.keys.toTypedArray(),
+                        onChange = {
+                            hazardViewModel.hazardStates.specifiedBehavior = it
+                            hazardViewModel.updateBVC(hazardViewModel.hazardStates.specifiedBehavior)
+                            println(hazardViewModel.hazardStates.nrOfBVC)
+                        },
+                        currentSelected = hazardViewModel.hazardStates.specifiedBehavior,
+                        labels = dangerBehaviors,
+                        bvcCounter = hazardViewModel.hazardStates.nrOfBVC
+                    )
+                }
+                Row() {
+                    BVCfield(BVC = hazardViewModel.hazardStates.nrOfBVC)
+                    if (hazardViewModel.hazardStates.nrOfBVC > 1) {
+                        ActionTakenTextField(
+                            setActionTaken = {},
+                            actionTaken = hazardViewModel.hazardStates.takenActions
+                        )
+                    }
+                }
             }
         }
     }
