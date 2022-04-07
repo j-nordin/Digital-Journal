@@ -7,6 +7,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -14,6 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.EENX15_22_17.digital_journal.android.ui.hazardassesment.*
 import com.EENX15_22_17.digital_journal.android.R
 import com.EENX15_22_17.digital_journal.android.ui.arrivalpage.ArrivalViewModel
@@ -62,12 +65,12 @@ fun HazardAssessment(
                            hazardViewModel.updateBVC(hazardViewModel.hazardStates.specifiedBehavior)
                            println(hazardViewModel.hazardStates.nrOfBVC)},
                 currentSelected = hazardViewModel.hazardStates.specifiedBehavior,
-                labels = dangerBehaviors,
-                bvcCounter = hazardViewModel.hazardStates.nrOfBVC
+                labels = dangerBehaviors
+                //bvcCounter = hazardViewModel.hazardStates.nrOfBVC
             )
         }
         Row() {
-            BVCfield(BVC = hazardViewModel.hazardStates.nrOfBVC)
+            bvcSummary(BVC = hazardViewModel.hazardStates.nrOfBVC)
             if (hazardViewModel.hazardStates.nrOfBVC > 1) {
                 ActionTakenTextField(setActionTaken = {}, actionTaken = hazardViewModel.hazardStates.takenActions)
             }
