@@ -1,6 +1,7 @@
 package com.EENX15_22_17.digital_journal.android.ui.hazardassesment
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -19,6 +20,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -46,24 +48,20 @@ fun HazardAssessment(
     ) {
         //FIXME, when state issue is solved, this must be updated when clicking on specified behavioir checkboxes
         var bvcNr by rememberSaveable { mutableStateOf(0) }
-        val rowModifier: Modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 6.dp, horizontal = 2.dp)
-            .border(
-                border = BorderStroke(
-                    2.dp,
-                    borderColor
-                ),
-                shape = RoundedCornerShape(8.dp)
-            )
-            .padding(horizontal = 16.dp, vertical = 12.dp)
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .fillMaxWidth()
         ) {
-            TitledSection(title = stringResource(id = R.string.InitialHazardAssessment)) {
+            TitledSection(
+                title = stringResource(id = R.string.InitialHazardAssessment)
+            ) {
                 EnumCheckBoxLazyGrid(
                     choices = dangerTypes.keys.toTypedArray(),
-                    onSelectionChanged = { hazardViewModel.hazardStates.initialAssessment = it },
+                    onSelectionChanged = {
+                        hazardViewModel.hazardStates.initialAssessment = it
+                    },
                     currentSelected = hazardViewModel.hazardStates.initialAssessment,
                     labels = dangerTypes,
                     gridLayout = GridCells.Adaptive(270.dp)
@@ -85,30 +83,23 @@ fun HazardAssessment(
                     backgroundColor = Colors.treatmentPrimary,
 
                     ) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-                        Text(
-                            text = "Number of BVC: $bvcNr",
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier.padding(8.dp)
-                        )
-                    }
+                    Text(
+                        text = "Number of BVC: $bvcNr",
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.padding(8.dp)
+                    )
                 }
             }
             // FIXME When state issue is solved, this will only appear when BBV >= 2.
             if (bvcNr == 0) {
-                Row() {
-                    TitledTextField(
-                        modifier = Modifier
-                            .width(600.dp)
-                            .height(250.dp),
-                        title = stringResource(id = R.string.hazardActionTaken),
-                        onChangeText = { hazardViewModel.hazardStates.takenActions = it },
-                        textValue = hazardViewModel.hazardStates.takenActions
-                    )
-                }
+                TitledTextField(
+                    modifier = Modifier
+                        .width(650.dp)
+                        .height(250.dp),
+                    title = stringResource(id = R.string.hazardActionTaken),
+                    onChangeText = { hazardViewModel.hazardStates.takenActions = it },
+                    textValue = hazardViewModel.hazardStates.takenActions
+                )
             }
         }
     }
