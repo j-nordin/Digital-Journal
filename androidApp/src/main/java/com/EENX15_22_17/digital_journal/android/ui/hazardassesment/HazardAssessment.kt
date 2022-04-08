@@ -60,7 +60,7 @@ fun HazardAssessment(
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            TitledSection(title = "Initial Bedömning") {
+            TitledSection(title = stringResource(id = R.string.InitialHazardAssessment)) {
                 EnumCheckBoxLazyGrid(
                     choices = dangerTypes.keys.toTypedArray(),
                     onSelectionChanged = { hazardViewModel.hazardStates.initialAssessment = it },
