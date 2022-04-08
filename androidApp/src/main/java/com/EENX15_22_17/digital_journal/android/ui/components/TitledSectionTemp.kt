@@ -16,28 +16,32 @@ import androidx.compose.ui.unit.sp
 import com.EENX15_22_17.digital_journal.android.ui.theme.colorTextGray
 
 @Composable
-fun TitledSectionTemp(title: String, body: @Composable() () -> Unit ) {
-    Box ( Modifier.fillMaxWidth().padding(bottom = 10.dp, top = 10.dp) ){
-        Box(Modifier.fillMaxWidth().padding(top = 15.dp)) {
+fun TitledSection(title: String, body: @Composable() () -> Unit) {
+    Box(
+        Modifier
+            .fillMaxWidth()
+            .padding(bottom = 10.dp, top = 10.dp)) {
+        Box(
+            Modifier
+                .fillMaxWidth()
+                .padding(top = 15.dp)) {
             Box(
                 Modifier
                     .fillMaxWidth()
                     .border(BorderStroke(1.dp, colorTextGray), shape = RoundedCornerShape(5))
-                    .padding(top = 10.dp)) {
+                    .padding(top = 10.dp)
+            ) {
                 // Content
-                Column(
-                    Modifier.padding(20.dp)
-                ) {
-                    //SuicideStepsList()
-                    body()
-                }
+                Column(Modifier.padding(20.dp)) { body() }
 
             }
         }
         //TODO: Place the Title composable on top : This issue is solved by Axel. (Wait for merge)
         Column(modifier = Modifier.padding(start = 20.dp)) {
-            Column(modifier = Modifier
-                .background(Color.White)) {
+            Column(
+                modifier = Modifier
+                    .background(Color.White)
+            ) {
                 Text(
                     text = " $title ",
                     style = TextStyle(fontSize = 26.sp, fontWeight = FontWeight.SemiBold),

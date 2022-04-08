@@ -8,13 +8,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.EENX15_22_17.digital_journal.android.ui.DetailPageWrapper
-import com.EENX15_22_17.digital_journal.android.ui.components_beta.CheckBoxData
-import com.EENX15_22_17.digital_journal.android.ui.components_beta.CheckboxSection
-import com.EENX15_22_17.digital_journal.android.ui.components_beta.TitledSectionTemp
+import com.EENX15_22_17.digital_journal.android.ui.components_beta.TitledSection
 import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.protectivefactors.SuicideAssessmentModel
-import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.protectivefactors.protectiveFactorsValues
-import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.section.ProtectiveFactorsContent
-import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.statisticalriskfactors.StatisticalRiskFactorsContent
 import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.summarysuicidesection.SummarySection
 import com.EENX15_22_17.digital_journal.android.ui.theme.Colors
 
@@ -29,13 +24,15 @@ fun SuicideAssessmentScreen(
         onBackClicked = onBackClicked,
         onMenuClicked = onMenuClicked
     ) {
-        Box( modifier = Modifier
-            .fillMaxSize()
-            .background(Color.White) ) {
-            Column (verticalArrangement = Arrangement.Center) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.White)
+        ) {
+            Column(verticalArrangement = Arrangement.Center) {
 
                 //Header checkbox
-                Column(Modifier.padding(start = 20.dp, top = 10.dp)) {
+                Column(Modifier.padding(start = 20.dp, top = 20.dp)) {
                     SuicideAssessmentModel(
                         choices = headerCheckboxesValues.keys.toTypedArray(),
                         onChange = { },
@@ -44,11 +41,11 @@ fun SuicideAssessmentScreen(
                     )
                 }
                 //Suicid steps
-                TitledSectionTemp("Suicidstegen") { SuicideStepsContent() }
+                TitledSection("Suicidstegen") { SuicideStepsContent() }
                 // Statistical Risk Factors
-                TitledSectionTemp("Statistiska riskfaktorer") { StatisticalRiskFactorsContent() }
+                TitledSection("Statistiska riskfaktorer") { StatisticalRiskFactorsContent() }
                 // Protective factors & Summary of suicide assessment
-                Row (
+                Row(
                     horizontalArrangement = Arrangement.Start,
                     verticalAlignment = Alignment.Top,
                     modifier = Modifier
@@ -56,11 +53,11 @@ fun SuicideAssessmentScreen(
                         .fillMaxWidth()
                 ) {
 
-                    Column( modifier = Modifier.fillMaxWidth(0.50f)) {
-                        TitledSectionTemp(title = "Skyddande faktorer") { ProtectiveFactorsContent() }
+                    Column(modifier = Modifier.fillMaxWidth(0.50f)) {
+                        TitledSection(title = "Skyddande faktorer") { ProtectiveFactorsContent() }
                     }
                     Column(Modifier.padding(start = 20.dp)) {
-                        TitledSectionTemp(title = "Summering") { SummarySection() }
+                        TitledSection(title = "Summering") { SummarySection() }
                     }
                 }
 
