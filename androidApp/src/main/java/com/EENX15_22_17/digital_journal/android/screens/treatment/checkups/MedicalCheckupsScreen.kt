@@ -1,4 +1,4 @@
-package com.EENX15_22_17.digital_journal.android.screens.triage.currentHealth
+package com.EENX15_22_17.digital_journal.android.screens.treatment.checkups
 
 import androidx.compose.material.Button
 import androidx.compose.material.Text
@@ -7,13 +7,13 @@ import com.EENX15_22_17.digital_journal.android.ui.DetailPageWrapper
 import com.EENX15_22_17.digital_journal.android.ui.theme.Colors
 
 @Composable
-fun TempCurrentHealth(
+fun TempMedicalCheckup(
     visitId: String,
     navBack: () -> Unit
 ) {
     DetailPageWrapper(
-        title = "CurrentHealth for $visitId",
-        titleColor = Colors.triagePrimary,
+        title = "Controls for $visitId",
+        titleColor = Colors.treatmentPrimary,
         onBackClicked = navBack,
     ) {
 
