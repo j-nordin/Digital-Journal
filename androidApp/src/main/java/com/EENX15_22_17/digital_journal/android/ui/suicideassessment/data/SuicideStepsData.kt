@@ -6,7 +6,7 @@ enum class HeaderCheckboxesData {
     THE_PATIENT_DOESNOT_ANSWER_QUESTIONS,
 }
 
-val headerCheckboxesValues = mapOf<HeaderCheckboxesData, String>(
+val headerCheckboxesLabels = mapOf<HeaderCheckboxesData, String>(
     HeaderCheckboxesData.CONSCIOUS_SUICIDAL_THOUGHTS_ARENOT_APPARENT_DURING_ARRIVAL_CONVERSATION to "Medveten suicidbenägenhet framgår inte vid ankomstsamtal",
     HeaderCheckboxesData.THE_PATIENT_DOESNOT_ANSWER_QUESTIONS to "Patienten svarar inte på frågor",
 )
@@ -21,7 +21,7 @@ enum class SuicideStepsData {
     SUICIDE_ACT,
 }
 
-val suicideStepsValues = mapOf<SuicideStepsData, String>(
+val suicideStepsLabels = mapOf<SuicideStepsData, String>(
     SuicideStepsData.DEPRESSION to "1. Nedstämdhet",
     SuicideStepsData.DEATH_THOUGHTS to "2. Livsleda, dödstankar",
     SuicideStepsData.DEATH_WISH to "3. Dödsönskan",

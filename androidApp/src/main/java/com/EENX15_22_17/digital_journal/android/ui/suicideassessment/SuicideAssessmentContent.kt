@@ -4,8 +4,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.protectivefactors.SuicideAssessmentModel
-import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.protectivefactors.protectiveFactorsValues
-import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.statisticalriskfactors.statisticalRiskFactorsValues
+import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.protectivefactors.protectiveFactorsLabels
+import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.statisticalriskfactors.statisticalRiskFactorsLabels
 
 //TODO: Complete onChange and currentSelected parameters after implementing Suicide Assessment Modelview
 
@@ -14,10 +14,10 @@ fun <E : Enum<*>> SuicideStepsContent() {
     Column {
         Row {
             SuicideAssessmentModel(
-                choices = suicideStepsValues.keys.toTypedArray(),
+                choices = suicideStepsLabels.keys.toTypedArray(),
                 onChange = { },
                 currentSelected = emptySet(),
-                labels = suicideStepsValues
+                labels = suicideStepsLabels
             )
         }
     }
@@ -29,10 +29,10 @@ fun <E : Enum<*>> StatisticalRiskFactorsContent() {
     Column {
         Row {
             SuicideAssessmentModel(
-                choices = statisticalRiskFactorsValues.keys.toTypedArray(),
+                choices = statisticalRiskFactorsLabels.keys.toTypedArray(),
                 onChange = { },
                 currentSelected = emptySet(),
-                labels = statisticalRiskFactorsValues
+                labels = statisticalRiskFactorsLabels
             )
         }
     }
@@ -43,10 +43,10 @@ fun <E : Enum<*>> ProtectiveFactorsContent() {
     Column {
         Row {
             SuicideAssessmentModel(
-                choices = protectiveFactorsValues.keys.toTypedArray(),
+                choices = protectiveFactorsLabels.keys.toTypedArray(),
                 onChange = { },
                 currentSelected = emptySet(),
-                labels = protectiveFactorsValues
+                labels = protectiveFactorsLabels
             )
         }
     }

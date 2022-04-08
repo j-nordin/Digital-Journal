@@ -13,7 +13,7 @@ enum class StatisticalRiskFactorsData {
     HIGH_LEVEL_OF_ANXIETY_THOUGHT_DISORDER_PSYCHOTIC_THINKING_REGARDLESS_OF_UNDERLYING_DISEASE,
 }
 
-val statisticalRiskFactorsValues = mapOf<StatisticalRiskFactorsData, String>(
+val statisticalRiskFactorsLabels = mapOf<StatisticalRiskFactorsData, String>(
     StatisticalRiskFactorsData.IS_MALE_AGE_BETWEEN_19_AND_45 to "Man och mellan 19 och 45 år",
     StatisticalRiskFactorsData.SOMATIC_DISEASE to "Somatisk sjukdom",
     StatisticalRiskFactorsData.MISUSE_OR_ADDICTION to "Missbruk/Beroende",

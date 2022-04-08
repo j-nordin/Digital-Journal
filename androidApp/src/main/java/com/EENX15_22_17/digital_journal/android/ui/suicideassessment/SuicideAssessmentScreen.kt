@@ -8,7 +8,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.EENX15_22_17.digital_journal.android.ui.DetailPageWrapper
-import com.EENX15_22_17.digital_journal.android.ui.components.TitledSection
 import com.EENX15_22_17.digital_journal.android.ui.components.TitledSectionTemp
 import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.protectivefactors.SuicideAssessmentModel
 import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.summarysuicidesection.SummarySection
@@ -26,19 +25,17 @@ fun SuicideAssessmentScreen(
         onMenuClicked = onMenuClicked
     ) {
         Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color.White)
+            modifier = Modifier.fillMaxSize().background(Color.White)
         ) {
             Column(verticalArrangement = Arrangement.Center) {
 
                 //Header checkbox
                 Column(Modifier.padding(start = 20.dp, top = 20.dp)) {
                     SuicideAssessmentModel(
-                        choices = headerCheckboxesValues.keys.toTypedArray(),
+                        choices = headerCheckboxesLabels.keys.toTypedArray(),
                         onChange = { },
                         currentSelected = emptySet(),
-                        labels = headerCheckboxesValues
+                        labels = headerCheckboxesLabels
                     )
                 }
                 //Suicide steps
@@ -49,9 +46,7 @@ fun SuicideAssessmentScreen(
                 Row(
                     horizontalArrangement = Arrangement.Start,
                     verticalAlignment = Alignment.Top,
-                    modifier = Modifier
-                        .background(Color.White)
-                        .fillMaxWidth()
+                    modifier = Modifier.background(Color.White).fillMaxWidth()
                 ) {
 
                     Column(modifier = Modifier.fillMaxWidth(0.50f)) {
