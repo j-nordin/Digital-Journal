@@ -17,6 +17,5 @@ fun OrdinationScreen(
         onBackClicked = onBackClicked,
         onMenuClicked = onMenuClicked
     ) {
-
     }
 }
