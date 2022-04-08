@@ -18,7 +18,7 @@ fun SummarySection() {
 
     Column() {
 
-        ShowSum(whichSection = "Suicidstegen", sum = 0)
+        ShowSum(whichSection = "Suicidstegen", sum = 0) //TODO: Get the right value after implementing Suicide Assessment Modelview
 
         ShowSum(whichSection = "Statistiska riskfaktorer", sum = 0)
 

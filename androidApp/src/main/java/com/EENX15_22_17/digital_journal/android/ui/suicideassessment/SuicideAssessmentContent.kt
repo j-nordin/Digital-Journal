@@ -7,6 +7,8 @@ import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.protectivef
 import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.protectivefactors.protectiveFactorsValues
 import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.statisticalriskfactors.statisticalRiskFactorsValues
 
+//TODO: Complete onChange and currentSelected parameters after implementing Suicide Assessment Modelview
+
 @Composable
 fun <E : Enum<*>> SuicideStepsContent() {
     Column {
