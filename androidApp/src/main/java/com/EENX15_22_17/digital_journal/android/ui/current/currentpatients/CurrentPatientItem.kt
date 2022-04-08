@@ -17,7 +17,6 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.EENX15_22_17.digital_journal.android.ui.theme.colorIcon
 import com.EENX15_22_17.digital_journal.android.ui.theme.danger
-import com.EENX15_22_17.digital_journal.android.ui.theme.primaryColor
 
 @Composable
 // TODO: Replace default parameter-values with PreviewParameter-annotations when tooling is less buggy.
@@ -36,7 +35,7 @@ fun PatientCard(
             .padding(horizontal = 120.dp, vertical = 2.dp)
             .fillMaxWidth()
             .clickable { navigateSelectedPatient(visitId) },
-        backgroundColor = primaryColor
+        backgroundColor = MaterialTheme.colors.primary
     ) {
         Row(horizontalArrangement = Arrangement.SpaceBetween) {
             Text(
@@ -101,7 +100,7 @@ fun WarningContent(visitId: String) {
         Column {
             Text(
                 text = "This is a warning. The id is displayed below",
-                fontSize = 20.sp
+                style = MaterialTheme.typography.h6
             )
             Text(
                 text = visitId,
@@ -109,7 +108,7 @@ fun WarningContent(visitId: String) {
                     .fillMaxHeight()
                     .fillMaxWidth(),
                 textAlign = TextAlign.Center,
-                fontSize = 40.sp
+                style = MaterialTheme.typography.h4
             )
         }
     }
@@ -127,7 +126,7 @@ fun CommentsContent(visitId: String) {
         Column {
             Text(
                 text = "This is a comment. The id is displayed below",
-                fontSize = 30.sp
+                style = MaterialTheme.typography.h6
             )
             Text(
                 text = visitId,
@@ -135,7 +134,7 @@ fun CommentsContent(visitId: String) {
                     .fillMaxHeight()
                     .fillMaxWidth(),
                 textAlign = TextAlign.Center,
-                fontSize = 40.sp
+                style = MaterialTheme.typography.h4
             )
         }
     }
