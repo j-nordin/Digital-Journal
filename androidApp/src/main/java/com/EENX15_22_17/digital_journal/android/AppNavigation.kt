@@ -8,11 +8,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import com.EENX15_22_17.digital_journal.android.screens.treatment.ordination.OrdinationScreen
-import com.EENX15_22_17.digital_journal.android.ui.arrivalpage.ArrivalPage
+import com.EENX15_22_17.digital_journal.android.screens.arrival.patientinfo.ArrivalPage
 import com.EENX15_22_17.digital_journal.android.ui.current.CurrentScreen
-import com.EENX15_22_17.digital_journal.android.ui.landingpage.LandingPage
+import com.EENX15_22_17.digital_journal.android.screens.landingpage.LandingPage
 import com.EENX15_22_17.digital_journal.android.ui.screen.ContactCauseScreen
-import com.EENX15_22_17.digital_journal.android.ui.triage.history.HealthHistoryPage
+import com.EENX15_22_17.digital_journal.android.screens.triage.healthHistory.HealthHistoryPage
 
 sealed class Screen(val route: String) {
     object Overview : Screen(route = "overview")

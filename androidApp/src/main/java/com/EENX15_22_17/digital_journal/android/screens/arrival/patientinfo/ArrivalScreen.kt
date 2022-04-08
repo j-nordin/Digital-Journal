@@ -1,4 +1,4 @@
-package com.EENX15_22_17.digital_journal.android.ui.arrivalpage
+package com.EENX15_22_17.digital_journal.android.screens.arrival.patientinfo
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border

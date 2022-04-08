@@ -1,4 +1,4 @@
-package com.EENX15_22_17.digital_journal.android.ui.landingpage
+package com.EENX15_22_17.digital_journal.android.screens.landingpage
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*

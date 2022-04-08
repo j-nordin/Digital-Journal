@@ -1,4 +1,4 @@
-package com.EENX15_22_17.digital_journal.android.ui.arrivalpage
+package com.EENX15_22_17.digital_journal.android.screens.arrival.patientinfo
 
 import com.EENX15_22_17.digital_journal.android.dataModel.YesNo
 import java.util.*

@@ -1,6 +1,4 @@
-package com.EENX15_22_17.digital_journal.android.ui.contactcause
-
-import androidx.annotation.DrawableRes
+package com.EENX15_22_17.digital_journal.android.screens.triage.contactreason
 
 data class TextFieldContent(
     val label : String,

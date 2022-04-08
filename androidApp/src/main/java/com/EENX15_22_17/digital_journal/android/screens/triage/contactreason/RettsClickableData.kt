@@ -1,4 +1,4 @@
-package com.EENX15_22_17.digital_journal.android.ui.contactcause
+package com.EENX15_22_17.digital_journal.android.screens.triage.contactreason
 
 import androidx.compose.ui.graphics.Color
 

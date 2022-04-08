@@ -2,20 +2,18 @@ package com.EENX15_22_17.digital_journal.android.ui.screen
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.EENX15_22_17.digital_journal.android.ui.contactcause.RettsClickableData
-import com.EENX15_22_17.digital_journal.android.ui.contactcause.RettsClickableSection
-import com.EENX15_22_17.digital_journal.android.ui.contactcause.TextFieldContent
-import com.EENX15_22_17.digital_journal.android.ui.contactcause.TextFieldSection
+import com.EENX15_22_17.digital_journal.android.screens.triage.contactreason.RettsClickableData
+import com.EENX15_22_17.digital_journal.android.screens.triage.contactreason.RettsClickableSection
+import com.EENX15_22_17.digital_journal.android.screens.triage.contactreason.TextFieldContent
+import com.EENX15_22_17.digital_journal.android.screens.triage.contactreason.TextFieldSection
 
 @Composable
 fun ContactCauseScreen() {

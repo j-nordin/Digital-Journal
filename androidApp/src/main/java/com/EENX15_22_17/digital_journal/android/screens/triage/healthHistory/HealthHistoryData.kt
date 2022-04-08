@@ -1,4 +1,4 @@
-package com.EENX15_22_17.digital_journal.android.ui.triage.history
+package com.EENX15_22_17.digital_journal.android.screens.triage.healthHistory
 
 
 enum class SomaticHealthData {
