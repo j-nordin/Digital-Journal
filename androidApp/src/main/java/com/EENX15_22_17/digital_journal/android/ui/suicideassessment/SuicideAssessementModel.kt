@@ -19,7 +19,7 @@ import com.EENX15_22_17.digital_journal.android.ui.triage.history.SomaticHealth
 import com.EENX15_22_17.digital_journal.android.ui.triage.history.somaticHealthValues
 
 @Composable
-fun <E : Enum<*>> ProtectiveFactors (
+fun <E : Enum<*>> SuicideAssessmentModel (
     modifier: Modifier = Modifier,
     choices: Array<E>,
     onChange: (values: Set<E>) -> Unit,

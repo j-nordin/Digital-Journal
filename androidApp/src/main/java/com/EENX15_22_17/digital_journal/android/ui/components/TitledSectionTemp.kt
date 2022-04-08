@@ -17,16 +17,8 @@ import com.EENX15_22_17.digital_journal.android.ui.theme.colorTextGray
 
 @Composable
 fun TitledSectionTemp(title: String, body: @Composable() () -> Unit ) {
-    Box (
-        Modifier
-            .fillMaxWidth()
-            .padding(start = 20.dp, end = 20.dp, bottom = 10.dp, top = 10.dp) ){
-        Box(
-            Modifier
-                .fillMaxWidth()
-                .padding(top = 15.dp)
-
-        ) {
+    Box ( Modifier.fillMaxWidth().padding(bottom = 10.dp, top = 10.dp) ){
+        Box(Modifier.fillMaxWidth().padding(top = 15.dp)) {
             Box(
                 Modifier
                     .fillMaxWidth()
@@ -42,9 +34,8 @@ fun TitledSectionTemp(title: String, body: @Composable() () -> Unit ) {
 
             }
         }
-        //TODO Title on top : This issue is solved by Axel. (Wait for merge)
-        Column(modifier = Modifier
-            .padding(start = 20.dp)) {
+        //TODO: Place the Title composable on top : This issue is solved by Axel. (Wait for merge)
+        Column(modifier = Modifier.padding(start = 20.dp)) {
             Column(modifier = Modifier
                 .background(Color.White)) {
                 Text(

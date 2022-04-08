@@ -24,11 +24,11 @@ fun SummarySection() {
 
     Column() {
 
-        ShowSum(whichSection = "Suicidstegen", sum = summaryService.suicideStepSum )
+        ShowSum(whichSection = "Suicidstegen", sum = 0 )
 
-        ShowSum(whichSection = "Statistiska riskfaktorer", sum = summaryService.riskFactorSum )
+        ShowSum(whichSection = "Statistiska riskfaktorer", sum = 0 )
 
-        ShowSum(whichSection = "Skyddande faktorer", sum = summaryService.protectiveFactorSum )
+        ShowSum(whichSection = "Skyddande faktorer", sum = 0 )
 
     }
 

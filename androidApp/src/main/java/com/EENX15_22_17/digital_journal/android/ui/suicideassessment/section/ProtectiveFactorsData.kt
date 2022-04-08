@@ -2,16 +2,16 @@ package com.EENX15_22_17.digital_journal.android.ui.suicideassessment.protective
 
 
 enum class ProtectiveFactorsData {
-    PERSONALRESOURCE,
-    NETWORKRESOURCE,
-    DIFFICULTOASSESS,
+    AVAILABLE_PERSONNEL_RESOURCE,
+    AVAILABLE_NETWORK_RESOURCE,
+    DIFFICULT_TO_ASSES,
     NO,
 
 }
 
 val protectiveFactorsValues = mapOf<ProtectiveFactorsData, String>(
-    ProtectiveFactorsData.PERSONALRESOURCE to "Personell resurs, t. ex. god samtalskontakt",
-    ProtectiveFactorsData.NETWORKRESOURCE to "Nätverkets resurs, t. ex. anhöriga, vänner",
-    ProtectiveFactorsData.DIFFICULTOASSESS to "Svårbedömt",
+    ProtectiveFactorsData.AVAILABLE_PERSONNEL_RESOURCE to "Personell resurs, t. ex. god samtalskontakt",
+    ProtectiveFactorsData.AVAILABLE_NETWORK_RESOURCE to "Nätverkets resurs, t. ex. anhöriga, vänner",
+    ProtectiveFactorsData.DIFFICULT_TO_ASSES to "Svårbedömt",
     ProtectiveFactorsData.NO to "Nej",
 )
