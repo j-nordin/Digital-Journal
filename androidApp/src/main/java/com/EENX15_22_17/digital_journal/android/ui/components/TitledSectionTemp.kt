@@ -1,4 +1,4 @@
-package com.EENX15_22_17.digital_journal.android.ui.components_beta
+package com.EENX15_22_17.digital_journal.android.ui.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.sp
 import com.EENX15_22_17.digital_journal.android.ui.theme.colorTextGray
 
 @Composable
-fun TitledSection(title: String, body: @Composable() () -> Unit) {
+fun TitledSectionTemp(title: String, body: @Composable() () -> Unit) {
     Box(
         Modifier
             .fillMaxWidth()

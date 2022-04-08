@@ -8,7 +8,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.EENX15_22_17.digital_journal.android.ui.DetailPageWrapper
-import com.EENX15_22_17.digital_journal.android.ui.components_beta.TitledSection
+import com.EENX15_22_17.digital_journal.android.ui.components.TitledSection
+import com.EENX15_22_17.digital_journal.android.ui.components.TitledSectionTemp
 import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.protectivefactors.SuicideAssessmentModel
 import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.summarysuicidesection.SummarySection
 import com.EENX15_22_17.digital_journal.android.ui.theme.Colors
@@ -40,10 +41,10 @@ fun SuicideAssessmentScreen(
                         labels = headerCheckboxesValues
                     )
                 }
-                //Suicid steps
-                TitledSection("Suicidstegen") { SuicideStepsContent() }
+                //Suicide steps
+                TitledSectionTemp("Suicidstegen") { SuicideStepsContent() }
                 // Statistical Risk Factors
-                TitledSection("Statistiska riskfaktorer") { StatisticalRiskFactorsContent() }
+                TitledSectionTemp("Statistiska riskfaktorer") { StatisticalRiskFactorsContent() }
                 // Protective factors & Summary of suicide assessment
                 Row(
                     horizontalArrangement = Arrangement.Start,
@@ -54,10 +55,10 @@ fun SuicideAssessmentScreen(
                 ) {
 
                     Column(modifier = Modifier.fillMaxWidth(0.50f)) {
-                        TitledSection(title = "Skyddande faktorer") { ProtectiveFactorsContent() }
+                        TitledSectionTemp(title = "Skyddande faktorer") { ProtectiveFactorsContent() }
                     }
                     Column(Modifier.padding(start = 20.dp)) {
-                        TitledSection(title = "Summering") { SummarySection() }
+                        TitledSectionTemp(title = "Summering") { SummarySection() }
                     }
                 }
 
