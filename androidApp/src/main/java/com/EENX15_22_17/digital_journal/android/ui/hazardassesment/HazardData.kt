@@ -8,7 +8,7 @@ import java.util.*
 data class HazardDataClass(
     var initialAssessment: Set<DangerType>,
     var specifiedBehavior: Set<DangerBehaviors>,
-    val takenActions: String,
+    var takenActions: String,
 )
 
 enum class DangerType {
