@@ -3,6 +3,7 @@ package com.EENX15_22_17.digital_journal.android.ui.hazardassesment
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.Text
@@ -22,6 +23,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.EENX15_22_17.digital_journal.android.ui.hazardassesment.*
 import com.EENX15_22_17.digital_journal.android.R
 import com.EENX15_22_17.digital_journal.android.ui.arrivalpage.ArrivalViewModel
+import com.EENX15_22_17.digital_journal.android.ui.components.EnumCheckBoxLazyGrid
+import com.EENX15_22_17.digital_journal.android.ui.components.TitledTextField
 import com.EENX15_22_17.digital_journal.android.ui.theme.borderColor
 
 
@@ -53,35 +56,43 @@ fun HazardAssessment(
             textAlign = TextAlign.Center,
             fontSize = 30.sp
         )
-        Row(modifier = rowModifier) {
-            InitialHazardAssessmentCheckboxes(
+        Row(
+            modifier = rowModifier
+        ) {
+            EnumCheckBoxLazyGrid(
                 choices = dangerTypes.keys.toTypedArray(),
-                onSelectionChange = { hazardViewModel.hazardStates.initialAssessment = it },
+                onSelectionChanged = { hazardViewModel.hazardStates.initialAssessment = it },
                 currentSelected = hazardViewModel.hazardStates.initialAssessment,
-                labels = dangerTypes
+                labels = dangerTypes,
+                gridLayout = GridCells.Adaptive(300.dp)
             )
         }
         Text(stringResource(id = R.string.BVC))
-        Row(modifier = rowModifier) {
-            HazardousBehaviours(
+        Row(
+            modifier = rowModifier
+        ) {
+            EnumCheckBoxLazyGrid(
                 choices = dangerBehaviors.keys.toTypedArray(),
-                onChange = {
-                    hazardViewModel.hazardStates.specifiedBehavior = it
-                    println(it)
-                    println(hazardViewModel.hazardStates.specifiedBehavior.size)
-                    bvcNr = hazardViewModel.hazardStates.specifiedBehavior.size
-                },
+                onSelectionChanged = { hazardViewModel.hazardStates.specifiedBehavior = it },
                 currentSelected = hazardViewModel.hazardStates.specifiedBehavior,
-                labels = dangerBehaviors
-                //bvcCounter = hazardViewModel.hazardStates.nrOfBVC
+                labels = dangerBehaviors,
+                gridLayout = GridCells.Adaptive(300.dp)
             )
         }
-        Row() {
-            Text(text = "Number of BVC: $bvcNr")
-            if (bvcNr > 1) {
-                ActionTakenTextField(
-                    setActionTaken = {},
-                    actionTaken = hazardViewModel.hazardStates.takenActions
+        Row(
+            modifier = rowModifier
+        ) {
+            Text(text = "Number of BVC: $bvcNr", textAlign = TextAlign.Center)
+        }
+        if (bvcNr > 1) {
+            Row() {
+                TitledTextField(
+                    modifier = Modifier
+                        .width(600.dp)
+                        .height(250.dp),
+                    title = stringResource(id = R.string.hazardActionTaken),
+                    onChangeText = { hazardViewModel.hazardStates.takenActions = it },
+                    textValue = hazardViewModel.hazardStates.takenActions
                 )
             }
         }

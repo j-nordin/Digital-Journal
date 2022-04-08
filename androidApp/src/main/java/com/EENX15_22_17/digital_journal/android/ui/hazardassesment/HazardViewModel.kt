@@ -14,8 +14,4 @@ class HazardViewModel : ViewModel() {
             takenActions = ""
         )
     )
-
-   /* fun updateBVC(spec: Set<DangerBehaviors>) {
-        this.hazardStates.nrOfBVC = spec.size
-    }*/
 }
