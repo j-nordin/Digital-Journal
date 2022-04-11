@@ -12,6 +12,7 @@ import com.EENX15_22_17.digital_journal.android.ui.arrivalpage.ArrivalPage
 import com.EENX15_22_17.digital_journal.android.ui.current.CurrentScreen
 import com.EENX15_22_17.digital_journal.android.ui.landingpage.LandingPage
 import com.EENX15_22_17.digital_journal.android.ui.screen.ContactCauseScreen
+import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.SuicideAssessmentScreen
 import com.EENX15_22_17.digital_journal.android.ui.triage.history.HealthHistoryPage
 
 sealed class Screen(val route: String) {
@@ -177,7 +178,7 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
         ) { backStackEntry ->
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient meeting" }
-            // TODO add SuicideAssessment composable
+            SuicideAssessmentScreen()
         }
         composable(
             route = PatientMeetingScreen.NursingNeed.createRoute()

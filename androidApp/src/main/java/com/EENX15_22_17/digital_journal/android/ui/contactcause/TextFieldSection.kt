@@ -2,13 +2,11 @@ package com.EENX15_22_17.digital_journal.android.ui.contactcause
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Icon
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -48,6 +46,8 @@ fun TextFieldSection(
                    fontSize = 24.sp) },
                textStyle = TextStyle(fontSize = 22.sp)
            )
+           Box(modifier = Modifier
+               .size(width = 20.dp, height = 20.dp))
            println("Label ${item.label} : ${item.value}")
        }
    }
