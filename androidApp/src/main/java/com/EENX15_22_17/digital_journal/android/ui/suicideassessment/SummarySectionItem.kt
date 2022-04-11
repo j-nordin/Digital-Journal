@@ -46,7 +46,7 @@ fun ShowSum(whichSection: String, sum: Int) {
 
             ) {
             Text(
-                text = "$sum",
+                text = sum,
                 style = TextStyle(fontSize = 16.sp),
                 color = Color.White,
                 modifier = Modifier.padding(8.dp)
