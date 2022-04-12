@@ -24,7 +24,7 @@ fun DigitalJournalScaffold(
     navToCurrPatients: () -> Unit,
     content: @Composable (PaddingValues) -> Unit
 ) {
-    val drawerWidthDp = LocalConfiguration.current.screenWidthDp.dp * 0.5f
+    val drawerWidthDp = LocalConfiguration.current.screenWidthDp.dp * 0.4f
     val drawerWidthPx = with(LocalDensity.current) { drawerWidthDp.toPx() }
 
     Scaffold(

@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 
 // TODO: Should fetch from backend
 object DrawerMenuViewModel : ViewModel() {
-    val loggedInState = "Inloggad"
-    val name = "Ulla Göransson"
-    val role = "Sjuksköterska"
+    val loggedInState = "INLOGGAD"
+    val name = "ULLA GÖRANSSON"
+    val role = "SJUKSKÖTERSKA"
 }
