@@ -1,7 +1,9 @@
 package com.EENX15_22_17.digital_journal.android.ui.drawer
 
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material.Scaffold
 import androidx.compose.material.ScaffoldState
 import androidx.compose.runtime.Composable
@@ -10,10 +12,11 @@ import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
-import com.EENX15_22_17.digital_journal.android.ui.drawer.DrawerMenu
-import com.EENX15_22_17.digital_journal.android.ui.drawer.DrawerShape
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun DigitalJournalScaffold(
@@ -21,20 +24,28 @@ fun DigitalJournalScaffold(
     navToCurrPatients: () -> Unit,
     content: @Composable (PaddingValues) -> Unit
 ) {
+    val drawerWidthDp = LocalConfiguration.current.screenWidthDp.dp * 0.5f
+    val drawerWidthPx = with(LocalDensity.current) { drawerWidthDp.toPx() }
+
     Scaffold(
         scaffoldState = scaffoldState,
-        /*modifier = Modifier.statusBarsPadding(),*/
         drawerContent = {
             DrawerMenu(
+                modifier = Modifier
+                    .widthIn(max = drawerWidthDp),
                 navToCurrPatients = navToCurrPatients
             )
         },
-        drawerShape = DrawerShape(),
+        drawerShape = DrawerShape(
+            width = drawerWidthPx
+        ),
         content = content
     )
 }
 
-class DrawerShape : Shape {
+class DrawerShape(
+    val width: Float
+) : Shape {
     override fun createOutline(
         size: Size,
         layoutDirection: LayoutDirection,
@@ -44,7 +55,7 @@ class DrawerShape : Shape {
             Rect(
                 left = 0f,
                 top = 0f,
-                right = size.width * 0.35f,
+                right = width,
                 bottom = size.height
             )
         )

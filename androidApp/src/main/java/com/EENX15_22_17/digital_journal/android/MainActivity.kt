@@ -7,8 +7,8 @@ import androidx.compose.material.Text
 import androidx.compose.material.Button
 import androidx.compose.material.ScaffoldState
 import androidx.compose.runtime.Composable
+import com.EENX15_22_17.digital_journal.android.ui.drawer.DigitalJournalScaffold
 import com.EENX15_22_17.digital_journal.android.ui.theme.DigitalJournalTheme
-import com.EENX15_22_17.digital_journal.android.ui.DigitalJournalScaffold
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
