@@ -18,20 +18,25 @@ import androidx.compose.ui.unit.dp
 private val screens = listOf("Find Trips", "My Trips", "Saved Trips", "Price Alerts", "My Account")
 
 
-
 @Composable
 fun DrawerMenu(
     modifier: Modifier = Modifier,
 ) {
+    DrawerHeader()
+}
+
+@Composable
+fun DrawerHeader(
+    modifier: Modifier = Modifier
+) {
     Column(
-        modifier
-            .fillMaxSize()
-            .padding(start = 24.dp, top = 48.dp)
+        modifier = modifier
     ) {
-        for (screen in screens) {
-            Spacer(Modifier.height(24.dp))
-            Text(text = screen, style = MaterialTheme.typography.h4)
-        }
+        Text(
+            modifier = modifier.padding(top = 15.dp, start = 10.dp),
+            text = DrawerMenuViewModel.loggedInState,
+            style = MaterialTheme.typography.h5
+        )
     }
 }
 
