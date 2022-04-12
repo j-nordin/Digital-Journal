@@ -18,7 +18,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val appState = rememberAppState()
-            DigitalJournalScaffold(scaffoldState = appState.scaffoldState) {
+            DigitalJournalScaffold(
+                scaffoldState = appState.scaffoldState,
+                navToCurrPatients = { appState.navController.navToCurrPatients() }
+            ) {
                 DigitalJournalTheme {
                     /* TODO: Scaffold state should be accessed by the components by using DI instead*/
                     NavigationApp(

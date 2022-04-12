@@ -1,6 +1,7 @@
 package com.EENX15_22_17.digital_journal.android.ui.drawer
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -21,6 +22,7 @@ private val screens = listOf("Find Trips", "My Trips", "Saved Trips", "Price Ale
 @Composable
 fun DrawerMenu(
     modifier: Modifier = Modifier,
+    navToCurrPatients: () -> Unit
 ) {
     DrawerHeader()
 }

@@ -243,3 +243,7 @@ private fun NavGraphBuilder.addCurrentBoardGraph(
         )
     }
 }
+
+fun NavController.navToCurrPatients() {
+    this.navigate(Screen.Current.route)
+}

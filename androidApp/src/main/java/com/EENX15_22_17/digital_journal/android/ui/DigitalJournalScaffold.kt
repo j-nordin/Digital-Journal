@@ -12,13 +12,16 @@ import com.EENX15_22_17.digital_journal.android.ui.drawer.DrawerShape
 @Composable
 fun DigitalJournalScaffold(
     scaffoldState: ScaffoldState,
+    navToCurrPatients: () -> Unit,
     content: @Composable (PaddingValues) -> Unit
 ) {
     Scaffold(
         scaffoldState = scaffoldState,
         /*modifier = Modifier.statusBarsPadding(),*/
         drawerContent = {
-            DrawerMenu()
+            DrawerMenu(
+                navToCurrPatients = navToCurrPatients
+            )
         },
         drawerShape = DrawerShape(),
         content = content
