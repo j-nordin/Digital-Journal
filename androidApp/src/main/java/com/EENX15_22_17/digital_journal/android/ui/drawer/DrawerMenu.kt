@@ -14,11 +14,6 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 
-/* TODO: implement real drawer */
-
-private val screens = listOf("Find Trips", "My Trips", "Saved Trips", "Price Alerts", "My Account")
-
-
 @Composable
 fun DrawerMenu(
     modifier: Modifier = Modifier,
@@ -38,24 +33,6 @@ fun DrawerHeader(
             modifier = modifier.padding(top = 15.dp, start = 10.dp),
             text = DrawerMenuViewModel.loggedInState,
             style = MaterialTheme.typography.h5
-        )
-    }
-}
-
-
-class DrawerShape : Shape {
-    override fun createOutline(
-        size: Size,
-        layoutDirection: LayoutDirection,
-        density: Density
-    ): Outline {
-        return Outline.Rectangle(
-            Rect(
-                left = 0f,
-                top = 0f,
-                right = size.width * 0.35f,
-                bottom = size.height
-            )
         )
     }
 }
