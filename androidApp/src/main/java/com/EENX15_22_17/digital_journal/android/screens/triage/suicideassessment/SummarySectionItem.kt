@@ -1,4 +1,4 @@
-package com.EENX15_22_17.digital_journal.android.ui.suicideassessment.summarysuicidesection
+package com.EENX15_22_17.digital_journal.android.screens.triage.suicideassessment.summarysuicidesection
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card

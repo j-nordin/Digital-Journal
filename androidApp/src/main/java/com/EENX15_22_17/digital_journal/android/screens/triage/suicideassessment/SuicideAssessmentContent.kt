@@ -1,11 +1,11 @@
-package com.EENX15_22_17.digital_journal.android.ui.suicideassessment
+package com.EENX15_22_17.digital_journal.android.screens.triage.suicideassessment
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
-import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.protectivefactors.SuicideAssessmentModel
-import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.protectivefactors.protectiveFactorsLabels
-import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.statisticalriskfactors.statisticalRiskFactorsLabels
+import com.EENX15_22_17.digital_journal.android.screens.triage.suicideassessment.protectivefactors.SuicideAssessmentModel
+import com.EENX15_22_17.digital_journal.android.screens.triage.suicideassessment.protectivefactors.protectiveFactorsLabels
+import com.EENX15_22_17.digital_journal.android.screens.triage.suicideassessment.statisticalriskfactors.statisticalRiskFactorsLabels
 
 //TODO: Complete onChange and currentSelected parameters after implementing Suicide Assessment Modelview
 

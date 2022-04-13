@@ -1,8 +1,4 @@
-package com.EENX15_22_17.digital_journal.android.ui.hazardassesment
-
-
-import com.EENX15_22_17.digital_journal.android.ui.arrivalpage.ArrivalMethod
-import java.util.*
+package com.EENX15_22_17.digital_journal.android.screens.arrival.hazardassesment
 
 
 data class HazardDataClass(

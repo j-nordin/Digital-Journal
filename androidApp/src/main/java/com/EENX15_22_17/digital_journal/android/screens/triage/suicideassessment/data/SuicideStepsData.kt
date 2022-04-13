@@ -1,4 +1,4 @@
-package com.EENX15_22_17.digital_journal.android.ui.suicideassessment
+package com.EENX15_22_17.digital_journal.android.screens.triage.suicideassessment
 
 
 enum class HeaderCheckboxesData {

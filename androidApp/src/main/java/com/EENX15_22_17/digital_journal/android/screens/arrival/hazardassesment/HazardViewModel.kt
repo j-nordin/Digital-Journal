@@ -1,10 +1,9 @@
-package com.EENX15_22_17.digital_journal.android.ui.hazardassesment
+package com.EENX15_22_17.digital_journal.android.screens.arrival.hazardassesment
 
 import androidx.lifecycle.ViewModel
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import java.util.*
 
 class HazardViewModel : ViewModel() {
     var hazardStates by mutableStateOf(

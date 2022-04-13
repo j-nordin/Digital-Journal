@@ -1,4 +1,4 @@
-package com.EENX15_22_17.digital_journal.android.ui.suicideassessment
+package com.EENX15_22_17.digital_journal.android.screens.triage.suicideassessment
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -9,8 +9,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.EENX15_22_17.digital_journal.android.ui.DetailPageWrapper
 import com.EENX15_22_17.digital_journal.android.ui.components.TitledSectionTemp
-import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.protectivefactors.SuicideAssessmentModel
-import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.summarysuicidesection.SummarySection
+import com.EENX15_22_17.digital_journal.android.screens.triage.suicideassessment.protectivefactors.SuicideAssessmentModel
+import com.EENX15_22_17.digital_journal.android.screens.triage.suicideassessment.summarysuicidesection.SummarySection
 import com.EENX15_22_17.digital_journal.android.ui.theme.Colors
 
 @Composable

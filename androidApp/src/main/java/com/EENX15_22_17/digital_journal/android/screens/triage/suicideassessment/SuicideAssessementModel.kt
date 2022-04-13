@@ -1,4 +1,4 @@
-package com.EENX15_22_17.digital_journal.android.ui.suicideassessment.protectivefactors
+package com.EENX15_22_17.digital_journal.android.screens.triage.suicideassessment.protectivefactors
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.grid.GridCells

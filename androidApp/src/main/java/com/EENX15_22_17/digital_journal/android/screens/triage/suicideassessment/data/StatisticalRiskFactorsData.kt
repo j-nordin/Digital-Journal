@@ -1,4 +1,4 @@
-package com.EENX15_22_17.digital_journal.android.ui.suicideassessment.statisticalriskfactors
+package com.EENX15_22_17.digital_journal.android.screens.triage.suicideassessment.statisticalriskfactors
 
 enum class StatisticalRiskFactorsData {
     IS_MALE_AGE_BETWEEN_19_AND_45,
