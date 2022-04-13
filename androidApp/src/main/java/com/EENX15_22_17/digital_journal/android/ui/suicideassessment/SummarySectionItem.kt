@@ -18,7 +18,10 @@ fun SummarySection() {
 
     Column() {
 
-        ShowSum(whichSection = "Suicidstegen", sum = 0) //TODO: Get the right value after implementing Suicide Assessment Modelview
+        ShowSum(
+            whichSection = "Suicidstegen",
+            sum = 0
+        ) //TODO: Get the right value after implementing Suicide Assessment Modelview
 
         ShowSum(whichSection = "Statistiska riskfaktorer", sum = 0)
 
@@ -46,12 +49,11 @@ fun ShowSum(whichSection: String, sum: Int) {
 
             ) {
             Text(
-                text = sum,
+                text = sum.toString(),
                 style = TextStyle(fontSize = 16.sp),
                 color = Color.White,
                 modifier = Modifier.padding(8.dp)
             )
         }
-
     }
 }
