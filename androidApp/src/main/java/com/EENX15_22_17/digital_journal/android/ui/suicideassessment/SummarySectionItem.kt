@@ -16,7 +16,7 @@ import com.EENX15_22_17.digital_journal.android.ui.theme.summarySuicideCard
 @Composable
 fun SummarySection() {
 
-    Column() {
+    Column {
 
         ShowSum(
             whichSection = "Suicidstegen",
@@ -26,9 +26,7 @@ fun SummarySection() {
         ShowSum(whichSection = "Statistiska riskfaktorer", sum = 0)
 
         ShowSum(whichSection = "Skyddande faktorer", sum = 0)
-
     }
-
 }
 
 @Composable

@@ -9,7 +9,9 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import com.EENX15_22_17.digital_journal.android.screens.treatment.ordination.OrdinationScreen
 import com.EENX15_22_17.digital_journal.android.ui.arrivalpage.ArrivalPage
+import com.EENX15_22_17.digital_journal.android.ui.hazardassesment.HazardAssessment
 import com.EENX15_22_17.digital_journal.android.ui.current.CurrentScreen
+import com.EENX15_22_17.digital_journal.android.ui.hazardassesment.HazardAssessment
 import com.EENX15_22_17.digital_journal.android.ui.landingpage.LandingPage
 import com.EENX15_22_17.digital_journal.android.ui.screen.ContactCauseScreen
 import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.SuicideAssessmentScreen
@@ -140,7 +142,7 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient id provided " }
             //TODO add hazard composable here
-            //Text("hej")
+            HazardAssessment(navBack = { navController.popBackStack() }, visitId = visitId )
         }
         composable(
             route = PatientMeetingScreen.ContactReason.createRoute()

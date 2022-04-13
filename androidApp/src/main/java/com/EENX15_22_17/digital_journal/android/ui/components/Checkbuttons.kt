@@ -55,7 +55,6 @@ fun <E : Enum<*>> EnumCheckBox(
     }
 }
 
-
 @Composable
 fun <E : Enum<*>> EnumCheckBoxHorizontal(
     choices: Array<E>,
@@ -63,7 +62,7 @@ fun <E : Enum<*>> EnumCheckBoxHorizontal(
     currentSelected: MutableSet<E>,
     labels: Map<E, String>
 ) {
-    Row(modifier = Modifier.padding(2.dp)) {
+    Row(modifier = Modifier.padding(2.dp), horizontalArrangement = Arrangement.SpaceEvenly) {
         EnumCheckBox(
             choices = choices,
             onSelectionChanged = onSelectionChanged,
