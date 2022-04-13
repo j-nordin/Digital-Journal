@@ -104,82 +104,77 @@ fun <E : Enum<*>> EnumCheckBoxLazyGrid(
     isHorizontal: Boolean = false
 ) {
     val currentSelection: MutableSet<E> = currentSelected.toMutableSet()
-
-    val horizontalGrid = LazyHorizontalGrid(
-        rows = gridLayout,
-        content = {
-            items(choices.size) { index ->
-                var isChecked by rememberSaveable { mutableStateOf(choices[index] in currentSelection) }
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.padding(4.dp)
-                ) {
-                    Box(
-                        modifier = Modifier.background(colorCheckBoxBeta, CircleShape)
+    if (isHorizontal) {
+        LazyHorizontalGrid(
+            rows = gridLayout,
+            content = {
+                items(choices.size) { index ->
+                    var isChecked by rememberSaveable { mutableStateOf(choices[index] in currentSelection) }
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.padding(4.dp)
                     ) {
-                        Checkbox(
-                            checked = isChecked,
-                            onCheckedChange = { checked ->
-                                isChecked = checked
-                                when (checked) {
-                                    false -> currentSelection.remove(choices[index])
-                                    true -> currentSelection.add(choices[index])
+                        Box(
+                            modifier = Modifier.background(colorCheckBoxBeta, CircleShape)
+                        ) {
+                            Checkbox(
+                                checked = isChecked,
+                                onCheckedChange = { checked ->
+                                    isChecked = checked
+                                    when (checked) {
+                                        false -> currentSelection.remove(choices[index])
+                                        true -> currentSelection.add(choices[index])
+                                    }
+                                    onSelectionChanged(currentSelection.toSet())
                                 }
-                                onSelectionChanged(currentSelection.toSet())
-                            }
+                            )
+                        }
+                        Text(
+                            text = labels[choices[index]] ?: choices[index].name,
+                            textAlign = TextAlign.Start,
+                            modifier = Modifier.padding(start = 8.dp),
+                            fontSize = textFontSize.sp
                         )
                     }
-                    Text(
-                        text = labels[choices[index]] ?: choices[index].name,
-                        textAlign = TextAlign.Start,
-                        modifier = Modifier.padding(start = 8.dp),
-                        fontSize = textFontSize.sp
-                    )
                 }
+
             }
-
-        }
-    )
-
-    val verticalGrid = LazyVerticalGrid(
-        columns = gridLayout,
-        content = {
-            items(choices.size) { index ->
-                var isChecked by rememberSaveable { mutableStateOf(choices[index] in currentSelection) }
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.padding(4.dp)
-                ) {
-                    Box(
-                        modifier = Modifier.background(colorCheckBoxBeta, CircleShape)
-                    ) {
-                        Checkbox(
-                            checked = isChecked,
-                            onCheckedChange = { checked ->
-                                isChecked = checked
-                                when (checked) {
-                                    false -> currentSelection.remove(choices[index])
-                                    true -> currentSelection.add(choices[index])
-                                }
-                                onSelectionChanged(currentSelection.toSet())
-                            }
-                        )
-                    }
-                    Text(
-                        text = labels[choices[index]] ?: choices[index].name,
-                        textAlign = TextAlign.Start,
-                        modifier = Modifier.padding(start = 8.dp),
-                        fontSize = textFontSize.sp
-                    )
-                }
-            }
-        }
-    )
-
-    return if (isHorizontal) {
-        horizontalGrid
+        )
     } else {
-        verticalGrid
+        LazyVerticalGrid(
+            columns = gridLayout,
+            content = {
+                items(choices.size) { index ->
+                    var isChecked by rememberSaveable { mutableStateOf(choices[index] in currentSelection) }
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.padding(4.dp)
+                    ) {
+                        Box(
+                            modifier = Modifier.background(colorCheckBoxBeta, CircleShape)
+                        ) {
+                            Checkbox(
+                                checked = isChecked,
+                                onCheckedChange = { checked ->
+                                    isChecked = checked
+                                    when (checked) {
+                                        false -> currentSelection.remove(choices[index])
+                                        true -> currentSelection.add(choices[index])
+                                    }
+                                    onSelectionChanged(currentSelection.toSet())
+                                }
+                            )
+                        }
+                        Text(
+                            text = labels[choices[index]] ?: choices[index].name,
+                            textAlign = TextAlign.Start,
+                            modifier = Modifier.padding(start = 8.dp),
+                            fontSize = textFontSize.sp
+                        )
+                    }
+                }
+            }
+        )
     }
 }
 

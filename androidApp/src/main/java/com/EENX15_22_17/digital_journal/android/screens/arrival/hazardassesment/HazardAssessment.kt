@@ -166,7 +166,8 @@ fun ArrivalType(
             onSelectionChanged = onChange,
             currentSelected = currentSelected,
             labels = labels,
-            gridLayout = GridCells.Adaptive(180.dp)
+            gridLayout = GridCells.Adaptive(180.dp),
+            isHorizontal = false
         )
     }
 }
