@@ -1,7 +1,6 @@
 package com.EENX15_22_17.digital_journal.android.screens.arrival.patientinfo
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.CalendarToday
@@ -27,7 +26,7 @@ import com.EENX15_22_17.digital_journal.android.ui.theme.danger
 fun DateField(date: String) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.padding(top = 25.dp)
+        modifier = Modifier.padding(top = 10.dp)
     ) {
         Icon(
             imageVector = Icons.Rounded.CalendarToday,
@@ -73,32 +72,67 @@ fun EssNumber(setEssNumber: (ess: String) -> Unit, essNumber: String) {
 }
 
 @Composable
+fun BelongingsContent(
+    noBelongings: Boolean,
+    onHospital: Boolean,
+    byRelative: Boolean,
+    lockNumber: String,
+    onLockNumberChange: (lockNumber: String) -> Unit,
+    signature: String,
+    onSignatureChange: (sign: String) -> Unit
+) {
+    var noBelongingsChecked by rememberSaveable { mutableStateOf(noBelongings) }
+    var inHospitalChecked by rememberSaveable { mutableStateOf(onHospital) }
+    var byRelativeChecked by rememberSaveable { mutableStateOf(byRelative) }
+    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+        Row {
+            LabeledCheckbox(
+                label = "Finns inga på akutmottagningen",
+                checked = noBelongingsChecked,
+                onCheckedChange = { noBelongingsChecked = it }
+            )
+        }
+        Row(horizontalArrangement = Arrangement.spacedBy(40.dp)) {
+            LabeledCheckbox(
+                label = "Lämnat på akutmottagningen",
+                checked = inHospitalChecked,
+                onCheckedChange = { inHospitalChecked = it }
+            )
+            TitledTextField(
+                title = "Skåpsnummer",
+                onChangeText = onLockNumberChange,
+                textValue = lockNumber,
+                isEnabled = inHospitalChecked
+            )
+        }
+        Row(horizontalArrangement = Arrangement.spacedBy(40.dp)) {
+            LabeledCheckbox(
+                label = "Lämnat till anhörig/signering",
+                checked = byRelativeChecked,
+                onCheckedChange = { byRelativeChecked = it }
+            )
+            TitledTextField(
+                title = "Signering",
+                onChangeText = onSignatureChange,
+                textValue = signature,
+                isEnabled = byRelativeChecked
+            )
+        }
+    }
+
+}
+
+@Composable
 fun Secrecy(
     value: YesAndNoAndNoAnswer,
     onChange: (value: YesAndNoAndNoAnswer) -> Unit
 ) {
-    Column {
-        Text(
-            text = stringResource(id = R.string.secrecy),
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(vertical = 16.dp)
-        )
-
-        EnumRadioButtonsHorizontal(
-            choices = yesNoNoAnswerLabels.keys.toTypedArray(),
-            labels = yesNoNoAnswerLabels,
-            currentChoice = value,
-            onSelection = onChange
-        )
-
-/*
-        RadioButtonComponent(
-            radioOptions = listOf("Ja", "Nej", "Inget svar"),
-            setRadioValue = setRadioValue,
-            radioStringValue = radioStringValue
-        )*/
-    }
+    EnumRadioButtonsHorizontal(
+        choices = yesNoNoAnswerLabels.keys.toTypedArray(),
+        labels = yesNoNoAnswerLabels,
+        currentChoice = value,
+        onSelection = onChange
+    )
 }
 
 @Composable
@@ -106,15 +140,11 @@ fun SecrecyReservation(
     setSecrecyReservation: (reservation: String) -> Unit,
     reservation: String
 ) {
-    Box(
-        modifier = Modifier.padding(start = 40.dp, top = 40.dp)
-    ) {
-        TitledTextField(
-            title = stringResource(id = R.string.reservation),
-            textValue = reservation,
-            onChangeText = { setSecrecyReservation(it) }
-        )
-    }
+    TitledTextField(
+        title = stringResource(id = R.string.reservation),
+        textValue = reservation,
+        onChangeText = { setSecrecyReservation(it) }
+    )
 }
 
 // TODO: Fråga Rickard om hur man ska göra med Booleans för RadioButtons.
@@ -123,25 +153,12 @@ fun Identity(
     value: YesNo,
     onChange: (identity: YesNo) -> Unit
 ) {
-    Column {
-        Text(
-            text = stringResource(id = R.string.identity),
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(vertical = 16.dp)
-        )
-
-        EnumRadioButtonsHorizontal(
-            choices = yesNoLabels.keys.toTypedArray(),
-            labels = yesNoLabels,
-            currentChoice = value,
-            onSelection = onChange
-        )
-        /*RadioButtonComponentBoolean(
-            radioOptions = listOf("Ja", "Nej"),
-            setRadioValue = setIdentity
-        )*/
-    }
+    EnumRadioButtonsHorizontal(
+        choices = yesNoLabels.keys.toTypedArray(),
+        labels = yesNoLabels,
+        currentChoice = value,
+        onSelection = onChange
+    )
 }
 
 @Composable
@@ -150,20 +167,12 @@ fun Samsa(
     onChange: (samsa: YesNo) -> Unit
 
 ) {
-    Column {
-        Text(
-            text = stringResource(id = R.string.samsa),
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(vertical = 16.dp)
-        )
-        EnumRadioButtonsHorizontal(
-            choices = yesNoLabels.keys.toTypedArray(),
-            labels = yesNoLabels,
-            currentChoice = value,
-            onSelection = onChange
-        )
-    }
+    EnumRadioButtonsHorizontal(
+        choices = yesNoLabels.keys.toTypedArray(),
+        labels = yesNoLabels,
+        currentChoice = value,
+        onSelection = onChange
+    )
 }
 
 @Composable
@@ -173,35 +182,26 @@ fun Relative(
     setRelativePhoneNumber: (relativeNumber: String) -> Unit,
     relativePhoneNumber: String
 ) {
-    Column {
-        Text(
-            text = stringResource(id = R.string.relative),
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(vertical = 16.dp)
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(20.dp)
+    ) {
+        TitledTextField(
+            title = stringResource(id = R.string.relativeName),
+            onChangeText = setRelativeName,
+            textValue = relativeName
         )
-
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(20.dp)
-        ) {
-            TitledTextField(
-                title = stringResource(id = R.string.relativeName),
-                onChangeText = setRelativeName,
-                textValue = relativeName
-            )
-            TitledTextField(
-                title = stringResource(id = R.string.relativePhoneNumber),
-                onChangeText = setRelativePhoneNumber,
-                textValue = relativePhoneNumber
-            )
-        }
+        TitledTextFieldDigitKeyboard(
+            title = stringResource(id = R.string.relativePhoneNumber),
+            onChangeText = setRelativePhoneNumber,
+            textValue = relativePhoneNumber
+        )
     }
 }
 
 @Composable
 fun ChildrenInHouseHold(
-    onChange: (age: List<Int>) -> Unit,
-    values: List<Int>,
+    onChange: (age: List<String>) -> Unit,
+    values: List<String>,
     onConcernReportChange: (value: YesNo) -> Unit,
     concernReport: YesNo
 ) {
@@ -219,15 +219,10 @@ fun ChildrenInHouseHold(
                 choices = yesNoLabels.keys.toTypedArray(),
                 labels = yesNoLabels,
                 currentChoice = hasChildren,
-                onSelection = {
-                    hasChildren = it
-                    println(hasChildren.name)
-                }
+                onSelection = { hasChildren = it }
             )
         }
         if (hasChildren == YesNo.YES) {
-
-
             AddChildren(
                 onAgeChange = onChange,
                 ageValues = values
@@ -242,54 +237,53 @@ fun ChildrenInHouseHold(
 
 @Composable
 fun AddChildren(
-    onAgeChange: (age: List<Int>) -> Unit,
-    ageValues: List<Int>
+    onAgeChange: (age: List<String>) -> Unit,
+    ageValues: List<String>
 ) {
     var ageList by rememberSaveable { mutableStateOf(ageValues) }
     var age by rememberSaveable { mutableStateOf("") }
     var warningMessage by remember { mutableStateOf("") }
 
-    Box {
-        Row {
-            Column {
-                TitledTextFieldDigitKeyboard(
-                    title = stringResource(id = R.string.childrenAge),
-                    textValue = age,
-                    onChangeText = {
-                        warningMessage = ""
-                        age = it
-                    }
-                )
-                Button(
-                    onClick = {
-                        when {
-                            age.isDigitsOnly() -> {
-                                val newList = ageList.toMutableList()
-                                newList.add(age.toInt())
-                                ageList = newList
-                                onAgeChange(ageList)
-                            }
-                            else -> {
-                                warningMessage = "Måste vara en siffra"
-                            }
+    Row {
+        Column {
+            TitledTextFieldDigitKeyboard(
+                title = stringResource(id = R.string.childrenAge),
+                textValue = age,
+                onChangeText = {
+                    warningMessage = ""
+                    age = it
+                }
+            )
+            Button(
+                onClick = {
+                    when {
+                        age.isDigitsOnly() -> {
+                            val newList = ageList.toMutableList()
+                            newList.add(age)
+                            ageList = newList
+                            onAgeChange(ageList)
+                        }
+                        else -> {
+                            warningMessage = "Måste vara en siffra"
                         }
                     }
-                ) {
-                    Text(text = stringResource(id = R.string.addChild))
                 }
-                Text(
-                    text = warningMessage,
-                    color = danger
-                )
+            ) {
+                Text(text = stringResource(id = R.string.addChild))
             }
-            ChildrenAgeList(ageList)
+            Text(
+                text = warningMessage,
+                color = danger
+            )
         }
+        ChildrenAgeList(ageList)
     }
+
 }
 
 @Composable
 private fun ChildrenAgeList(
-    ageList: List<Int>
+    ageList: List<String>
 ) {
     Column(
         modifier = Modifier.padding(4.dp)
@@ -332,63 +326,3 @@ fun ConcernReport(
         )
     }
 }
-/*
-@Composable
-fun Laws(
-    modifier: Modifier = Modifier,
-    choices: Array<Law>,
-    onChange: (values: Set<Law>) -> Unit,
-    currentSelected: Set<Law>,
-    labels: Map<Law, String>,
-
-    ) {
-    Column(
-        modifier = modifier
-    ) {
-        Text(
-            text = stringResource(id = R.string.laws),
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(vertical = 16.dp)
-        )
-
-        EnumCheckBoxLazyGrid(
-            choices = choices,
-            onSelectionChanged = onChange,
-            currentSelected = currentSelected,
-            labels = labels,
-            gridLayout = GridCells.Adaptive(100.dp)
-        )
-    }
-}
-*/
-
-/*
-@Composable
-fun ArrivalType(
-    modifier: Modifier = Modifier,
-    choices: Array<ArrivalMethod>,
-    onChange: (values: Set<ArrivalMethod>) -> Unit,
-    currentSelected: Set<ArrivalMethod>,
-    labels: Map<ArrivalMethod, String>,
-) {
-    Column(
-        modifier = modifier
-    ) {
-        Text(
-            text = stringResource(id = R.string.arrivalType),
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(vertical = 16.dp)
-        )
-        EnumCheckBoxLazyGrid(
-            choices = choices,
-            onSelectionChanged = onChange,
-            currentSelected = currentSelected,
-            labels = labels,
-            gridLayout = GridCells.Adaptive(200.dp)
-        )
-    }
-}
-
- */
