@@ -15,8 +15,8 @@ data class ArrivalDataClass(
     var relativePhoneNumber: String,
     var children: MutableList<Int>,
     var concernReport: YesNo,
-    var arrivalMethod: Set<ArrivalMethod>,
-    var law: Set<Law>
+    //var arrivalMethod: Set<ArrivalMethod>,
+    //var law: Set<Law>
 )
 
 enum class YesAndNoAndNoAnswer {
@@ -31,7 +31,7 @@ val yesNoNoAnswerLabels = mapOf<YesAndNoAndNoAnswer, String>(
     YesAndNoAndNoAnswer.NO to "Nej",
     YesAndNoAndNoAnswer.NO_ANSWER to "Inget svar"
 )
-
+/*
 enum class ArrivalMethod {
     OWN_INITIATIVE,
     RELATIVE,
@@ -54,8 +54,9 @@ val arrivalMethods = mapOf<ArrivalMethod, String>(
     ArrivalMethod.POLICE to "Med Polis",
     ArrivalMethod.OTHER to "Annat"
 )
+*/
 
-
+/*
 enum class Law {
     HSL,
     LPT,
@@ -74,3 +75,4 @@ val laws = mapOf<Law, String>(
     Law.LRV to "LRV",
     Law.LVM to "LVM",
 )
+*/

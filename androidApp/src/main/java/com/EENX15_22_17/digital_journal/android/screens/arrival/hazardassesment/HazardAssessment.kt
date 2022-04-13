@@ -12,8 +12,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.EENX15_22_17.digital_journal.android.R
 import com.EENX15_22_17.digital_journal.android.ui.DetailPageWrapper
 import com.EENX15_22_17.digital_journal.android.ui.components.EnumCheckBoxLazyGrid
@@ -35,6 +37,7 @@ fun HazardAssessment(
         onBackClicked = navBack,
         onMenuClicked = {}
     ) {
+
         //FIXME, when state issue is solved, this must be updated when clicking on specified behavioir checkboxes
         var bvcNr by rememberSaveable { mutableStateOf(0) }
         Column(
@@ -43,6 +46,34 @@ fun HazardAssessment(
             modifier = Modifier
                 .fillMaxWidth()
         ) {
+
+            Row {
+                Box(modifier = Modifier
+                    .fillMaxWidth(0.62f)
+                    .padding(end = 4.dp)) {
+                    TitledSection(title = stringResource(id = R.string.arrivalType)) {
+                        ArrivalType(
+                            choices = arrivalMethods.keys.toTypedArray(),
+                            onChange = { hazardViewModel.hazardStates.arrivalMethod = it },
+                            currentSelected = hazardViewModel.hazardStates.arrivalMethod,
+                            labels = arrivalMethods
+                        )
+                    }
+                }
+
+                Box(modifier = Modifier.fillMaxWidth()) {
+                    TitledSection(title = "Aktuella lagar") {
+                        Laws(
+                            choices = laws.keys.toTypedArray(),
+                            onChange = { hazardViewModel.hazardStates.law = it },
+                            currentSelected = hazardViewModel.hazardStates.law,
+                            labels = laws
+                        )
+                    }
+                }
+
+            }
+
             TitledSection(
                 title = stringResource(id = R.string.InitialHazardAssessment)
             ) {
@@ -56,7 +87,7 @@ fun HazardAssessment(
                     gridLayout = GridCells.Adaptive(270.dp)
                 )
             }
-            TitledSection(title = stringResource(id = R.string.BVC))
+            TitledSection(title = stringResource(id = R.string.specifiedBehavior))
             {
                 EnumCheckBoxLazyGrid(
                     choices = dangerBehaviors.keys.toTypedArray(),
@@ -67,17 +98,20 @@ fun HazardAssessment(
                 )
             }
             TitledSection(title = "Summary") {
-                Card(
-                    elevation = 2.dp,
-                    backgroundColor = Colors.treatmentPrimary,
-
-                    ) {
-                    Text(
-                        text = "Number of BVC: $bvcNr",
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.padding(8.dp)
-                    )
+                Column {
+                    Text(text = stringResource(id = R.string.BVC))
+                    Card(
+                        elevation = 2.dp,
+                        backgroundColor = Colors.treatmentPrimary,
+                        ) {
+                        Text(
+                            text = "Number of BVC: $bvcNr",
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.padding(8.dp)
+                        )
+                    }
                 }
+
             }
             // FIXME When state issue is solved, this will only appear when BBV >= 2.
             if (bvcNr == 0) {
@@ -91,5 +125,48 @@ fun HazardAssessment(
                 )
             }
         }
+    }
+}
+
+@Composable
+fun Laws(
+    modifier: Modifier = Modifier,
+    choices: Array<Law>,
+    onChange: (values: Set<Law>) -> Unit,
+    currentSelected: Set<Law>,
+    labels: Map<Law, String>,
+
+    ) {
+    Column(
+        modifier = modifier
+    ) {
+        EnumCheckBoxLazyGrid(
+            choices = choices,
+            onSelectionChanged = onChange,
+            currentSelected = currentSelected,
+            labels = labels,
+            gridLayout = GridCells.Adaptive(92.dp)
+        )
+    }
+}
+
+@Composable
+fun ArrivalType(
+    modifier: Modifier = Modifier,
+    choices: Array<ArrivalMethod>,
+    onChange: (values: Set<ArrivalMethod>) -> Unit,
+    currentSelected: Set<ArrivalMethod>,
+    labels: Map<ArrivalMethod, String>,
+) {
+    Column(
+        modifier = modifier
+    ) {
+        EnumCheckBoxLazyGrid(
+            choices = choices,
+            onSelectionChanged = onChange,
+            currentSelected = currentSelected,
+            labels = labels,
+            gridLayout = GridCells.Adaptive(180.dp)
+        )
     }
 }

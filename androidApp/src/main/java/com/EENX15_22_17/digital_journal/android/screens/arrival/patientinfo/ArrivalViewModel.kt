@@ -21,8 +21,8 @@ class ArrivalViewModel : ViewModel() {
             relativePhoneNumber = "",
             children = mutableListOf(),
             concernReport = YesNo.UNKOWN,
-            arrivalMethod = setOf<ArrivalMethod>(),
-            law = setOf<Law>()
+            //arrivalMethod = setOf<ArrivalMethod>(),
+            //law = setOf<Law>()
         )
     )
         private set

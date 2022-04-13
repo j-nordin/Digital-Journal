@@ -148,12 +148,15 @@ fun ArrivalPage(
                     )
                     .padding(horizontal = 16.dp, vertical = 12.dp)
             ) {
+                /*
                 ArrivalType(
                     choices = arrivalMethods.keys.toTypedArray(),
                     onChange = { arrivalViewModel.arrivalStates.arrivalMethod = it},
                     currentSelected = arrivalViewModel.arrivalStates.arrivalMethod,
                     labels = arrivalMethods
                 )
+
+                 */
             }
             Box(
                 modifier = Modifier
@@ -168,12 +171,15 @@ fun ArrivalPage(
                     )
                     .padding(horizontal = 16.dp, vertical = 12.dp)
             ) {
+                /*
                 Laws(
                     choices = laws.keys.toTypedArray(),
                     onChange = { arrivalViewModel.arrivalStates.law = it},
                     currentSelected = arrivalViewModel.arrivalStates.law,
                     labels = laws
                 )
+
+                 */
             }
         }
     }

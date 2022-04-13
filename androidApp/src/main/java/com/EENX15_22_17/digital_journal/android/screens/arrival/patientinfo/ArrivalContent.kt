@@ -332,7 +332,7 @@ fun ConcernReport(
         )
     }
 }
-
+/*
 @Composable
 fun Laws(
     modifier: Modifier = Modifier,
@@ -361,7 +361,9 @@ fun Laws(
         )
     }
 }
+*/
 
+/*
 @Composable
 fun ArrivalType(
     modifier: Modifier = Modifier,
@@ -388,3 +390,5 @@ fun ArrivalType(
         )
     }
 }
+
+ */
