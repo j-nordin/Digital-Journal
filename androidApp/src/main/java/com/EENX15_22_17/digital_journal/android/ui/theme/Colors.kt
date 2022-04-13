@@ -39,3 +39,6 @@ object Colors {
     val treatmentBackground = arrivalPrimary.brighter(0.7f)
 }
 
+
+val colorCheckBoxBeta = Color(0xFFE8F4FE)
+val summarySuicideCard = Color(0xFF2196F3)

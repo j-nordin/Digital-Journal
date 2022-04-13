@@ -7,7 +7,7 @@ class MainActivityTest {
 
     @Test
     fun `Temporary test for setup teststructure` () {
-        val actualValue = 0;
+        val actualValue = 0
         Assert.assertEquals(0,  actualValue )
         Assert.assertNotEquals(1, actualValue)
     }
