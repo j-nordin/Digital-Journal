@@ -46,6 +46,8 @@ fun TextFieldSection(
                    fontSize = 24.sp) },
                textStyle = TextStyle(fontSize = 22.sp)
            )
+           Box(modifier = Modifier
+               .size(width = 20.dp, height = 20.dp))
            println("Label ${item.label} : ${item.value}")
        }
    }

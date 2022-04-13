@@ -10,12 +10,16 @@ import androidx.navigation.navigation
 import com.EENX15_22_17.digital_journal.android.screens.arrival.hazard.TempHazardAssessment
 import com.EENX15_22_17.digital_journal.android.screens.arrival.patientinfo.ArrivalPage
 import com.EENX15_22_17.digital_journal.android.screens.treatment.ordination.OrdinationScreen
+import com.EENX15_22_17.digital_journal.android.ui.arrivalpage.ArrivalPage
+import com.EENX15_22_17.digital_journal.android.ui.hazardassesment.HazardAssessment
 import com.EENX15_22_17.digital_journal.android.ui.current.CurrentScreen
+import com.EENX15_22_17.digital_journal.android.ui.hazardassesment.HazardAssessment
 import com.EENX15_22_17.digital_journal.android.screens.landingpage.LandingPage
 import com.EENX15_22_17.digital_journal.android.screens.treatment.checkups.TempMedicalCheckup
 import com.EENX15_22_17.digital_journal.android.screens.treatment.interim.TempInterim
 import com.EENX15_22_17.digital_journal.android.screens.triage.currentHealth.TempCurrentHealth
 import com.EENX15_22_17.digital_journal.android.ui.screen.ContactCauseScreen
+import com.EENX15_22_17.digital_journal.android.ui.suicideassessment.SuicideAssessmentScreen
 import com.EENX15_22_17.digital_journal.android.screens.triage.healthHistory.HealthHistoryPage
 import com.EENX15_22_17.digital_journal.android.screens.triage.previousCare.TempPreviusCare
 import com.EENX15_22_17.digital_journal.android.screens.triage.suicideAssessment.TempSuicideAssessment
@@ -146,7 +150,7 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient id provided " }
             //TODO add hazard composable here
-            //Text("hej")
+            HazardAssessment(navBack = { navController.popBackStack() }, visitId = visitId )
             TempHazardAssessment(
                 visitId = visitId,
                 navBack = { navController.popBackStack() }
@@ -195,11 +199,7 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
         ) { backStackEntry ->
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient meeting" }
-            // TODO add SuicideAssessment composable
-            TempSuicideAssessment(
-                visitId = visitId,
-                navBack = { navController.popBackStack() }
-            )
+            SuicideAssessmentScreen()
         }
         composable(
             route = PatientMeetingScreen.NursingNeed.createRoute()

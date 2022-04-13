@@ -10,6 +10,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.EENX15_22_17.digital_journal.android.ui.contactcause.*
 import com.EENX15_22_17.digital_journal.android.screens.triage.contactreason.RettsClickableData
 import com.EENX15_22_17.digital_journal.android.screens.triage.contactreason.RettsClickableSection
 import com.EENX15_22_17.digital_journal.android.screens.triage.contactreason.TextFieldContent
@@ -35,40 +36,7 @@ fun ContactCauseScreen() {
 
             )
 
-            TextFieldSection(items = listOf(
-                TextFieldContent(
-                    "Situation",
-                    "Information kopplat till situation",
-                )
-            ))
-
-            TextFieldSection(items = listOf(
-                TextFieldContent(
-                    "Bakgrund",
-                    "Information kopplat till bakgrund",
-                )
-            ))
-
-            TextFieldSection(items = listOf(
-                TextFieldContent(
-                    "Aktuellt tillstånd",
-                    "Information kopplat till aktuellt tillstånd",
-                )
-            ))
-
-            TextFieldSection(items = listOf(
-                TextFieldContent(
-                    "Rekommendation",
-                    "Information kopplat till rekommendation",
-                )
-            ))
-
-            TextFieldSection(items = listOf(
-                TextFieldContent(
-                    "Övrigt",
-                    "Övrig information",
-                )
-            ))
+            TextFieldSection(items = ContactCauseList())
 
             RettsClickableSection( items = mutableListOf(
                 RettsClickableData("Nedsatt koncentration", Color.Green),

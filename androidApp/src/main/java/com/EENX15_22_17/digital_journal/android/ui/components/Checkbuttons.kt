@@ -12,6 +12,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -54,7 +55,6 @@ fun <E : Enum<*>> EnumCheckBox(
     }
 }
 
-
 @Composable
 fun <E : Enum<*>> EnumCheckBoxHorizontal(
     choices: Array<E>,
@@ -62,7 +62,7 @@ fun <E : Enum<*>> EnumCheckBoxHorizontal(
     currentSelected: MutableSet<E>,
     labels: Map<E, String>
 ) {
-    Row(modifier = Modifier.padding(2.dp)) {
+    Row(modifier = Modifier.padding(2.dp), horizontalArrangement = Arrangement.SpaceEvenly) {
         EnumCheckBox(
             choices = choices,
             onSelectionChanged = onSelectionChanged,
@@ -96,7 +96,9 @@ fun <E : Enum<*>> EnumCheckBoxLazyGrid(
     onSelectionChanged: (selected: Set<E>) -> Unit,
     currentSelected: Set<E>,
     labels: Map<E, String>,
-    gridLayout: GridCells
+    gridLayout: GridCells,
+    circleBgColor: Color=checkBoxColor,
+    textFontSize: Int=20
 ) {
     val currentSelection: MutableSet<E> = currentSelected.toMutableSet()
 
@@ -110,7 +112,7 @@ fun <E : Enum<*>> EnumCheckBoxLazyGrid(
                     modifier = Modifier.padding(4.dp)
                 ) {
                     Box(
-                        modifier = Modifier.background(checkBoxColor, CircleShape)
+                        modifier = Modifier.background(circleBgColor, CircleShape)
                     ) {
                         Checkbox(
                             checked = isChecked,
@@ -127,8 +129,8 @@ fun <E : Enum<*>> EnumCheckBoxLazyGrid(
                     Text(
                         text = labels[choices[index]] ?: choices[index].name,
                         textAlign = TextAlign.Start,
-                        modifier = Modifier.padding(start = 4.dp),
-                        fontSize = 20.sp
+                        modifier = Modifier.padding(start = 8.dp),
+                        fontSize = textFontSize.sp
                     )
                 }
             }
