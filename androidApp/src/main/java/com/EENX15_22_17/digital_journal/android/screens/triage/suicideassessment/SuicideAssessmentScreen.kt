@@ -6,7 +6,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.EENX15_22_17.digital_journal.android.R
 import com.EENX15_22_17.digital_journal.android.ui.DetailPageWrapper
 import com.EENX15_22_17.digital_journal.android.ui.components.TitledSectionTemp
 import com.EENX15_22_17.digital_journal.android.screens.triage.suicideassessment.protectivefactors.SuicideAssessmentModel
@@ -15,17 +17,17 @@ import com.EENX15_22_17.digital_journal.android.ui.theme.Colors
 
 @Composable
 fun SuicideAssessmentScreen(
-    onBackClicked: () -> Unit = {},
-    onMenuClicked: () -> Unit = {},
+    onBackClicked: () -> Unit,
+    visitId: String
 ) {
     DetailPageWrapper(
-        title = "SUICIDBEDÖMNING", // TODO: Use `JournalScreen.ACTIONS_AND_ORDINATIONS.title` when libs are available,
+        title = stringResource(id = R.string.suicideAssessment),
         titleColor = Colors.treatmentPrimary,
         onBackClicked = onBackClicked,
-        onMenuClicked = onMenuClicked
+        onMenuClicked = {}
     ) {
         Box(
-            modifier = Modifier.fillMaxSize().background(Color.White)
+            modifier = Modifier.fillMaxSize()
         ) {
             Column(verticalArrangement = Arrangement.Center) {
 
@@ -46,7 +48,7 @@ fun SuicideAssessmentScreen(
                 Row(
                     horizontalArrangement = Arrangement.Start,
                     verticalAlignment = Alignment.Top,
-                    modifier = Modifier.background(Color.White).fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth()
                 ) {
 
                     Column(modifier = Modifier.fillMaxWidth(0.50f)) {

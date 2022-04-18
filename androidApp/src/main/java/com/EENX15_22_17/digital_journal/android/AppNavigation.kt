@@ -156,7 +156,10 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
         ) { backStackEntry ->
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient meeting" }
-            ContactCauseScreen()
+            ContactCauseScreen(
+                navBack = { navController.popBackStack() },
+                visitId = visitId
+            )
         }
         composable(
             route = PatientMeetingScreen.PreviousCare.createRoute()
@@ -194,7 +197,10 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
         ) { backStackEntry ->
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient meeting" }
-            SuicideAssessmentScreen()
+            SuicideAssessmentScreen(
+                onBackClicked = { navController.popBackStack() },
+                visitId = visitId
+            )
         }
         composable(
             route = PatientMeetingScreen.NursingNeed.createRoute()
