@@ -26,10 +26,7 @@ fun SuicideAssessmentScreen(
         onBackClicked = onBackClicked,
         onMenuClicked = {}
     ) {
-        Box(
-            modifier = Modifier.fillMaxSize()
-        ) {
-            Column(verticalArrangement = Arrangement.Center) {
+       Column(verticalArrangement = Arrangement.Center) {
 
                 //Header checkbox
                 Column(Modifier.padding(start = 20.dp, top = 20.dp)) {
@@ -59,9 +56,7 @@ fun SuicideAssessmentScreen(
                     }
                 }
 
-
             }
-        }
     }
 
 }
