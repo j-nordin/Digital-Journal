@@ -9,13 +9,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.EENX15_22_17.digital_journal.android.R
-import com.EENX15_22_17.digital_journal.android.ui.contactcause.*
 import com.EENX15_22_17.digital_journal.android.screens.triage.contactreason.RettsClickableData
-import com.EENX15_22_17.digital_journal.android.screens.triage.contactreason.RettsClickableItem
-import com.EENX15_22_17.digital_journal.android.screens.triage.suicideassessment.ProtectiveFactorsContent
-import com.EENX15_22_17.digital_journal.android.screens.triage.suicideassessment.summarysuicidesection.SummarySection
+import com.EENX15_22_17.digital_journal.android.screens.triage.contactreason.RettsSymtomChip
 import com.EENX15_22_17.digital_journal.android.ui.DetailPageWrapper
-import com.EENX15_22_17.digital_journal.android.ui.components.TitledSectionTemp
 import com.EENX15_22_17.digital_journal.android.ui.components.TitledTextField
 import com.EENX15_22_17.digital_journal.android.ui.theme.Colors
 
@@ -98,17 +94,17 @@ fun ContactCauseScreen(
                     Column(
                         modifier = Modifier.padding(top = 20.dp)
                     ) {
-                        RettsClickableItem(
+                        RettsSymtomChip(
                             item = RettsClickableData(
                                 data = "Nedsatt koncentration",
                                 color = Color.Green
                             ), onClick = {}) //TODO: Implement View Model for Retts Clickable Items
-                        RettsClickableItem(
+                        RettsSymtomChip(
                             item = RettsClickableData(
                                 data = "Psykomotorisk oro (oroligt beteende, rastlöshet)",
                                 color = Color.Yellow
                             ), onClick = {}) //TODO: Implement View Model for Retts Clickable Items
-                        RettsClickableItem(
+                        RettsSymtomChip(
                             item = RettsClickableData(
                                 data = "Social isolering",
                                 color = Color.Yellow
