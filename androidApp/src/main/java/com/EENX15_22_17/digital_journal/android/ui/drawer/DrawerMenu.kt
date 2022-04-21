@@ -3,12 +3,12 @@ package com.EENX15_22_17.digital_journal.android.ui.drawer
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.MenuBook
-import androidx.compose.material.icons.filled.SwitchAccount
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.EENX15_22_17.digital_journal.android.ui.theme.brighter
@@ -24,8 +24,72 @@ fun DrawerMenu(
 ) {
     DrawerHeader(modifier = modifier)
     DrawerDivider(modifier = modifier)
-/*    DrawerBody()
+    DrawerItem(
+        modifier = modifier,
+        icon = Icons.Filled.Group,
+        text = "PATIENTMÖTE"
+    )
+    DrawerItem(
+        modifier = modifier,
+        icon = Icons.Filled.MedicalInformation,
+        text = "SENASTE JOURNAL"
+    )
+    DrawerItem(
+        modifier = modifier,
+        icon = Icons.Filled.Sensors,
+        text = "RETTS-ONLINE"
+    )
+    DrawerItem(
+        modifier = modifier,
+        icon = Icons.Filled.GppBad,
+        text = "PERSONAL"
+    )
+    DrawerItem(
+        modifier = modifier,
+        icon = Icons.Filled.Dvr,
+        text = "SAMSA"
+    )
+    DrawerItem(
+        modifier = modifier,
+        icon = Icons.Filled.Lightbulb,
+        text = "ARBETSBESKRIVNING"
+    )
+
+/*
     DrawerFooter()*/
+}
+
+@Composable
+fun DrawerItem(
+    modifier: Modifier = Modifier,
+    icon: ImageVector,
+    text: String,
+    onClicked: () -> Unit = {}
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(start = 25.dp, bottom = 15.dp, top = 15.dp),
+        horizontalArrangement = Arrangement.spacedBy(25.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Icon(
+            modifier = Modifier.size(30.dp),
+            imageVector = icon,
+            contentDescription = "icon",
+            tint = colorTextGray)
+        Text(
+            text = text,
+            style = MaterialTheme.typography.h6,
+            color = colorTextGray
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun DrawerItemPreview() {
+    DrawerItem(icon = Icons.Filled.Group, text = "PREVIEW TEXT")
 }
 
 @Preview(showBackground = true)
