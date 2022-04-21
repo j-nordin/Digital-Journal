@@ -6,7 +6,6 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import com.EENX15_22_17.digital_journal.android.screens.arrival.patientinfo.ArrivalPage
 import com.EENX15_22_17.digital_journal.android.screens.treatment.ordination.OrdinationScreen
@@ -94,12 +93,13 @@ fun NavigationApp(
         startDestination = Screen.Current.route
     ) {
         addCurrentBoardGraph(navController = navController, switchScaffoldDrawerState = switchScaffoldDrawerState)
-        addPatientMeetingGraph(navController = navController)
+        addPatientMeetingGraph(navController = navController, switchScaffoldDrawerState = switchScaffoldDrawerState)
     }
 }
 
 private fun NavGraphBuilder.addPatientMeetingGraph(
     navController: NavController,
+    switchScaffoldDrawerState: () -> Unit,
 ) {
     navigation(
         route = Screen.PatientMeeting.route,
@@ -221,7 +221,10 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
         ) { backStackEntry ->
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient meeting" }
-            OrdinationScreen(onBackClicked = navController::popBackStack)
+            OrdinationScreen(
+                onBackClicked = navController::popBackStack,
+                onMenuClicked = switchScaffoldDrawerState
+            )
         }
         composable(
             route = PatientMeetingScreen.InterimJournal.createRoute()
