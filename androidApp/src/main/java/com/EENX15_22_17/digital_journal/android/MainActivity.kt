@@ -27,10 +27,8 @@ class MainActivity : ComponentActivity() {
                     NavigationApp(
                         navController = appState.navController,
                         switchScaffoldDrawerState = {
-                            switchScaffoldDrawerState(
-                                scaffoldState = appState.scaffoldState,
-                                coroutineScope = appState.coroutineScope
-                            )
+                            val dr = appState.scaffoldState.drawerState
+                            appState.coroutineScope.launch { if (dr.isOpen) dr.close() else dr.open() }
                         }
                     )
                 }
@@ -38,17 +36,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-fun switchScaffoldDrawerState(
-    scaffoldState: ScaffoldState,
-    coroutineScope: CoroutineScope
-) {
-    val dr = scaffoldState.drawerState
-    coroutineScope.launch {
-        if (dr.isOpen) dr.close() else dr.open()
-    }
-}
-
 
 
 @Composable
