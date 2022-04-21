@@ -25,14 +25,10 @@ import com.EENX15_22_17.digital_journal.android.ui.theme.colorTextGray
 @Composable
 fun TitledSection(
     title: String,
-    content: @Composable () -> Unit
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
 ) {
-
-    Box(
-        Modifier
-            .fillMaxWidth()
-            .padding(start = 20.dp, end = 20.dp, bottom = 10.dp, top = 10.dp)
-    ) {
+    Box(modifier) {
         Text(
             text = title,
             style = TextStyle(fontSize = 26.sp, fontWeight = FontWeight.SemiBold),
@@ -47,20 +43,18 @@ fun TitledSection(
         Box(
             Modifier
                 .fillMaxWidth()
-                .padding(15.dp)
-
+                .padding(vertical = 15.dp)
         ) {
             Box(
-                content = { content() },
                 modifier = Modifier
                     .fillMaxWidth()
                     .border(BorderStroke(1.dp, colorTextGray), shape = RoundedCornerShape(5))
-                    .padding(top = 30.dp, bottom = 10.dp, start = 10.dp, end = 10.dp)
+                    .padding(top = 30.dp, bottom = 10.dp, start = 10.dp, end = 10.dp),
+                content = { content() },
             )
         }
     }
 }
-
 
 @Composable
 @Preview(showBackground = true)

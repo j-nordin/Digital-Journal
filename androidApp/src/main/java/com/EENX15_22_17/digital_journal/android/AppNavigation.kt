@@ -8,12 +8,18 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
+import com.EENX15_22_17.digital_journal.android.screens.arrival.patientinfo.ArrivalPage
 import com.EENX15_22_17.digital_journal.android.screens.treatment.ordination.OrdinationScreen
-import com.EENX15_22_17.digital_journal.android.ui.arrivalpage.ArrivalPage
+import com.EENX15_22_17.digital_journal.android.screens.arrival.hazardassesment.HazardAssessment
 import com.EENX15_22_17.digital_journal.android.ui.current.CurrentScreen
-import com.EENX15_22_17.digital_journal.android.ui.landingpage.LandingPage
+import com.EENX15_22_17.digital_journal.android.screens.landingpage.LandingPage
+import com.EENX15_22_17.digital_journal.android.screens.treatment.checkups.TempMedicalCheckup
+import com.EENX15_22_17.digital_journal.android.screens.treatment.interim.TempInterim
+import com.EENX15_22_17.digital_journal.android.screens.triage.currentHealth.TempCurrentHealth
 import com.EENX15_22_17.digital_journal.android.ui.screen.ContactCauseScreen
-import com.EENX15_22_17.digital_journal.android.ui.triage.history.HealthHistoryPage
+import com.EENX15_22_17.digital_journal.android.screens.triage.suicideassessment.SuicideAssessmentScreen
+import com.EENX15_22_17.digital_journal.android.screens.triage.healthHistory.HealthHistoryPage
+import com.EENX15_22_17.digital_journal.android.screens.triage.previousCare.TempPreviusCare
 
 sealed class Screen(val route: String) {
     object Current : Screen(route = "current")
@@ -107,7 +113,8 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
             /*TODO: Handle meeting id not provided, ex show alert*/
             requireNotNull(visitId) { "No meeting id provided" }
 
-            fun navTo(form: PatientMeetingScreen) = navController.navToPatientMeetingForm(visitId, form)
+            fun navTo(form: PatientMeetingScreen) =
+                navController.navToPatientMeetingForm(visitId, form)
 
             LandingPage(
                 visitId = visitId,
@@ -142,14 +149,20 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient id provided " }
             //TODO add hazard composable here
-            //Text("hej")
+            HazardAssessment(
+                navBack = { navController.popBackStack() },
+                visitId = visitId
+            )
         }
         composable(
             route = PatientMeetingScreen.ContactReason.createRoute()
         ) { backStackEntry ->
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient meeting" }
-            ContactCauseScreen()
+            ContactCauseScreen(
+                navBack = { navController.popBackStack() },
+                visitId = visitId
+            )
         }
         composable(
             route = PatientMeetingScreen.PreviousCare.createRoute()
@@ -157,6 +170,9 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient meeting" }
             // TODO add PreviousCare composable
+            TempPreviusCare(
+                visitId = visitId,
+                navBack = { navController.popBackStack() })
         }
         composable(
             route = PatientMeetingScreen.HealthHistory.createRoute()
@@ -174,13 +190,20 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient meeting" }
             // TODO add HealthNow composable
+            TempCurrentHealth(
+                visitId = visitId,
+                navBack = { navController.popBackStack() }
+            )
         }
         composable(
             route = PatientMeetingScreen.SuicideAssessment.createRoute()
         ) { backStackEntry ->
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient meeting" }
-            // TODO add SuicideAssessment composable
+            SuicideAssessmentScreen(
+                onBackClicked = { navController.popBackStack() },
+                visitId = visitId
+            )
         }
         composable(
             route = PatientMeetingScreen.NursingNeed.createRoute()
@@ -188,6 +211,10 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient meeting" }
             // TODO add nursingNeed composable
+            TempMedicalCheckup(
+                visitId = visitId,
+                navBack = { navController.popBackStack() }
+            )
         }
         composable(
             route = PatientMeetingScreen.MedicalOrder.createRoute()
@@ -202,6 +229,10 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient meeting" }
             // TODO add interimJournal composable
+            TempInterim(
+                visitId = visitId,
+                navBack = { navController.popBackStack() }
+            )
         }
     }
 }

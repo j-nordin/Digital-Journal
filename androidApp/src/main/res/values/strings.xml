@@ -16,6 +16,12 @@
     <string name="concernReport">Orosanmälan</string>
     <string name="arrivalType">Ankomst till akutmottagningen</string>
     <string name="laws">Lagar</string>
+    <string name="hazardActionTaken">Vidtagen åtgärd</string>
+    <string name="dangerAssessmentHeader">FARLIGHETSBEDÖMNING</string>
+    <string name="BVC">Om BVC > 2 ska åtgärder vidtas</string>
+    <string name="InitialHazardAssessment">Initial farlighetsbedömning</string>
+
+
     <string name="arrivalCard">ANKOMST</string>
     <string name="hazardCard">FARLIGHETSBEDÖMNING</string>
     <string name="contactReason">KONTAKTORSAK</string>
