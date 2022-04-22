@@ -1,5 +1,6 @@
 package com.EENX15_22_17.digital_journal.android.ui.drawer
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -7,7 +8,6 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -31,11 +31,6 @@ fun DrawerMenu(
     )
     DrawerItem(
         modifier = modifier,
-        icon = Icons.Filled.MedicalInformation,
-        text = "SENASTE JOURNAL"
-    )
-    DrawerItem(
-        modifier = modifier,
         icon = Icons.Filled.Sensors,
         text = "RETTS-ONLINE"
     )
@@ -54,9 +49,6 @@ fun DrawerMenu(
         icon = Icons.Filled.Lightbulb,
         text = "ARBETSBESKRIVNING"
     )
-
-/*
-    DrawerFooter()*/
 }
 
 @Composable
@@ -69,7 +61,8 @@ fun DrawerItem(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(start = 25.dp, bottom = 15.dp, top = 15.dp),
+            .padding(start = 25.dp, bottom = 15.dp, top = 15.dp)
+            .clickable { println(text) },
         horizontalArrangement = Arrangement.spacedBy(25.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
