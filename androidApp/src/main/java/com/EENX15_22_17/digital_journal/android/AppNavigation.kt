@@ -140,7 +140,8 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
             requireNotNull(visitId) { "No patient id provided" }
             ArrivalPage(
                 visitId = visitId,
-                navBack = { navController.popBackStack() }
+                onBackClicked = navController::popBackStack,
+                onMenuClicked = switchScaffoldDrawerState
             )
         }
         composable(

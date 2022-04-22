@@ -27,7 +27,8 @@ fun DrawerMenu(
     DrawerItem(
         modifier = modifier,
         icon = Icons.Filled.Group,
-        text = "PATIENTMÖTE"
+        text = "PATIENTMÖTE",
+        onClicked = navToCurrPatients
     )
     DrawerItem(
         modifier = modifier,
@@ -70,7 +71,8 @@ fun DrawerItem(
             modifier = Modifier.size(30.dp),
             imageVector = icon,
             contentDescription = "icon",
-            tint = colorTextGray)
+            tint = colorTextGray
+        )
         Text(
             text = text,
             style = MaterialTheme.typography.h6,
@@ -79,7 +81,7 @@ fun DrawerItem(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun DrawerItemPreview() {
     DrawerItem(icon = Icons.Filled.Group, text = "PREVIEW TEXT")
@@ -113,7 +115,7 @@ fun DrawerHeader(
                 onClick = { /*TODO: Implement onSwitchAccount function*/ }
             ) {
                 Icon(
-                    imageVector = Icons.Default.SwitchAccount,
+                    imageVector = Icons.Default.SyncAlt,
                     contentDescription = "Switch account",
                     tint = primary.brighter(0.1f)
                 )
@@ -149,16 +151,4 @@ fun DrawerDivider(
     Spacer(
         modifier = Modifier.height(10.dp)
     )
-}
-
-
-@Composable
-fun DrawerBody() {
-
-}
-
-
-@Composable
-fun DrawerFooter() {
-    TODO("Not yet implemented")
 }
