@@ -3,9 +3,9 @@ package com.EENX15_22_17.digital_journal.android
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import com.EENX15_22_17.digital_journal.android.screens.arrival.patientinfo.ArrivalPage
 import com.EENX15_22_17.digital_journal.android.screens.treatment.ordination.OrdinationScreen
@@ -21,7 +21,7 @@ import com.EENX15_22_17.digital_journal.android.screens.triage.healthHistory.Hea
 import com.EENX15_22_17.digital_journal.android.screens.triage.previousCare.TempPreviusCare
 
 sealed class Screen(val route: String) {
-    object Overview : Screen(route = "overview")
+    object Current : Screen(route = "current")
     object PatientMeeting : Screen(route = "patientMeeting")
     object PatientOverview : Screen(route = "patientOverview/{visitId}") {
         fun createRoute(visitId: String) = "patientOverview/$visitId"
@@ -84,19 +84,22 @@ sealed class PatientMeetingScreen(val route: String) {
 
 
 @Composable
-fun NavigationApp() {
-    val navController = rememberNavController()
+fun NavigationApp(
+    navController: NavHostController,
+    switchScaffoldDrawerState : () -> Unit
+) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Overview.route
+        startDestination = Screen.Current.route
     ) {
-        addCurrentBoardGraph(navController = navController)
-        addPatientMeetingGraph(navController = navController)
+        addCurrentBoardGraph(navController = navController, switchScaffoldDrawerState = switchScaffoldDrawerState)
+        addPatientMeetingGraph(navController = navController, switchScaffoldDrawerState = switchScaffoldDrawerState)
     }
 }
 
 private fun NavGraphBuilder.addPatientMeetingGraph(
     navController: NavController,
+    switchScaffoldDrawerState: () -> Unit,
 ) {
     navigation(
         route = Screen.PatientMeeting.route,
@@ -137,7 +140,8 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
             requireNotNull(visitId) { "No patient id provided" }
             ArrivalPage(
                 visitId = visitId,
-                navBack = { navController.popBackStack() }
+                onBackClicked = navController::popBackStack,
+                onMenuClicked = switchScaffoldDrawerState
             )
         }
         composable(
@@ -147,7 +151,8 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
             requireNotNull(visitId) { "No patient id provided " }
             //TODO add hazard composable here
             HazardAssessment(
-                navBack = { navController.popBackStack() },
+                onBackClicked = navController::popBackStack,
+                onMenuClicked = switchScaffoldDrawerState,
                 visitId = visitId
             )
         }
@@ -156,7 +161,11 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
         ) { backStackEntry ->
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient meeting" }
-            ContactCauseScreen()
+            ContactCauseScreen(
+                onBackClicked = { navController.popBackStack() },
+                onMenuClicked = switchScaffoldDrawerState,
+                visitId = visitId
+            )
         }
         composable(
             route = PatientMeetingScreen.PreviousCare.createRoute()
@@ -194,7 +203,10 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
         ) { backStackEntry ->
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient meeting" }
-            SuicideAssessmentScreen()
+            SuicideAssessmentScreen(
+                onBackClicked = { navController.popBackStack() },
+                visitId = visitId
+            )
         }
         composable(
             route = PatientMeetingScreen.NursingNeed.createRoute()
@@ -212,7 +224,10 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
         ) { backStackEntry ->
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient meeting" }
-            OrdinationScreen(onBackClicked = navController::popBackStack)
+            OrdinationScreen(
+                onBackClicked = navController::popBackStack,
+                onMenuClicked = switchScaffoldDrawerState
+            )
         }
         composable(
             route = PatientMeetingScreen.InterimJournal.createRoute()
@@ -237,7 +252,8 @@ fun NavController.navToPatientMeetingForm(
 
 
 private fun NavGraphBuilder.addCurrentBoardGraph(
-    navController: NavController
+    navController: NavController,
+    switchScaffoldDrawerState: () -> Unit
 ) {
     /*TODO: Replace with real overview page */
     composable(route = Screen.PatientOverview.route) { backStackEntry ->
@@ -248,10 +264,7 @@ private fun NavGraphBuilder.addCurrentBoardGraph(
             navBack = { navController.popBackStack() }
         )
     }
-    composable(route = Screen.Overview.route) {
-        /*TODO: replace with real overview screen*/
-        /*TODO. Rename this so this not is the overview, should be startPage; Ask Jonas*/
-
+    composable(route = Screen.Current.route) {
         CurrentScreen(
             navigateSpecificPatient = { id ->
                 navController.navigate(
@@ -262,7 +275,12 @@ private fun NavGraphBuilder.addCurrentBoardGraph(
                 navController.navigate(
                     Screen.PatientOverview.createRoute(visitId = id)
                 )
-            }
+            },
+            switchScaffoldDrawerState = switchScaffoldDrawerState
         )
     }
+}
+
+fun NavController.navToCurrPatients() {
+    this.navigate(Screen.Current.route)
 }

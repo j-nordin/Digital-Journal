@@ -8,6 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.EENX15_22_17.digital_journal.android.ui.DetailPageWrapper
+import com.EENX15_22_17.digital_journal.android.ui.theme.Colors
 import com.EENX15_22_17.digital_journal.android.R
 import com.EENX15_22_17.digital_journal.android.ui.DetailPageWrapper
 import com.EENX15_22_17.digital_journal.android.ui.components.TitledSection
@@ -18,7 +20,8 @@ import com.EENX15_22_17.digital_journal.android.ui.theme.borderColor
 fun ArrivalPage(
     arrivalViewModel: ArrivalViewModel = ArrivalViewModel(),
     visitId: String,
-    navBack: () -> Unit
+    onBackClicked: () -> Unit,
+    onMenuClicked: () -> Unit
 ) {
 
     DetailPageWrapper(

@@ -3,6 +3,7 @@ val compose_version: String by project
 plugins {
     id("com.android.application")
     kotlin("android")
+    id("net.linguica.maven-settings")
 }
 
 android {
@@ -32,13 +33,17 @@ android {
 }
 
 dependencies {
+    // PREDICARE LIBS
+    implementation("se.predicare:core-data-jvm:0.2.0-SNAPSHOT")
+    implementation("se.predicare:journal-lib-jvm:0.2.1-SNAPSHOT")
+    implementation("se.predicare:journal-client-jvm:0.2.1-SNAPSHOT")
     implementation(project(":shared"))
     implementation("com.google.android.material:material:1.5.0")
     implementation("androidx.appcompat:appcompat:1.4.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.3")
     implementation("androidx.activity:activity-compose:1.5.0-alpha02")
     implementation("androidx.navigation:navigation-compose:2.4.1")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.6.10")
+    implementation(kotlin("stdlib"))
     implementation("androidx.compose.material:material:$compose_version")
     implementation("androidx.compose.ui:ui:$compose_version")
     androidTestImplementation("junit:junit:4.13.2")
