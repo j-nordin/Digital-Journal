@@ -1,20 +1,16 @@
 package com.EENX15_22_17.digital_journal.android.screens.arrival.patientinfo
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.EENX15_22_17.digital_journal.android.ui.DetailPageWrapper
-import com.EENX15_22_17.digital_journal.android.ui.theme.Colors
 import com.EENX15_22_17.digital_journal.android.R
 import com.EENX15_22_17.digital_journal.android.ui.DetailPageWrapper
 import com.EENX15_22_17.digital_journal.android.ui.components.TitledSection
 import com.EENX15_22_17.digital_journal.android.ui.theme.Colors
-import com.EENX15_22_17.digital_journal.android.ui.theme.borderColor
+
 
 @Composable
 fun ArrivalPage(
@@ -27,8 +23,8 @@ fun ArrivalPage(
     DetailPageWrapper(
         title = stringResource(id = R.string.patientInfo),
         titleColor = Colors.arrivalPrimary,
-        onBackClicked = navBack,
-        onMenuClicked = {}
+        onBackClicked = onBackClicked,
+        onMenuClicked = onMenuClicked
     ) {
         Column {
             TitledSection(title = "Ankomsttid") {
