@@ -17,15 +17,15 @@ import com.EENX15_22_17.digital_journal.android.ui.theme.Colors
 
 @Composable
 fun ContactCauseScreen(
-    navBack: () -> Unit,
     visitId: String,
+    onBackClicked: () -> Unit,
+    onMenuClicked: () -> Unit,
 ) {
     DetailPageWrapper(
         title = stringResource(id = R.string.contactReason),
         titleColor = Colors.treatmentPrimary,
-        onBackClicked = navBack,
-        onMenuClicked = {}
-
+        onBackClicked = onBackClicked,
+        onMenuClicked = onMenuClicked
     ) {
         Box(
             modifier = Modifier.fillMaxSize().padding(top = 20.dp)

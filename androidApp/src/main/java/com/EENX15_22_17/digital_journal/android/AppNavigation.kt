@@ -162,7 +162,8 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient meeting" }
             ContactCauseScreen(
-                navBack = { navController.popBackStack() },
+                onBackClicked = { navController.popBackStack() },
+                onMenuClicked = switchScaffoldDrawerState,
                 visitId = visitId
             )
         }
