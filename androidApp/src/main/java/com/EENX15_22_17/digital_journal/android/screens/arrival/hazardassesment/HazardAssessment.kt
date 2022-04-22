@@ -24,16 +24,17 @@ import com.EENX15_22_17.digital_journal.android.ui.theme.Colors
 
 @Composable
 fun HazardAssessment(
-    navBack: () -> Unit,
     // FIXME - This creates a new viewModel each conf. change which is not good. Will need to solve later
     hazardViewModel: HazardViewModel = HazardViewModel(),
-    visitId: String
+    visitId: String,
+    onBackClicked: () -> Unit,
+    onMenuClicked: () -> Unit
 ) {
     DetailPageWrapper(
         title = stringResource(id = R.string.dangerAssessmentHeader),
-        titleColor = Colors.treatmentPrimary,
-        onBackClicked = navBack,
-        onMenuClicked = {}
+        titleColor = Colors.arrivalPrimary,
+        onBackClicked = onBackClicked,
+        onMenuClicked = onMenuClicked
     ) {
         //FIXME, when state issue is solved, this must be updated when clicking on specified behavioir checkboxes
         var bvcNr by rememberSaveable { mutableStateOf(0) }

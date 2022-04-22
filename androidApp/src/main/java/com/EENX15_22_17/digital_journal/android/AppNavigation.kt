@@ -151,7 +151,8 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
             requireNotNull(visitId) { "No patient id provided " }
             //TODO add hazard composable here
             HazardAssessment(
-                navBack = { navController.popBackStack() },
+                onBackClicked = navController::popBackStack,
+                onMenuClicked = switchScaffoldDrawerState,
                 visitId = visitId
             )
         }
