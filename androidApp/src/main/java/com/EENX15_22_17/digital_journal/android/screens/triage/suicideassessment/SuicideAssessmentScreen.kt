@@ -17,14 +17,15 @@ import com.EENX15_22_17.digital_journal.android.ui.theme.Colors
 
 @Composable
 fun SuicideAssessmentScreen(
+    visitId: String,
     onBackClicked: () -> Unit,
-    visitId: String
+    onMenuClicked: () -> Unit
 ) {
     DetailPageWrapper(
         title = stringResource(id = R.string.suicideAssessment),
         titleColor = Colors.treatmentPrimary,
         onBackClicked = onBackClicked,
-        onMenuClicked = {}
+        onMenuClicked = onMenuClicked
     ) {
        Column(verticalArrangement = Arrangement.Center) {
 

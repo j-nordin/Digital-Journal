@@ -162,7 +162,7 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient meeting" }
             ContactCauseScreen(
-                onBackClicked = { navController.popBackStack() },
+                onBackClicked = navController::popBackStack,
                 onMenuClicked = switchScaffoldDrawerState,
                 visitId = visitId
             )
@@ -175,7 +175,9 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
             // TODO add PreviousCare composable
             TempPreviusCare(
                 visitId = visitId,
-                navBack = { navController.popBackStack() })
+                onBackClicked = navController::popBackStack,
+                onMenuClicked = switchScaffoldDrawerState
+            )
         }
         composable(
             route = PatientMeetingScreen.HealthHistory.createRoute()
@@ -184,7 +186,8 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
             requireNotNull(visitId) { "No patient meeting" }
             HealthHistoryPage(
                 visitId = visitId,
-                navBack = { navController.popBackStack() }
+                onBackClicked = navController::popBackStack,
+                onMenuClicked = switchScaffoldDrawerState
             )
         }
         composable(
@@ -195,7 +198,8 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
             // TODO add HealthNow composable
             TempCurrentHealth(
                 visitId = visitId,
-                navBack = { navController.popBackStack() }
+                onBackClicked = navController::popBackStack,
+                onMenuClicked = switchScaffoldDrawerState
             )
         }
         composable(
@@ -204,8 +208,9 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient meeting" }
             SuicideAssessmentScreen(
-                onBackClicked = { navController.popBackStack() },
-                visitId = visitId
+                visitId = visitId,
+                onBackClicked = navController::popBackStack,
+                onMenuClicked = switchScaffoldDrawerState
             )
         }
         composable(
@@ -216,7 +221,8 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
             // TODO add nursingNeed composable
             TempMedicalCheckup(
                 visitId = visitId,
-                navBack = { navController.popBackStack() }
+                onBackClicked = navController::popBackStack,
+                onMenuClicked = switchScaffoldDrawerState
             )
         }
         composable(
@@ -237,7 +243,8 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
             // TODO add interimJournal composable
             TempInterim(
                 visitId = visitId,
-                navBack = { navController.popBackStack() }
+                onBackClicked = navController::popBackStack,
+                onMenuClicked = switchScaffoldDrawerState
             )
         }
     }
