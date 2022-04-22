@@ -17,6 +17,8 @@ import com.EENX15_22_17.digital_journal.android.dataModel.NursesNeeds
 import com.EENX15_22_17.digital_journal.android.dataModel.YesNo
 import com.EENX15_22_17.digital_journal.android.dataModel.nursesNeeds
 import com.EENX15_22_17.digital_journal.android.dataModel.yesNoLabels
+import com.EENX15_22_17.digital_journal.android.ui.DetailPageWrapper
+import com.EENX15_22_17.digital_journal.android.ui.theme.Colors
 import com.EENX15_22_17.digital_journal.android.ui.theme.borderColor
 
 @Composable
@@ -39,141 +41,148 @@ fun HealthHistoryPage(
         .padding(horizontal = 16.dp, vertical = 12.dp)
 
 
-    Column(modifier = Modifier.fillMaxWidth()) {
-        Text(text = "Ankomst sidan för patient: $visitId")
-        Button(onClick = onBackClicked) {
-            Text(text = "Gå tillbaka")
-        }
-        Row(modifier = rowModifier) {
-            healthHistoryViewModel.somaticHealth.value?.let { somaticHealth ->
-                SomaticHealth(
-                    choices = somaticHealthValues.keys.toTypedArray(),
-                    onChange = { healthHistoryViewModel.somaticHealth.value = it },
-                    currentSelected = healthHistoryViewModel.somaticHealth.value ?: emptySet(),
-                    labels = somaticHealthValues
-                )
-            }
-        }
-        Row {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth(0.5f)
-                    .padding(vertical = 6.dp, horizontal = 2.dp)
-                    .border(
-                        border = BorderStroke(
-                            2.dp,
-                            borderColor
-                        ),
-                        shape = RoundedCornerShape(8.dp)
-                    )
-                    .padding(horizontal = 16.dp, vertical = 12.dp)
-            ) {
-                Row {
-                    BloodInfection(
-                        isBloodInfection = healthHistoryViewModel.isBloodInfection.value
-                            ?: YesNo.UNKOWN,
-                        onBloodInfection = { healthHistoryViewModel.isBloodInfection.value = it },
-                        choices = yesNoLabels.keys.toTypedArray(),
-                        labels = yesNoLabels
-                    )
-                    BloodInfectionType(
-                        onChangeText = { healthHistoryViewModel.bloodInfectionType.value = it },
-                        textValue = healthHistoryViewModel.bloodInfectionType.value ?: ""
+    DetailPageWrapper(
+        title = "HÄLSA HISTORIK",
+        titleColor = Colors.treatmentPrimary,
+        onBackClicked = onBackClicked,
+        onMenuClicked = onMenuClicked
+    ) {
+        Column(modifier = Modifier.fillMaxWidth()) {
+            Row(modifier = rowModifier) {
+                healthHistoryViewModel.somaticHealth.value?.let { somaticHealth ->
+                    SomaticHealth(
+                        choices = somaticHealthValues.keys.toTypedArray(),
+                        onChange = { healthHistoryViewModel.somaticHealth.value = it },
+                        currentSelected = healthHistoryViewModel.somaticHealth.value ?: emptySet(),
+                        labels = somaticHealthValues
                     )
                 }
             }
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 6.dp, horizontal = 2.dp)
-                    .border(
-                        border = BorderStroke(
-                            2.dp,
-                            borderColor
-                        ),
-                        shape = RoundedCornerShape(8.dp)
-                    )
-                    .padding(horizontal = 16.dp, vertical = 12.dp)
-            ) {
-                Row {
-                    Hypersensitivity(
-                        isHypersensitiv = healthHistoryViewModel.isHyperSensitive.value
+            Row {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth(0.5f)
+                        .padding(vertical = 6.dp, horizontal = 2.dp)
+                        .border(
+                            border = BorderStroke(
+                                2.dp,
+                                borderColor
+                            ),
+                            shape = RoundedCornerShape(8.dp)
+                        )
+                        .padding(horizontal = 16.dp, vertical = 12.dp)
+                ) {
+                    Row {
+                        BloodInfection(
+                            isBloodInfection = healthHistoryViewModel.isBloodInfection.value
+                                ?: YesNo.UNKOWN,
+                            onBloodInfection = {
+                                healthHistoryViewModel.isBloodInfection.value = it
+                            },
+                            choices = yesNoLabels.keys.toTypedArray(),
+                            labels = yesNoLabels
+                        )
+                        BloodInfectionType(
+                            onChangeText = { healthHistoryViewModel.bloodInfectionType.value = it },
+                            textValue = healthHistoryViewModel.bloodInfectionType.value ?: ""
+                        )
+                    }
+                }
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 6.dp, horizontal = 2.dp)
+                        .border(
+                            border = BorderStroke(
+                                2.dp,
+                                borderColor
+                            ),
+                            shape = RoundedCornerShape(8.dp)
+                        )
+                        .padding(horizontal = 16.dp, vertical = 12.dp)
+                ) {
+                    Row {
+                        Hypersensitivity(
+                            isHypersensitiv = healthHistoryViewModel.isHyperSensitive.value
+                                ?: YesNo.UNKOWN,
+                            onHypersensitiv = {
+                                healthHistoryViewModel.isHyperSensitive.value = it
+                            },
+                            choices = yesNoLabels.keys.toTypedArray(),
+                            labels = yesNoLabels
+                        )
+                        HypersensitivityType(
+                            onChangeText = { healthHistoryViewModel.hyperSensitiveType.value = it },
+                            textValue = healthHistoryViewModel.hyperSensitiveType.value ?: ""
+                        )
+                    }
+
+                }
+            }
+
+            Row {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth(0.5f)
+                        .padding(vertical = 6.dp, horizontal = 2.dp)
+                        .border(
+                            border = BorderStroke(
+                                2.dp,
+                                borderColor
+                            ),
+                            shape = RoundedCornerShape(8.dp)
+                        )
+                        .padding(horizontal = 16.dp, vertical = 12.dp)
+                ) {
+                    Multiresistant(
+                        isMultiresistant = healthHistoryViewModel.isMultiresistant.value
                             ?: YesNo.UNKOWN,
-                        onHypersensitiv = { healthHistoryViewModel.isHyperSensitive.value = it },
+                        onMultiresistant = { healthHistoryViewModel.isMultiresistant.value = it },
                         choices = yesNoLabels.keys.toTypedArray(),
                         labels = yesNoLabels
                     )
-                    HypersensitivityType(
-                        onChangeText = { healthHistoryViewModel.hyperSensitiveType.value = it },
-                        textValue = healthHistoryViewModel.hyperSensitiveType.value ?: ""
+                }
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 6.dp, horizontal = 2.dp)
+                        .border(
+                            border = BorderStroke(
+                                2.dp,
+                                borderColor
+                            ),
+                            shape = RoundedCornerShape(8.dp)
+                        )
+                        .padding(horizontal = 16.dp, vertical = 12.dp)
+                ) {
+                    SuspicionGE(
+                        isSuspicionGE = healthHistoryViewModel.suspicionGE.value ?: YesNo.UNKOWN,
+                        onSuspicionGE = { healthHistoryViewModel.suspicionGE.value = it },
+                        choices = yesNoLabels.keys.toTypedArray(),
+                        labels = yesNoLabels
                     )
                 }
-
             }
-        }
-
-        Row {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth(0.5f)
-                    .padding(vertical = 6.dp, horizontal = 2.dp)
-                    .border(
-                        border = BorderStroke(
-                            2.dp,
-                            borderColor
-                        ),
-                        shape = RoundedCornerShape(8.dp)
-                    )
-                    .padding(horizontal = 16.dp, vertical = 12.dp)
-            ) {
-                Multiresistant(
-                    isMultiresistant = healthHistoryViewModel.isMultiresistant.value
-                        ?: YesNo.UNKOWN,
-                    onMultiresistant = { healthHistoryViewModel.isMultiresistant.value = it },
+            Row(modifier = rowModifier) {
+                var isRendered by rememberSaveable { mutableStateOf(healthHistoryViewModel.isNursesNeed.value) }
+                NursesNeeds(
+                    isNursesNeeds = healthHistoryViewModel.isNursesNeed.value ?: YesNo.UNKOWN,
+                    onNursesNeeds = {
+                        healthHistoryViewModel.isNursesNeed.value = it
+                        isRendered = healthHistoryViewModel.isNursesNeed.value
+                    },
                     choices = yesNoLabels.keys.toTypedArray(),
                     labels = yesNoLabels
                 )
-            }
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 6.dp, horizontal = 2.dp)
-                    .border(
-                        border = BorderStroke(
-                            2.dp,
-                            borderColor
-                        ),
-                        shape = RoundedCornerShape(8.dp)
+                if (isRendered?.equals(YesNo.YES) == true) {
+                    NursesNeedsAlternative(
+                        currentValues = healthHistoryViewModel.nursesNeedsAlternatives.value
+                            ?: setOf<NursesNeeds>(),
+                        setValues = { healthHistoryViewModel.nursesNeedsAlternatives.value = it },
+                        choices = nursesNeeds.keys.toTypedArray(),
+                        labels = nursesNeeds
                     )
-                    .padding(horizontal = 16.dp, vertical = 12.dp)
-            ) {
-                SuspicionGE(
-                    isSuspicionGE = healthHistoryViewModel.suspicionGE.value ?: YesNo.UNKOWN,
-                    onSuspicionGE = { healthHistoryViewModel.suspicionGE.value = it },
-                    choices = yesNoLabels.keys.toTypedArray(),
-                    labels = yesNoLabels
-                )
-            }
-        }
-        Row(modifier = rowModifier) {
-            var isRendered by rememberSaveable { mutableStateOf(healthHistoryViewModel.isNursesNeed.value) }
-            NursesNeeds(
-                isNursesNeeds = healthHistoryViewModel.isNursesNeed.value ?: YesNo.UNKOWN,
-                onNursesNeeds = {
-                    healthHistoryViewModel.isNursesNeed.value = it
-                    isRendered = healthHistoryViewModel.isNursesNeed.value
-                },
-                choices = yesNoLabels.keys.toTypedArray(),
-                labels = yesNoLabels
-            )
-            if (isRendered?.equals(YesNo.YES) == true) {
-                NursesNeedsAlternative(
-                    currentValues = healthHistoryViewModel.nursesNeedsAlternatives.value
-                        ?: setOf<NursesNeeds>(),
-                    setValues = { healthHistoryViewModel.nursesNeedsAlternatives.value = it },
-                    choices = nursesNeeds.keys.toTypedArray(),
-                    labels = nursesNeeds
-                )
+                }
             }
         }
     }
