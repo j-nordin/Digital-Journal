@@ -9,11 +9,13 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 import com.EENX15_22_17.digital_journal.android.ui.theme.borderColor
 
 @Composable
 fun ArrivalPage(
-    arrivalViewModel: ArrivalViewModel = ArrivalViewModel(),
+    arrivalViewModel: ArrivalViewModel,
     visitId: String,
     navBack: () -> Unit
 ) {
@@ -150,7 +152,7 @@ fun ArrivalPage(
             ) {
                 ArrivalType(
                     choices = arrivalMethods.keys.toTypedArray(),
-                    onChange = { arrivalViewModel.arrivalStates.arrivalMethod = it},
+                    onChange = { arrivalViewModel.arrivalStates.arrivalMethod = it },
                     currentSelected = arrivalViewModel.arrivalStates.arrivalMethod,
                     labels = arrivalMethods
                 )
@@ -170,7 +172,7 @@ fun ArrivalPage(
             ) {
                 Laws(
                     choices = laws.keys.toTypedArray(),
-                    onChange = { arrivalViewModel.arrivalStates.law = it},
+                    onChange = { arrivalViewModel.arrivalStates.law = it },
                     currentSelected = arrivalViewModel.arrivalStates.law,
                     labels = laws
                 )

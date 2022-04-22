@@ -10,6 +10,7 @@ import androidx.navigation.navigation
 import com.EENX15_22_17.digital_journal.android.screens.arrival.patientinfo.ArrivalPage
 import com.EENX15_22_17.digital_journal.android.screens.treatment.ordination.OrdinationScreen
 import com.EENX15_22_17.digital_journal.android.screens.arrival.hazardassesment.HazardAssessment
+import com.EENX15_22_17.digital_journal.android.screens.arrival.patientinfo.ArrivalViewModel
 import com.EENX15_22_17.digital_journal.android.ui.current.CurrentScreen
 import com.EENX15_22_17.digital_journal.android.screens.landingpage.LandingPage
 import com.EENX15_22_17.digital_journal.android.screens.treatment.checkups.TempMedicalCheckup
@@ -84,19 +85,22 @@ sealed class PatientMeetingScreen(val route: String) {
 
 
 @Composable
-fun NavigationApp() {
+fun NavigationApp(
+    arrivalViewModel: ArrivalViewModel
+) {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
         startDestination = Screen.Overview.route
     ) {
         addCurrentBoardGraph(navController = navController)
-        addPatientMeetingGraph(navController = navController)
+        addPatientMeetingGraph(navController = navController, arrivalViewModel = arrivalViewModel)
     }
 }
 
 private fun NavGraphBuilder.addPatientMeetingGraph(
     navController: NavController,
+    arrivalViewModel: ArrivalViewModel
 ) {
     navigation(
         route = Screen.PatientMeeting.route,
@@ -136,6 +140,7 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient id provided" }
             ArrivalPage(
+                arrivalViewModel,
                 visitId = visitId,
                 navBack = { navController.popBackStack() }
             )
