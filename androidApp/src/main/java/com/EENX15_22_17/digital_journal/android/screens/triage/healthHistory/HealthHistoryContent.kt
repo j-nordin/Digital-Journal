@@ -12,7 +12,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.EENX15_22_17.digital_journal.android.R
-import com.EENX15_22_17.digital_journal.android.ui.components.EnumCheckBoxLazyGrid
+import com.EENX15_22_17.digital_journal.android.ui.components.EnumCheckboxesLazyGrid
 import com.EENX15_22_17.digital_journal.android.ui.components.EnumRadioButtonsHorizontal
 import com.EENX15_22_17.digital_journal.android.dataModel.YesNo
 import com.EENX15_22_17.digital_journal.android.ui.components.TitledTextField
@@ -33,10 +33,10 @@ fun <E : Enum<*>> SomaticHealth(
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(vertical = 16.dp)
         )
-        EnumCheckBoxLazyGrid(
+        EnumCheckboxesLazyGrid(
             choices = choices,
             onSelectionChanged = onChange,
-            currentSelected = currentSelected,
+            selection = currentSelected,
             labels = labels,
             gridLayout = GridCells.Adaptive(300.dp)
         )
@@ -228,10 +228,10 @@ fun <E : Enum<E>> NursesNeedsAlternative(
     labels: Map<E, String>,
 ) {
     Box(modifier = modifier.padding(start = 40.dp)) {
-        EnumCheckBoxLazyGrid(
+        EnumCheckboxesLazyGrid(
             choices = choices,
             onSelectionChanged = setValues,
-            currentSelected = currentValues,
+            selection = currentValues,
             labels = labels,
             gridLayout = GridCells.Adaptive(250.dp)
         )

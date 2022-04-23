@@ -20,4 +20,8 @@ object TextStyles {
         fontWeight = FontWeight.Medium,
         letterSpacing = 0.50.sp
     )
+    val checkboxLabel = TextStyle(
+        fontSize = 18.sp,
+        fontWeight = FontWeight.Normal
+    )
 }

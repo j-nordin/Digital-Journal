@@ -16,7 +16,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.EENX15_22_17.digital_journal.android.R
 import com.EENX15_22_17.digital_journal.android.ui.DetailPageWrapper
-import com.EENX15_22_17.digital_journal.android.ui.components.EnumCheckBoxLazyGrid
+import com.EENX15_22_17.digital_journal.android.ui.components.EnumCheckboxesLazyGrid
 import com.EENX15_22_17.digital_journal.android.ui.components.TitledSection
 import com.EENX15_22_17.digital_journal.android.ui.components.TitledTextField
 import com.EENX15_22_17.digital_journal.android.ui.theme.Colors
@@ -76,22 +76,22 @@ fun HazardAssessment(
             TitledSection(
                 title = stringResource(id = R.string.InitialHazardAssessment)
             ) {
-                EnumCheckBoxLazyGrid(
+                EnumCheckboxesLazyGrid(
                     choices = dangerTypes.keys.toTypedArray(),
                     onSelectionChanged = {
                         hazardViewModel.hazardStates.initialAssessment = it
                     },
-                    currentSelected = hazardViewModel.hazardStates.initialAssessment,
+                    selection = hazardViewModel.hazardStates.initialAssessment,
                     labels = dangerTypes,
                     gridLayout = GridCells.Adaptive(270.dp)
                 )
             }
             TitledSection(title = stringResource(id = R.string.specifiedBehavior))
             {
-                EnumCheckBoxLazyGrid(
+                EnumCheckboxesLazyGrid(
                     choices = dangerBehaviors.keys.toTypedArray(),
                     onSelectionChanged = { hazardViewModel.hazardStates.specifiedBehavior = it },
-                    currentSelected = hazardViewModel.hazardStates.specifiedBehavior,
+                    selection = hazardViewModel.hazardStates.specifiedBehavior,
                     labels = dangerBehaviors,
                     gridLayout = GridCells.Adaptive(270.dp)
                 )
@@ -139,10 +139,10 @@ fun Laws(
     Column(
         modifier = modifier
     ) {
-        EnumCheckBoxLazyGrid(
+        EnumCheckboxesLazyGrid(
             choices = choices,
             onSelectionChanged = onChange,
-            currentSelected = currentSelected,
+            selection = currentSelected,
             labels = labels,
             gridLayout = GridCells.Adaptive(92.dp)
         )
@@ -160,10 +160,10 @@ fun ArrivalType(
     Column(
         modifier = modifier
     ) {
-        EnumCheckBoxLazyGrid(
+        EnumCheckboxesLazyGrid(
             choices = choices,
             onSelectionChanged = onChange,
-            currentSelected = currentSelected,
+            selection = currentSelected,
             labels = labels,
             gridLayout = GridCells.Adaptive(180.dp),
             isHorizontal = false
