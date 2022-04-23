@@ -5,8 +5,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.EENX15_22_17.digital_journal.android.ui.components.EnumCheckBoxLazyGrid
-import com.EENX15_22_17.digital_journal.android.ui.theme.colorCheckBoxBeta
+import com.EENX15_22_17.digital_journal.android.ui.components.EnumCheckboxesLazyGrid
 
 @Composable
 fun <E : Enum<*>> SuicideAssessmentModel(
@@ -19,14 +18,12 @@ fun <E : Enum<*>> SuicideAssessmentModel(
 
     Column(modifier = modifier) {
 
-        EnumCheckBoxLazyGrid(
+        EnumCheckboxesLazyGrid(
             choices = choices,
             onSelectionChanged = onChange,
-            currentSelected = currentSelected,
+            selection = currentSelected,
             labels = labels,
-            gridLayout = GridCells.Adaptive(300.dp),
-            textFontSize = 18,
-            circleBgColor = colorCheckBoxBeta
+            gridLayout = GridCells.Adaptive(300.dp)
         )
 
     }

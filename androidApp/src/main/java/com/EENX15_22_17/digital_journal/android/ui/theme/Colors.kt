@@ -40,5 +40,5 @@ object Colors {
 }
 
 
-val colorCheckBoxBeta = Color(0xFFE8F4FE)
+val colorCheckBoxBeta = Color(0xFFF5F5F5)
 val summarySuicideCard = Color(0xFF2196F3)
