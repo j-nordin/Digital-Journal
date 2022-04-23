@@ -14,3 +14,4 @@ val DigitalJournalShapes = Shapes(
 val checkboxBackgroundShape = RoundedCornerShape(CornerSize(4.dp))
 // This is not used as it seems not possible to change the box part of checkboxes.
 val checkboxBoxSize = 26.dp
+val checkboxBoxBackgroundSize = 36.dp

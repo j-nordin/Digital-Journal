@@ -7,11 +7,13 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Checkbox
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -20,7 +22,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.EENX15_22_17.digital_journal.android.ui.theme.TextStyles
 import com.EENX15_22_17.digital_journal.android.ui.theme.checkboxBackgroundShape
-import com.EENX15_22_17.digital_journal.android.ui.theme.checkboxBoxSize
+import com.EENX15_22_17.digital_journal.android.ui.theme.checkboxBoxBackgroundSize
 import com.EENX15_22_17.digital_journal.android.ui.theme.colorCheckBoxBeta
 import modifyIf
 
@@ -109,7 +111,11 @@ fun LabeledCheckbox(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Start
     ) {
-        Box(Modifier.background(colorCheckBoxBeta, checkboxBackgroundShape)) {
+        Box(contentAlignment = Alignment.Center) {
+            Box(Modifier
+                .size(checkboxBoxBackgroundSize)
+                .background(colorCheckBoxBeta, checkboxBackgroundShape)
+            )
             Checkbox(
                 checked = isChecked,
                 onCheckedChange = ::changeState
