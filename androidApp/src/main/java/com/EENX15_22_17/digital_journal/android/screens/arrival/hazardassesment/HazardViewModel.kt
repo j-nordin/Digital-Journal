@@ -10,7 +10,9 @@ class HazardViewModel : ViewModel() {
         HazardDataClass(
             initialAssessment = setOf<DangerType>(),
             specifiedBehavior = setOf<DangerBehaviors>(),
-            takenActions = ""
+            takenActions = "",
+            law = setOf<Law>(),
+            arrivalMethod = setOf<ArrivalMethod>()
         )
     )
 }

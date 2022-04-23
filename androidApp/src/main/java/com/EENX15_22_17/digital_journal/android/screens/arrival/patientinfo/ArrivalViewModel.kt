@@ -19,10 +19,10 @@ class ArrivalViewModel : ViewModel() {
             samsa = YesNo.UNKOWN,
             relativeName = "",
             relativePhoneNumber = "",
-            children = mutableListOf(),
+            children = mutableListOf<String>(),
             concernReport = YesNo.UNKOWN,
-            arrivalMethod = setOf<ArrivalMethod>(),
-            law = setOf<Law>()
+            lockNumber = "",
+            signature = "",
         )
     )
         private set

@@ -12,9 +12,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.EENX15_22_17.digital_journal.android.ui.theme.checkBoxColor
+import com.EENX15_22_17.digital_journal.android.ui.theme.colorCheckBoxBeta
 
 
 @Composable
@@ -69,11 +71,13 @@ fun <E : Enum<*>> EnumRadioButtons(
                     onSelection(choice)
                 }
                 .padding(horizontal = 12.dp)
-                .background(checkBoxColor, CircleShape)
+
         ) {
             RadioButton(
                 selected = (choice == selection),
-                modifier = Modifier.padding(all = Dp(value = 8F)),
+                modifier = Modifier
+                    .padding(4.dp)
+                    .background(colorCheckBoxBeta, CircleShape),
                 onClick = {
                     selection = choice
                     onSelection(choice)

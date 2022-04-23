@@ -2,6 +2,7 @@ package com.EENX15_22_17.digital_journal.android.ui.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
@@ -27,23 +28,25 @@ fun TitledTextField(
     onChangeText: (textValue: String) -> Unit,
     textValue: String,
     modifier: Modifier = Modifier,
+    isEnabled: Boolean = true
 ) {
     var text by rememberSaveable { mutableStateOf(textValue) }
     Box {
         OutlinedTextField(
             value = text,
             onValueChange = { text = it; onChangeText(it) },
-            textStyle = TextStyle(fontSize = 25.sp),
+            textStyle = TextStyle(fontSize = 20.sp),
             modifier = modifier
-                .padding(top = 10.dp)
-                .width(200.dp),
+                .width(200.dp)
+                .height(60.dp),
             label = {
                 Text(
                     text = title,
-                    fontSize = 25.sp
+                    fontSize = 20.sp
                 )
             },
-            maxLines = 1
+            maxLines = 1,
+            enabled = isEnabled
         )
     }
 }
@@ -59,14 +62,14 @@ fun TitledTextFieldDigitKeyboard(
         OutlinedTextField(
             value = text,
             onValueChange = { text = it; onChangeText(it) },
-            textStyle = TextStyle(fontSize = 25.sp),
+            textStyle = TextStyle(fontSize = 20.sp),
             modifier = Modifier
-                .padding(top = 10.dp)
-                .width(160.dp),
+                .width(160.dp)
+                .height(60.dp),
             label = {
                 Text(
                     text = title,
-                    fontSize = 25.sp
+                    fontSize = 20.sp
                 )
             },
             maxLines = 1,

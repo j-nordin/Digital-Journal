@@ -3,6 +3,7 @@ package com.EENX15_22_17.digital_journal.android.ui.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Checkbox
@@ -17,6 +18,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.EENX15_22_17.digital_journal.android.ui.theme.checkBoxColor
+import com.EENX15_22_17.digital_journal.android.ui.theme.colorCheckBoxBeta
 
 @Composable
 fun <E : Enum<*>> EnumCheckBox(
@@ -32,7 +34,7 @@ fun <E : Enum<*>> EnumCheckBox(
             var isChecked by rememberSaveable { mutableStateOf(choice in selection) }
             Text(text = labels[choice] ?: choice.name, textAlign = TextAlign.Center)
             Box(
-                modifier = Modifier.background(MaterialTheme.colors.secondary, CircleShape)
+                modifier = Modifier.background(colorCheckBoxBeta, CircleShape)
             ) {
                 Checkbox(
                     checked = isChecked,
@@ -97,44 +99,110 @@ fun <E : Enum<*>> EnumCheckBoxLazyGrid(
     currentSelected: Set<E>,
     labels: Map<E, String>,
     gridLayout: GridCells,
-    circleBgColor: Color=checkBoxColor,
-    textFontSize: Int=20
+    circleBgColor: Color = checkBoxColor,
+    textFontSize: Int = 20,
+    isHorizontal: Boolean = false
 ) {
     val currentSelection: MutableSet<E> = currentSelected.toMutableSet()
-
-    LazyVerticalGrid(
-        columns = gridLayout,
-        content = {
-            items(choices.size) { index ->
-                var isChecked by rememberSaveable { mutableStateOf(choices[index] in currentSelection) }
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.padding(4.dp)
-                ) {
-                    Box(
-                        modifier = Modifier.background(circleBgColor, CircleShape)
+    if (isHorizontal) {
+        LazyHorizontalGrid(
+            rows = gridLayout,
+            content = {
+                items(choices.size) { index ->
+                    var isChecked by rememberSaveable { mutableStateOf(choices[index] in currentSelection) }
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.padding(4.dp)
                     ) {
-                        Checkbox(
-                            checked = isChecked,
-                            onCheckedChange = { checked ->
-                                isChecked = checked
-                                when(checked) {
-                                    false -> currentSelection.remove(choices[index])
-                                    true -> currentSelection.add(choices[index])
+                        Box(
+                            modifier = Modifier.background(colorCheckBoxBeta, CircleShape)
+                        ) {
+                            Checkbox(
+                                checked = isChecked,
+                                onCheckedChange = { checked ->
+                                    isChecked = checked
+                                    when (checked) {
+                                        false -> currentSelection.remove(choices[index])
+                                        true -> currentSelection.add(choices[index])
+                                    }
+                                    onSelectionChanged(currentSelection.toSet())
                                 }
-                                onSelectionChanged(currentSelection.toSet())
-                            }
+                            )
+                        }
+                        Text(
+                            text = labels[choices[index]] ?: choices[index].name,
+                            textAlign = TextAlign.Start,
+                            modifier = Modifier.padding(start = 8.dp),
+                            fontSize = textFontSize.sp
                         )
                     }
-                    Text(
-                        text = labels[choices[index]] ?: choices[index].name,
-                        textAlign = TextAlign.Start,
-                        modifier = Modifier.padding(start = 8.dp),
-                        fontSize = textFontSize.sp
-                    )
+                }
+
+            }
+        )
+    } else {
+        LazyVerticalGrid(
+            columns = gridLayout,
+            content = {
+                items(choices.size) { index ->
+                    var isChecked by rememberSaveable { mutableStateOf(choices[index] in currentSelection) }
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.padding(4.dp)
+                    ) {
+                        Box(
+                            modifier = Modifier.background(colorCheckBoxBeta, CircleShape)
+                        ) {
+                            Checkbox(
+                                checked = isChecked,
+                                onCheckedChange = { checked ->
+                                    isChecked = checked
+                                    when (checked) {
+                                        false -> currentSelection.remove(choices[index])
+                                        true -> currentSelection.add(choices[index])
+                                    }
+                                    onSelectionChanged(currentSelection.toSet())
+                                }
+                            )
+                        }
+                        Text(
+                            text = labels[choices[index]] ?: choices[index].name,
+                            textAlign = TextAlign.Start,
+                            modifier = Modifier.padding(start = 8.dp),
+                            fontSize = textFontSize.sp
+                        )
+                    }
                 }
             }
+        )
+    }
+}
+
+
+@Composable
+fun LabeledCheckbox(
+    label: String,
+    checked: Boolean,
+    onCheckedChange: (isChecked: Boolean) -> Unit
+) {
+    var isChecked by rememberSaveable { mutableStateOf(checked) }
+    Row {
+        Box(
+            modifier = Modifier.background(colorCheckBoxBeta, CircleShape)
+        ) {
+            Checkbox(
+                checked = isChecked,
+                onCheckedChange = {
+                    isChecked = it
+                    onCheckedChange(isChecked)
+                }
+            )
         }
-    )
+        Text(
+            modifier = Modifier.padding(start = 4.dp, top = 14.dp),
+            text = label,
+            textAlign = TextAlign.Center
+        )
+    }
 }
 
