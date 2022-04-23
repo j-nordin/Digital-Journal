@@ -23,7 +23,8 @@ import com.EENX15_22_17.digital_journal.android.ui.theme.borderColor
 fun HealthHistoryPage(
     healthHistoryViewModel: HealthHistoryViewModel = HealthHistoryViewModel(),
     visitId: String = "id",
-    navBack: () -> Unit = { }
+    onBackClicked: () -> Unit = { },
+    onMenuClicked: () -> Unit
 ) {
     val rowModifier: Modifier = Modifier
         .fillMaxWidth()
@@ -40,7 +41,7 @@ fun HealthHistoryPage(
 
     Column(modifier = Modifier.fillMaxWidth()) {
         Text(text = "Ankomst sidan för patient: $visitId")
-        Button(onClick = navBack) {
+        Button(onClick = onBackClicked) {
             Text(text = "Gå tillbaka")
         }
         Row(modifier = rowModifier) {
