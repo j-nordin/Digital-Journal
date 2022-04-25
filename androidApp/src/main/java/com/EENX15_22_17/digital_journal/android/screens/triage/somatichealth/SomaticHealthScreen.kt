@@ -16,10 +16,7 @@ import com.EENX15_22_17.digital_journal.android.dataModel.YesNo
 import com.EENX15_22_17.digital_journal.android.dataModel.nursesNeeds
 import com.EENX15_22_17.digital_journal.android.dataModel.yesNoLabels
 import com.EENX15_22_17.digital_journal.android.ui.DetailPageWrapper
-import com.EENX15_22_17.digital_journal.android.ui.components.EnumCheckBoxLazyGrid
-import com.EENX15_22_17.digital_journal.android.ui.components.EnumRadioButtonsHorizontal
-import com.EENX15_22_17.digital_journal.android.ui.components.TitledSection
-import com.EENX15_22_17.digital_journal.android.ui.components.TitledTextField
+import com.EENX15_22_17.digital_journal.android.ui.components.*
 import com.EENX15_22_17.digital_journal.android.ui.theme.Colors
 
 @Composable
@@ -40,10 +37,10 @@ fun HealthHistoryPage(
             // SomaticHealth choices
             TitledSection(title = stringResource(id = R.string.somaticHealth)) {
                 somaticHealthViewModel.somaticHealth.value?.let { _ ->
-                    EnumCheckBoxLazyGrid(
+                    EnumCheckboxesLazyGrid(
                         choices = somaticHealthValues.keys.toTypedArray(),
                         onSelectionChanged = { somaticHealthViewModel.somaticHealth.value = it },
-                        currentSelected = somaticHealthViewModel.somaticHealth.value ?: emptySet(),
+                        selection = somaticHealthViewModel.somaticHealth.value ?: emptySet(),
                         labels = somaticHealthValues,
                         gridLayout = GridCells.Adaptive(300.dp)
                     )
@@ -185,10 +182,10 @@ fun <E : Enum<E>> NursesNeedsAlternative(
     labels: Map<E, String>,
 ) {
     Box(modifier = modifier.padding(start = 40.dp)) {
-        EnumCheckBoxLazyGrid(
+        EnumCheckboxesLazyGrid(
             choices = choices,
             onSelectionChanged = setValues,
-            currentSelected = currentValues,
+            selection = currentValues,
             labels = labels,
             gridLayout = GridCells.Adaptive(200.dp)
         )
