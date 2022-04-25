@@ -19,204 +19,118 @@ import com.EENX15_22_17.digital_journal.android.ui.components.TitledTextField
 
 @Composable
 fun <E : Enum<*>> SomaticHealth(
-    modifier: Modifier = Modifier,
     choices: Array<E>,
     onChange: (values: Set<E>) -> Unit,
     currentSelected: Set<E>,
     labels: Map<E, String>,
 ) {
-
-    Column(modifier = modifier) {
-        Text(
-            text = stringResource(id = R.string.somaticHealth),
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(vertical = 16.dp)
-        )
-        EnumCheckBoxLazyGrid(
-            choices = choices,
-            onSelectionChanged = onChange,
-            currentSelected = currentSelected,
-            labels = labels,
-            gridLayout = GridCells.Adaptive(300.dp)
-        )
-    }
+    EnumCheckBoxLazyGrid(
+        choices = choices,
+        onSelectionChanged = onChange,
+        currentSelected = currentSelected,
+        labels = labels,
+        gridLayout = GridCells.Adaptive(300.dp)
+    )
 }
 
 @Composable
 fun BloodInfection(
-    modifier: Modifier = Modifier,
     isBloodInfection: YesNo,
     onBloodInfection: (value: YesNo) -> Unit,
     choices: Array<YesNo>,
     labels: Map<YesNo, String>
 ) {
-    Column(
-        modifier = modifier
-    ) {
-        Text(
-            text = stringResource(id = R.string.bloodInfection),
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(vertical = 16.dp)
-        )
-        EnumRadioButtonsHorizontal(
-            choices = choices,
-            labels = labels,
-            currentChoice = isBloodInfection,
-            onSelection = onBloodInfection
-        )
-    }
+    EnumRadioButtonsHorizontal(
+        choices = choices,
+        labels = labels,
+        currentChoice = isBloodInfection,
+        onSelection = onBloodInfection
+    )
 }
 
 @Composable
 fun BloodInfectionType(
-    modifier: Modifier = Modifier,
     onChangeText: (textValue: String) -> Unit,
     textValue: String
 ) {
-    Column(
-        modifier = modifier
-    ) {
-        Text(
-            text = stringResource(id = R.string.bloodInfectionType),
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(vertical = 16.dp)
-        )
-        TitledTextField(
-            title = "Typ",
-            onChangeText = onChangeText,
-            textValue = textValue
-        )
-    }
+    TitledTextField(
+        title = "Typ",
+        onChangeText = onChangeText,
+        textValue = textValue
+    )
 }
 
 @Composable
 fun Hypersensitivity(
-    modifier: Modifier = Modifier,
     isHypersensitiv: YesNo,
     onHypersensitiv: (value: YesNo) -> Unit,
     choices: Array<YesNo>,
     labels: Map<YesNo, String>
 ) {
-    Column(
-        modifier = modifier
-    ) {
-        Text(
-            text = stringResource(id = R.string.hypersensitivity),
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(vertical = 16.dp)
-        )
-        EnumRadioButtonsHorizontal(
-            choices = choices,
-            labels = labels,
-            currentChoice = isHypersensitiv,
-            onSelection = onHypersensitiv
-        )
-    }
+    EnumRadioButtonsHorizontal(
+        choices = choices,
+        labels = labels,
+        currentChoice = isHypersensitiv,
+        onSelection = onHypersensitiv
+    )
 }
 
 @Composable
 fun HypersensitivityType(
-    modifier: Modifier = Modifier,
     onChangeText: (textValue: String) -> Unit,
     textValue: String
 ) {
-    Column(
-        modifier = modifier
-    ) {
-        Text(
-            text = stringResource(id = R.string.hypersensitivityType),
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(vertical = 16.dp)
-        )
-        TitledTextField(
-            title = "Typ",
-            onChangeText = onChangeText,
-            textValue = textValue
-        )
-    }
+    TitledTextField(
+        title = "Mot",
+        onChangeText = onChangeText,
+        textValue = textValue
+    )
+
 }
 
 @Composable
 fun Multiresistant(
-    modifier: Modifier = Modifier,
     isMultiresistant: YesNo,
     onMultiresistant: (value: YesNo) -> Unit,
     choices: Array<YesNo>,
     labels: Map<YesNo, String>
 ) {
-    Column(
-        modifier = modifier
-    ) {
-        Text(
-            text = stringResource(id = R.string.multiresistant),
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(vertical = 16.dp)
-        )
-        EnumRadioButtonsHorizontal(
-            choices = choices,
-            labels = labels,
-            currentChoice = isMultiresistant,
-            onSelection = onMultiresistant
-        )
-    }
+    EnumRadioButtonsHorizontal(
+        choices = choices,
+        labels = labels,
+        currentChoice = isMultiresistant,
+        onSelection = onMultiresistant
+    )
 }
 
 @Composable
 fun SuspicionGE(
-    modifier: Modifier = Modifier,
     isSuspicionGE: YesNo,
     onSuspicionGE: (value: YesNo) -> Unit,
     choices: Array<YesNo>,
     labels: Map<YesNo, String>
 ) {
-    Column(
-        modifier = modifier
-    ) {
-        Text(
-            text = stringResource(id = R.string.suspicionGE),
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(vertical = 16.dp)
-        )
-        EnumRadioButtonsHorizontal(
-            choices = choices,
-            labels = labels,
-            currentChoice = isSuspicionGE,
-            onSelection = onSuspicionGE
-        )
-    }
+    EnumRadioButtonsHorizontal(
+        choices = choices,
+        labels = labels,
+        currentChoice = isSuspicionGE,
+        onSelection = onSuspicionGE
+    )
 }
 
 @Composable
 fun NursesNeeds(
-    modifier: Modifier = Modifier,
     isNursesNeeds: YesNo,
     onNursesNeeds: (value: YesNo) -> Unit,
     choices: Array<YesNo>,
     labels: Map<YesNo, String>
 ) {
-    Column(
-        modifier = modifier
-    ) {
-        Text(
-            text = stringResource(id = R.string.nursesNeeds),
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(vertical = 16.dp)
-        )
-        EnumRadioButtonsHorizontal(
-            choices = choices,
-            labels = labels,
-            currentChoice = isNursesNeeds,
-            onSelection = onNursesNeeds
-        )
-    }
+    EnumRadioButtonsHorizontal(
+        choices = choices,
+        labels = labels,
+        currentChoice = isNursesNeeds,
+        onSelection = onNursesNeeds
+    )
 }
 
 @Composable
@@ -233,7 +147,7 @@ fun <E : Enum<E>> NursesNeedsAlternative(
             onSelectionChanged = setValues,
             currentSelected = currentValues,
             labels = labels,
-            gridLayout = GridCells.Adaptive(250.dp)
+            gridLayout = GridCells.Adaptive(200.dp)
         )
     }
 }

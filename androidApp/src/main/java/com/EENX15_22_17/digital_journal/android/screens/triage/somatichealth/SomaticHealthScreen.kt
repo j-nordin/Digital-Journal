@@ -20,6 +20,7 @@ import com.EENX15_22_17.digital_journal.android.dataModel.YesNo
 import com.EENX15_22_17.digital_journal.android.dataModel.nursesNeeds
 import com.EENX15_22_17.digital_journal.android.dataModel.yesNoLabels
 import com.EENX15_22_17.digital_journal.android.ui.DetailPageWrapper
+import com.EENX15_22_17.digital_journal.android.ui.components.TitledSection
 import com.EENX15_22_17.digital_journal.android.ui.theme.Colors
 import com.EENX15_22_17.digital_journal.android.ui.theme.borderColor
 
@@ -38,8 +39,6 @@ fun HealthHistoryPage(
     onBackClicked: () -> Unit = { },
     onMenuClicked: () -> Unit
 ) {
-
-
     val rowModifier: Modifier = Modifier
         .fillMaxWidth()
         .padding(vertical = 6.dp, horizontal = 4.dp)
@@ -59,11 +58,8 @@ fun HealthHistoryPage(
         onMenuClicked = onMenuClicked
     ) {
         Column(modifier = Modifier.fillMaxWidth()) {
-            Text(text = "Ankomst sidan för patient: $visitId")
-            Button(onClick = onBackClicked) {
-                Text(text = "Gå tillbaka")
-            }
-            Row(modifier = rowModifier) {
+
+            TitledSection(title = stringResource(id = R.string.somaticHealth)) {
                 somaticHealthViewModel.somaticHealth.value?.let { somaticHealth ->
                     SomaticHealth(
                         choices = somaticHealthValues.keys.toTypedArray(),
@@ -73,48 +69,13 @@ fun HealthHistoryPage(
                     )
                 }
             }
+
             Row {
-                Box(
+                TitledSection(
+                    title = stringResource(id = R.string.hypersensitivity),
                     modifier = Modifier
                         .fillMaxWidth(0.5f)
-                        .padding(vertical = 6.dp, horizontal = 2.dp)
-                        .border(
-                            border = BorderStroke(
-                                2.dp,
-                                borderColor
-                            ),
-                            shape = RoundedCornerShape(8.dp)
-                        )
-                        .padding(horizontal = 16.dp, vertical = 12.dp)
-                ) {
-                    Row {
-                        BloodInfection(
-                            isBloodInfection = somaticHealthViewModel.isBloodInfection.value
-                                ?: YesNo.UNKOWN,
-                            onBloodInfection = {
-                                somaticHealthViewModel.isBloodInfection.value = it
-                            },
-                            choices = yesNoLabels.keys.toTypedArray(),
-                            labels = yesNoLabels
-                        )
-                        BloodInfectionType(
-                            onChangeText = { somaticHealthViewModel.bloodInfectionType.value = it },
-                            textValue = somaticHealthViewModel.bloodInfectionType.value ?: ""
-                        )
-                    }
-                }
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 6.dp, horizontal = 2.dp)
-                        .border(
-                            border = BorderStroke(
-                                2.dp,
-                                borderColor
-                            ),
-                            shape = RoundedCornerShape(8.dp)
-                        )
-                        .padding(horizontal = 16.dp, vertical = 12.dp)
+                        .padding(horizontal = 4.dp)
                 ) {
                     Row {
                         Hypersensitivity(
@@ -133,21 +94,35 @@ fun HealthHistoryPage(
                     }
 
                 }
+
+                TitledSection(
+                    title = stringResource(id = R.string.bloodInfection),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Row {
+                        BloodInfection(
+                            isBloodInfection = somaticHealthViewModel.isBloodInfection.value
+                                ?: YesNo.UNKOWN,
+                            onBloodInfection = {
+                                somaticHealthViewModel.isBloodInfection.value = it
+                            },
+                            choices = yesNoLabels.keys.toTypedArray(),
+                            labels = yesNoLabels
+                        )
+                        BloodInfectionType(
+                            onChangeText = { somaticHealthViewModel.bloodInfectionType.value = it },
+                            textValue = somaticHealthViewModel.bloodInfectionType.value ?: ""
+                        )
+                    }
+                }
             }
 
             Row {
-                Box(
+                TitledSection(
+                    title = stringResource(id = R.string.multiresistant),
                     modifier = Modifier
                         .fillMaxWidth(0.5f)
-                        .padding(vertical = 6.dp, horizontal = 2.dp)
-                        .border(
-                            border = BorderStroke(
-                                2.dp,
-                                borderColor
-                            ),
-                            shape = RoundedCornerShape(8.dp)
-                        )
-                        .padding(horizontal = 16.dp, vertical = 12.dp)
+                        .padding(horizontal = 4.dp)
                 ) {
                     Multiresistant(
                         isMultiresistant = somaticHealthViewModel.isMultiresistant.value
@@ -157,18 +132,10 @@ fun HealthHistoryPage(
                         labels = yesNoLabels
                     )
                 }
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 6.dp, horizontal = 2.dp)
-                        .border(
-                            border = BorderStroke(
-                                2.dp,
-                                borderColor
-                            ),
-                            shape = RoundedCornerShape(8.dp)
-                        )
-                        .padding(horizontal = 16.dp, vertical = 12.dp)
+
+                TitledSection(
+                    title = stringResource(id = R.string.suspicionGE),
+                    modifier = Modifier.fillMaxWidth()
                 ) {
                     SuspicionGE(
                         isSuspicionGE = somaticHealthViewModel.suspicionGE.value ?: YesNo.UNKOWN,
@@ -178,27 +145,53 @@ fun HealthHistoryPage(
                     )
                 }
             }
-            Row(modifier = rowModifier) {
-                var isRendered by rememberSaveable { mutableStateOf(somaticHealthViewModel.isNursesNeed.value) }
-                NursesNeeds(
-                    isNursesNeeds = somaticHealthViewModel.isNursesNeed.value ?: YesNo.UNKOWN,
-                    onNursesNeeds = {
-                        somaticHealthViewModel.isNursesNeed.value = it
-                        isRendered = somaticHealthViewModel.isNursesNeed.value
-                    },
-                    choices = yesNoLabels.keys.toTypedArray(),
-                    labels = yesNoLabels
-                )
-                if (isRendered?.equals(YesNo.YES) == true) {
-                    NursesNeedsAlternative(
-                        currentValues = somaticHealthViewModel.nursesNeedsAlternatives.value
-                            ?: setOf<NursesNeeds>(),
-                        setValues = { somaticHealthViewModel.nursesNeedsAlternatives.value = it },
-                        choices = nursesNeeds.keys.toTypedArray(),
-                        labels = nursesNeeds
+
+            TitledSection(title = stringResource(id = R.string.nursesNeeds)) {
+                Row {
+                    var isRendered by rememberSaveable { mutableStateOf(somaticHealthViewModel.isNursesNeed.value) }
+                    NursesNeeds(
+                        isNursesNeeds = somaticHealthViewModel.isNursesNeed.value ?: YesNo.UNKOWN,
+                        onNursesNeeds = {
+                            somaticHealthViewModel.isNursesNeed.value = it
+                            isRendered = somaticHealthViewModel.isNursesNeed.value
+                        },
+                        choices = yesNoLabels.keys.toTypedArray(),
+                        labels = yesNoLabels
                     )
+                    if (isRendered?.equals(YesNo.YES) == true) {
+                        NursesNeedsAlternative(
+                            currentValues = somaticHealthViewModel.nursesNeedsAlternatives.value
+                                ?: setOf<NursesNeeds>(),
+                            setValues = {
+                                somaticHealthViewModel.nursesNeedsAlternatives.value = it
+                            },
+                            choices = nursesNeeds.keys.toTypedArray(),
+                            labels = nursesNeeds
+                        )
+                    }
                 }
             }
+//            Row(modifier = rowModifier) {
+//                var isRendered by rememberSaveable { mutableStateOf(somaticHealthViewModel.isNursesNeed.value) }
+//                NursesNeeds(
+//                    isNursesNeeds = somaticHealthViewModel.isNursesNeed.value ?: YesNo.UNKOWN,
+//                    onNursesNeeds = {
+//                        somaticHealthViewModel.isNursesNeed.value = it
+//                        isRendered = somaticHealthViewModel.isNursesNeed.value
+//                    },
+//                    choices = yesNoLabels.keys.toTypedArray(),
+//                    labels = yesNoLabels
+//                )
+//                if (isRendered?.equals(YesNo.YES) == true) {
+//                    NursesNeedsAlternative(
+//                        currentValues = somaticHealthViewModel.nursesNeedsAlternatives.value
+//                            ?: setOf<NursesNeeds>(),
+//                        setValues = { somaticHealthViewModel.nursesNeedsAlternatives.value = it },
+//                        choices = nursesNeeds.keys.toTypedArray(),
+//                        labels = nursesNeeds
+//                    )
+//                }
+//            }
         }
     }
 }
