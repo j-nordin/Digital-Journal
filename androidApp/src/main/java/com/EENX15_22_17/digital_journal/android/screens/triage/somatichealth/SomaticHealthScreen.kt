@@ -20,7 +20,7 @@ import com.EENX15_22_17.digital_journal.android.ui.components.*
 import com.EENX15_22_17.digital_journal.android.ui.theme.Colors
 
 @Composable
-fun HealthHistoryPage(
+fun SomaticHealthPage(
     somaticHealthViewModel: SomaticHealthViewModel = SomaticHealthViewModel(),
     visitId: String = "id",
     onBackClicked: () -> Unit = { },
