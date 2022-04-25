@@ -24,14 +24,16 @@ fun <E : Enum<*>> EnumRadioButtonsHorizontal(
     choices: Array<E>,
     labels: Map<E, String>,
     currentChoice: E,
-    onSelection: (choice: E) -> Unit
+    onSelection: (choice: E) -> Unit,
+    isEnabled: Boolean = true
 ) {
     Row {
         EnumRadioButtons(
             choices = choices,
             labels = labels,
             currentChoice = currentChoice,
-            onSelection = onSelection
+            onSelection = onSelection,
+            isEnabled = isEnabled
         )
     }
 }
@@ -41,14 +43,16 @@ fun <E : Enum<*>> EnumRadioButtonsVertical(
     choices: Array<E>,
     labels: Map<E, String>,
     currentChoice: E,
-    onSelection: (choice: E) -> Unit
+    onSelection: (choice: E) -> Unit,
+    isEnabled: Boolean = true
 ) {
     Column {
         EnumRadioButtons(
             choices = choices,
             labels = labels,
             currentChoice = currentChoice,
-            onSelection = onSelection
+            onSelection = onSelection,
+            isEnabled = isEnabled
         )
     }
 }
@@ -59,10 +63,10 @@ fun <E : Enum<*>> EnumRadioButtons(
     choices: Array<E>,
     labels: Map<E, String>,
     currentChoice: E,
-    onSelection: (choice: E) -> Unit
+    onSelection: (choice: E) -> Unit,
+    isEnabled: Boolean = true
 ) {
     var selection by rememberSaveable { mutableStateOf(currentChoice) }
-
     choices.forEach { choice ->
         Box(
             Modifier
@@ -81,7 +85,8 @@ fun <E : Enum<*>> EnumRadioButtons(
                 onClick = {
                     selection = choice
                     onSelection(choice)
-                }
+                },
+                enabled = isEnabled
             )
             Text(
                 text = labels[choice] ?: choice.name,

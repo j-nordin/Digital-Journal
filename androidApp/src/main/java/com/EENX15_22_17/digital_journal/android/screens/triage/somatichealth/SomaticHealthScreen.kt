@@ -8,6 +8,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.EENX15_22_17.digital_journal.android.R
@@ -18,6 +19,7 @@ import com.EENX15_22_17.digital_journal.android.dataModel.yesNoLabels
 import com.EENX15_22_17.digital_journal.android.ui.DetailPageWrapper
 import com.EENX15_22_17.digital_journal.android.ui.components.*
 import com.EENX15_22_17.digital_journal.android.ui.theme.Colors
+import modifyIf
 
 @Composable
 fun SomaticHealthPage(
@@ -129,8 +131,19 @@ fun SomaticHealthPage(
             }
 
             TitledSection(title = stringResource(id = R.string.nursesNeeds)) {
+
                 Row {
                     var isRendered by rememberSaveable { mutableStateOf(somaticHealthViewModel.isNursesNeed.value) }
+                    //TODO: Use Modifier.modifyIf - method here.
+                    var isEnabled by rememberSaveable { mutableStateOf(false) }
+                    var alpha by rememberSaveable() { mutableStateOf(0.3f)}
+                    isEnabled = isRendered?.equals(YesNo.YES) == true
+                    alpha = if (isEnabled) {
+                        1f
+                    } else {
+                        0.3f
+                    }
+
                     NursesNeeds(
                         isNursesNeeds = somaticHealthViewModel.isNursesNeed.value ?: YesNo.UNKOWN,
                         onNursesNeeds = {
@@ -140,17 +153,18 @@ fun SomaticHealthPage(
                         choices = yesNoLabels.keys.toTypedArray(),
                         labels = yesNoLabels
                     )
-                    if (isRendered?.equals(YesNo.YES) == true) {
-                        NursesNeedsAlternative(
-                            currentValues = somaticHealthViewModel.nursesNeedsAlternatives.value
-                                ?: setOf<NursesNeeds>(),
-                            setValues = {
-                                somaticHealthViewModel.nursesNeedsAlternatives.value = it
-                            },
-                            choices = nursesNeeds.keys.toTypedArray(),
-                            labels = nursesNeeds
-                        )
-                    }
+                    NursesNeedsAlternative(
+                        modifier = Modifier
+                            .alpha(alpha = alpha),
+                        currentValues = somaticHealthViewModel.nursesNeedsAlternatives.value
+                            ?: setOf<NursesNeeds>(),
+                        setValues = {
+                            somaticHealthViewModel.nursesNeedsAlternatives.value = it
+                        },
+                        choices = nursesNeeds.keys.toTypedArray(),
+                        labels = nursesNeeds,
+                        isEnable = isEnabled
+                    )
                 }
             }
         }
@@ -180,6 +194,7 @@ fun <E : Enum<E>> NursesNeedsAlternative(
     setValues: (value: Set<E>) -> Unit,
     choices: Array<E>,
     labels: Map<E, String>,
+    isEnable: Boolean
 ) {
     Box(modifier = modifier.padding(start = 40.dp)) {
         EnumCheckboxesLazyGrid(
@@ -187,7 +202,8 @@ fun <E : Enum<E>> NursesNeedsAlternative(
             onSelectionChanged = setValues,
             selection = currentValues,
             labels = labels,
-            gridLayout = GridCells.Adaptive(200.dp)
+            gridLayout = GridCells.Adaptive(200.dp),
+            isEnabled = isEnable
         )
     }
 }
