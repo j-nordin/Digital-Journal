@@ -54,6 +54,11 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     implementation("androidx.compose.ui:ui-test-junit4:$compose_version")
     implementation ("androidx.compose.material:material-icons-extended:$compose_version")
+    // Dependency Injection
+    implementation("org.kodein.di:kodein-di:7.11.0")
+    implementation("org.kodein.di:kodein-di-framework-android-core:7.11.0")
+    implementation("org.kodein.di:kodein-di-framework-android-x:7.11.0")
+    implementation("org.kodein.di:kodein-di-framework-compose:7.11.0")
 
     //Preview Composables
     debugImplementation ("androidx.compose.ui:ui-tooling:1.1.1")
