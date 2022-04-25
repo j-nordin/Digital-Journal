@@ -19,6 +19,7 @@ import com.EENX15_22_17.digital_journal.android.ui.screen.ContactCauseScreen
 import com.EENX15_22_17.digital_journal.android.screens.triage.suicideassessment.SuicideAssessmentScreen
 import com.EENX15_22_17.digital_journal.android.screens.triage.somatichealth.SomaticHealthPage
 import com.EENX15_22_17.digital_journal.android.screens.triage.previousCare.TempPreviusCare
+import se.predicare.journal.screens.JournalScreen
 
 sealed class Screen(val route: String) {
     object Current : Screen(route = "current")
@@ -118,16 +119,20 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
 
             LandingPage(
                 visitId = visitId,
-                navToArrival = { navTo(PatientMeetingScreen.Arrival) },
-                navToHazard = { navTo(PatientMeetingScreen.HazardAssessment) },
-                navToContactReason = { navTo(PatientMeetingScreen.ContactReason) },
-                navToPreviousCare = { navTo(PatientMeetingScreen.PreviousCare) },
-                navToHealthHistory = { navTo(PatientMeetingScreen.HealthHistory) },
-                navToHealthNow = { navTo(PatientMeetingScreen.HealthNow) },
-                navToSuicideAssessment = { navTo(PatientMeetingScreen.SuicideAssessment) },
-                navToNursingNeed = { navTo(PatientMeetingScreen.NursingNeed) },
-                navToMedicalOrder = { navTo(PatientMeetingScreen.MedicalOrder) },
-                navToInterimJournal = { navTo(PatientMeetingScreen.InterimJournal) },
+                onNavigate = { screen ->
+                    val target: PatientMeetingScreen = when(screen) {
+                        JournalScreen.PATIENT_INFORMATION -> PatientMeetingScreen.Arrival
+                        JournalScreen.ARRIVAL_HAZARD_ASSESSMENT -> PatientMeetingScreen.HazardAssessment
+                        JournalScreen.CONTACT_REASON -> PatientMeetingScreen.ContactReason
+                        JournalScreen.SUICIDE_ASSESSMENT -> PatientMeetingScreen.SuicideAssessment
+                        JournalScreen.PREVIOUS_CARE -> PatientMeetingScreen.PreviousCare
+                        JournalScreen.SOMATIC_HEALTH -> PatientMeetingScreen.HealthHistory
+                        JournalScreen.TRIAGE_ASSESSMENT -> PatientMeetingScreen.HealthNow
+                        JournalScreen.EVENTS -> PatientMeetingScreen.MedicalOrder
+                        JournalScreen.INTERIM_JOURNAL -> PatientMeetingScreen.InterimJournal
+                    }
+                    navTo(target)
+                },
                 showOverview = { id ->
                     navController.navigate(Screen.PatientOverview.createRoute(visitId = id))
                 }

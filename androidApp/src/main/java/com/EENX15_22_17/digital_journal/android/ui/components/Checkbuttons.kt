@@ -24,7 +24,7 @@ import com.EENX15_22_17.digital_journal.android.ui.theme.TextStyles
 import com.EENX15_22_17.digital_journal.android.ui.theme.checkboxBackgroundShape
 import com.EENX15_22_17.digital_journal.android.ui.theme.checkboxBoxBackgroundSize
 import com.EENX15_22_17.digital_journal.android.ui.theme.colorCheckBoxBeta
-import modifyIf
+import com.EENX15_22_17.digital_journal.android.ui.modifyIf
 
 
 @Composable
