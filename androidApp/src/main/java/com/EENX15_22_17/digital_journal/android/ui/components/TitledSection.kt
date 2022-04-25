@@ -31,7 +31,7 @@ fun TitledSection(
     Box(modifier) {
         Text(
             text = title,
-            style = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.SemiBold),
+            style = MaterialTheme.typography.h6,
             color = Color.Black,
             modifier = Modifier
                 .zIndex(1f)
