@@ -156,6 +156,27 @@ fun HealthHistoryPage(
                     }
                 }
             }
+//            Row(modifier = rowModifier) {
+//                var isRendered by rememberSaveable { mutableStateOf(somaticHealthViewModel.isNursesNeed.value) }
+//                NursesNeeds(
+//                    isNursesNeeds = somaticHealthViewModel.isNursesNeed.value ?: YesNo.UNKOWN,
+//                    onNursesNeeds = {
+//                        somaticHealthViewModel.isNursesNeed.value = it
+//                        isRendered = somaticHealthViewModel.isNursesNeed.value
+//                    },
+//                    choices = yesNoLabels.keys.toTypedArray(),
+//                    labels = yesNoLabels
+//                )
+//                if (isRendered?.equals(YesNo.YES) == true) {
+//                    NursesNeedsAlternative(
+//                        currentValues = somaticHealthViewModel.nursesNeedsAlternatives.value
+//                            ?: setOf<NursesNeeds>(),
+//                        setValues = { somaticHealthViewModel.nursesNeedsAlternatives.value = it },
+//                        choices = nursesNeeds.keys.toTypedArray(),
+//                        labels = nursesNeeds
+//                    )
+//                }
+//            }
         }
     }
 }
