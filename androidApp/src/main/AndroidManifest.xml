@@ -3,6 +3,7 @@
     package="com.EENX15_22_17.digital_journal.android">
 
     <application
+        android:name=".DigitalJournalApplication"
         android:allowBackup="false"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
