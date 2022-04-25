@@ -66,7 +66,8 @@ fun <E : Enum<*>> EnumCheckboxesLazyGrid(
     onSelectionChanged: (selected: Set<E>) -> Unit,
     gridLayout: GridCells,
     isHorizontal: Boolean = false,
-    checkboxSpacing: Dp = 8.dp
+    checkboxSpacing: Dp = 8.dp,
+    isEnabled: Boolean = true
 ) {
     val currentSelection: MutableSet<E> = selection.toMutableSet()
     val content: LazyGridScope.() -> Unit = {
@@ -82,7 +83,8 @@ fun <E : Enum<*>> EnumCheckboxesLazyGrid(
                         true -> currentSelection.add(choices[index])
                     }
                     onSelectionChanged(currentSelection.toSet())
-                }
+                },
+                isEnabled = isEnabled
             )
         }
     }
@@ -98,7 +100,8 @@ fun LabeledCheckbox(
     label: String,
     checked: Boolean,
     clickableText: Boolean = false,
-    onCheckedChange: (isChecked: Boolean) -> Unit
+    onCheckedChange: (isChecked: Boolean) -> Unit,
+    isEnabled: Boolean = true
 ) {
     var isChecked by rememberSaveable { mutableStateOf(checked) }
 
@@ -118,7 +121,8 @@ fun LabeledCheckbox(
             )
             Checkbox(
                 checked = isChecked,
-                onCheckedChange = ::changeState
+                onCheckedChange = ::changeState,
+                enabled = isEnabled
             )
         }
         Text(

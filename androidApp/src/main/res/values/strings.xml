@@ -30,7 +30,7 @@
     <string name="hazardCard">ANKOMST / \nFARLIGHETSBEDÖMNING</string>
     <string name="contactReason">KONTAKTORSAK</string>
     <string name="previousCare">TIDIGARE VÅRD</string>
-    <string name="healthHistory">HÄLSA HISTORIK </string>
+    <string name="somaticHealthTitle">SOMATISK HÄLSA</string>
     <string name="healthNow">HÄLSA NU</string>
     <string name="suicideAssessment">SUICIDBEDÖMNING</string>
     <string name="nursingNeed">OMV. BEDÖM / ÅTGÄRD</string>

@@ -1,11 +1,11 @@
-package com.EENX15_22_17.digital_journal.android.screens.triage.healthHistory
+package com.EENX15_22_17.digital_journal.android.screens.triage.somatichealth
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.EENX15_22_17.digital_journal.android.dataModel.NursesNeeds
 import com.EENX15_22_17.digital_journal.android.dataModel.YesNo
 
-class HealthHistoryViewModel : ViewModel() {
+class SomaticHealthViewModel : ViewModel() {
 
 
     val somaticHealth: MutableLiveData<Set<SomaticHealthData>> by lazy {
