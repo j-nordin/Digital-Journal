@@ -17,9 +17,11 @@ import com.EENX15_22_17.digital_journal.android.dataModel.YesNo
 import com.EENX15_22_17.digital_journal.android.dataModel.nursesNeeds
 import com.EENX15_22_17.digital_journal.android.dataModel.yesNoLabels
 import com.EENX15_22_17.digital_journal.android.ui.DetailPageWrapper
-import com.EENX15_22_17.digital_journal.android.ui.components.*
+import com.EENX15_22_17.digital_journal.android.ui.components.EnumCheckboxesLazyGrid
+import com.EENX15_22_17.digital_journal.android.ui.components.EnumRadioButtonsHorizontal
+import com.EENX15_22_17.digital_journal.android.ui.components.TitledSection
+import com.EENX15_22_17.digital_journal.android.ui.components.TitledTextField
 import com.EENX15_22_17.digital_journal.android.ui.theme.Colors
-import modifyIf
 
 @Composable
 fun SomaticHealthPage(
