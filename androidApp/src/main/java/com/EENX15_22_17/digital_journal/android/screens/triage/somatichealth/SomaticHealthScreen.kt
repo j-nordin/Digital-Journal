@@ -1,11 +1,7 @@
 package com.EENX15_22_17.digital_journal.android.screens.triage.somatichealth
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.Text
+import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -20,7 +16,10 @@ import com.EENX15_22_17.digital_journal.android.dataModel.YesNo
 import com.EENX15_22_17.digital_journal.android.dataModel.nursesNeeds
 import com.EENX15_22_17.digital_journal.android.dataModel.yesNoLabels
 import com.EENX15_22_17.digital_journal.android.ui.DetailPageWrapper
+import com.EENX15_22_17.digital_journal.android.ui.components.EnumCheckBoxLazyGrid
+import com.EENX15_22_17.digital_journal.android.ui.components.EnumRadioButtonsHorizontal
 import com.EENX15_22_17.digital_journal.android.ui.components.TitledSection
+import com.EENX15_22_17.digital_journal.android.ui.components.TitledTextField
 import com.EENX15_22_17.digital_journal.android.ui.theme.Colors
 
 @Composable
@@ -38,13 +37,15 @@ fun HealthHistoryPage(
     ) {
         Column(modifier = Modifier.fillMaxWidth()) {
 
+            // SomaticHealth choices
             TitledSection(title = stringResource(id = R.string.somaticHealth)) {
                 somaticHealthViewModel.somaticHealth.value?.let { _ ->
-                    SomaticHealth(
+                    EnumCheckBoxLazyGrid(
                         choices = somaticHealthValues.keys.toTypedArray(),
-                        onChange = { somaticHealthViewModel.somaticHealth.value = it },
+                        onSelectionChanged = { somaticHealthViewModel.somaticHealth.value = it },
                         currentSelected = somaticHealthViewModel.somaticHealth.value ?: emptySet(),
-                        labels = somaticHealthValues
+                        labels = somaticHealthValues,
+                        gridLayout = GridCells.Adaptive(300.dp)
                     )
                 }
             }
@@ -57,16 +58,18 @@ fun HealthHistoryPage(
                         .padding(horizontal = 4.dp)
                 ) {
                     Row {
-                        Hypersensitivity(
-                            isHypersensitiv = somaticHealthViewModel.isHyperSensitive.value
+                        // Hypersensitive content
+                        EnumRadioButtonsHorizontal(
+                            currentChoice = somaticHealthViewModel.isHyperSensitive.value
                                 ?: YesNo.UNKOWN,
-                            onHypersensitiv = {
+                            onSelection = {
                                 somaticHealthViewModel.isHyperSensitive.value = it
                             },
                             choices = yesNoLabels.keys.toTypedArray(),
                             labels = yesNoLabels
                         )
-                        HypersensitivityType(
+                        TitledTextField(
+                            title = "Mot",
                             onChangeText = { somaticHealthViewModel.hyperSensitiveType.value = it },
                             textValue = somaticHealthViewModel.hyperSensitiveType.value ?: ""
                         )
@@ -79,16 +82,18 @@ fun HealthHistoryPage(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Row {
-                        BloodInfection(
-                            isBloodInfection = somaticHealthViewModel.isBloodInfection.value
+                        //Blood infection content
+                        EnumRadioButtonsHorizontal(
+                            currentChoice = somaticHealthViewModel.isBloodInfection.value
                                 ?: YesNo.UNKOWN,
-                            onBloodInfection = {
+                            onSelection = {
                                 somaticHealthViewModel.isBloodInfection.value = it
                             },
                             choices = yesNoLabels.keys.toTypedArray(),
                             labels = yesNoLabels
                         )
-                        BloodInfectionType(
+                        TitledTextField(
+                            title = "Typ",
                             onChangeText = { somaticHealthViewModel.bloodInfectionType.value = it },
                             textValue = somaticHealthViewModel.bloodInfectionType.value ?: ""
                         )
@@ -102,10 +107,11 @@ fun HealthHistoryPage(
                         .fillMaxWidth(0.5f)
                         .padding(horizontal = 4.dp)
                 ) {
-                    Multiresistant(
-                        isMultiresistant = somaticHealthViewModel.isMultiresistant.value
+                    //Multi-resistant content
+                    EnumRadioButtonsHorizontal(
+                        currentChoice = somaticHealthViewModel.isMultiresistant.value
                             ?: YesNo.UNKOWN,
-                        onMultiresistant = { somaticHealthViewModel.isMultiresistant.value = it },
+                        onSelection = { somaticHealthViewModel.isMultiresistant.value = it },
                         choices = yesNoLabels.keys.toTypedArray(),
                         labels = yesNoLabels
                     )
@@ -115,9 +121,10 @@ fun HealthHistoryPage(
                     title = stringResource(id = R.string.suspicionGE),
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    SuspicionGE(
-                        isSuspicionGE = somaticHealthViewModel.suspicionGE.value ?: YesNo.UNKOWN,
-                        onSuspicionGE = { somaticHealthViewModel.suspicionGE.value = it },
+                    // GE suspicion content
+                    EnumRadioButtonsHorizontal(
+                        currentChoice = somaticHealthViewModel.suspicionGE.value ?: YesNo.UNKOWN,
+                        onSelection = { somaticHealthViewModel.suspicionGE.value = it },
                         choices = yesNoLabels.keys.toTypedArray(),
                         labels = yesNoLabels
                     )
@@ -149,27 +156,41 @@ fun HealthHistoryPage(
                     }
                 }
             }
-//            Row(modifier = rowModifier) {
-//                var isRendered by rememberSaveable { mutableStateOf(somaticHealthViewModel.isNursesNeed.value) }
-//                NursesNeeds(
-//                    isNursesNeeds = somaticHealthViewModel.isNursesNeed.value ?: YesNo.UNKOWN,
-//                    onNursesNeeds = {
-//                        somaticHealthViewModel.isNursesNeed.value = it
-//                        isRendered = somaticHealthViewModel.isNursesNeed.value
-//                    },
-//                    choices = yesNoLabels.keys.toTypedArray(),
-//                    labels = yesNoLabels
-//                )
-//                if (isRendered?.equals(YesNo.YES) == true) {
-//                    NursesNeedsAlternative(
-//                        currentValues = somaticHealthViewModel.nursesNeedsAlternatives.value
-//                            ?: setOf<NursesNeeds>(),
-//                        setValues = { somaticHealthViewModel.nursesNeedsAlternatives.value = it },
-//                        choices = nursesNeeds.keys.toTypedArray(),
-//                        labels = nursesNeeds
-//                    )
-//                }
-//            }
         }
+    }
+}
+
+
+@Composable
+fun NursesNeeds(
+    isNursesNeeds: YesNo,
+    onNursesNeeds: (value: YesNo) -> Unit,
+    choices: Array<YesNo>,
+    labels: Map<YesNo, String>
+) {
+    EnumRadioButtonsHorizontal(
+        choices = choices,
+        labels = labels,
+        currentChoice = isNursesNeeds,
+        onSelection = onNursesNeeds
+    )
+}
+
+@Composable
+fun <E : Enum<E>> NursesNeedsAlternative(
+    modifier: Modifier = Modifier,
+    currentValues: Set<E>,
+    setValues: (value: Set<E>) -> Unit,
+    choices: Array<E>,
+    labels: Map<E, String>,
+) {
+    Box(modifier = modifier.padding(start = 40.dp)) {
+        EnumCheckBoxLazyGrid(
+            choices = choices,
+            onSelectionChanged = setValues,
+            currentSelected = currentValues,
+            labels = labels,
+            gridLayout = GridCells.Adaptive(200.dp)
+        )
     }
 }
