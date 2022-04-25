@@ -40,17 +40,17 @@ fun CurrentScreen(
 
 
     var showCreatePatientModal by remember { mutableStateOf(false) }
-    fun switchStateCratatePatientModal() {showCreatePatientModal = !showCreatePatientModal}
+    fun switchStateCreatePatientModal() {showCreatePatientModal = !showCreatePatientModal}
 
     if (showCreatePatientModal) {
         CreatePatientDialog(
-            onDismiss = {switchStateCratatePatientModal()},
-            onConfirm = {switchStateCratatePatientModal()}
+            onDismiss = {switchStateCreatePatientModal()},
+            onConfirm = {switchStateCreatePatientModal()}
         )
     }
     
     Button(
-        onClick = ::switchStateCratatePatientModal
+        onClick = ::switchStateCreatePatientModal
     ) {
         Text(text = "Ny Patient")
     }
