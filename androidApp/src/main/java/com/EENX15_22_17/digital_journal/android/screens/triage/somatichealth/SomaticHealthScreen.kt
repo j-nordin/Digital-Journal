@@ -22,15 +22,6 @@ import com.EENX15_22_17.digital_journal.android.dataModel.yesNoLabels
 import com.EENX15_22_17.digital_journal.android.ui.DetailPageWrapper
 import com.EENX15_22_17.digital_journal.android.ui.components.TitledSection
 import com.EENX15_22_17.digital_journal.android.ui.theme.Colors
-import com.EENX15_22_17.digital_journal.android.ui.theme.borderColor
-
-
-//DetailPageWrapper(
-//title = stringResource(id = R.string.patientInfo),
-//titleColor = Colors.arrivalPrimary,
-//onBackClicked = onBackClicked,
-//onMenuClicked = onMenuClicked
-//)
 
 @Composable
 fun HealthHistoryPage(
@@ -39,18 +30,6 @@ fun HealthHistoryPage(
     onBackClicked: () -> Unit = { },
     onMenuClicked: () -> Unit
 ) {
-    val rowModifier: Modifier = Modifier
-        .fillMaxWidth()
-        .padding(vertical = 6.dp, horizontal = 4.dp)
-        .border(
-            border = BorderStroke(
-                2.dp,
-                borderColor
-            ),
-            shape = RoundedCornerShape(8.dp)
-        )
-        .padding(horizontal = 16.dp, vertical = 12.dp)
-
     DetailPageWrapper(
         title = stringResource(id = R.string.somaticHealth),
         titleColor = Colors.arrivalPrimary,
@@ -60,7 +39,7 @@ fun HealthHistoryPage(
         Column(modifier = Modifier.fillMaxWidth()) {
 
             TitledSection(title = stringResource(id = R.string.somaticHealth)) {
-                somaticHealthViewModel.somaticHealth.value?.let { somaticHealth ->
+                somaticHealthViewModel.somaticHealth.value?.let { _ ->
                     SomaticHealth(
                         choices = somaticHealthValues.keys.toTypedArray(),
                         onChange = { somaticHealthViewModel.somaticHealth.value = it },
@@ -116,7 +95,6 @@ fun HealthHistoryPage(
                     }
                 }
             }
-
             Row {
                 TitledSection(
                     title = stringResource(id = R.string.multiresistant),

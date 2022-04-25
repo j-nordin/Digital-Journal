@@ -151,5 +151,3 @@ fun <E : Enum<E>> NursesNeedsAlternative(
         )
     }
 }
-
-
