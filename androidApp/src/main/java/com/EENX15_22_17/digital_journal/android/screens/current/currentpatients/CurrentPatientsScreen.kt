@@ -2,16 +2,16 @@ package com.EENX15_22_17.digital_journal.android.ui.current
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.EENX15_22_17.digital_journal.android.screens.current.currentpatients.CreatePatientDialog
 import com.EENX15_22_17.digital_journal.android.screens.current.currentpatients.PatientsList
 
 @Composable
@@ -37,4 +37,21 @@ fun CurrentScreen(
         navigateSpecificPatient = navigateSpecificPatient,
         navigateSpecificOverviewPage = navigateSpecificOverviewPage
     )
+
+
+    var showCreatePatientModal by remember { mutableStateOf(false) }
+    fun switchStateCratatePatientModal() {showCreatePatientModal = !showCreatePatientModal}
+
+    if (showCreatePatientModal) {
+        CreatePatientDialog(
+            onDismiss = {switchStateCratatePatientModal()},
+            onConfirm = {switchStateCratatePatientModal()}
+        )
+    }
+    
+    Button(
+        onClick = ::switchStateCratatePatientModal
+    ) {
+        Text(text = "Ny Patient")
+    }
 }
