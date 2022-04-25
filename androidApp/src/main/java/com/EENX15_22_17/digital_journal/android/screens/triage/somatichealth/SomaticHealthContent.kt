@@ -1,4 +1,4 @@
-package com.EENX15_22_17.digital_journal.android.screens.triage.healthHistory
+package com.EENX15_22_17.digital_journal.android.screens.triage.somatichealth
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column

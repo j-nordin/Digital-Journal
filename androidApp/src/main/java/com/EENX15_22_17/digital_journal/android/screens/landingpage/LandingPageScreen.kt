@@ -85,7 +85,7 @@ fun LandingPage(
                 navigateToForm = navToPreviousCare
             )
             NavigationCard(
-                label = stringResource(R.string.healthHistory),
+                label = stringResource(R.string.somaticHealthTitle),
                 titleColor = Colors.triagePrimary,
                 modifier = Modifier
                     .width(240.dp),

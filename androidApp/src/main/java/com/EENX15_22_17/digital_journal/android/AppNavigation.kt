@@ -17,7 +17,7 @@ import com.EENX15_22_17.digital_journal.android.screens.treatment.interim.TempIn
 import com.EENX15_22_17.digital_journal.android.screens.triage.currentHealth.TempCurrentHealth
 import com.EENX15_22_17.digital_journal.android.ui.screen.ContactCauseScreen
 import com.EENX15_22_17.digital_journal.android.screens.triage.suicideassessment.SuicideAssessmentScreen
-import com.EENX15_22_17.digital_journal.android.screens.triage.healthHistory.HealthHistoryPage
+import com.EENX15_22_17.digital_journal.android.screens.triage.somatichealth.HealthHistoryPage
 import com.EENX15_22_17.digital_journal.android.screens.triage.previousCare.TempPreviusCare
 
 sealed class Screen(val route: String) {
