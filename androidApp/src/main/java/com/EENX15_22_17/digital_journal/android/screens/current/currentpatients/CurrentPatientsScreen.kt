@@ -12,17 +12,24 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.EENX15_22_17.digital_journal.android.screens.current.currentpatients.CreatePatientDialog
+import com.EENX15_22_17.digital_journal.android.screens.current.currentpatients.PatientListViewModel
 import com.EENX15_22_17.digital_journal.android.screens.current.currentpatients.PatientsList
 
 @Composable
 fun CurrentScreen(
+    patientListViewModel: PatientListViewModel,
     navigateSpecificPatient: (visitId: String) -> Unit = {},
     navigateSpecificOverviewPage: (visitId: String) -> Unit = {},
     switchScaffoldDrawerState: () -> Unit,
 ) {
+    val journals by patientListViewModel.journals.collectAsState()
+
     var showCreatePatientModal by remember { mutableStateOf(false) }
     fun switchStateCreatePatientModal() {showCreatePatientModal = !showCreatePatientModal}
 
@@ -44,7 +51,7 @@ fun CurrentScreen(
         horizontalAlignment = Alignment.End
     ) {
         PatientsList(
-            navigateSpecificPatient = navigateSpecificPatient,
+            patients = journals.map { it.patientInfo },navigateSpecificPatient = navigateSpecificPatient,
             navigateSpecificOverviewPage = navigateSpecificOverviewPage
         )
         Spacer(modifier = Modifier.size(30.dp))
@@ -62,5 +69,4 @@ fun CurrentScreen(
             onDismiss = {switchStateCreatePatientModal()},
         )
     }
-
 }

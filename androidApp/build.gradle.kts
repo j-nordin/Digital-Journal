@@ -1,4 +1,5 @@
 val compose_version: String by project
+val ktor_version: String by project
 val kotlinx_datetime_version: String by project
 
 plugins {
@@ -38,7 +39,6 @@ dependencies {
     implementation("se.predicare:core-data-jvm:0.3.0-SNAPSHOT")
     implementation("se.predicare:journal-lib-jvm:0.4.0-SNAPSHOT")
     implementation("se.predicare:journal-client-jvm:0.4.0-SNAPSHOT")
-
     implementation(project(":shared"))
     implementation("com.google.android.material:material:1.5.0")
     implementation("androidx.appcompat:appcompat:1.4.1")
@@ -59,6 +59,12 @@ dependencies {
     implementation("org.kodein.di:kodein-di-framework-android-core:7.11.0")
     implementation("org.kodein.di:kodein-di-framework-android-x:7.11.0")
     implementation("org.kodein.di:kodein-di-framework-compose:7.11.0")
+
+    //Ktor
+    implementation("io.ktor:ktor-client-core:$ktor_version")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
+    implementation("io.ktor:ktor-client-resources:$ktor_version")
+    implementation("io.ktor:ktor-client-auth:$ktor_version")
 
     //Preview Composables
     debugImplementation ("androidx.compose.ui:ui-tooling:1.1.1")
