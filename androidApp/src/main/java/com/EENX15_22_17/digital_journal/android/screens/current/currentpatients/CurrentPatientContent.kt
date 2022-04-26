@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.EENX15_22_17.digital_journal.android.ui.theme.colorIcon
 import com.EENX15_22_17.digital_journal.android.ui.theme.danger
+import se.predicare.journal.screens.PatientInformationDto
 
 @Composable
 // TODO: Replace default parameter-values with PreviewParameter-annotations when tooling is less buggy.
@@ -36,7 +37,7 @@ fun PatientCard(
     var showComments by remember { mutableStateOf(false) }
     Card(
         modifier = Modifier
-            .padding(vertical = 2.dp)
+            .padding(horizontal = 120.dp, vertical = 2.dp)
             .fillMaxWidth()
             .clickable { navigateSelectedPatient(visitId) },
         backgroundColor = MaterialTheme.colors.primary
@@ -154,22 +155,27 @@ private val defaultPatients: List<CurrentPatientsData> =
 fun PatientsList(
     modifier: Modifier = Modifier,
     @PreviewParameter(SampleCurrentPatientsProvider::class)
-    patients: List<CurrentPatientsData> = defaultPatients,
+    patients: List<PatientInformationDto>,
     navigateSpecificPatient: (visitId: String) -> Unit = {},
     navigateSpecificOverviewPage: (visitId: String) -> Unit = {}
 ) {
     val scrollState = rememberScrollState()
-    Column(
-        Modifier.verticalScroll(scrollState)
+    Box(
+        modifier
+            .height(400.dp)
     ) {
-        for (patient in patients) {
-            PatientCard(
-                visitId = patient.id,
-                name = patient.name,
-                securityNumber = patient.securityNumber,
-                showOverview = { navigateSpecificOverviewPage(it) },
-                navigateSelectedPatient = { navigateSpecificPatient(it) }
-            )
+        Column(
+            Modifier.verticalScroll(scrollState)
+        ) {
+            for (patient in patients) {
+                PatientCard(
+                    visitId = patient.patientData?.patientId ?: "",
+                    name = patient.patientData?.name ?: "",
+                    securityNumber = patient.patientData?.personalId ?: "",
+                    showOverview = { navigateSpecificOverviewPage(it) },
+                    navigateSelectedPatient = { navigateSpecificPatient(it) }
+                )
+            }
         }
     }
 }
