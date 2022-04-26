@@ -21,6 +21,7 @@ import com.EENX15_22_17.digital_journal.android.ui.components.EnumCheckboxesLazy
 import com.EENX15_22_17.digital_journal.android.ui.components.EnumRadioButtonsHorizontal
 import com.EENX15_22_17.digital_journal.android.ui.components.TitledSection
 import com.EENX15_22_17.digital_journal.android.ui.components.TitledTextField
+import com.EENX15_22_17.digital_journal.android.ui.modifyIf
 import com.EENX15_22_17.digital_journal.android.ui.theme.Colors
 
 @Composable
