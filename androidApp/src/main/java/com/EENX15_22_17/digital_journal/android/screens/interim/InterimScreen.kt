@@ -14,6 +14,8 @@ import com.EENX15_22_17.digital_journal.android.dataModel.*
 import com.EENX15_22_17.digital_journal.android.ui.DetailPageWrapper
 import com.EENX15_22_17.digital_journal.android.ui.components.*
 import com.EENX15_22_17.digital_journal.android.ui.theme.Colors
+import se.predicare.journal.data.ArrivalLaws
+import se.predicare.journal.data.Labels.labels
 import se.predicare.journal.data.YesNoQuestion
 import se.predicare.journal.screens.InterimJournalDto
 
@@ -35,14 +37,15 @@ fun InterimPage(
             //PatientDecision content
             TitledSection(title = stringResource(id = R.string.patientDecision)) {
                 EnumRadioButtonWithTextField(
-                    choices = patientDecision.keys.toTypedArray(),
-                    labels = patientDecision,
+                    choices = InterimJournalDto.PatientAction.labels.keys.toTypedArray(),
+                    labels = InterimJournalDto.PatientAction.labels,
                     currentChoice = interimViewModel.interimStates.patientAction.choice,
-                    onSelection = {
+                    onSelection = { interimViewModel.interimStates.patientAction.choice = it },
+                    onChangeTextValue = { choice, text ->
+                        interimViewModel.interimStates.patientAction.notes[choice] = text
                     },
-                    onChangeTextValue = {},
                     title = patientDecisionTitles,
-                    textValues = mapOf(),
+                    textValues = interimViewModel.interimStates.patientAction.notes,
                     hasTextfield = patientDecisionTextfields,
                 )
             }
@@ -118,7 +121,10 @@ fun InterimPage(
                             choices = arrivalLaws.keys.toTypedArray(),
                             labels = arrivalLaws,
                             selection = interimViewModel.interimStates.hospitalization.laws,
-                            onSelectionChanged = { /* TODO: Wait for backend change from val to var*/ },
+                            onSelectionChanged = {
+                                interimViewModel.interimStates.hospitalization.laws =
+                                    it as MutableSet<ArrivalLaws>
+                            },
                             gridLayout = GridCells.Adaptive(50.dp),
                             checkboxSpacing = 1.dp,
                             isHorizontal = true
@@ -135,7 +141,10 @@ fun InterimPage(
                             choices = transportationWaysLabel.keys.toTypedArray(),
                             labels = transportationWaysLabel,
                             selection = interimViewModel.interimStates.hospitalization.wayOfTransport,
-                            onSelectionChanged = { /* TODO: Wait for backend change from val to var*/ },
+                            onSelectionChanged = {
+                                interimViewModel.interimStates.hospitalization.wayOfTransport =
+                                    it as MutableSet<InterimJournalDto.WayOfTransport>
+                            },
                             gridLayout = GridCells.Adaptive(30.dp),
                             checkboxSpacing = 1.dp,
                             isHorizontal = true
@@ -149,7 +158,7 @@ fun InterimPage(
                     Row(horizontalArrangement = Arrangement.spacedBy(50.dp)) {
                         TitledTextField(
                             title = "Avdelning",
-                            //TODO: Remove when inclded in InterimDto
+                            //TODO: Remove when included in InterimDto
                             onChangeText = { interimViewModel.department = it },
                             textValue = interimViewModel.department
                         )
@@ -172,13 +181,14 @@ fun InterimPage(
                         modifier = Modifier.padding(vertical = 16.dp)
                     )
                     Row {
-
-                        EnumRadioButtonsHorizontal(
-                            choices = onlyYes.keys.toTypedArray(),
-                            labels = onlyYes,
-                            currentChoice = interimViewModel.admission,
-                            onSelection = { interimViewModel.admission = it }
+                        LabeledCheckbox(
+                            label = "Ja",
+                            checked = interimViewModel.admission,
+                            onCheckedChange = {
+                                interimViewModel.admission = it
+                            }
                         )
+
                     }
                 }
             }

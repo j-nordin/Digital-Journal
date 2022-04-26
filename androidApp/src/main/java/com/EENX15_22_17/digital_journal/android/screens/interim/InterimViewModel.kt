@@ -9,11 +9,9 @@ import se.predicare.journal.screens.InterimJournalDto
 
 class InterimViewModel : ViewModel() {
     var interimStates by mutableStateOf(InterimJournalDto())
-
     //TODO: Remove when they are included in InterimDto
     var department by mutableStateOf("")
     var ssk by mutableStateOf("")
     var time by mutableStateOf("")
-    var admission by mutableStateOf(YesNoQuestion.UNANSWERED)
-
+    var admission by mutableStateOf(false)
 }
