@@ -10,7 +10,6 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,9 +29,9 @@ import java.util.*
 fun DatePickerModal(
     onDateSelected: (LocalDate) -> Unit,
     onDismissRequest: () -> Unit,
-    dateVaule: LocalDate = LocalDate.now()
+    dateValue: LocalDate = LocalDate.now()
 ) {
-    val selDate = rememberSaveable { mutableStateOf(dateVaule) }
+    val selDate = rememberSaveable { mutableStateOf(dateValue) }
 
     //TODO - Change this to use the date picker from compose when it arrives
     Dialog(onDismissRequest = onDismissRequest) {
