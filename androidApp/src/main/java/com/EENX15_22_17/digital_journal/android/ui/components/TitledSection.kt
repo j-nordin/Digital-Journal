@@ -6,6 +6,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.internal.composableLambda
@@ -31,7 +32,7 @@ fun TitledSection(
     Box(modifier) {
         Text(
             text = title,
-            style = TextStyle(fontSize = 26.sp, fontWeight = FontWeight.SemiBold),
+            style = MaterialTheme.typography.h6,
             color = Color.Black,
             modifier = Modifier
                 .zIndex(1f)

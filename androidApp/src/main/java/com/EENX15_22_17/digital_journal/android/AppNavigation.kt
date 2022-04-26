@@ -10,6 +10,8 @@ import androidx.navigation.navigation
 import com.EENX15_22_17.digital_journal.android.screens.arrival.patientinfo.ArrivalPage
 import com.EENX15_22_17.digital_journal.android.screens.treatment.ordination.OrdinationScreen
 import com.EENX15_22_17.digital_journal.android.screens.arrival.hazardassesment.HazardAssessment
+import com.EENX15_22_17.digital_journal.android.screens.interim.InterimPage
+import com.EENX15_22_17.digital_journal.android.screens.interim.InterimViewModel
 import com.EENX15_22_17.digital_journal.android.ui.current.CurrentScreen
 import com.EENX15_22_17.digital_journal.android.screens.landingpage.LandingPage
 import com.EENX15_22_17.digital_journal.android.screens.treatment.checkups.TempMedicalCheckup
@@ -17,8 +19,9 @@ import com.EENX15_22_17.digital_journal.android.screens.treatment.interim.TempIn
 import com.EENX15_22_17.digital_journal.android.screens.triage.currentHealth.TempCurrentHealth
 import com.EENX15_22_17.digital_journal.android.ui.screen.ContactCauseScreen
 import com.EENX15_22_17.digital_journal.android.screens.triage.suicideassessment.SuicideAssessmentScreen
-import com.EENX15_22_17.digital_journal.android.screens.triage.healthHistory.HealthHistoryPage
+import com.EENX15_22_17.digital_journal.android.screens.triage.somatichealth.SomaticHealthPage
 import com.EENX15_22_17.digital_journal.android.screens.triage.previousCare.TempPreviusCare
+import se.predicare.journal.screens.JournalScreen
 
 sealed class Screen(val route: String) {
     object Current : Screen(route = "current")
@@ -118,16 +121,20 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
 
             LandingPage(
                 visitId = visitId,
-                navToArrival = { navTo(PatientMeetingScreen.Arrival) },
-                navToHazard = { navTo(PatientMeetingScreen.HazardAssessment) },
-                navToContactReason = { navTo(PatientMeetingScreen.ContactReason) },
-                navToPreviousCare = { navTo(PatientMeetingScreen.PreviousCare) },
-                navToHealthHistory = { navTo(PatientMeetingScreen.HealthHistory) },
-                navToHealthNow = { navTo(PatientMeetingScreen.HealthNow) },
-                navToSuicideAssessment = { navTo(PatientMeetingScreen.SuicideAssessment) },
-                navToNursingNeed = { navTo(PatientMeetingScreen.NursingNeed) },
-                navToMedicalOrder = { navTo(PatientMeetingScreen.MedicalOrder) },
-                navToInterimJournal = { navTo(PatientMeetingScreen.InterimJournal) },
+                onNavigate = { screen ->
+                    val target: PatientMeetingScreen = when(screen) {
+                        JournalScreen.PATIENT_INFORMATION -> PatientMeetingScreen.Arrival
+                        JournalScreen.ARRIVAL_HAZARD_ASSESSMENT -> PatientMeetingScreen.HazardAssessment
+                        JournalScreen.CONTACT_REASON -> PatientMeetingScreen.ContactReason
+                        JournalScreen.SUICIDE_ASSESSMENT -> PatientMeetingScreen.SuicideAssessment
+                        JournalScreen.PREVIOUS_CARE -> PatientMeetingScreen.PreviousCare
+                        JournalScreen.SOMATIC_HEALTH -> PatientMeetingScreen.HealthHistory
+                        JournalScreen.TRIAGE_ASSESSMENT -> PatientMeetingScreen.HealthNow
+                        JournalScreen.EVENTS -> PatientMeetingScreen.MedicalOrder
+                        JournalScreen.INTERIM_JOURNAL -> PatientMeetingScreen.InterimJournal
+                    }
+                    navTo(target)
+                },
                 showOverview = { id ->
                     navController.navigate(Screen.PatientOverview.createRoute(visitId = id))
                 }
@@ -149,7 +156,6 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
         ) { backStackEntry ->
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient id provided " }
-            //TODO add hazard composable here
             HazardAssessment(
                 onBackClicked = navController::popBackStack,
                 onMenuClicked = switchScaffoldDrawerState,
@@ -172,7 +178,6 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
         ) { backStackEntry ->
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient meeting" }
-            // TODO add PreviousCare composable
             TempPreviusCare(
                 visitId = visitId,
                 onBackClicked = navController::popBackStack,
@@ -184,7 +189,7 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
         ) { backStackEntry ->
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient meeting" }
-            HealthHistoryPage(
+            SomaticHealthPage(
                 visitId = visitId,
                 onBackClicked = navController::popBackStack,
                 onMenuClicked = switchScaffoldDrawerState
@@ -195,7 +200,6 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
         ) { backStackEntry ->
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient meeting" }
-            // TODO add HealthNow composable
             TempCurrentHealth(
                 visitId = visitId,
                 onBackClicked = navController::popBackStack,
@@ -218,7 +222,6 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
         ) { backStackEntry ->
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient meeting" }
-            // TODO add nursingNeed composable
             TempMedicalCheckup(
                 visitId = visitId,
                 onBackClicked = navController::popBackStack,
@@ -240,8 +243,9 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
         ) { backStackEntry ->
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient meeting" }
-            // TODO add interimJournal composable
-            TempInterim(
+            //TODO: FIX viewmodel
+            InterimPage(
+                interimViewModel = InterimViewModel(),
                 visitId = visitId,
                 onBackClicked = navController::popBackStack,
                 onMenuClicked = switchScaffoldDrawerState

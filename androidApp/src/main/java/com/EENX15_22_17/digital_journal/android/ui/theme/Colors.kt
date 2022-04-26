@@ -2,6 +2,7 @@ package com.EENX15_22_17.digital_journal.android.ui.theme
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.lerp
+import se.predicare.journal.screens.JournalSection
 
 /*TODO: Refactor to not use top level colors */
 val danger = Color(0xFFCD9A50)
@@ -35,8 +36,17 @@ object Colors {
     val arrivalBackground = arrivalPrimary.brighter(0.7f)
     val triagePrimary = Color(0xFF3D8085)
     val triageBackground = arrivalPrimary.brighter(0.7f)
+    val eventsPrimary = Color(0xFF78907A)
+    val eventsBackground = arrivalPrimary.brighter(0.7f)
     val treatmentPrimary = Color(0xFF87618A)
     val treatmentBackground = arrivalPrimary.brighter(0.7f)
+
+    val journalSectionColors = mapOf(
+        JournalSection.ARRIVAL to arrivalPrimary,
+        JournalSection.TRIAGE to triagePrimary,
+        JournalSection.EVENTS to eventsPrimary,
+        JournalSection.INTERIM_JOURNAL to treatmentPrimary
+    )
 }
 
 

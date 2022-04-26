@@ -4,6 +4,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import com.EENX15_22_17.digital_journal.android.dataModel.YesAndNoAndNoAnswer
 import com.EENX15_22_17.digital_journal.android.dataModel.YesNo
 import java.util.*
 

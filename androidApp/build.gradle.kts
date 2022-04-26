@@ -1,4 +1,5 @@
 val compose_version: String by project
+val kotlinx_datetime_version: String by project
 
 plugins {
     id("com.android.application")
@@ -34,9 +35,10 @@ android {
 
 dependencies {
     // PREDICARE LIBS
-    implementation("se.predicare:core-data-jvm:0.2.0-SNAPSHOT")
-    implementation("se.predicare:journal-lib-jvm:0.2.1-SNAPSHOT")
-    implementation("se.predicare:journal-client-jvm:0.2.1-SNAPSHOT")
+    implementation("se.predicare:core-data-jvm:0.3.0-SNAPSHOT")
+    implementation("se.predicare:journal-lib-jvm:0.4.0-SNAPSHOT")
+    implementation("se.predicare:journal-client-jvm:0.4.0-SNAPSHOT")
+
     implementation(project(":shared"))
     implementation("com.google.android.material:material:1.5.0")
     implementation("androidx.appcompat:appcompat:1.4.1")
@@ -44,6 +46,7 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.5.0-alpha02")
     implementation("androidx.navigation:navigation-compose:2.4.1")
     implementation(kotlin("stdlib"))
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:$kotlinx_datetime_version")
     implementation("androidx.compose.material:material:$compose_version")
     implementation("androidx.compose.ui:ui:$compose_version")
     androidTestImplementation("junit:junit:4.13.2")

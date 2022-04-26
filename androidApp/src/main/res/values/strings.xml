@@ -30,9 +30,10 @@
     <string name="hazardCard">ANKOMST / \nFARLIGHETSBEDÖMNING</string>
     <string name="contactReason">KONTAKTORSAK</string>
     <string name="previousCare">TIDIGARE VÅRD</string>
-    <string name="healthHistory">HÄLSA HISTORIK </string>
+    <string name="somaticHealthTitle">SOMATISK HÄLSA</string>
     <string name="healthNow">HÄLSA NU</string>
     <string name="suicideAssessment">SUICIDBEDÖMNING</string>
+    <string name="interimTitle">INTERIMJOURNAL</string>
     <string name="nursingNeed">OMV. BEDÖM / ÅTGÄRD</string>
     <string name="medicalOrder">LÄKARORDINATION</string>
     <string name="interimJournal">INTERIMJOURNAL</string>
@@ -44,4 +45,9 @@
     <string name="multiresistant">Multiresistans misstanke</string>
     <string name="suspicionGE">Misstanke om GE</string>
     <string name="nursesNeeds">Omvårdnadsbehov</string>
+    <string name="patientDecision">Patientbeslut</string>
+    <string name="preliminaryAssessment">Bedömning</string>
+    <string name="hospitalization">Inläggning</string>
+    <string name="reportedTo">Patient rapporterad till</string>
+
 </resources>
