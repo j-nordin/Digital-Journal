@@ -136,16 +136,8 @@ fun SomaticHealthPage(
 
                 Row {
                     var isRendered by rememberSaveable { mutableStateOf(somaticHealthViewModel.isNursesNeed.value) }
-                    //TODO: Use Modifier.modifyIf - method here.
                     var isEnabled by rememberSaveable { mutableStateOf(false) }
-                    var alpha by rememberSaveable() { mutableStateOf(0.3f)}
                     isEnabled = isRendered?.equals(YesNo.YES) == true
-                    alpha = if (isEnabled) {
-                        1f
-                    } else {
-                        0.3f
-                    }
-
                     NursesNeeds(
                         isNursesNeeds = somaticHealthViewModel.isNursesNeed.value ?: YesNo.UNKOWN,
                         onNursesNeeds = {
@@ -157,7 +149,7 @@ fun SomaticHealthPage(
                     )
                     NursesNeedsAlternative(
                         modifier = Modifier
-                            .alpha(alpha = alpha),
+                            .modifyIf(!isEnabled, Modifier.alpha(0.3f)),
                         currentValues = somaticHealthViewModel.nursesNeedsAlternatives.value
                             ?: setOf<NursesNeeds>(),
                         setValues = {
