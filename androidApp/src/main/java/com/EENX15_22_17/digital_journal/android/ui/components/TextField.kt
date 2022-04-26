@@ -28,7 +28,8 @@ fun TitledTextField(
     onChangeText: (textValue: String) -> Unit,
     textValue: String,
     modifier: Modifier = Modifier,
-    isEnabled: Boolean = true
+    isEnabled: Boolean = true,
+    maxLines : Int = 1
 ) {
     var text by rememberSaveable { mutableStateOf(textValue) }
     Box {
@@ -45,7 +46,7 @@ fun TitledTextField(
                     fontSize = 20.sp
                 )
             },
-            maxLines = 1,
+            maxLines = maxLines,
             enabled = isEnabled
         )
     }
