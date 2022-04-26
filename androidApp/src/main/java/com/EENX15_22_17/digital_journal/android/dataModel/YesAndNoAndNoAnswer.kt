@@ -19,7 +19,11 @@ val yesNoNoAnswerLabels = mapOf<YesAndNoAndNoAnswer, String>(
 
 // TODO: Match Predicare api
 val yesNoQuestionLabels = mapOf<YesNoQuestion, String>(
+    YesNoQuestion.YES to "Ja",
     YesNoQuestion.NO to "Nej",
-    YesNoQuestion.YES to "Yes",
     YesNoQuestion.UNANSWERED to "Inget svar"
+)
+
+val onlyYes = mapOf<YesNoQuestion, String>(
+    YesNoQuestion.YES to "Ja",
 )
