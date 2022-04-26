@@ -99,10 +99,9 @@ fun <E : Enum<*>> EnumRadioButtonWithTextField(
     onSelection: (choice: E) -> Unit,
     isEnabled: Boolean = true,
     textValues: Map<E, String>,
-    onChangeTextValue: (textValue: String) -> Unit,
+    onChangeTextValue: (choice: E, textValue: String) -> Unit,
     title: Map<E, String>,
-    hasTextfield: Map<E, Boolean>,
-    textFieldEnabled: Boolean = true
+    hasTextfield: Map<E, Boolean>
 ) {
     var selection by rememberSaveable { mutableStateOf(currentChoice) }
     Column {
@@ -136,7 +135,7 @@ fun <E : Enum<*>> EnumRadioButtonWithTextField(
                 if (hasTextfield[choice] == true) {
                     TitledTextField(
                         title = title[choice] ?: "",
-                        onChangeText = onChangeTextValue,
+                        onChangeText = { onChangeTextValue(choice, it) },
                         textValue = textValues[choice] ?: "",
                         isEnabled = choice == selection
                     )
