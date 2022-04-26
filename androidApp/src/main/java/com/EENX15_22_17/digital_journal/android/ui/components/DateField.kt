@@ -32,7 +32,7 @@ fun TitledDateField(
     OutlinedTextField(
         value = currentlySelectedDate.toString(),
         onValueChange = {},
-        textStyle = TextStyle(fontSize = 20.sp),
+        textStyle = TextStyle(fontSize = 17.sp),
         modifier = modifier
             .width(200.dp)
             .height(60.dp),
