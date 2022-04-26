@@ -25,7 +25,7 @@ import java.util.*
 * is 21 when the 'LocalDate' requires API level 26
 * */
 @Composable
-fun DatePicker(onDateSelected: (LocalDate) -> Unit, onDismissRequest: () -> Unit) {
+fun DatePickerModal(onDateSelected: (LocalDate) -> Unit, onDismissRequest: () -> Unit) {
     val selDate = remember { mutableStateOf(LocalDate.now()) }
 
     //TODO - Change this to use the date picker from compose when it arrives
