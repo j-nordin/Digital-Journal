@@ -59,7 +59,7 @@ fun TitledDateField(
         DatePickerModal(
             onDateSelected = { date -> currentlySelectedDate = date; onChangedDate(date) },
             onDismissRequest = ::switchStateDatePickerModal,
-            dateVaule = currentlySelectedDate
+            dateValue = currentlySelectedDate
         )
     }
 }
