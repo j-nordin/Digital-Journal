@@ -16,10 +16,10 @@ import java.time.LocalDate
 
 @Composable
 fun TitledDateField(
+    modifier: Modifier = Modifier,
     title: String,
     onChangedDate: (date: LocalDate) -> Unit,
-    value: LocalDate,
-    modifier: Modifier = Modifier,
+    value: LocalDate = LocalDate.now(),
     isEnabled: Boolean = true
 ) {
     var currentDate by rememberSaveable { mutableStateOf(value) }

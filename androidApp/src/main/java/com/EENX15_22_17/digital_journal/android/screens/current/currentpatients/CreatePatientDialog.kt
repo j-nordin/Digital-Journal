@@ -61,12 +61,17 @@ fun CreatePatientDialog(
 
                 Spacer(modifier = Modifier.size(20.dp))
 
-                TitledDateField(
-                    modifier = modifier.fillMaxWidth(0.5f),
-                    title = "Datum",
-                    onChangedDate = {selectedDate.value = it},
-                    value = LocalDate.now(),
-                )
+
+                Row(modifier = modifier.fillMaxWidth()) {
+                    TitledDateField(
+                        modifier = modifier.fillMaxWidth(0.5f),
+                        title = "Datum",
+                        onChangedDate = {selectedDate.value = it},
+                    )
+
+                    Spacer(modifier = modifier.width(20.dp))
+                }
+
 
                 Row(
                     modifier = modifier
