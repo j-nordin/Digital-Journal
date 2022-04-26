@@ -12,16 +12,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import java.time.LocalDate
 
 @Composable
 fun TitledDateField(
     title: String,
-    onChangeDate: (date: String) -> Unit,
-    value: String,
+    onChangedDate: (date: LocalDate) -> Unit,
+    value: LocalDate,
     modifier: Modifier = Modifier,
     isEnabled: Boolean = true
 ) {
-    var text by rememberSaveable { mutableStateOf(value) }
+    var currentDate by rememberSaveable { mutableStateOf(value) }
     var showDatePickerModal by rememberSaveable { mutableStateOf(false) }
 
     fun switchStateDatePickerModal() {
@@ -29,7 +30,7 @@ fun TitledDateField(
     }
 
     OutlinedTextField(
-        value = text,
+        value = currentDate.toString(),
         onValueChange = {},
         textStyle = TextStyle(fontSize = 20.sp),
         modifier = modifier
@@ -56,7 +57,7 @@ fun TitledDateField(
 
     if (showDatePickerModal) {
         DatePickerModal(
-            onDateSelected = { date -> text = date.toString(); onChangeDate(date.toString()) },
+            onDateSelected = { date -> currentDate = date; onChangedDate(date) },
             onDismissRequest = ::switchStateDatePickerModal
         )
     }

@@ -10,8 +10,6 @@ import androidx.compose.ui.window.Dialog
 import com.EENX15_22_17.digital_journal.android.ui.components.TitledTextField
 import com.EENX15_22_17.digital_journal.android.ui.components.TitledDateField
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import java.util.*
 
 
 @Composable
@@ -21,8 +19,9 @@ fun CreatePatientDialog(
     onCreateClicked: () -> Unit
 ) {
     /*TODO: move to viewmodel*/
-    var selectedDate = rememberSaveable { mutableStateOf("")}
+    val selectedDate = rememberSaveable { mutableStateOf(LocalDate.now())}
     val name = rememberSaveable { mutableStateOf("")}
+    val socialSecurityNumber = rememberSaveable { mutableStateOf("")}
 
     Dialog(
         onDismissRequest = onDismiss,
@@ -55,7 +54,7 @@ fun CreatePatientDialog(
                     TitledTextField(
                         modifier = modifier.fillMaxWidth(),
                         title = "Personnummer",
-                        onChangeText = {},
+                        onChangeText = { socialSecurityNumber.value = it },
                         textValue = ""
                     )
                 }
@@ -65,8 +64,8 @@ fun CreatePatientDialog(
                 TitledDateField(
                     modifier = modifier.fillMaxWidth(0.5f),
                     title = "Datum",
-                    onChangeDate = {selectedDate.value = it; println(it)},
-                    value = LocalDate.now().format(DateTimeFormatter.ofPattern("y-MM-dd")),
+                    onChangedDate = {selectedDate.value = it},
+                    value = LocalDate.now(),
                 )
 
                 Row(
