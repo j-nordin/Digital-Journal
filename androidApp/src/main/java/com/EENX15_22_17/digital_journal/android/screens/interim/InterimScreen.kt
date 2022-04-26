@@ -9,13 +9,11 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.EENX15_22_17.digital_journal.android.R
-import com.EENX15_22_17.digital_journal.android.dataModel.YesNo
-import com.EENX15_22_17.digital_journal.android.dataModel.yesNoLabels
-import com.EENX15_22_17.digital_journal.android.dataModel.yesNoNoAnswerLabels
-import com.EENX15_22_17.digital_journal.android.dataModel.yesNoQuestionLabels
+import com.EENX15_22_17.digital_journal.android.dataModel.*
 import com.EENX15_22_17.digital_journal.android.ui.DetailPageWrapper
 import com.EENX15_22_17.digital_journal.android.ui.components.*
 import com.EENX15_22_17.digital_journal.android.ui.theme.Colors
@@ -30,6 +28,7 @@ fun InterimPage(
     onBackClicked: () -> Unit,
     onMenuClicked: () -> Unit
 ) {
+    //TODO: Fix grey out content if certain radiobutton is selected
     DetailPageWrapper(
         title = stringResource(id = R.string.interimJournal),
         titleColor = Colors.treatmentPrimary,
@@ -37,7 +36,7 @@ fun InterimPage(
         onMenuClicked = onMenuClicked
     ) {
         Column {
-            //patientDecision content
+            //PatientDecision content
             TitledSection(title = stringResource(id = R.string.patientDecision)) {
                 EnumRadioButtonWithTextField(
                     choices = patientDecision.keys.toTypedArray(),
@@ -51,13 +50,13 @@ fun InterimPage(
                     hasTextfield = patientDecisionTextfields,
                 )
             }
-            //preliminaryAssessment content
+            //PreliminaryAssessment content
             TitledSection(title = stringResource(id = R.string.preliminaryAssessment)) {
                 Column {
                     TitledTextField(
                         modifier = Modifier
                             .padding(16.dp)
-                            .height(160.dp)
+                            .height(140.dp)
                             .fillMaxWidth(),
                         title = "Preliminär bedömning",
                         onChangeText = {
@@ -107,8 +106,11 @@ fun InterimPage(
                 }
             }
             // Hospitalization content
-            TitledSection(title = stringResource(id = R.string.hospitalization)) {
-                Row {
+            TitledSection(
+                title = stringResource(id = R.string.hospitalization),
+                modifier = Modifier.height(300.dp)
+            ) {
+                Row(horizontalArrangement = Arrangement.spacedBy(140.dp)) {
                     Column {
                         Text(
                             text = "Lagar",
@@ -121,8 +123,9 @@ fun InterimPage(
                             labels = arrivalLaws,
                             selection = interimViewModel.interimStates.hospitalization.laws,
                             onSelectionChanged = { /* TODO: Wait for backend change from val to var*/ },
-                            gridLayout = GridCells.Adaptive(300.dp),
-                            checkboxSpacing = 1.dp
+                            gridLayout = GridCells.Adaptive(50.dp),
+                            checkboxSpacing = 1.dp,
+                            isHorizontal = true
                         )
                     }
                     Column {
@@ -133,25 +136,56 @@ fun InterimPage(
                             modifier = Modifier.padding(vertical = 16.dp)
                         )
                         EnumCheckboxesLazyGrid(
-                            choices = arrivalLaws.keys.toTypedArray(),
-                            labels = arrivalLaws,
-                            selection = interimViewModel.interimStates.hospitalization.laws,
+                            choices = transportationWaysLabel.keys.toTypedArray(),
+                            labels = transportationWaysLabel,
+                            selection = interimViewModel.interimStates.hospitalization.wayOfTransport,
                             onSelectionChanged = { /* TODO: Wait for backend change from val to var*/ },
-                            gridLayout = GridCells.Adaptive(300.dp),
-                            checkboxSpacing = 1.dp
+                            gridLayout = GridCells.Adaptive(30.dp),
+                            checkboxSpacing = 1.dp,
+                            isHorizontal = true
                         )
                     }
+                }
+            }
 
+            TitledSection(title = stringResource(id = R.string.reportedTo)) {
+                Column {
+                    Row(horizontalArrangement = Arrangement.spacedBy(50.dp)) {
+                        TitledTextField(
+                            title = "Avdelning",
+                            //TODO: Remove when inclded in InterimDto
+                            onChangeText = { interimViewModel.department = it },
+                            textValue = interimViewModel.department
+                        )
+                        TitledTextField(
+                            title = "Ssk",
+                            onChangeText = { interimViewModel.ssk = it },
+                            textValue = interimViewModel.ssk
+                        )
+                        TitledTextField(
+                            title = "Klockan",
+                            //TODO: Have a Datefield
+                            onChangeText = { interimViewModel.time },
+                            textValue = interimViewModel.time
+                        )
+                    }
+                    Text(
+                        text = "Intagningsbeslut fattat",
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(vertical = 16.dp)
+                    )
+                    Row {
+
+                        EnumRadioButtonsHorizontal(
+                            choices = onlyYes.keys.toTypedArray(),
+                            labels = onlyYes,
+                            currentChoice = interimViewModel.admission,
+                            onSelection = { interimViewModel.admission = it }
+                        )
+                    }
                 }
             }
         }
     }
-}
-
-@Composable
-fun PatientDecisionContent(
-
-) {
-
-
 }

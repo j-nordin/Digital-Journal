@@ -54,7 +54,11 @@ val arrivalLaws = mapOf<ArrivalLaws, String>(
 )
 
 val transportationWaysLabel = mapOf<InterimJournalDto.WayOfTransport, String>(
-    
+    InterimJournalDto.WayOfTransport.TAXI_OR_PRIVATE_TRANSPORT to "Taxi/Privat",
+    InterimJournalDto.WayOfTransport.PATIENT_TRANSPORTATION to "Sjuktransport",
+    InterimJournalDto.WayOfTransport.CORRECTIONAL_TREATMENT to "Häktespersonal/kriminalvården",
+    InterimJournalDto.WayOfTransport.POLICE to "Polis",
+    InterimJournalDto.WayOfTransport.AMBULANCE to "Ambulanstransport"
 )
 
 enum class InterimLaw {
