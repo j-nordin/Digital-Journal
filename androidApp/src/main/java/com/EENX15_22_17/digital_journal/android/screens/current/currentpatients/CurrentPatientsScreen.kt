@@ -45,7 +45,6 @@ fun CurrentScreen(
     if (showCreatePatientModal) {
         CreatePatientDialog(
             onDismiss = {switchStateCreatePatientModal()},
-            onCreateClicked = {switchStateCreatePatientModal()} //TODO: Send collected data to backend to create a new patient
         )
     }
     
