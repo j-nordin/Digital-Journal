@@ -1,6 +1,7 @@
 package com.EENX15_22_17.digital_journal.android.screens.interim
 
 import com.EENX15_22_17.digital_journal.android.dataModel.YesAndNoAndNoAnswer
+import se.predicare.journal.data.ArrivalLaws
 import se.predicare.journal.screens.InterimJournalDto
 
 data class InterimData(
@@ -41,6 +42,19 @@ val patientDecisionTextfields = mapOf<InterimJournalDto.PatientAction, Boolean>(
 val patientDecisionTitles = mapOf<InterimJournalDto.PatientAction, String>(
     InterimJournalDto.PatientAction.PATIENT_REMITTED to "Till vård",
     InterimJournalDto.PatientAction.PATIENT_HOSPITALIZED to "Till avdelning"
+)
+
+val arrivalLaws = mapOf<ArrivalLaws, String>(
+    ArrivalLaws.HSL to "HSL",
+    ArrivalLaws.LPT to "LPT",
+    ArrivalLaws.PARAGRAPH_47 to "$47",
+    ArrivalLaws.VI to "VI",
+    ArrivalLaws.LRV to "LRV",
+    ArrivalLaws.LVM to "LVM",
+)
+
+val transportationWaysLabel = mapOf<InterimJournalDto.WayOfTransport, String>(
+    
 )
 
 enum class InterimLaw {
