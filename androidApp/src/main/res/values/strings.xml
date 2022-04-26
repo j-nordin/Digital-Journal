@@ -45,4 +45,5 @@
     <string name="multiresistant">Multiresistans misstanke</string>
     <string name="suspicionGE">Misstanke om GE</string>
     <string name="nursesNeeds">Omvårdnadsbehov</string>
+    <string name="patientDecision">Patientbeslut</string>
 </resources>
