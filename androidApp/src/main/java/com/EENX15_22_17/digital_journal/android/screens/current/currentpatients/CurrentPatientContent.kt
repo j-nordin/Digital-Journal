@@ -36,7 +36,7 @@ fun PatientCard(
     var showComments by remember { mutableStateOf(false) }
     Card(
         modifier = Modifier
-            .padding(horizontal = 120.dp, vertical = 2.dp)
+            .padding(vertical = 2.dp)
             .fillMaxWidth()
             .clickable { navigateSelectedPatient(visitId) },
         backgroundColor = MaterialTheme.colors.primary
@@ -159,22 +159,17 @@ fun PatientsList(
     navigateSpecificOverviewPage: (visitId: String) -> Unit = {}
 ) {
     val scrollState = rememberScrollState()
-    Box(
-        modifier
-            .height(400.dp)
+    Column(
+        Modifier.verticalScroll(scrollState)
     ) {
-        Column(
-            Modifier.verticalScroll(scrollState)
-        ) {
-            for (patient in patients) {
-                PatientCard(
-                    visitId = patient.id,
-                    name = patient.name,
-                    securityNumber = patient.securityNumber,
-                    showOverview = { navigateSpecificOverviewPage(it) },
-                    navigateSelectedPatient = { navigateSpecificPatient(it) }
-                )
-            }
+        for (patient in patients) {
+            PatientCard(
+                visitId = patient.id,
+                name = patient.name,
+                securityNumber = patient.securityNumber,
+                showOverview = { navigateSpecificOverviewPage(it) },
+                navigateSelectedPatient = { navigateSpecificPatient(it) }
+            )
         }
     }
 }
