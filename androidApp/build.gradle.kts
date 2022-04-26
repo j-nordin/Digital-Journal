@@ -1,6 +1,7 @@
 val compose_version: String by project
 val ktor_version: String by project
 val kotlinx_datetime_version: String by project
+val kodein_version: String by project
 
 plugins {
     id("com.android.application")
@@ -55,10 +56,10 @@ dependencies {
     implementation("androidx.compose.ui:ui-test-junit4:$compose_version")
     implementation ("androidx.compose.material:material-icons-extended:$compose_version")
     // Dependency Injection
-    implementation("org.kodein.di:kodein-di:7.11.0")
-    implementation("org.kodein.di:kodein-di-framework-android-core:7.11.0")
-    implementation("org.kodein.di:kodein-di-framework-android-x:7.11.0")
-    implementation("org.kodein.di:kodein-di-framework-compose:7.11.0")
+    implementation("org.kodein.di:kodein-di:$kodein_version")
+    implementation("org.kodein.di:kodein-di-framework-android-core:$kodein_version")
+    implementation("org.kodein.di:kodein-di-framework-android-x:$kodein_version")
+    implementation("org.kodein.di:kodein-di-framework-compose:$kodein_version")
 
     //Ktor
     implementation("io.ktor:ktor-client-core:$ktor_version")
