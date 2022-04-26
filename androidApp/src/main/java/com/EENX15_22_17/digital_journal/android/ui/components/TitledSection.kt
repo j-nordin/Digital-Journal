@@ -58,6 +58,50 @@ fun TitledSection(
 }
 
 @Composable
+fun TitledSectionWithRettsColor(
+    title: String,
+    modifier: Modifier = Modifier,
+    color: Color = Color.White,
+    content: @Composable () -> Unit
+) {
+    Box(modifier) {
+        Row(modifier = Modifier.zIndex(1f)) {
+            Box(
+                modifier = Modifier
+                    .size(30.dp)
+                    .background(color = color, CircleShape)
+                    .border(2.dp, Color.Black, CircleShape)
+            )
+            Text(
+                text = title,
+                style = MaterialTheme.typography.h6,
+                color = Color.Black,
+                modifier = Modifier
+                    .zIndex(1f)
+                    .padding(horizontal = 20.dp)
+                    .background(color = Color.White, shape = CircleShape)
+                    .padding(horizontal = 2.dp)
+
+            )
+        }
+
+        Box(
+            Modifier
+                .fillMaxWidth()
+                .padding(vertical = 15.dp)
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .border(BorderStroke(1.dp, colorTextGray), shape = RoundedCornerShape(5))
+                    .padding(top = 30.dp, bottom = 10.dp, start = 10.dp, end = 10.dp),
+                content = { content() },
+            )
+        }
+    }
+}
+
+@Composable
 @Preview(showBackground = true)
 private fun PreviewTitledSection() {
     TitledSection(title = "Titel") {

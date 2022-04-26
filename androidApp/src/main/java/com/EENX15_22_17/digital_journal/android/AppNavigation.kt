@@ -15,6 +15,7 @@ import com.EENX15_22_17.digital_journal.android.screens.interim.InterimPage
 import com.EENX15_22_17.digital_journal.android.screens.interim.InterimViewModel
 import com.EENX15_22_17.digital_journal.android.ui.current.CurrentScreen
 import com.EENX15_22_17.digital_journal.android.screens.landingpage.LandingPage
+import com.EENX15_22_17.digital_journal.android.screens.landingpage.LandingPageViewModel
 import com.EENX15_22_17.digital_journal.android.screens.treatment.checkups.TempMedicalCheckup
 import com.EENX15_22_17.digital_journal.android.screens.treatment.interim.TempInterim
 import com.EENX15_22_17.digital_journal.android.screens.triage.currentHealth.TempCurrentHealth
@@ -101,15 +102,26 @@ fun NavigationApp(
         navController = navController,
         startDestination = Screen.Current.route
     ) {
-        addCurrentBoardGraph(di, navController = navController, switchScaffoldDrawerState = switchScaffoldDrawerState)
-        addPatientMeetingGraph(navController = navController, switchScaffoldDrawerState = switchScaffoldDrawerState)
+        addCurrentBoardGraph(
+            di,
+            navController = navController,
+            switchScaffoldDrawerState = switchScaffoldDrawerState
+        )
+        addPatientMeetingGraph(
+            di,
+            navController = navController,
+            switchScaffoldDrawerState = switchScaffoldDrawerState
+        )
     }
 }
 
 private fun NavGraphBuilder.addPatientMeetingGraph(
+    di: DI,
     navController: NavController,
     switchScaffoldDrawerState: () -> Unit,
 ) {
+
+
     navigation(
         route = Screen.PatientMeeting.route,
         startDestination = PatientMeetingScreen.Landing.route
@@ -118,6 +130,9 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
             route = PatientMeetingScreen.Landing.createRoute()
         ) { backStackEntry ->
             val visitId = backStackEntry.arguments?.getString("visitId")
+
+            //TODO: JournalId should go in to args when available
+            val landingPageViewModel: LandingPageViewModel by di.instance(arg = "626803fd7f788d66486d6561")
 
             /*TODO: Handle meeting id not provided, ex show alert*/
             requireNotNull(visitId) { "No meeting id provided" }
@@ -128,7 +143,7 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
             LandingPage(
                 visitId = visitId,
                 onNavigate = { screen ->
-                    val target: PatientMeetingScreen = when(screen) {
+                    val target: PatientMeetingScreen = when (screen) {
                         JournalScreen.PATIENT_INFORMATION -> PatientMeetingScreen.Arrival
                         JournalScreen.ARRIVAL_HAZARD_ASSESSMENT -> PatientMeetingScreen.HazardAssessment
                         JournalScreen.CONTACT_REASON -> PatientMeetingScreen.ContactReason
@@ -143,7 +158,8 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
                 },
                 showOverview = { id ->
                     navController.navigate(Screen.PatientOverview.createRoute(visitId = id))
-                }
+                },
+                landingPageViewModel = landingPageViewModel
             )
         }
         composable(

@@ -25,7 +25,6 @@
     <string name="belongins">Patienttillhörigheter/Värdesaker</string>
 
 
-
     <string name="arrivalCard">PATIENTINFO</string>
     <string name="hazardCard">ANKOMST / \nFARLIGHETSBEDÖMNING</string>
     <string name="contactReason">KONTAKTORSAK</string>
@@ -49,5 +48,6 @@
     <string name="preliminaryAssessment">Bedömning</string>
     <string name="hospitalization">Inläggning</string>
     <string name="reportedTo">Patient rapporterad till</string>
+    <string name="patientJouralTitle">Patientjournal</string>
 
 </resources>
