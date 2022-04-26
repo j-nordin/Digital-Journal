@@ -54,6 +54,7 @@ fun TitledTextField(
 
 @Composable
 fun TitledTextFieldDigitKeyboard(
+    modifier: Modifier = Modifier,
     title: String,
     onChangeText: (textValue: String) -> Unit = {},
     textValue: String
@@ -64,7 +65,7 @@ fun TitledTextFieldDigitKeyboard(
             value = text,
             onValueChange = { text = it; onChangeText(it) },
             textStyle = TextStyle(fontSize = 20.sp),
-            modifier = Modifier
+            modifier = modifier
                 .width(160.dp)
                 .height(60.dp),
             label = {
