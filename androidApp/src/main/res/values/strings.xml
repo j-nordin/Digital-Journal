@@ -48,5 +48,6 @@
     <string name="patientDecision">Patientbeslut</string>
     <string name="preliminaryAssessment">Bedömning</string>
     <string name="hospitalization">Inläggning</string>
+    <string name="reportedTo">Patient rapporterad till</string>
 
 </resources>
