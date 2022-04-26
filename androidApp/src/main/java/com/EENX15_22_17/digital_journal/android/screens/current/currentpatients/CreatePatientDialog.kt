@@ -1,25 +1,29 @@
 package com.EENX15_22_17.digital_journal.android.screens.current.currentpatients
 
-import android.widget.Space
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.material.*
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.EENX15_22_17.digital_journal.android.ui.components.TitledTextField
+import com.EENX15_22_17.digital_journal.android.ui.components.TitledDateField
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 
 @Composable
 fun CreatePatientDialog(
     modifier: Modifier = Modifier,
     onDismiss: () -> Unit,
-    onConfirm: () -> Unit
+    onCreateClicked: () -> Unit
 ) {
+    /*TODO: move to viewmodel*/
+    var selectedDate = rememberSaveable { mutableStateOf("")}
+    val name = rememberSaveable { mutableStateOf("")}
+
     Dialog(
         onDismissRequest = onDismiss,
     ) {
@@ -44,7 +48,7 @@ fun CreatePatientDialog(
                     TitledTextField(
                         modifier = Modifier.fillMaxWidth(0.5f),
                         title = "Namn",
-                        onChangeText = {},
+                        onChangeText = { name.value = it },
                         textValue = ""
                     )
                     Spacer(modifier = modifier.width(20.dp))
@@ -55,6 +59,16 @@ fun CreatePatientDialog(
                         textValue = ""
                     )
                 }
+
+                Spacer(modifier = Modifier.size(20.dp))
+
+                TitledDateField(
+                    modifier = modifier.fillMaxWidth(0.5f),
+                    title = "Datum",
+                    onChangeDate = {selectedDate.value = it; println(it)},
+                    value = LocalDate.now().format(DateTimeFormatter.ofPattern("y-MM-dd")),
+                )
+
                 Row(
                     modifier = modifier
                         .fillMaxWidth()
@@ -63,7 +77,7 @@ fun CreatePatientDialog(
                 ) {
                     DismissButton(onDismissClicked = onDismiss)
                     Spacer(modifier = Modifier.width(20.dp))
-                    ConfirmButton(onConfirmClicked = onConfirm)
+                    ConfirmButton(onConfirmClicked = onCreateClicked)
                 }
             }
         }
@@ -76,7 +90,7 @@ private fun DismissButton(
     modifier: Modifier = Modifier,
     onDismissClicked: () -> Unit
 ) {
-    Button(
+    TextButton(
         modifier = modifier,
         onClick = onDismissClicked
     ) {
@@ -96,4 +110,5 @@ private fun ConfirmButton(
         Text(text = "Skapa")
     }
 }
+
 
