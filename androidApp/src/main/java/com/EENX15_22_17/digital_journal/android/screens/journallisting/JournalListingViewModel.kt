@@ -1,4 +1,4 @@
-package com.EENX15_22_17.digital_journal.android.screens.current.currentpatients
+package com.EENX15_22_17.digital_journal.android.screens.journallisting
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 import se.predicare.journal.data.JournalEntryDto
 import se.predicare.journal.repository.JournalRepository
 
-class PatientListViewModel(
+class JournalListingViewModel(
     val journalRepo: JournalRepository
 ): ViewModel() {
 
@@ -17,6 +17,14 @@ class PatientListViewModel(
 
     init {
         refresh()
+    }
+
+    fun createNew(journalEntryDto: JournalEntryDto) {
+        viewModelScope.launch {
+            journalRepo.create(journalEntryDto)
+        }.invokeOnCompletion {
+            refresh()
+        }
     }
 
     fun refresh(){

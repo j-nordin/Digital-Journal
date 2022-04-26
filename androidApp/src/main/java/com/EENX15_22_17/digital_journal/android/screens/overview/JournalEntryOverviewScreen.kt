@@ -1,4 +1,4 @@
-package com.EENX15_22_17.digital_journal.android.screens.landingpage
+package com.EENX15_22_17.digital_journal.android.screens.overview
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
@@ -12,18 +12,23 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.MedicalInformation
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.lerp
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.EENX15_22_17.digital_journal.android.screens.JournalEventViewModel
 import com.EENX15_22_17.digital_journal.android.ui.ifMobile
 import com.EENX15_22_17.digital_journal.android.ui.theme.Colors
 import com.EENX15_22_17.digital_journal.android.ui.theme.TextStyles
 import com.EENX15_22_17.digital_journal.android.ui.theme.colorIcon
+import org.kodein.di.compose.androidContextDI
+import org.kodein.di.instance
+import se.predicare.journal.data.JournalEntryDto
 import se.predicare.journal.data.Labels.labels
 import se.predicare.journal.screens.JournalScreen
 
@@ -54,12 +59,17 @@ val navigationSections by lazy {
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-@Preview
-fun LandingPage(
-    visitId: String = "1",
+fun JournalEntryOverviewScreen(
+    journalId: String,
     showOverview: (patientId: String) -> Unit = {},
     onNavigate: (destination: JournalScreen) -> Unit = {}
 ) {
+
+    val di = androidContextDI()
+    val journalEventViewModel: JournalEventViewModel by di.instance(arg = journalId)
+    val model = journalEventViewModel.journal.collectAsState()
+
+    Text(text = "journalId: $journalId", fontFamily = FontFamily.Monospace)
 
     LazyColumn( modifier = Modifier
         .padding(62.dp ifMobile 8.dp)
@@ -67,7 +77,7 @@ fun LandingPage(
         verticalArrangement = Arrangement.spacedBy(24.dp ifMobile 8.dp),
     ) {
         stickyHeader {
-            InfoDisplay()
+            JournalEntrySummaryCard(model.value)
         }
         items(navigationSections.size) { index ->
             val screens = navigationSections[index]
@@ -76,13 +86,13 @@ fun LandingPage(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 screens.forEach { screen ->
-                    NavigationCard(
+                    JournalSectionNavigationCard(
                         modifier = Modifier
                             .height(140.dp ifMobile 100.dp)
                             .weight(1.0f / screens.size.toFloat()),
                         label = JournalScreen.labels[screen]!!,
                         titleColor = Colors.journalSectionColors[screen.section]!!,
-                        navigateToForm = { onNavigate(screen) }
+                        onNavigate = { onNavigate(screen) }
                     )
                 }
             }
@@ -90,11 +100,8 @@ fun LandingPage(
     }
 }
 
-/**
- * TODO: When we have avaialable patient data, this card is supposed to display patient information
- */
 @Composable
-fun InfoDisplay() {
+fun JournalEntrySummaryCard(journal: JournalEntryDto) {
     Column(
         modifier = Modifier
             .fillMaxWidth(),
@@ -106,9 +113,19 @@ fun InfoDisplay() {
                 .height(150.dp),
             elevation = 10.dp
         ) {
-            Row(Modifier.padding(8.dp), horizontalArrangement = Arrangement.SpaceBetween) {
-                Text("Namn: Erik Bengtsson", textAlign = TextAlign.Start, fontSize = 20.sp)
-                Text("ID: 1997001122-XXXX", textAlign = TextAlign.End, fontSize = 20.sp)
+            with(journal.patientInfo) {
+                Row(Modifier.padding(8.dp), horizontalArrangement = Arrangement.SpaceBetween) {
+                    Text(
+                        "Namn: ${patientData?.name}",
+                        textAlign = TextAlign.Start,
+                        fontSize = 20.sp
+                    )
+                    Text(
+                        "ID: ${patientData?.personalId}",
+                        textAlign = TextAlign.End,
+                        fontSize = 20.sp
+                    )
+                }
             }
         }
     }
@@ -116,16 +133,16 @@ fun InfoDisplay() {
 
 
 @Composable
-fun NavigationCard(
+fun JournalSectionNavigationCard(
     modifier: Modifier = Modifier,
     label: String = "Title",
     titleColor: Color = Color.Blue,
     backgroundColor: Color = lerp(titleColor, Color.White, 0.70f),
-    navigateToForm: () -> Unit = {}
+    onNavigate: () -> Unit = {}
 ) {
     Card(
         modifier = modifier
-            .clickable { navigateToForm() }
+            .clickable { onNavigate() }
             .padding(2.dp), // Same as shadow elevation since its otherwise cut-of
         backgroundColor = backgroundColor,
         elevation = 4.dp,

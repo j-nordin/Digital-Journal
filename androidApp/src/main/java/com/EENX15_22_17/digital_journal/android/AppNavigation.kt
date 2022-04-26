@@ -10,15 +10,14 @@ import androidx.navigation.navigation
 import com.EENX15_22_17.digital_journal.android.screens.arrival.patientinfo.ArrivalPage
 import com.EENX15_22_17.digital_journal.android.screens.treatment.ordination.OrdinationScreen
 import com.EENX15_22_17.digital_journal.android.screens.arrival.hazardassesment.HazardAssessment
-import com.EENX15_22_17.digital_journal.android.screens.current.currentpatients.PatientListViewModel
+import com.EENX15_22_17.digital_journal.android.screens.journallisting.JournalListingViewModel
 import com.EENX15_22_17.digital_journal.android.screens.interim.InterimPage
 import com.EENX15_22_17.digital_journal.android.screens.interim.InterimViewModel
-import com.EENX15_22_17.digital_journal.android.ui.current.CurrentScreen
-import com.EENX15_22_17.digital_journal.android.screens.landingpage.LandingPage
+import com.EENX15_22_17.digital_journal.android.screens.journallisting.JournalListingScreen
+import com.EENX15_22_17.digital_journal.android.screens.overview.JournalEntryOverviewScreen
 import com.EENX15_22_17.digital_journal.android.screens.treatment.checkups.TempMedicalCheckup
-import com.EENX15_22_17.digital_journal.android.screens.treatment.interim.TempInterim
 import com.EENX15_22_17.digital_journal.android.screens.triage.currentHealth.TempCurrentHealth
-import com.EENX15_22_17.digital_journal.android.ui.screen.ContactCauseScreen
+import com.EENX15_22_17.digital_journal.android.ui.screen.ContactReasonScreen
 import com.EENX15_22_17.digital_journal.android.screens.triage.suicideassessment.SuicideAssessmentScreen
 import com.EENX15_22_17.digital_journal.android.screens.triage.somatichealth.SomaticHealthPage
 import com.EENX15_22_17.digital_journal.android.screens.triage.previousCare.TempPreviusCare
@@ -125,8 +124,8 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
             fun navTo(form: PatientMeetingScreen) =
                 navController.navToPatientMeetingForm(visitId, form)
 
-            LandingPage(
-                visitId = visitId,
+            JournalEntryOverviewScreen(
+                journalId = visitId,
                 onNavigate = { screen ->
                     val target: PatientMeetingScreen = when(screen) {
                         JournalScreen.PATIENT_INFORMATION -> PatientMeetingScreen.Arrival
@@ -173,10 +172,10 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
         ) { backStackEntry ->
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient meeting" }
-            ContactCauseScreen(
+            ContactReasonScreen(
                 onBackClicked = navController::popBackStack,
                 onMenuClicked = switchScaffoldDrawerState,
-                visitId = visitId
+                journalId = visitId
             )
         }
         composable(
@@ -273,7 +272,7 @@ private fun NavGraphBuilder.addCurrentBoardGraph(
     navController: NavController,
     switchScaffoldDrawerState: () -> Unit
 ) {
-    val patientListViewModel: PatientListViewModel by di.instance()
+    val journalListingViewModel: JournalListingViewModel by di.instance()
 
     /*TODO: Replace with real overview page */
     composable(route = Screen.PatientOverview.route) { backStackEntry ->
@@ -285,8 +284,8 @@ private fun NavGraphBuilder.addCurrentBoardGraph(
         )
     }
     composable(route = Screen.Current.route) {
-        CurrentScreen(
-            patientListViewModel = patientListViewModel,
+        JournalListingScreen(
+            journalListingViewModel = journalListingViewModel,
             navigateSpecificPatient = { id ->
                 navController.navigate(
                     PatientMeetingScreen.Landing.createRoute(visitId = id)

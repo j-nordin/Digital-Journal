@@ -16,8 +16,8 @@ import com.EENX15_22_17.digital_journal.android.ui.components.TitledTextField
 import com.EENX15_22_17.digital_journal.android.ui.theme.Colors
 
 @Composable
-fun ContactCauseScreen(
-    visitId: String,
+fun ContactReasonScreen(
+    journalId: String,
     onBackClicked: () -> Unit,
     onMenuClicked: () -> Unit,
 ) {

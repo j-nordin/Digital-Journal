@@ -38,8 +38,8 @@ android {
 dependencies {
     // PREDICARE LIBS
     implementation("se.predicare:core-data-jvm:0.3.0-SNAPSHOT")
-    implementation("se.predicare:journal-lib-jvm:0.4.0-SNAPSHOT")
-    implementation("se.predicare:journal-client-jvm:0.4.0-SNAPSHOT")
+    implementation("se.predicare:journal-lib-jvm:0.4.1-SNAPSHOT")
+    implementation("se.predicare:journal-client-jvm:0.4.1-SNAPSHOT")
     implementation(project(":shared"))
     implementation("com.google.android.material:material:1.5.0")
     implementation("androidx.appcompat:appcompat:1.4.1")

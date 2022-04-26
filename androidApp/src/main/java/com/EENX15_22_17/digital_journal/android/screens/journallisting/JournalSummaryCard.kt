@@ -1,4 +1,4 @@
-package com.EENX15_22_17.digital_journal.android.screens.current.currentpatients
+package com.EENX15_22_17.digital_journal.android.screens.journallisting
 
 
 import androidx.compose.foundation.clickable
@@ -21,41 +21,41 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.EENX15_22_17.digital_journal.android.ui.theme.colorIcon
 import com.EENX15_22_17.digital_journal.android.ui.theme.danger
-import se.predicare.journal.screens.PatientInformationDto
+import se.predicare.journal.data.JournalEntryDto
 
 @Composable
 // TODO: Replace default parameter-values with PreviewParameter-annotations when tooling is less buggy.
-fun PatientCard(
-    visitId: String = "1",
-    name: String = "PatientName",
-    securityNumber: String = "00000000",
-    navigateSelectedPatient: (visitId: String) -> Unit = {},
-    showOverview: (visitId: String) -> Unit = {}
+fun JournalSummaryCard(
+    journalEntry: JournalEntryDto,
+    navigateToJournalOverview: (journalId: String) -> Unit,
+    navigateToPatientOverview: (patientId: String) -> Unit
 ) {
+
+    val patient = journalEntry.patientInfo.patientData
+
     //TODO: use navigation to show these
     var showWarning by remember { mutableStateOf(false) }
     var showComments by remember { mutableStateOf(false) }
     Card(
         modifier = Modifier
-            .padding(horizontal = 120.dp, vertical = 2.dp)
             .fillMaxWidth()
-            .clickable { navigateSelectedPatient(visitId) },
+            .clickable { navigateToJournalOverview(journalEntry._id!!) },
         backgroundColor = MaterialTheme.colors.primary
     ) {
         Row(horizontalArrangement = Arrangement.SpaceBetween) {
             Text(
-                text = name,
+                text = patient?.name ?: "Unknown",
                 modifier = Modifier.padding(16.dp),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold
             )
             Text(
-                text = securityNumber,
+                text = patient?.personalId ?: "Unknown",
                 modifier = Modifier.padding(16.dp),
                 fontSize = 20.sp
             )
             Row(horizontalArrangement = Arrangement.End) {
-                IconButton(onClick = { showOverview(visitId) }) {
+                IconButton(onClick = { navigateToPatientOverview(patient!!.patientId!!) }) {
                     Icon(
                         imageVector = Icons.Rounded.Info,
                         contentDescription = "Overview",
@@ -80,11 +80,11 @@ fun PatientCard(
                 }
                 if (showWarning) {
                     Dialog(onDismissRequest = { showWarning = false }) {
-                        WarningContent(visitId = visitId)
+                        WarningContent(journalId = journalEntry._id!!)
                     }
                 } else if (showComments) {
                     Dialog(onDismissRequest = { showComments = false }) {
-                        CommentsContent(visitId = visitId)
+                        CommentsContent(journalId = journalEntry._id!!)
                     }
                 }
             }
@@ -94,7 +94,7 @@ fun PatientCard(
 
 //TODO: Replace with the real warningContent
 @Composable
-fun WarningContent(visitId: String) {
+fun WarningContent(journalId: String) {
     //TODO: Get font sizes (and other theme-related stuff) from the theme
     Surface(
         modifier = Modifier
@@ -108,7 +108,7 @@ fun WarningContent(visitId: String) {
                 style = MaterialTheme.typography.h6
             )
             Text(
-                text = visitId,
+                text = journalId,
                 modifier = Modifier
                     .fillMaxHeight()
                     .fillMaxWidth(),
@@ -121,7 +121,7 @@ fun WarningContent(visitId: String) {
 
 //TODO: Replace with the real commentContent
 @Composable
-fun CommentsContent(visitId: String) {
+fun CommentsContent(journalId: String) {
     Surface(
         modifier = Modifier
             .width(300.dp)
@@ -134,7 +134,7 @@ fun CommentsContent(visitId: String) {
                 style = MaterialTheme.typography.h6
             )
             Text(
-                text = visitId,
+                text = journalId,
                 modifier = Modifier
                     .fillMaxHeight()
                     .fillMaxWidth(),
@@ -145,37 +145,23 @@ fun CommentsContent(visitId: String) {
     }
 }
 
-// Temporary data before backend is implemented
-//TODO: Fetch data from API instead of using sampledata from the preview-provider
-private val defaultPatients: List<CurrentPatientsData> =
-    SampleCurrentPatientsProvider().values.toList()[0]
-
-@Preview
 @Composable
-fun PatientsList(
+fun JournalEntryList(
     modifier: Modifier = Modifier,
-    @PreviewParameter(SampleCurrentPatientsProvider::class)
-    patients: List<PatientInformationDto>,
+    journals: List<JournalEntryDto>,
     navigateSpecificPatient: (visitId: String) -> Unit = {},
     navigateSpecificOverviewPage: (visitId: String) -> Unit = {}
 ) {
     val scrollState = rememberScrollState()
-    Box(
-        modifier
-            .height(400.dp)
+    Column(
+        Modifier.verticalScroll(scrollState)
     ) {
-        Column(
-            Modifier.verticalScroll(scrollState)
-        ) {
-            for (patient in patients) {
-                PatientCard(
-                    visitId = patient.patientData?.patientId ?: "",
-                    name = patient.patientData?.name ?: "",
-                    securityNumber = patient.patientData?.personalId ?: "",
-                    showOverview = { navigateSpecificOverviewPage(it) },
-                    navigateSelectedPatient = { navigateSpecificPatient(it) }
-                )
-            }
+        for (journal in journals) {
+            JournalSummaryCard(
+                journalEntry = journal,
+                navigateToPatientOverview = { navigateSpecificOverviewPage(it) },
+                navigateToJournalOverview = { navigateSpecificPatient(it) }
+            )
         }
     }
 }
