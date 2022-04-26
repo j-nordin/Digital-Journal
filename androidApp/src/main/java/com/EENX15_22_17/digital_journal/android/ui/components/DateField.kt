@@ -22,7 +22,7 @@ fun TitledDateField(
     value: LocalDate = LocalDate.now(),
     isEnabled: Boolean = true
 ) {
-    var currentDate by rememberSaveable { mutableStateOf(value) }
+    var currentlySelectedDate by rememberSaveable { mutableStateOf(value) }
     var showDatePickerModal by rememberSaveable { mutableStateOf(false) }
 
     fun switchStateDatePickerModal() {
@@ -30,7 +30,7 @@ fun TitledDateField(
     }
 
     OutlinedTextField(
-        value = currentDate.toString(),
+        value = currentlySelectedDate.toString(),
         onValueChange = {},
         textStyle = TextStyle(fontSize = 20.sp),
         modifier = modifier
@@ -57,8 +57,9 @@ fun TitledDateField(
 
     if (showDatePickerModal) {
         DatePickerModal(
-            onDateSelected = { date -> currentDate = date; onChangedDate(date) },
-            onDismissRequest = ::switchStateDatePickerModal
+            onDateSelected = { date -> currentlySelectedDate = date; onChangedDate(date) },
+            onDismissRequest = ::switchStateDatePickerModal,
+            dateVaule = currentlySelectedDate
         )
     }
 }

@@ -11,12 +11,14 @@ import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.window.Dialog
 import java.time.LocalDate
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.*
 
@@ -25,8 +27,12 @@ import java.util.*
 * is 21 when the 'LocalDate' requires API level 26
 * */
 @Composable
-fun DatePickerModal(onDateSelected: (LocalDate) -> Unit, onDismissRequest: () -> Unit) {
-    val selDate = remember { mutableStateOf(LocalDate.now()) }
+fun DatePickerModal(
+    onDateSelected: (LocalDate) -> Unit,
+    onDismissRequest: () -> Unit,
+    dateVaule: LocalDate = LocalDate.now()
+) {
+    val selDate = rememberSaveable { mutableStateOf(dateVaule) }
 
     //TODO - Change this to use the date picker from compose when it arrives
     Dialog(onDismissRequest = onDismissRequest) {
@@ -65,7 +71,10 @@ fun DatePickerModal(onDateSelected: (LocalDate) -> Unit, onDismissRequest: () ->
                 Spacer(modifier = Modifier.size(16.dp))
             }
 
-            CustomCalendarView(onDateChanged = { date -> selDate.value = date })
+            CustomCalendarView(
+                onDateChanged = { date -> selDate.value = date },
+                date = selDate.value
+            )
 
             Row(
                 modifier = Modifier
@@ -100,12 +109,18 @@ fun DatePickerModal(onDateSelected: (LocalDate) -> Unit, onDismissRequest: () ->
 }
 
 @Composable
-fun CustomCalendarView(onDateChanged: (LocalDate) -> Unit) {
-    // Adds view to Compose
+fun CustomCalendarView(
+    onDateChanged: (LocalDate) -> Unit,
+    date: LocalDate = LocalDate.now()
+) {
     AndroidView(
         modifier = Modifier.wrapContentSize(),
         factory = { CalendarView(it) },
         update = { view ->
+            view.date = date
+                .atStartOfDay(ZoneId.systemDefault())
+                .toInstant()
+                .toEpochMilli()
             view.setOnDateChangeListener { _, year, month, dayOfMonth ->
                 onDateChanged(
                     LocalDate
@@ -115,6 +130,6 @@ fun CustomCalendarView(onDateChanged: (LocalDate) -> Unit) {
                         .withDayOfMonth(dayOfMonth)
                 )
             }
-        }
+        },
     )
 }
