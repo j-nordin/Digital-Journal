@@ -6,20 +6,23 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.EENX15_22_17.digital_journal.android.screens.current.currentpatients.PatientListViewModel
 import com.EENX15_22_17.digital_journal.android.screens.current.currentpatients.PatientsList
 
 @Composable
 fun CurrentScreen(
+    patientListViewModel: PatientListViewModel,
     navigateSpecificPatient: (visitId: String) -> Unit = {},
     navigateSpecificOverviewPage: (visitId: String) -> Unit = {},
     switchScaffoldDrawerState: () -> Unit,
 ) {
+    val journals by patientListViewModel.journals.collectAsState()
+
     IconButton(
         modifier = Modifier.padding(15.dp),
         onClick = switchScaffoldDrawerState,
@@ -34,6 +37,7 @@ fun CurrentScreen(
     }
     PatientsList(
         modifier = Modifier.padding(top = 100.dp),
+        patients = journals.map { it.patientInfo },
         navigateSpecificPatient = navigateSpecificPatient,
         navigateSpecificOverviewPage = navigateSpecificOverviewPage
     )

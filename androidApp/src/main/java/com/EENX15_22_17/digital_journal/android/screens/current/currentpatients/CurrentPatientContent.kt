@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.EENX15_22_17.digital_journal.android.ui.theme.colorIcon
 import com.EENX15_22_17.digital_journal.android.ui.theme.danger
+import se.predicare.journal.screens.PatientInformationDto
 
 @Composable
 // TODO: Replace default parameter-values with PreviewParameter-annotations when tooling is less buggy.
@@ -154,7 +155,7 @@ private val defaultPatients: List<CurrentPatientsData> =
 fun PatientsList(
     modifier: Modifier = Modifier,
     @PreviewParameter(SampleCurrentPatientsProvider::class)
-    patients: List<CurrentPatientsData> = defaultPatients,
+    patients: List<PatientInformationDto>,
     navigateSpecificPatient: (visitId: String) -> Unit = {},
     navigateSpecificOverviewPage: (visitId: String) -> Unit = {}
 ) {
@@ -168,9 +169,9 @@ fun PatientsList(
         ) {
             for (patient in patients) {
                 PatientCard(
-                    visitId = patient.id,
-                    name = patient.name,
-                    securityNumber = patient.securityNumber,
+                    visitId = patient.patientData?.patientId ?: "",
+                    name = patient.patientData?.name ?: "",
+                    securityNumber = patient.patientData?.personalId ?: "",
                     showOverview = { navigateSpecificOverviewPage(it) },
                     navigateSelectedPatient = { navigateSpecificPatient(it) }
                 )

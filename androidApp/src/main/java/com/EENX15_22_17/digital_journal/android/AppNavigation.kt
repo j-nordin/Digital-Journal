@@ -10,6 +10,7 @@ import androidx.navigation.navigation
 import com.EENX15_22_17.digital_journal.android.screens.arrival.patientinfo.ArrivalPage
 import com.EENX15_22_17.digital_journal.android.screens.treatment.ordination.OrdinationScreen
 import com.EENX15_22_17.digital_journal.android.screens.arrival.hazardassesment.HazardAssessment
+import com.EENX15_22_17.digital_journal.android.screens.current.currentpatients.PatientListViewModel
 import com.EENX15_22_17.digital_journal.android.screens.interim.InterimPage
 import com.EENX15_22_17.digital_journal.android.screens.interim.InterimViewModel
 import com.EENX15_22_17.digital_journal.android.ui.current.CurrentScreen
@@ -22,6 +23,9 @@ import com.EENX15_22_17.digital_journal.android.screens.triage.suicideassessment
 import com.EENX15_22_17.digital_journal.android.screens.triage.somatichealth.SomaticHealthPage
 import com.EENX15_22_17.digital_journal.android.screens.triage.previousCare.TempPreviusCare
 import se.predicare.journal.screens.JournalScreen
+import org.kodein.di.DI
+import org.kodein.di.compose.androidContextDI
+import org.kodein.di.instance
 
 sealed class Screen(val route: String) {
     object Current : Screen(route = "current")
@@ -89,13 +93,15 @@ sealed class PatientMeetingScreen(val route: String) {
 @Composable
 fun NavigationApp(
     navController: NavHostController,
-    switchScaffoldDrawerState : () -> Unit
+    switchScaffoldDrawerState: () -> Unit
 ) {
+    val di = androidContextDI()
+
     NavHost(
         navController = navController,
         startDestination = Screen.Current.route
     ) {
-        addCurrentBoardGraph(navController = navController, switchScaffoldDrawerState = switchScaffoldDrawerState)
+        addCurrentBoardGraph(di, navController = navController, switchScaffoldDrawerState = switchScaffoldDrawerState)
         addPatientMeetingGraph(navController = navController, switchScaffoldDrawerState = switchScaffoldDrawerState)
     }
 }
@@ -263,9 +269,12 @@ fun NavController.navToPatientMeetingForm(
 
 
 private fun NavGraphBuilder.addCurrentBoardGraph(
+    di: DI,
     navController: NavController,
     switchScaffoldDrawerState: () -> Unit
 ) {
+    val patientListViewModel: PatientListViewModel by di.instance()
+
     /*TODO: Replace with real overview page */
     composable(route = Screen.PatientOverview.route) { backStackEntry ->
         val visitId = backStackEntry.arguments?.getString("visitId")
@@ -277,6 +286,7 @@ private fun NavGraphBuilder.addCurrentBoardGraph(
     }
     composable(route = Screen.Current.route) {
         CurrentScreen(
+            patientListViewModel = patientListViewModel,
             navigateSpecificPatient = { id ->
                 navController.navigate(
                     PatientMeetingScreen.Landing.createRoute(visitId = id)
