@@ -10,6 +10,8 @@ import androidx.navigation.navigation
 import com.EENX15_22_17.digital_journal.android.screens.arrival.patientinfo.ArrivalPage
 import com.EENX15_22_17.digital_journal.android.screens.treatment.ordination.OrdinationScreen
 import com.EENX15_22_17.digital_journal.android.screens.arrival.hazardassesment.HazardAssessment
+import com.EENX15_22_17.digital_journal.android.screens.interim.InterimPage
+import com.EENX15_22_17.digital_journal.android.screens.interim.InterimViewModel
 import com.EENX15_22_17.digital_journal.android.ui.current.CurrentScreen
 import com.EENX15_22_17.digital_journal.android.screens.landingpage.LandingPage
 import com.EENX15_22_17.digital_journal.android.screens.treatment.checkups.TempMedicalCheckup
@@ -154,7 +156,6 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
         ) { backStackEntry ->
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient id provided " }
-            //TODO add hazard composable here
             HazardAssessment(
                 onBackClicked = navController::popBackStack,
                 onMenuClicked = switchScaffoldDrawerState,
@@ -177,7 +178,6 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
         ) { backStackEntry ->
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient meeting" }
-            // TODO add PreviousCare composable
             TempPreviusCare(
                 visitId = visitId,
                 onBackClicked = navController::popBackStack,
@@ -200,7 +200,6 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
         ) { backStackEntry ->
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient meeting" }
-            // TODO add HealthNow composable
             TempCurrentHealth(
                 visitId = visitId,
                 onBackClicked = navController::popBackStack,
@@ -223,7 +222,6 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
         ) { backStackEntry ->
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient meeting" }
-            // TODO add nursingNeed composable
             TempMedicalCheckup(
                 visitId = visitId,
                 onBackClicked = navController::popBackStack,
@@ -245,8 +243,9 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
         ) { backStackEntry ->
             val visitId = backStackEntry.arguments?.getString("visitId")
             requireNotNull(visitId) { "No patient meeting" }
-            // TODO add interimJournal composable
-            TempInterim(
+            //TODO: FIX viewmodel
+            InterimPage(
+                interimViewModel = InterimViewModel(),
                 visitId = visitId,
                 onBackClicked = navController::popBackStack,
                 onMenuClicked = switchScaffoldDrawerState
