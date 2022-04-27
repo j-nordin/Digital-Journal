@@ -20,11 +20,13 @@ fun TitledSectionTemp(title: String, body: @Composable() () -> Unit) {
     Box(
         Modifier
             .fillMaxWidth()
-            .padding(bottom = 10.dp, top = 10.dp)) {
+            .padding(bottom = 10.dp, top = 10.dp)
+    ) {
         Box(
             Modifier
                 .fillMaxWidth()
-                .padding(top = 15.dp)) {
+                .padding(top = 15.dp)
+        ) {
             Box(
                 Modifier
                     .fillMaxWidth()
