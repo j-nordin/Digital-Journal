@@ -78,7 +78,7 @@ fun LandingPage(
 ) {
 
     val di = androidContextDI()
-    //TODO: Use arges in instance to get the real journalId.
+    //TODO: Use args in instance to get the real journalId.
     val journalViewModel: JournalEventViewModel by di.instance()
     val journal by journalViewModel.journal.collectAsState()
 
@@ -112,30 +112,6 @@ fun LandingPage(
     }
 }
 
-/**
- * TODO: When we have avaialable patient data, this card is supposed to display patient information
- */
-@Composable
-fun InfoDisplay() {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth(),
-        verticalArrangement = Arrangement.Top
-    ) {
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(150.dp),
-            elevation = 10.dp
-        ) {
-            Row(Modifier.padding(8.dp), horizontalArrangement = Arrangement.SpaceBetween) {
-                Text("Namn: Erik Bengtsson", textAlign = TextAlign.Start, fontSize = 20.sp)
-                Text("ID: 1997001122-XXXX", textAlign = TextAlign.End, fontSize = 20.sp)
-            }
-        }
-    }
-}
-
 
 @Composable
 fun NavigationCard(
@@ -164,20 +140,6 @@ fun NavigationCard(
                 textAlign = TextAlign.Center
             )
         }
-    }
-}
-
-@Composable
-fun OverViewButton(
-    showOverview: (patientId: String) -> Unit = {}
-) {
-    IconButton(
-        onClick = { showOverview("") }) {
-        Icon(
-            imageVector = Icons.Rounded.MedicalInformation,
-            contentDescription = "Overview",
-            tint = colorIcon
-        )
     }
 }
 
