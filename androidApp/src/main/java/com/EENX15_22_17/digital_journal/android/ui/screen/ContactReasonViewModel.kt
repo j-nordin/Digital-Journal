@@ -2,7 +2,7 @@ package com.EENX15_22_17.digital_journal.android.ui.screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.EENX15_22_17.digital_journal.android.screens.journal.triage.contactReason.ContactReasonData
+import com.EENX15_22_17.digital_journal.android.data.MutableStateProviderFromModel
 import io.ktor.client.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -40,6 +40,6 @@ class ContactReasonViewModel(
         }
     }
 
-    val data = ContactReasonData(ContactReasonDto())
+    val data = MutableStateProviderFromModel(ContactReasonDto())
 
 }

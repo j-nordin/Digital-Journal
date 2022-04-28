@@ -26,7 +26,7 @@ import org.kodein.di.instance
 import se.predicare.journal.screens.ContactReasonDto
 
 val json = Json {
-    prettyPrint = true
+    prettyPrint = false
 }
 
 @Composable
@@ -43,7 +43,16 @@ fun ContactReasonScreen(
         mutableStateOf(json.encodeToString(vm.data.model))
     }
 
-    vm.update()
+    // FIXME: This is not the right way of loading data only when the screen is first navigated to.
+    var hasLoadedData by rememberSaveable {
+        mutableStateOf(false)
+    }
+    if(!hasLoadedData) {
+        LaunchedEffect(key1 = Unit) {
+            vm.update()
+            hasLoadedData = true
+        }
+    }
 
     var situation by vm.data.stateOf(ContactReasonDto::sbar, ContactReasonDto.SBAR::situation)
     var background by vm.data.stateOf(ContactReasonDto::sbar, ContactReasonDto.SBAR::background)
@@ -59,7 +68,9 @@ fun ContactReasonScreen(
         onMenuClicked = onMenuClicked
     ) {
         Box(
-            modifier = Modifier.fillMaxSize().padding(top = 20.dp)
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 20.dp)
         ) {
             Column(
                 verticalArrangement = Arrangement.Center
@@ -83,18 +94,16 @@ fun ContactReasonScreen(
                 TitledTextField(
                     title = "Situation",
                     textValue = situation ?: "",
-                    onChangeText = { situation = it }, //TODO: Implement View Model for Contact Cause
+                    onChangeText = { situation = it },
                     modifier = Modifier
                         .fillMaxWidth()
                         .size(width = 200.dp, height = 100.dp)
                 )
 
-                Text(vm.data.otherNotes?:"")
-
                 TitledTextField(
                     title = "Bakgrund",
                     textValue = background ?: "",
-                    onChangeText = { background = it },  //TODO: Implement View Model for Contact Cause
+                    onChangeText = { background = it },
                     modifier = Modifier
                         .fillMaxWidth()
                         .size(width = 200.dp, height = 100.dp)
@@ -103,7 +112,7 @@ fun ContactReasonScreen(
                 TitledTextField(
                     title = "Aktuellt tillstånd",
                     textValue = assessment ?: "",
-                    onChangeText = { assessment = it },  //TODO: Implement View Model for Contact Cause
+                    onChangeText = { assessment = it },
                     modifier = Modifier
                         .fillMaxWidth()
                         .size(width = 200.dp, height = 100.dp)
