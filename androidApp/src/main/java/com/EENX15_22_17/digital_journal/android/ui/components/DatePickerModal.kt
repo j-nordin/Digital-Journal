@@ -8,17 +8,16 @@ import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.window.Dialog
-import java.time.LocalDate
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
+import com.EENX15_22_17.digital_journal.android.ui.localDateTimeAtSystemTimeZone
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toInstant
 import java.util.*
 
 /* This component will change to use the built in date picker with compose when it arrives.
@@ -27,11 +26,11 @@ import java.util.*
 * */
 @Composable
 fun DatePickerModal(
-    onDateSelected: (LocalDate) -> Unit,
+    onDateSelected: (LocalDateTime) -> Unit,
     onDismissRequest: () -> Unit,
-    dateValue: LocalDate = LocalDate.now()
+    dateValue: LocalDateTime = LocalDateTime.localDateTimeAtSystemTimeZone()
 ) {
-    val selDate = rememberSaveable { mutableStateOf(dateValue) }
+    var selDate by remember { mutableStateOf(dateValue) }
 
     //TODO - Change this to use the date picker from compose when it arrives
     Dialog(onDismissRequest = onDismissRequest) {
@@ -62,7 +61,7 @@ fun DatePickerModal(
                 Spacer(modifier = Modifier.size(24.dp))
 
                 Text(
-                    text = selDate.value.format(DateTimeFormatter.ofPattern("MMM d, y")),
+                    text = selDate.toString(),
                     style = MaterialTheme.typography.h4,
                     color = MaterialTheme.colors.onPrimary
                 )
@@ -71,8 +70,8 @@ fun DatePickerModal(
             }
 
             CustomCalendarView(
-                onDateChanged = { date -> selDate.value = date },
-                date = selDate.value
+                onDateChanged = { date -> selDate = date },
+                date = selDate
             )
 
             Row(
@@ -93,7 +92,7 @@ fun DatePickerModal(
 
                 Button(
                     onClick = {
-                        onDateSelected(selDate.value)
+                        onDateSelected(selDate)
                         onDismissRequest()
                     }
                 ) {
@@ -109,24 +108,24 @@ fun DatePickerModal(
 
 @Composable
 fun CustomCalendarView(
-    onDateChanged: (LocalDate) -> Unit,
-    date: LocalDate = LocalDate.now()
+    onDateChanged: (LocalDateTime) -> Unit,
+    date: LocalDateTime = LocalDateTime.localDateTimeAtSystemTimeZone()
 ) {
     AndroidView(
         modifier = Modifier.wrapContentSize(),
         factory = { CalendarView(it) },
         update = { view ->
-            view.date = date
-                .atStartOfDay(ZoneId.systemDefault())
-                .toInstant()
-                .toEpochMilli()
+            view.date = date.toInstant(TimeZone.currentSystemDefault()).toEpochMilliseconds()
             view.setOnDateChangeListener { _, year, month, dayOfMonth ->
                 onDateChanged(
-                    LocalDate
-                        .now()
-                        .withMonth(month + 1)
-                        .withYear(year)
-                        .withDayOfMonth(dayOfMonth)
+                    LocalDateTime(
+                        year,
+                        month + 1,
+                        dayOfMonth,
+                        0,
+                        0,
+                        0
+                    )
                 )
             }
         },

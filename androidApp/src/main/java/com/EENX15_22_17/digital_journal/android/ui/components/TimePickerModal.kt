@@ -1,31 +1,29 @@
 package com.EENX15_22_17.digital_journal.android.ui.components
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.window.Dialog
-import java.time.LocalTime
 import android.widget.TimePicker
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
+import com.EENX15_22_17.digital_journal.android.ui.localDateTimeAtSystemTimeZone
 import com.EENX15_22_17.digital_journal.android.ui.theme.colorTextFieldGray
-import java.time.format.DateTimeFormatter
+import kotlinx.datetime.LocalDateTime
 import java.util.*
 
 @Composable
 fun TimePickerModal(
-    onTimeSelected: (LocalTime) -> Unit,
+    onTimeSelected: (LocalDateTime) -> Unit,
     onDismissRequest: () -> Unit,
-    timeValue: LocalTime = LocalTime.now()
+    timeValue: LocalDateTime = LocalDateTime.localDateTimeAtSystemTimeZone()
 ) {
-    val selTime = rememberSaveable { mutableStateOf(timeValue) }
+    var selTime by remember { mutableStateOf(timeValue) }
 
     Dialog(
         onDismissRequest = onDismissRequest
@@ -61,7 +59,7 @@ fun TimePickerModal(
                     Spacer(modifier = Modifier.size(15.dp))
 
                     Text(
-                        text = selTime.value.format(DateTimeFormatter.ofPattern("HH:mm")),
+                        text = "${selTime.hour} : ${selTime.minute}",
                         style = MaterialTheme.typography.h4,
                         color = MaterialTheme.colors.onPrimary
                     )
@@ -70,8 +68,8 @@ fun TimePickerModal(
                 Spacer(modifier = Modifier.size(20.dp))
 
                 CustomTimePickerView(
-                    onTimeChanged = { time -> selTime.value = time },
-                    time = selTime.value
+                    onTimeChanged = { time -> selTime = time },
+                    time = selTime
                 )
 
                 Spacer(modifier = Modifier.size(20.dp))
@@ -96,7 +94,7 @@ fun TimePickerModal(
 
                     Button(
                         onClick = {
-                            onTimeSelected(selTime.value)
+                            onTimeSelected(selTime)
                             onDismissRequest()
                         }
                     ) {
@@ -114,8 +112,8 @@ fun TimePickerModal(
 
 @Composable
 fun CustomTimePickerView(
-    onTimeChanged: (LocalTime) -> Unit,
-    time: LocalTime = LocalTime.now()
+    onTimeChanged: (LocalDateTime) -> Unit,
+    time: LocalDateTime = LocalDateTime.localDateTimeAtSystemTimeZone()
 ) {
     Card(
         border = BorderStroke(2.dp, colorTextFieldGray)
@@ -131,7 +129,13 @@ fun CustomTimePickerView(
                 view.minute = time.minute
                 view.setOnTimeChangedListener { _, hour, minute ->
                     onTimeChanged(
-                        LocalTime.now().withHour(hour).withMinute(minute)
+                        LocalDateTime(
+                            1,
+                            1,
+                            1,
+                            hour,
+                            minute
+                        )
                     )
                 }
             }

@@ -12,17 +12,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import java.time.LocalDate
+import com.EENX15_22_17.digital_journal.android.ui.localDateTimeAtSystemTimeZone
+import kotlinx.datetime.LocalDateTime
 
 @Composable
 fun TitledDateField(
     modifier: Modifier = Modifier,
     title: String,
-    onChangedDate: (date: LocalDate) -> Unit,
-    value: LocalDate = LocalDate.now(),
+    onChangedDate: (date: LocalDateTime) -> Unit,
+    value: LocalDateTime = LocalDateTime.localDateTimeAtSystemTimeZone(),
     isEnabled: Boolean = true
 ) {
-    var currentlySelectedDate by rememberSaveable { mutableStateOf(value) }
+    var currentlySelectedDate by remember { mutableStateOf(value) }
     var showDatePickerModal by rememberSaveable { mutableStateOf(false) }
 
     fun switchStateDatePickerModal() {

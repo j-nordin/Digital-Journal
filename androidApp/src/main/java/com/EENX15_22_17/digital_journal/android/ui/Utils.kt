@@ -5,6 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import kotlinx.datetime.*
 
 /**
  * Returns `true` if the screen size is indicative of a mobile device rather than a tablet.
@@ -48,4 +49,36 @@ infix fun Dp.ifMobile(mobileDp: Dp): Dp {
     } else {
         mobileDp
     }
+}
+
+/**
+ * Returns the current time and date with the system-default timezone as a LocalDateTime object.
+ */
+fun LocalDateTime.Companion.localDateTimeAtSystemTimeZone(): LocalDateTime {
+    val instant = Clock.System.now()
+    val currentTimeZone = TimeZone.currentSystemDefault()
+    return instant.toLocalDateTime(currentTimeZone)
+}
+
+/**
+ * Converts the this [LocalDate] to Epoch-milliseconds ([Long])
+ */
+fun LocalDate.toEpochMilliseconds(): Long {
+    val dateAsDateTime = LocalDateTime(this.year, this.monthNumber, this.dayOfMonth, 0, 0, 0)
+    return dateAsDateTime.toInstant(TimeZone.currentSystemDefault()).toEpochMilliseconds()
+}
+
+
+/**
+ * Return a new object with an updated date
+ */
+fun LocalDateTime.withDate(newDate: LocalDateTime): LocalDateTime {
+    return LocalDateTime(newDate.year, newDate.month, newDate.dayOfMonth, this.hour, this.minute, this.second)
+}
+
+/**
+ * Return a new object with an updated time
+ */
+fun LocalDateTime.withTime(newTime: LocalDateTime): LocalDateTime {
+    return LocalDateTime(this.year, this.month, this.dayOfMonth, newTime.hour, newTime.minute, newTime.second)
 }

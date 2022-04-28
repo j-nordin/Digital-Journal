@@ -13,8 +13,11 @@ import com.EENX15_22_17.digital_journal.android.ui.components.TitledTextField
 import com.EENX15_22_17.digital_journal.android.ui.components.TitledDateField
 import com.EENX15_22_17.digital_journal.android.ui.components.TitledTextFieldDigitKeyboard
 import com.EENX15_22_17.digital_journal.android.ui.components.TitledTimeField
-import java.time.LocalDate
-import java.time.LocalTime
+import com.EENX15_22_17.digital_journal.android.ui.withDate
+import com.EENX15_22_17.digital_journal.android.ui.withTime
+import kotlinx.datetime.Clock.System.now
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -24,8 +27,8 @@ fun CreatePatientDialog(
     onDismiss: () -> Unit,
 ) {
     /*TODO: move collected data to viewmodel*/
-    val selectedDate = rememberSaveable { mutableStateOf(LocalDate.now())}
-    val selectedTime = rememberSaveable { mutableStateOf(LocalTime.now())}
+    val dateTimeNow = now().toLocalDateTime(TimeZone.currentSystemDefault())
+    var selectedDateTime by remember { mutableStateOf(dateTimeNow)}
     val name = rememberSaveable { mutableStateOf("")}
     val socialSecurityNumber = rememberSaveable { mutableStateOf("")}
 
@@ -74,7 +77,7 @@ fun CreatePatientDialog(
                     TitledDateField(
                         modifier = modifier.fillMaxWidth(0.5f),
                         title = "Datum",
-                        onChangedDate = {selectedDate.value = it},
+                        onChangedDate = {selectedDateTime = selectedDateTime.withDate(it)},
                     )
 
                     Spacer(modifier = modifier.width(20.dp))
@@ -82,7 +85,7 @@ fun CreatePatientDialog(
                     TitledTimeField(
                         modifier = modifier.fillMaxWidth(),
                         title = "Tid",
-                        onChangedTime = { selectedTime.value = it }
+                        onChangedTime = { selectedDateTime = selectedDateTime.withTime(it) }
                     )
                 }
 
