@@ -10,19 +10,22 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.EENX15_22_17.digital_journal.android.ui.theme.Colors.getAndroidColor
 import com.EENX15_22_17.digital_journal.android.ui.theme.colorTextGray
+import se.predicare.journal.screens.ContactReasonDto
+import se.predicare.retts.RettsColor
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun RettsSymtomChip(
-    item: RettsClickableData,
+    symptom: ContactReasonDto.RettsSymptom,
     onClick: () -> Unit
 ) {
     Chip(
         onClick = { onClick() },
         border = BorderStroke(
             2.dp,
-            item.color
+            symptom.color.getAndroidColor()
         ),
         colors = ChipDefaults.chipColors(
             backgroundColor = Color.White,
@@ -36,7 +39,7 @@ fun RettsSymtomChip(
             )
         },
     ) {
-        Text(text=item.data,fontSize = 16.sp)
+        Text(text=symptom.description,fontSize = 16.sp)
     }
 }
 
@@ -45,9 +48,10 @@ fun RettsSymtomChip(
 @Preview(showBackground = true)
 fun RettsSymtomChipPreview() {
     RettsSymtomChip(
-        item = RettsClickableData(
-            data = "Nedsatt koncentration",
-            color = Color.Green
+        ContactReasonDto.RettsSymptom(
+            essIndex = 123,
+            description = "Nedsatt koncentration",
+            color = RettsColor.ORANGE
         ), onClick = {}
     )
 }

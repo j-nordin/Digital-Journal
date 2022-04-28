@@ -1,58 +1,29 @@
 package com.EENX15_22_17.digital_journal.android.ui.screen
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Button
-import androidx.compose.material.Text
-import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import com.EENX15_22_17.digital_journal.android.R
-import com.EENX15_22_17.digital_journal.android.screens.journal.triage.contactReason.RettsClickableData
 import com.EENX15_22_17.digital_journal.android.screens.journal.triage.contactReason.RettsSymtomChip
 import com.EENX15_22_17.digital_journal.android.ui.DetailPageWrapper
 import com.EENX15_22_17.digital_journal.android.ui.components.TitledTextField
 import com.EENX15_22_17.digital_journal.android.ui.theme.Colors
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
-import org.kodein.di.compose.androidContextDI
-import org.kodein.di.instance
 import se.predicare.journal.screens.ContactReasonDto
-
-val json = Json {
-    prettyPrint = false
-}
 
 @Composable
 fun ContactReasonScreen(
-    journalId: String,
+    vm: ContactReasonViewModel,
     onBackClicked: () -> Unit,
     onMenuClicked: () -> Unit,
 ) {
-    val di = androidContextDI()
-
-    val vm: ContactReasonViewModel by di.instance(arg = journalId)
-
-    var jsonModel by rememberSaveable {
-        mutableStateOf(json.encodeToString(vm.data.model))
-    }
-
-    // FIXME: This is not the right way of loading data only when the screen is first navigated to.
-    var hasLoadedData by rememberSaveable {
-        mutableStateOf(false)
-    }
-    if(!hasLoadedData) {
-        LaunchedEffect(key1 = Unit) {
-            vm.update()
-            hasLoadedData = true
-        }
-    }
 
     var situation by vm.data.stateOf(ContactReasonDto::sbar, ContactReasonDto.SBAR::situation)
     var background by vm.data.stateOf(ContactReasonDto::sbar, ContactReasonDto.SBAR::background)
@@ -60,11 +31,19 @@ fun ContactReasonScreen(
     var recommendation by vm.data.stateOf(ContactReasonDto::sbar, ContactReasonDto.SBAR::recommendation)
     var otherNotes by vm.data.stateOf(ContactReasonDto::otherNotes)
     var patientExpectations by vm.data.stateOf(ContactReasonDto::patientExpectations)
+    var rettsSymptoms by vm.data.stateOf(ContactReasonDto::rettsSymptoms, mutableSetOf())
+
+    fun saveAndReturn() {
+        vm.save()
+        onBackClicked()
+    }
+
+    BackHandler(onBack = ::saveAndReturn)
 
     DetailPageWrapper(
         title = stringResource(id = R.string.contactReason),
         titleColor = Colors.treatmentPrimary,
-        onBackClicked = onBackClicked,
+        onBackClicked = ::saveAndReturn,
         onMenuClicked = onMenuClicked
     ) {
         Box(
@@ -75,26 +54,11 @@ fun ContactReasonScreen(
             Column(
                 verticalArrangement = Arrangement.Center
             ) {
-
-                Text(text = jsonModel, fontFamily = FontFamily.Monospace)
-
-                Button(onClick = {
-                    jsonModel = json.encodeToString(vm.data.model)
-                }) {
-                    Text("Show current JSON")
-                }
-
-                Button(onClick = { vm.update() }) {
-                    Text("Load from backend")
-                }
-                Button(onClick = { vm.save() }) {
-                    Text("Save to backend")
-                }
-
                 TitledTextField(
                     title = "Situation",
                     textValue = situation ?: "",
                     onChangeText = { situation = it },
+                    maxLines = Int.MAX_VALUE,
                     modifier = Modifier
                         .fillMaxWidth()
                         .size(width = 200.dp, height = 100.dp)
@@ -104,15 +68,17 @@ fun ContactReasonScreen(
                     title = "Bakgrund",
                     textValue = background ?: "",
                     onChangeText = { background = it },
+                    maxLines = Int.MAX_VALUE,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .size(width = 200.dp, height = 100.dp)
+                        .size(width = 200.dp, height = 100.dp),
                 )
 
                 TitledTextField(
                     title = "Aktuellt tillstånd",
                     textValue = assessment ?: "",
                     onChangeText = { assessment = it },
+                    maxLines = Int.MAX_VALUE,
                     modifier = Modifier
                         .fillMaxWidth()
                         .size(width = 200.dp, height = 100.dp)
@@ -122,6 +88,7 @@ fun ContactReasonScreen(
                     title = "Rekommendation",
                     textValue = recommendation ?: "",
                     onChangeText = { recommendation = it },
+                    maxLines = Int.MAX_VALUE,
                     modifier = Modifier
                         .fillMaxWidth()
                         .size(width = 200.dp, height = 100.dp)
@@ -137,6 +104,7 @@ fun ContactReasonScreen(
                         TitledTextField(
                             title = "Övrigt",
                             onChangeText = { otherNotes = it },
+                            maxLines = Int.MAX_VALUE,
                             textValue = otherNotes ?: "",
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -148,6 +116,7 @@ fun ContactReasonScreen(
                             title = "Förväntan på besöket",
                             textValue = patientExpectations ?: "",
                             onChangeText = { patientExpectations = it },
+                            maxLines = Int.MAX_VALUE,
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .size(width = 200.dp, height = 100.dp)
@@ -165,21 +134,12 @@ fun ContactReasonScreen(
                     Column(
                         modifier = Modifier.padding(top = 20.dp)
                     ) {
-                        RettsSymtomChip(
-                            item = RettsClickableData(
-                                data = "Nedsatt koncentration",
-                                color = Color.Green
-                            ), onClick = {}) //TODO: Implement View Model for Retts Clickable Items
-                        RettsSymtomChip(
-                            item = RettsClickableData(
-                                data = "Psykomotorisk oro (oroligt beteende, rastlöshet)",
-                                color = Color.Yellow
-                            ), onClick = {}) //TODO: Implement View Model for Retts Clickable Items
-                        RettsSymtomChip(
-                            item = RettsClickableData(
-                                data = "Social isolering",
-                                color = Color.Yellow
-                            ), onClick = {}) //TODO: Implement View Model for Retts Clickable Items
+                        rettsSymptoms.forEach {
+                            RettsSymtomChip(it) {
+
+                            }
+                        }
+
                     }
                 }
 
