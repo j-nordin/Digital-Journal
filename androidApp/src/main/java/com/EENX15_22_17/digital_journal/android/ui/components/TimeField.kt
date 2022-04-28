@@ -33,7 +33,7 @@ fun TitledTimeField(
     }
 
     OutlinedTextField(
-        value = "${if (currentlySelectedTime.minute < 10) "0" else ""}${currentlySelectedTime.hour} : ${if (currentlySelectedTime.minute < 10) "0" else ""}${currentlySelectedTime.minute}",
+        value = "${currentlySelectedTime.hour} : ${currentlySelectedTime.minute}",
         onValueChange = {},
         textStyle = TextStyle(fontSize = 17.sp),
         modifier = modifier
