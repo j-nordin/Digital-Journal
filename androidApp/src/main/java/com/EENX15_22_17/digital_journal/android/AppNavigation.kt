@@ -1,92 +1,83 @@
 package com.EENX15_22_17.digital_journal.android
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
+import androidx.navigation.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.navigation
-import com.EENX15_22_17.digital_journal.android.screens.arrival.patientinfo.ArrivalPage
-import com.EENX15_22_17.digital_journal.android.screens.treatment.ordination.OrdinationScreen
-import com.EENX15_22_17.digital_journal.android.screens.arrival.hazardassesment.HazardAssessment
-import com.EENX15_22_17.digital_journal.android.screens.current.currentpatients.PatientListViewModel
-import com.EENX15_22_17.digital_journal.android.screens.interim.InterimPage
-import com.EENX15_22_17.digital_journal.android.screens.interim.InterimViewModel
-import com.EENX15_22_17.digital_journal.android.ui.current.CurrentScreen
-import com.EENX15_22_17.digital_journal.android.screens.landingpage.LandingPage
-import com.EENX15_22_17.digital_journal.android.screens.treatment.checkups.TempMedicalCheckup
-import com.EENX15_22_17.digital_journal.android.screens.treatment.interim.TempInterim
-import com.EENX15_22_17.digital_journal.android.screens.triage.currentHealth.TempCurrentHealth
-import com.EENX15_22_17.digital_journal.android.ui.screen.ContactCauseScreen
-import com.EENX15_22_17.digital_journal.android.screens.triage.suicideassessment.SuicideAssessmentScreen
-import com.EENX15_22_17.digital_journal.android.screens.triage.somatichealth.SomaticHealthPage
-import com.EENX15_22_17.digital_journal.android.screens.triage.previousCare.TempPreviusCare
-import se.predicare.journal.screens.JournalScreen
+import com.EENX15_22_17.digital_journal.android.screens.journal.arrival.hazardAssessment.HazardAssessmentScreen
+import com.EENX15_22_17.digital_journal.android.screens.journal.arrival.patientInfo.PatientInfoScreen
+import com.EENX15_22_17.digital_journal.android.screens.journal.events.JournalEventsScreen
+import com.EENX15_22_17.digital_journal.android.screens.journal.treatment.interim.InterimJournalScreen
+import com.EENX15_22_17.digital_journal.android.screens.journal.treatment.interim.InterimViewModel
+import com.EENX15_22_17.digital_journal.android.screens.journal.triage.previousCare.PreviousCareScreen
+import com.EENX15_22_17.digital_journal.android.screens.journal.triage.somaticHealth.SomaticHealthScreen
+import com.EENX15_22_17.digital_journal.android.screens.journal.triage.suicideAssessment.SuicideAssessmentScreen
+import com.EENX15_22_17.digital_journal.android.screens.journal.triage.triageAssessment.TriageAssessmentScreen
+import com.EENX15_22_17.digital_journal.android.screens.journalList.JournalListViewModel
+import com.EENX15_22_17.digital_journal.android.screens.landingpage.JournalEntryOverviewScreen
+import com.EENX15_22_17.digital_journal.android.ui.current.JournalListScreen
+import com.EENX15_22_17.digital_journal.android.ui.screen.ContactReasonScreen
 import org.kodein.di.DI
 import org.kodein.di.compose.androidContextDI
 import org.kodein.di.instance
+import se.predicare.journal.screens.JournalScreen
 
-sealed class Screen(val route: String) {
-    object Current : Screen(route = "current")
-    object PatientMeeting : Screen(route = "patientMeeting")
-    object PatientOverview : Screen(route = "patientOverview/{visitId}") {
-        fun createRoute(visitId: String) = "patientOverview/$visitId"
+sealed class ScreenRoute(val route: String) {
+    object JournalList : ScreenRoute(route = "journals")
+    object JournalOverview : ScreenRoute(route = "journal")
+    object PatientOverview : ScreenRoute(route = "patient/{patientId}") {
+        fun createRoute(patientId: String) = "patient/$patientId"
     }
 }
 
-sealed class PatientMeetingScreen(val route: String) {
-    val root = Screen.PatientMeeting.route
+sealed class JournalScreenRoute(val route: String) {
+    val root = ScreenRoute.JournalOverview.route
 
     //For creating routes to composables
     fun createRoute() = "$root/$route"
 
-    object Landing : PatientMeetingScreen("{visitId}") {
+    object Overview : JournalScreenRoute("{journalId}") {
         // Overloads and creates a route with a specific id
-        override fun createRoute(visitId: String) = "$root/$visitId"
+        override fun createRoute(journalId: String) = "$root/$journalId"
+    }
+    
+    object PatientInfo : JournalScreenRoute("{journalId}/arrival") {
+        override fun createRoute(journalId: String) = "$root/$journalId/arrival"
     }
 
-    object Arrival : PatientMeetingScreen("{visitId}/arrival") {
-        override fun createRoute(visitId: String) = "$root/$visitId/arrival"
+    object HazardAssessment : JournalScreenRoute("{journalId}/hazardAssessment") {
+        override fun createRoute(journalId: String) = "$root/$journalId/hazardAssessment"
     }
 
-    object HazardAssessment : PatientMeetingScreen("{visitId}/hazardAssessment") {
-        override fun createRoute(visitId: String) = "$root/$visitId/hazardAssessment"
+    object ContactReason : JournalScreenRoute("{journalId}/contactReason") {
+        override fun createRoute(journalId: String) = "$root/$journalId/contactReason"
     }
 
-    object ContactReason : PatientMeetingScreen("{visitId}/contactReason") {
-        override fun createRoute(visitId: String) = "$root/$visitId/contactReason"
+    object PreviousCare : JournalScreenRoute("{journalId}/previousCare") {
+        override fun createRoute(journalId: String) = "$root/$journalId/previousCare"
     }
 
-    object PreviousCare : PatientMeetingScreen("{visitId}/previousCare") {
-        override fun createRoute(visitId: String) = "$root/$visitId/previousCare"
+    object SomaticHealth : JournalScreenRoute("{journalId}/somaticHealth") {
+        override fun createRoute(journalId: String) = "$root/$journalId/somaticHealth"
     }
 
-    object HealthHistory : PatientMeetingScreen("{visitId}/healthHistory") {
-        override fun createRoute(visitId: String) = "$root/$visitId/healthHistory"
+    object TriageAssessment : JournalScreenRoute("{journalId}/triageAssessment") {
+        override fun createRoute(journalId: String) = "$root/$journalId/triageAssessment"
     }
 
-    object HealthNow : PatientMeetingScreen("{visitId}/healthNow") {
-        override fun createRoute(visitId: String) = "$root/$visitId/healthNow"
+    object SuicideAssessment : JournalScreenRoute("{journalId}/suicideAssessment") {
+        override fun createRoute(journalId: String) = "$root/$journalId/suicideAssessment"
     }
 
-    object SuicideAssessment : PatientMeetingScreen("{visitId}/suicideAssessment") {
-        override fun createRoute(visitId: String) = "$root/$visitId/suicideAssessment"
+    object JournalEvents : JournalScreenRoute("{journalId}/journalEvents") {
+        override fun createRoute(journalId: String) = "$root/$journalId/journalEvents"
     }
 
-    object NursingNeed : PatientMeetingScreen("{visitId}/nursingNeed") {
-        override fun createRoute(visitId: String) = "$root/$visitId/nursingNeed"
+    object InterimJournal : JournalScreenRoute("{journalId}/interimJournal") {
+        override fun createRoute(journalId: String) = "$root/$journalId/interimJournal"
     }
 
-    object MedicalOrder : PatientMeetingScreen("{visitId}/medicalOrder") {
-        override fun createRoute(visitId: String) = "$root/$visitId/medicalOrder"
-    }
-
-    object InterimJournal : PatientMeetingScreen("{visitId}/interimJournal") {
-        override fun createRoute(visitId: String) = "$root/$visitId/interimJournal"
-    }
-
-    abstract fun createRoute(visitId: String): String
+    abstract fun createRoute(journalId: String): String
 }
 
 
@@ -96,14 +87,20 @@ fun NavigationApp(
     switchScaffoldDrawerState: () -> Unit
 ) {
     val di = androidContextDI()
-
     NavHost(
         navController = navController,
-        startDestination = Screen.Current.route
+        startDestination = ScreenRoute.JournalList.route
     ) {
         addCurrentBoardGraph(di, navController = navController, switchScaffoldDrawerState = switchScaffoldDrawerState)
         addPatientMeetingGraph(navController = navController, switchScaffoldDrawerState = switchScaffoldDrawerState)
     }
+
+}
+
+private fun NavBackStackEntry.getJournalId(): String {
+    val journalId = arguments?.getString("journalId")
+    requireNotNull(journalId) { "No journalId provided" }
+    return journalId
 }
 
 private fun NavGraphBuilder.addPatientMeetingGraph(
@@ -111,148 +108,120 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
     switchScaffoldDrawerState: () -> Unit,
 ) {
     navigation(
-        route = Screen.PatientMeeting.route,
-        startDestination = PatientMeetingScreen.Landing.route
+        route = ScreenRoute.JournalOverview.route,
+        startDestination = JournalScreenRoute.Overview.route
     ) {
         composable(
-            route = PatientMeetingScreen.Landing.createRoute()
+            route = JournalScreenRoute.Overview.createRoute()
         ) { backStackEntry ->
-            val visitId = backStackEntry.arguments?.getString("visitId")
+            val journalId = backStackEntry.arguments?.getString("journalId")
 
             /*TODO: Handle meeting id not provided, ex show alert*/
-            requireNotNull(visitId) { "No meeting id provided" }
+            requireNotNull(journalId) { "No journalId provided" }
 
-            fun navTo(form: PatientMeetingScreen) =
-                navController.navToPatientMeetingForm(visitId, form)
+            fun navTo(form: JournalScreenRoute) =
+                navController.navigateToJournalDetailScreen(journalId, form)
 
-            LandingPage(
-                visitId = visitId,
+            JournalEntryOverviewScreen(
+                journalId = journalId,
                 onNavigate = { screen ->
-                    val target: PatientMeetingScreen = when(screen) {
-                        JournalScreen.PATIENT_INFORMATION -> PatientMeetingScreen.Arrival
-                        JournalScreen.ARRIVAL_HAZARD_ASSESSMENT -> PatientMeetingScreen.HazardAssessment
-                        JournalScreen.CONTACT_REASON -> PatientMeetingScreen.ContactReason
-                        JournalScreen.SUICIDE_ASSESSMENT -> PatientMeetingScreen.SuicideAssessment
-                        JournalScreen.PREVIOUS_CARE -> PatientMeetingScreen.PreviousCare
-                        JournalScreen.SOMATIC_HEALTH -> PatientMeetingScreen.HealthHistory
-                        JournalScreen.TRIAGE_ASSESSMENT -> PatientMeetingScreen.HealthNow
-                        JournalScreen.EVENTS -> PatientMeetingScreen.MedicalOrder
-                        JournalScreen.INTERIM_JOURNAL -> PatientMeetingScreen.InterimJournal
+                    val target: JournalScreenRoute = when(screen) {
+                        JournalScreen.PATIENT_INFORMATION -> JournalScreenRoute.PatientInfo
+                        JournalScreen.ARRIVAL_HAZARD_ASSESSMENT -> JournalScreenRoute.HazardAssessment
+                        JournalScreen.CONTACT_REASON -> JournalScreenRoute.ContactReason
+                        JournalScreen.SUICIDE_ASSESSMENT -> JournalScreenRoute.SuicideAssessment
+                        JournalScreen.PREVIOUS_CARE -> JournalScreenRoute.PreviousCare
+                        JournalScreen.SOMATIC_HEALTH -> JournalScreenRoute.SomaticHealth
+                        JournalScreen.TRIAGE_ASSESSMENT -> JournalScreenRoute.TriageAssessment
+                        JournalScreen.EVENTS -> JournalScreenRoute.JournalEvents
+                        JournalScreen.INTERIM_JOURNAL -> JournalScreenRoute.InterimJournal
                     }
                     navTo(target)
                 },
-                showOverview = { id ->
-                    navController.navigate(Screen.PatientOverview.createRoute(visitId = id))
+                showOverview = { patientId ->
+                    navController.navigate(ScreenRoute.PatientOverview.createRoute(patientId = patientId))
                 }
             )
         }
         composable(
-            route = PatientMeetingScreen.Arrival.createRoute()
+            route = JournalScreenRoute.PatientInfo.createRoute()
         ) { backStackEntry ->
-            val visitId = backStackEntry.arguments?.getString("visitId")
-            requireNotNull(visitId) { "No patient id provided" }
-            ArrivalPage(
-                visitId = visitId,
+            PatientInfoScreen(
+                journalId = backStackEntry.getJournalId(),
                 onBackClicked = navController::popBackStack,
                 onMenuClicked = switchScaffoldDrawerState
             )
         }
         composable(
-            route = PatientMeetingScreen.HazardAssessment.createRoute()
+            route = JournalScreenRoute.HazardAssessment.createRoute()
         ) { backStackEntry ->
-            val visitId = backStackEntry.arguments?.getString("visitId")
-            requireNotNull(visitId) { "No patient id provided " }
-            HazardAssessment(
+            HazardAssessmentScreen(
+                journalId = backStackEntry.getJournalId(),
+                onBackClicked = navController::popBackStack,
+                onMenuClicked = switchScaffoldDrawerState
+            )
+        }
+        composable(
+            route = JournalScreenRoute.ContactReason.createRoute()
+        ) { backStackEntry ->
+            ContactReasonScreen(
+                journalId = backStackEntry.getJournalId(),
                 onBackClicked = navController::popBackStack,
                 onMenuClicked = switchScaffoldDrawerState,
-                visitId = visitId
             )
         }
         composable(
-            route = PatientMeetingScreen.ContactReason.createRoute()
+            route = JournalScreenRoute.SuicideAssessment.createRoute()
         ) { backStackEntry ->
-            val visitId = backStackEntry.arguments?.getString("visitId")
-            requireNotNull(visitId) { "No patient meeting" }
-            ContactCauseScreen(
-                onBackClicked = navController::popBackStack,
-                onMenuClicked = switchScaffoldDrawerState,
-                visitId = visitId
-            )
-        }
-        composable(
-            route = PatientMeetingScreen.PreviousCare.createRoute()
-        ) { backStackEntry ->
-            val visitId = backStackEntry.arguments?.getString("visitId")
-            requireNotNull(visitId) { "No patient meeting" }
-            TempPreviusCare(
-                visitId = visitId,
-                onBackClicked = navController::popBackStack,
-                onMenuClicked = switchScaffoldDrawerState
-            )
-        }
-        composable(
-            route = PatientMeetingScreen.HealthHistory.createRoute()
-        ) { backStackEntry ->
-            val visitId = backStackEntry.arguments?.getString("visitId")
-            requireNotNull(visitId) { "No patient meeting" }
-            SomaticHealthPage(
-                visitId = visitId,
-                onBackClicked = navController::popBackStack,
-                onMenuClicked = switchScaffoldDrawerState
-            )
-        }
-        composable(
-            route = PatientMeetingScreen.HealthNow.createRoute()
-        ) { backStackEntry ->
-            val visitId = backStackEntry.arguments?.getString("visitId")
-            requireNotNull(visitId) { "No patient meeting" }
-            TempCurrentHealth(
-                visitId = visitId,
-                onBackClicked = navController::popBackStack,
-                onMenuClicked = switchScaffoldDrawerState
-            )
-        }
-        composable(
-            route = PatientMeetingScreen.SuicideAssessment.createRoute()
-        ) { backStackEntry ->
-            val visitId = backStackEntry.arguments?.getString("visitId")
-            requireNotNull(visitId) { "No patient meeting" }
             SuicideAssessmentScreen(
-                visitId = visitId,
+                journalId = backStackEntry.getJournalId(),
                 onBackClicked = navController::popBackStack,
                 onMenuClicked = switchScaffoldDrawerState
             )
         }
         composable(
-            route = PatientMeetingScreen.NursingNeed.createRoute()
+            route = JournalScreenRoute.PreviousCare.createRoute()
         ) { backStackEntry ->
-            val visitId = backStackEntry.arguments?.getString("visitId")
-            requireNotNull(visitId) { "No patient meeting" }
-            TempMedicalCheckup(
-                visitId = visitId,
+            PreviousCareScreen(
+                journalId = backStackEntry.getJournalId(),
                 onBackClicked = navController::popBackStack,
                 onMenuClicked = switchScaffoldDrawerState
             )
         }
         composable(
-            route = PatientMeetingScreen.MedicalOrder.createRoute()
+            route = JournalScreenRoute.SomaticHealth.createRoute()
         ) { backStackEntry ->
-            val visitId = backStackEntry.arguments?.getString("visitId")
-            requireNotNull(visitId) { "No patient meeting" }
-            OrdinationScreen(
+            SomaticHealthScreen(
+                journalId = backStackEntry.getJournalId(),
                 onBackClicked = navController::popBackStack,
                 onMenuClicked = switchScaffoldDrawerState
             )
         }
         composable(
-            route = PatientMeetingScreen.InterimJournal.createRoute()
+            route = JournalScreenRoute.TriageAssessment.createRoute()
         ) { backStackEntry ->
-            val visitId = backStackEntry.arguments?.getString("visitId")
-            requireNotNull(visitId) { "No patient meeting" }
+            TriageAssessmentScreen(
+                journalId = backStackEntry.getJournalId(),
+                onBackClicked = navController::popBackStack,
+                onMenuClicked = switchScaffoldDrawerState
+            )
+        }
+        composable(
+            route = JournalScreenRoute.JournalEvents.createRoute()
+        ) { backStackEntry ->
+            JournalEventsScreen(
+                journalId = backStackEntry.getJournalId(),
+                onBackClicked = navController::popBackStack,
+                onMenuClicked = switchScaffoldDrawerState
+            )
+        }
+        composable(
+            route = JournalScreenRoute.InterimJournal.createRoute()
+        ) { backStackEntry ->
             //TODO: FIX viewmodel
-            InterimPage(
+            InterimJournalScreen(
+                journalId = backStackEntry.getJournalId(),
                 interimViewModel = InterimViewModel(),
-                visitId = visitId,
                 onBackClicked = navController::popBackStack,
                 onMenuClicked = switchScaffoldDrawerState
             )
@@ -260,11 +229,11 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
     }
 }
 
-fun NavController.navToPatientMeetingForm(
-    visitId: String,
-    patientMeetingScreen: PatientMeetingScreen
+fun NavController.navigateToJournalDetailScreen(
+    journalId: String,
+    detailScreenRoute: JournalScreenRoute
 ) {
-    this.navigate(patientMeetingScreen.createRoute(visitId))
+    this.navigate(detailScreenRoute.createRoute(journalId))
 }
 
 
@@ -273,28 +242,28 @@ private fun NavGraphBuilder.addCurrentBoardGraph(
     navController: NavController,
     switchScaffoldDrawerState: () -> Unit
 ) {
-    val patientListViewModel: PatientListViewModel by di.instance()
+    val journalListViewModel: JournalListViewModel by di.instance()
 
     /*TODO: Replace with real overview page */
-    composable(route = Screen.PatientOverview.route) { backStackEntry ->
-        val visitId = backStackEntry.arguments?.getString("visitId")
-        requireNotNull(visitId) { "No patient id provided" }
+    composable(route = ScreenRoute.PatientOverview.route) { backStackEntry ->
+        val patientId = backStackEntry.arguments?.getString("patientId")
+        requireNotNull(patientId) { "No patient id provided" }
         PatientOverviewPage(
-            visitId = visitId,
+            patientId = patientId,
             navBack = { navController.popBackStack() }
         )
     }
-    composable(route = Screen.Current.route) {
-        CurrentScreen(
-            patientListViewModel = patientListViewModel,
-            navigateSpecificPatient = { id ->
+    composable(route = ScreenRoute.JournalList.route) {
+        JournalListScreen(
+            journalListViewModel = journalListViewModel,
+            onNavigateToJournal = { journalId ->
                 navController.navigate(
-                    PatientMeetingScreen.Landing.createRoute(visitId = id)
+                    JournalScreenRoute.Overview.createRoute(journalId = journalId)
                 )
             },
-            navigateSpecificOverviewPage = { id ->
+            onNavigateToPatient = { patientId ->
                 navController.navigate(
-                    Screen.PatientOverview.createRoute(visitId = id)
+                    ScreenRoute.PatientOverview.createRoute(patientId = patientId)
                 )
             },
             switchScaffoldDrawerState = switchScaffoldDrawerState
@@ -303,5 +272,5 @@ private fun NavGraphBuilder.addCurrentBoardGraph(
 }
 
 fun NavController.navToCurrPatients() {
-    this.navigate(Screen.Current.route)
+    this.navigate(ScreenRoute.JournalList.route)
 }

@@ -1,8 +1,6 @@
 package com.EENX15_22_17.digital_journal.android.ui.drawer
 
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material.Scaffold
 import androidx.compose.material.ScaffoldState

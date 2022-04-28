@@ -20,11 +20,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.EENX15_22_17.digital_journal.android.ui.modifyIf
 import com.EENX15_22_17.digital_journal.android.ui.theme.TextStyles
 import com.EENX15_22_17.digital_journal.android.ui.theme.checkboxBackgroundShape
 import com.EENX15_22_17.digital_journal.android.ui.theme.checkboxBoxBackgroundSize
 import com.EENX15_22_17.digital_journal.android.ui.theme.colorCheckBoxBeta
-import com.EENX15_22_17.digital_journal.android.ui.modifyIf
 
 
 @Composable
