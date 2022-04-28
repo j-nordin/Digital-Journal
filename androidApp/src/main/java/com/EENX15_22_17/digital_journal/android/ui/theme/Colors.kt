@@ -3,6 +3,7 @@ package com.EENX15_22_17.digital_journal.android.ui.theme
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.lerp
 import se.predicare.journal.screens.JournalSection
+import se.predicare.retts.RettsColor
 
 /*TODO: Refactor to not use top level colors */
 val danger = Color(0xFFCD9A50)
@@ -47,6 +48,20 @@ object Colors {
         JournalSection.EVENTS to eventsPrimary,
         JournalSection.INTERIM_JOURNAL to treatmentPrimary
     )
+
+    val riskLevel1 = Color(0xFFE93830); // red
+    val riskLevel2 = Color(0xFFF17B14); // orange
+    val riskLevel3 = Color(0xFFFDD701); // yellow
+    val riskLevel4 = Color(0xFF25A02C); // green
+    val riskLevel5 = Color(0xFF337AB7); // blue
+
+    fun RettsColor.getAndroidColor(): Color = when(this) {
+        RettsColor.RED -> riskLevel1
+        RettsColor.ORANGE -> riskLevel2
+        RettsColor.YELLOW -> riskLevel3
+        RettsColor.GREEN -> riskLevel4
+        RettsColor.BLUE -> riskLevel5
+    }
 }
 
 

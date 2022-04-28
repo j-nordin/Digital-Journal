@@ -3,13 +3,15 @@ package com.EENX15_22_17.digital_journal.android.data
 import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import kotlinx.coroutines.delay
 import kotlin.reflect.KMutableProperty1
 import kotlin.reflect.KProperty1
 
 /**
  * Helper class which given a [ModelT] can create [MutableState] objects based on its properties.
  *
- * This is done by providing property references to the [stateOf]-methods. For example:
+ * This is done by providing property references to the [registerStateForProperty]-methods.
+ * For example:
  *
  * ```kotlin
  * var stateProvider = MutableStateProviderFor<UserModel>()
@@ -34,11 +36,14 @@ open class MutableStateProviderFor<ModelT : Any> {
         mutableMapOf()
 
     /**
-     * Creates a [MutableState] based on the provided [property]
+     * Registers [state] for the provided [property], or returns the same [state] if the property
+     * has been registered before.
      */
-    fun <PropT> stateOf(property: KMutableProperty1<ModelT, PropT?>): MutableState<PropT?> {
+    private fun <PropT: Any?> registerStateForProperty(
+        property: KMutableProperty1<ModelT, PropT>,
+        state: MutableState<PropT>
+    ): MutableState<PropT> {
         return stateHolders.getOrPut(property) {
-            val state = mutableStateOf<PropT?>(null)
 
             stateSavers[property] = { model: ModelT ->
                 Log.d(TAG, "Saving state \"${state.value}\" to property ${property.name}")
@@ -52,7 +57,22 @@ open class MutableStateProviderFor<ModelT : Any> {
             }
 
             return@getOrPut state
-        } as MutableState<PropT?>
+        } as MutableState<PropT>
+    }
+
+    /**
+     * Creates a nullable [MutableState] based on the provided [property] of nullable type [PropT]
+     */
+    @JvmName("nullableStateOf")
+    fun <PropT: Any> stateOf(property: KMutableProperty1<ModelT, PropT?>): MutableState<PropT?> {
+        return registerStateForProperty(property, mutableStateOf(null))
+    }
+
+    /**
+     * Creates a [MutableState] based on the provided [property] of type [PropT]
+     */
+    fun <PropT: Any> stateOf(property: KMutableProperty1<ModelT, PropT>, defaultValue: PropT): MutableState<PropT> {
+        return registerStateForProperty(property, mutableStateOf(defaultValue))
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.EENX15_22_17.digital_journal.android
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.Composable
 import androidx.navigation.*
 import androidx.navigation.compose.NavHost
@@ -17,6 +18,7 @@ import com.EENX15_22_17.digital_journal.android.screens.journalList.JournalListV
 import com.EENX15_22_17.digital_journal.android.screens.landingpage.JournalEntryOverviewScreen
 import com.EENX15_22_17.digital_journal.android.ui.current.JournalListScreen
 import com.EENX15_22_17.digital_journal.android.ui.screen.ContactReasonScreen
+import com.EENX15_22_17.digital_journal.android.ui.screen.ContactReasonViewModel
 import org.kodein.di.DI
 import org.kodein.di.compose.androidContextDI
 import org.kodein.di.instance
@@ -92,7 +94,7 @@ fun NavigationApp(
         startDestination = ScreenRoute.JournalList.route
     ) {
         addCurrentBoardGraph(di, navController = navController, switchScaffoldDrawerState = switchScaffoldDrawerState)
-        addPatientMeetingGraph(navController = navController, switchScaffoldDrawerState = switchScaffoldDrawerState)
+        addPatientMeetingGraph(di, navController = navController, switchScaffoldDrawerState = switchScaffoldDrawerState)
     }
 
 }
@@ -104,6 +106,7 @@ private fun NavBackStackEntry.getJournalId(): String {
 }
 
 private fun NavGraphBuilder.addPatientMeetingGraph(
+    di: DI,
     navController: NavController,
     switchScaffoldDrawerState: () -> Unit,
 ) {
@@ -164,8 +167,11 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
         composable(
             route = JournalScreenRoute.ContactReason.createRoute()
         ) { backStackEntry ->
+            val viewModel: ContactReasonViewModel by di.instance(arg = backStackEntry.getJournalId())
+            viewModel.update()
+
             ContactReasonScreen(
-                journalId = backStackEntry.getJournalId(),
+                viewModel,
                 onBackClicked = navController::popBackStack,
                 onMenuClicked = switchScaffoldDrawerState,
             )
