@@ -37,30 +37,40 @@ fun ContactReasonScreen(
 
                 TitledTextField(
                     title = "Situation",
-                    onChangeText = {}, //TODO: Implement View Model for Contact Cause
+                    onChangeText = {  }, //TODO: Implement View Model for Contact Cause
                     textValue = "",
-                    modifier = Modifier.fillMaxWidth().size(width = 200.dp, height = 100.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .size(width = 200.dp, height = 100.dp)
                 )
+
+                Text(vm.data.otherNotes?:"")
 
                 TitledTextField(
                     title = "Bakgrund",
                     onChangeText = {},  //TODO: Implement View Model for Contact Cause
                     textValue = "",
-                    modifier = Modifier.fillMaxWidth().size(width = 200.dp, height = 100.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .size(width = 200.dp, height = 100.dp)
                 )
 
                 TitledTextField(
                     title = "Aktuellt tillstånd",
                     onChangeText = {},  //TODO: Implement View Model for Contact Cause
                     textValue = "",
-                    modifier = Modifier.fillMaxWidth().size(width = 200.dp, height = 100.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .size(width = 200.dp, height = 100.dp)
                 )
 
                 TitledTextField(
                     title = "Rekommendation",
                     onChangeText = {},
                     textValue = "",
-                    modifier = Modifier.fillMaxWidth().size(width = 200.dp, height = 100.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .size(width = 200.dp, height = 100.dp)
                 )
 
                 Row(
@@ -74,7 +84,9 @@ fun ContactReasonScreen(
                             title = "Övrigt",
                             onChangeText = {},
                             textValue = "",
-                            modifier = Modifier.fillMaxWidth().size(width = 200.dp, height = 100.dp)
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .size(width = 200.dp, height = 100.dp)
                         )
                     }
                     Column(Modifier.padding(start = 20.dp)) {
@@ -82,7 +94,9 @@ fun ContactReasonScreen(
                             title = "Förväntan på besöket",
                             onChangeText = {},
                             textValue = "",
-                            modifier = Modifier.fillMaxWidth().size(width = 200.dp, height = 100.dp)
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .size(width = 200.dp, height = 100.dp)
                         )
                     }
                 }
@@ -90,7 +104,9 @@ fun ContactReasonScreen(
 
                 val scrollState = rememberScrollState()
                 Box(
-                    modifier = Modifier.size(width = 600.dp, height = 250.dp).verticalScroll(scrollState)
+                    modifier = Modifier
+                        .size(width = 600.dp, height = 250.dp)
+                        .verticalScroll(scrollState)
                 ) {
                     Column(
                         modifier = Modifier.padding(top = 20.dp)

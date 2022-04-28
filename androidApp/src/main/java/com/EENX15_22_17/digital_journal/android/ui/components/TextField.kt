@@ -9,10 +9,6 @@ import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.text.TextStyle
@@ -25,17 +21,16 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun TitledTextField(
     title: String,
-    onChangeText: (textValue: String) -> Unit,
     textValue: String,
+    onChangeText: (textValue: String) -> Unit,
     modifier: Modifier = Modifier,
     isEnabled: Boolean = true,
     maxLines : Int = 1
 ) {
-    var text by rememberSaveable { mutableStateOf(textValue) }
     Box {
         OutlinedTextField(
-            value = text,
-            onValueChange = { text = it; onChangeText(it) },
+            value = textValue,
+            onValueChange = onChangeText,
             textStyle = TextStyle(fontSize = 20.sp),
             modifier = modifier
                 .width(200.dp)
@@ -56,14 +51,13 @@ fun TitledTextField(
 fun TitledTextFieldDigitKeyboard(
     modifier: Modifier = Modifier,
     title: String,
-    onChangeText: (textValue: String) -> Unit = {},
-    textValue: String
+    textValue: String,
+    onChangeText: (textValue: String) -> Unit = {}
 ) {
-    var text by rememberSaveable { mutableStateOf(textValue) }
     Box {
         OutlinedTextField(
-            value = text,
-            onValueChange = { text = it; onChangeText(it) },
+            value = textValue,
+            onValueChange = onChangeText,
             textStyle = TextStyle(fontSize = 20.sp),
             modifier = modifier
                 .width(160.dp)
