@@ -73,4 +73,5 @@ dependencies {
 
     //material dialogs components
     implementation ("io.github.vanpra.compose-material-dialogs:datetime:0.7.0")
+    implementation(kotlin("reflect"))
 }
