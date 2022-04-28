@@ -3,13 +3,11 @@ package com.EENX15_22_17.digital_journal.android
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material.Text
 import androidx.compose.material.Button
-import androidx.compose.material.ScaffoldState
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import com.EENX15_22_17.digital_journal.android.ui.drawer.DigitalJournalScaffold
 import com.EENX15_22_17.digital_journal.android.ui.theme.DigitalJournalTheme
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 
@@ -40,10 +38,10 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun PatientOverviewPage(
-    visitId: String,
+    patientId: String,
     navBack: () -> Unit
 ) {
-    Text(text = "The overviewPage for patient: $visitId")
+    Text(text = "The overviewPage for patient: $patientId")
     Button(onClick = navBack) {
         Text(text = "Nav back")
     }
