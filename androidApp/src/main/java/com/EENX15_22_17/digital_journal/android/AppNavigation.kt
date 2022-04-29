@@ -1,6 +1,5 @@
 package com.EENX15_22_17.digital_journal.android
 
-import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.Composable
 import androidx.navigation.*
 import androidx.navigation.compose.NavHost
@@ -17,8 +16,8 @@ import com.EENX15_22_17.digital_journal.android.screens.journal.triage.triageAss
 import com.EENX15_22_17.digital_journal.android.screens.journalList.JournalListViewModel
 import com.EENX15_22_17.digital_journal.android.screens.landingpage.JournalEntryOverviewScreen
 import com.EENX15_22_17.digital_journal.android.ui.current.JournalListScreen
-import com.EENX15_22_17.digital_journal.android.ui.screen.ContactReasonScreen
-import com.EENX15_22_17.digital_journal.android.ui.screen.ContactReasonViewModel
+import com.EENX15_22_17.digital_journal.android.screens.journal.triage.contactReason.ContactReasonScreen
+import com.EENX15_22_17.digital_journal.android.screens.journal.triage.contactReason.ContactReasonViewModel
 import org.kodein.di.DI
 import org.kodein.di.compose.androidContextDI
 import org.kodein.di.instance

@@ -1,4 +1,4 @@
-package com.EENX15_22_17.digital_journal.android.ui.screen
+package com.EENX15_22_17.digital_journal.android.screens.journal.triage.contactReason
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
@@ -12,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.EENX15_22_17.digital_journal.android.R
-import com.EENX15_22_17.digital_journal.android.screens.journal.triage.contactReason.RettsSymtomChip
 import com.EENX15_22_17.digital_journal.android.ui.DetailPageWrapper
 import com.EENX15_22_17.digital_journal.android.ui.components.TitledTextField
 import com.EENX15_22_17.digital_journal.android.ui.theme.Colors
