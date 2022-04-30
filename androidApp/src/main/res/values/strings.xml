@@ -49,5 +49,7 @@
     <string name="preliminaryAssessment">Bedömning</string>
     <string name="hospitalization">Inläggning</string>
     <string name="reportedTo">Patient rapporterad till</string>
+    <string name="previousHealtCare">Kontakt med vården</string>
+    <string name="previousJournalInPsychiatry">Tidigare journal inom psykiatri</string>
 
 </resources>
