@@ -1,14 +1,10 @@
 package com.EENX15_22_17.digital_journal.android.screens.journal.triage.previousCare
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Icon
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.CalendarMonth
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.EENX15_22_17.digital_journal.android.ui.components.*
 import se.predicare.journal.screens.PreviousCareDto
@@ -30,7 +26,9 @@ fun previousHealthCare(item: PreviousCareDto) {
                 title = "Via",
                 onChangeText = {}, //TODO: Implement View Model for previouscare Cause
                 textValue = "",
-                modifier = Modifier.padding(start = 10.dp, end = 10.dp).size(width = 200.dp, height = 60.dp)
+                modifier = Modifier
+                    .padding(start = 10.dp, end = 10.dp)
+                    .size(width = 200.dp, height = 60.dp)
             )
 
             LabeledRadioButton(
@@ -44,9 +42,11 @@ fun previousHealthCare(item: PreviousCareDto) {
             title = "Aktuell behandling",
             onChangeText = {}, //TODO: Implement View Model for previouscare Cause
             textValue = "",
-            modifier = Modifier.padding(top = 20.dp).size(width = 500.dp, height = 60.dp)
+            modifier = Modifier
+                .padding(top = 20.dp)
+                .size(width = 500.dp, height = 60.dp)
         )
-        visitTime(items = item, title = "Senast besöket")
+        visitTime(items = item, title = "Senast besöket") // Duplicate in Figma. Why?
         visitTime(items = item, title = "Senast besöket")
     }
 
@@ -60,21 +60,11 @@ fun visitTime(items: PreviousCareDto, title: String) {
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.padding(top = 20.dp)
     ) {
-        Row(
-            horizontalArrangement = Arrangement.Start,
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.size(height = 100.dp, width = 250.dp)
-        ) {
-            Icon(
-                imageVector = Icons.Rounded.CalendarMonth,
-                contentDescription = "calendar",
-                modifier = Modifier.size(42.dp).padding(end = 10.dp),
-                tint = Color.Gray
-            )
-
-            TitledSection(title = title) {} //TODO: Replace this with a really calendar (from Jonas)
-
-        }
+        TitledDateField(
+            modifier = Modifier.fillMaxWidth(0.5f),
+            title = "Tidigare Besöket",
+            onChangedDate = {}, //TODO: Implement View Model for previouscare Cause
+        )
         Row(
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically
@@ -83,13 +73,13 @@ fun visitTime(items: PreviousCareDto, title: String) {
                 title = "Behandlare",
                 onChangeText = {}, //TODO: Implement View Model for previouscare Cause
                 textValue = "",
-                modifier = Modifier.padding(start = 10.dp).size(width = 200.dp, height = 60.dp)
+                modifier = Modifier.padding(start = 10.dp).height(60.dp)
             )
             TitledTextField(
                 title = "Titel",
                 onChangeText = {}, //TODO: Implement View Model for previouscare Cause
                 textValue = "",
-                modifier = Modifier.padding(start = 10.dp).size(width = 200.dp, height = 60.dp)
+                modifier = Modifier.padding(start = 10.dp).height(60.dp)
             )
         }
     }
@@ -124,7 +114,9 @@ fun previousJournalInPsychiatry(item: PreviousCareDto) {
                 title = "Var",
                 onChangeText = {}, //TODO: Implement View Model for previouscare Cause
                 textValue = "",
-                modifier = Modifier.padding(start = 100.dp, end = 10.dp).size(width = 200.dp, height = 60.dp)
+                modifier = Modifier
+                    .padding(start = 100.dp, end = 10.dp)
+                    .size(width = 200.dp, height = 60.dp)
             )
 
         }
