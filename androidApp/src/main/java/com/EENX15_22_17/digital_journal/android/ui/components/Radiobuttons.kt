@@ -3,10 +3,7 @@ package com.EENX15_22_17.digital_journal.android.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.RadioButton
 import androidx.compose.material.Text
@@ -15,8 +12,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.EENX15_22_17.digital_journal.android.ui.modifyIf
+import com.EENX15_22_17.digital_journal.android.ui.theme.TextStyles
+import com.EENX15_22_17.digital_journal.android.ui.theme.checkboxBackgroundShape
+import com.EENX15_22_17.digital_journal.android.ui.theme.checkboxBoxBackgroundSize
 import com.EENX15_22_17.digital_journal.android.ui.theme.colorCheckBoxBeta
 
 
@@ -151,3 +155,45 @@ fun <E : Enum<*>> EnumRadioButtonWithTextField(
 
     }
 }
+
+@Composable
+fun LabeledRadioButton(
+    label: String,
+    checked: Boolean,
+    clickableText: Boolean = false,
+    onCheckedChange: (isChecked: Boolean) -> Unit,
+    isEnabled: Boolean = true
+) {
+    var isChecked by rememberSaveable { mutableStateOf(checked) }
+
+    fun changeState(newState: Boolean? = null) {
+        isChecked = newState ?: !isChecked
+        onCheckedChange(isChecked)
+    }
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Start
+    ) {
+        Box(contentAlignment = Alignment.Center) {
+            Box(Modifier
+                .size(checkboxBoxBackgroundSize)
+                .background(colorCheckBoxBeta, checkboxBackgroundShape)
+            )
+            RadioButton(
+                selected = isChecked,
+                onClick = ::changeState,
+                enabled = isEnabled
+            )
+        }
+        Text(
+            modifier = Modifier
+                .padding(start = 8.dp)
+                .modifyIf(clickableText, Modifier.clickable { changeState() }),
+            text = label,
+            style = TextStyles.checkboxLabel,
+            textAlign = TextAlign.Start
+        )
+    }
+}
+
