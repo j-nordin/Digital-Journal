@@ -178,7 +178,7 @@ fun LabeledRadioButton(
         Box(contentAlignment = Alignment.Center) {
             Box(Modifier
                 .size(checkboxBoxBackgroundSize)
-                .background(colorCheckBoxBeta, checkboxBackgroundShape)
+                .background(colorCheckBoxBeta, CircleShape)
             )
             RadioButton(
                 selected = isChecked,
