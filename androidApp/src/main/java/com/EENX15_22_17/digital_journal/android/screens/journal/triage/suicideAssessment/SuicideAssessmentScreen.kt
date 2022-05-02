@@ -10,7 +10,7 @@ import com.EENX15_22_17.digital_journal.android.R
 import com.EENX15_22_17.digital_journal.android.screens.journal.triage.suicideAssessment.protectivefactors.SuicideAssessmentModel
 import com.EENX15_22_17.digital_journal.android.screens.journal.triage.suicideAssessment.summarysuicidesection.SummarySection
 import com.EENX15_22_17.digital_journal.android.ui.DetailPageWrapper
-import com.EENX15_22_17.digital_journal.android.ui.components.TitledSectionTemp
+import com.EENX15_22_17.digital_journal.android.ui.components.TitledSection
 import com.EENX15_22_17.digital_journal.android.ui.theme.Colors
 
 @Composable
@@ -37,9 +37,9 @@ fun SuicideAssessmentScreen(
                     )
                 }
                 //Suicide steps
-                TitledSectionTemp("Suicidstegen") { SuicideStepsContent() }
+                TitledSection("Suicidstegen") { SuicideStepsContent() }
                 // Statistical Risk Factors
-                TitledSectionTemp("Statistiska riskfaktorer") { StatisticalRiskFactorsContent() }
+                TitledSection("Statistiska riskfaktorer") { StatisticalRiskFactorsContent() }
                 // Protective factors & Summary of suicide assessment
                 Row(
                     horizontalArrangement = Arrangement.Start,
@@ -48,10 +48,10 @@ fun SuicideAssessmentScreen(
                 ) {
 
                     Column(modifier = Modifier.fillMaxWidth(0.50f)) {
-                        TitledSectionTemp(title = "Skyddande faktorer") { ProtectiveFactorsContent() }
+                        TitledSection(title = "Skyddande faktorer") { ProtectiveFactorsContent() }
                     }
                     Column(Modifier.padding(start = 20.dp)) {
-                        TitledSectionTemp(title = "Summering") { SummarySection() }
+                        TitledSection(title = "Summering") { SummarySection() }
                     }
                 }
 

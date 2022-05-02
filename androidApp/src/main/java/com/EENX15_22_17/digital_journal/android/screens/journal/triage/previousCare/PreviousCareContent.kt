@@ -10,7 +10,7 @@ import com.EENX15_22_17.digital_journal.android.ui.components.*
 import se.predicare.journal.screens.PreviousCareDto
 
 @Composable
-fun previousHealthCare(item: PreviousCareDto) {
+fun PreviousHealthCare(item: PreviousCareDto) {
     Column() {
         Row(
             horizontalArrangement = Arrangement.Start,

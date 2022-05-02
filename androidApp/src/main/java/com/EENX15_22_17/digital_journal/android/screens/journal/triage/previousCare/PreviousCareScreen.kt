@@ -8,7 +8,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.EENX15_22_17.digital_journal.android.R
 import com.EENX15_22_17.digital_journal.android.ui.DetailPageWrapper
-import com.EENX15_22_17.digital_journal.android.ui.components.TitledSectionTemp
+import com.EENX15_22_17.digital_journal.android.ui.components.TitledSection
 import com.EENX15_22_17.digital_journal.android.ui.theme.Colors
 import se.predicare.journal.screens.PreviousCareDto
 
@@ -25,10 +25,10 @@ fun PreviousCareScreen(
         onMenuClicked = onMenuClicked
     ) {
         Column(modifier = Modifier.padding(top=20.dp)) {
-            TitledSectionTemp(title = stringResource(id = R.string.previousHealtCare)) {
-                previousHealthCare(item = PreviousCareDto())
+            TitledSection(title = stringResource(id = R.string.previousHealtCare)) {
+                PreviousHealthCare(item = PreviousCareDto())
             }
-            TitledSectionTemp(title = stringResource(id = R.string.previousJournalInPsychiatry)) {
+            TitledSection(title = stringResource(id = R.string.previousJournalInPsychiatry)) {
                 previousJournalInPsychiatry(item = PreviousCareDto())
             }
         }

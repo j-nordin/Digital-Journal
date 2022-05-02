@@ -38,7 +38,7 @@ fun TitledSection(
         Box(
             Modifier
                 .fillMaxWidth()
-                .padding(vertical = 15.dp)
+                .padding(vertical = 12.dp)
         ) {
             Box(
                 modifier = Modifier
