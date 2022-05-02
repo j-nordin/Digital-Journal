@@ -33,10 +33,10 @@ class ContactReasonViewModel(
 
     fun save() {
         viewModelScope.launch {
-            data.saveStatesToModel()
+            //data.saveStatesToModel()
             client.saveResource(resource, data.model)
         }.invokeOnCompletion {
-            update()
+            //update()
         }
     }
 

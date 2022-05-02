@@ -3,7 +3,7 @@ package com.EENX15_22_17.digital_journal.android.data
 import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import kotlinx.coroutines.delay
+import com.EENX15_22_17.digital_journal.android.Utils.instanceReferenceString
 import kotlin.reflect.KMutableProperty1
 import kotlin.reflect.KProperty1
 
@@ -32,27 +32,28 @@ open class MutableStateProviderFor<ModelT : Any> {
 
     private val stateHolders: MutableMap<KProperty1<*, *>, MutableState<*>> = mutableMapOf()
     private val stateSavers: MutableMap<KProperty1<*, *>, ((ModelT) -> Unit)> = mutableMapOf()
-    private val stateLoaders: MutableMap<KProperty1<*, *>, ((ModelT) -> Unit)> =
-        mutableMapOf()
+    private val stateLoaders: MutableMap<KProperty1<*, *>, ((ModelT) -> Unit)> = mutableMapOf()
 
     /**
-     * Registers [state] for the provided [property], or returns the same [state] if the property
-     * has been registered before.
+     * Registers the [MutableState] created from [stateHolderCreator] for the provided [property],
+     * or returns the same [MutableState] if the property already has a state registered before.
      */
-    private fun <PropT: Any?> registerStateForProperty(
+    private fun <PropT : Any?> registerStateForProperty(
         property: KMutableProperty1<ModelT, PropT>,
-        state: MutableState<PropT>
+        stateHolderCreator: () -> MutableState<PropT>
     ): MutableState<PropT> {
         return stateHolders.getOrPut(property) {
+            val state = stateHolderCreator()
+            Log.d(TAG, "Created new MutableState for property ${property.name}")
 
             stateSavers[property] = { model: ModelT ->
-                Log.d(TAG, "Saving state \"${state.value}\" to property ${property.name}")
+                Log.d(TAG, "  Saving state \"${state.value}\" to property ${property.name}")
                 property.set(model, state.value)
             }
 
             stateLoaders[property] = { model: ModelT ->
                 val value = property.get(model)
-                Log.d(TAG, "Loading state \"$value\" from property ${property.name}")
+                Log.d(TAG, "  Loading state \"$value\" from property ${property.name}")
                 state.value = value
             }
 
@@ -64,15 +65,18 @@ open class MutableStateProviderFor<ModelT : Any> {
      * Creates a nullable [MutableState] based on the provided [property] of nullable type [PropT]
      */
     @JvmName("nullableStateOf")
-    fun <PropT: Any> stateOf(property: KMutableProperty1<ModelT, PropT?>): MutableState<PropT?> {
-        return registerStateForProperty(property, mutableStateOf(null))
+    fun <PropT : Any> stateOf(property: KMutableProperty1<ModelT, PropT?>): MutableState<PropT?> {
+        return registerStateForProperty(property) { mutableStateOf(null) }
     }
 
     /**
      * Creates a [MutableState] based on the provided [property] of type [PropT]
      */
-    fun <PropT: Any> stateOf(property: KMutableProperty1<ModelT, PropT>, defaultValue: PropT): MutableState<PropT> {
-        return registerStateForProperty(property, mutableStateOf(defaultValue))
+    fun <PropT : Any> stateOf(
+        property: KMutableProperty1<ModelT, PropT>,
+        defaultValue: PropT
+    ): MutableState<PropT> {
+        return registerStateForProperty(property) { mutableStateOf(defaultValue) }
     }
 
     /**
@@ -84,23 +88,19 @@ open class MutableStateProviderFor<ModelT : Any> {
     ): MutableState<SubPropT?> {
         return stateHolders.getOrPut(subProp) {
             val state = mutableStateOf<SubPropT?>(null)
+            val propName = "${property.name}.${subProp.name}"
+            Log.d(TAG, "Created new MutableState for subProp $propName")
 
             stateSavers[subProp] = { model: ModelT ->
                 val subModel: PropT = property.get(model)
-                Log.d(
-                    TAG,
-                    "Saving state \"${state.value}\" to property ${property.name}.${subProp.name}"
-                )
+                Log.d(TAG, "  Saving state \"${state.value}\" to property $propName")
                 subProp.set(subModel, state.value)
             }
 
             stateLoaders[subProp] = { model: ModelT ->
                 val subModel: PropT = property.get(model)
                 val value = subProp.get(subModel)
-                Log.d(
-                    TAG,
-                    "Loading state \"$value\" from property ${property.name}.${subProp.name}"
-                )
+                Log.d(TAG, "  Loading state \"$value\" from property $propName")
                 state.value = value
             }
 
@@ -112,7 +112,7 @@ open class MutableStateProviderFor<ModelT : Any> {
      * Saves the states of all registered state-properties to the supplied [model] object.
      */
     fun saveStatesToModel(model: ModelT) {
-        Log.i(TAG, "Saving state to model")
+        Log.i(TAG, "Saving state to model ${model.instanceReferenceString}")
         stateSavers.forEach { (_, saver) ->
             saver(model)
         }
@@ -123,7 +123,7 @@ open class MutableStateProviderFor<ModelT : Any> {
      * state-properties.
      */
     fun loadStatesFromModel(model: ModelT) {
-        Log.i(TAG, "Loading state from model")
+        Log.i(TAG, "Loading state from model ${model.instanceReferenceString}")
         stateLoaders.forEach { (_, updater) ->
             updater(model)
         }
