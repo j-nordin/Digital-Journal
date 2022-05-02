@@ -48,6 +48,7 @@ fun PreviousHealthCare(item: PreviousCareDto) {
         )
         visitTime(items = item, title = "Senast besöket") // Duplicate in Figma. Why?
         visitTime(items = item, title = "Senast besöket")
+        Spacer(modifier = Modifier.size(10.dp))
     }
 
 }
