@@ -4,26 +4,38 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.EENX15_22_17.digital_journal.android.R
 import com.EENX15_22_17.digital_journal.android.ui.DetailPageWrapper
 import com.EENX15_22_17.digital_journal.android.ui.components.TitledSection
 import com.EENX15_22_17.digital_journal.android.ui.theme.Colors
+import se.predicare.journal.screens.PatientInformationDto
+import kotlinx.datetime.Clock
 
 
 @Composable
 fun PatientInfoScreen(
-    patientInfoViewModel: PatientInfoViewModel = PatientInfoViewModel(),
-    journalId: String,
+    vm: PatientInfoViewModel,
     onBackClicked: () -> Unit,
     onMenuClicked: () -> Unit
 ) {
 
+    var arrivalTime by vm.data.stateOf(PatientInformationDto::arrivalTime, Clock.System.now())
+    var ess by vm.data.stateOf(PatientInformationDto::ess)
+    var noBelongingsAtWard by vm.data.stateOf(PatientInformationDto::belongings, PatientInformationDto.Belongings::noBelongingsAtWard)
+
+    fun saveAndReturn() {
+        vm.save()
+        onBackClicked()
+    }
+
     DetailPageWrapper(
         title = stringResource(id = R.string.patientInfo),
         titleColor = Colors.arrivalPrimary,
-        onBackClicked = onBackClicked,
+        onBackClicked = ::saveAndReturn,
         onMenuClicked = onMenuClicked
     ) {
         Column {
