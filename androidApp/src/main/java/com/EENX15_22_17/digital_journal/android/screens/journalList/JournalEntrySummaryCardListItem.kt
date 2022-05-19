@@ -5,25 +5,15 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Info
-import androidx.compose.material.icons.rounded.Notifications
-import androidx.compose.material.icons.rounded.Warning
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.compose.ui.window.Dialog
-import com.EENX15_22_17.digital_journal.android.ui.theme.colorIcon
-import com.EENX15_22_17.digital_journal.android.ui.theme.danger
+import com.EENX15_22_17.digital_journal.android.ui.components.TitledSectionWithRettsColor
 import se.predicare.journal.data.JournalEntryDto
 
-@Composable
+/*@Composable
 // TODO: Replace default parameter-values with PreviewParameter-annotations when tooling is less buggy.
 fun JournalEntrySummaryCardListItem(
     journalId: String = "1",
@@ -37,10 +27,9 @@ fun JournalEntrySummaryCardListItem(
     var showComments by remember { mutableStateOf(false) }
     Card(
         modifier = Modifier
-            .padding(horizontal = 120.dp, vertical = 2.dp)
+            .padding(vertical = 2.dp)
             .fillMaxWidth()
             .clickable { onNavigateToJournal(journalId) },
-        backgroundColor = MaterialTheme.colors.primary
     ) {
         Row(horizontalArrangement = Arrangement.SpaceBetween) {
             Text(
@@ -91,6 +80,7 @@ fun JournalEntrySummaryCardListItem(
         }
     }
 }
+
 
 //TODO: Replace with the real warningContent
 @Composable
@@ -144,6 +134,7 @@ fun CommentsContent(journalId: String) {
         }
     }
 }
+*/
 
 
 @Preview
@@ -156,23 +147,43 @@ fun JournalList(
     onNavigateToPatient: (patientId: String) -> Unit = {}
 ) {
     val scrollState = rememberScrollState()
-    Box(
-        modifier
+    Column(
+        modifier = Modifier
+            .verticalScroll(scrollState)
             .height(400.dp)
     ) {
-        Column(
-            Modifier.verticalScroll(scrollState)
-        ) {
-            for (journal in journals) {
-                JournalEntrySummaryCardListItem(
-                    journalId = journal._id ?: "",
-                    name = journal.patientInfo.patientData?.name ?: "",
-                    securityNumber = journal.patientInfo.patientData?.personalId ?: "",
-                    // TODO: Navigate using real patientID
-                    onNavigateToPatient = { onNavigateToPatient("<patientId goes here>") },
-                    onNavigateToJournal = { onNavigateToJournal(it) }
-                )
-            }
+        for (journal in journals) {
+/*            JournalEntrySummaryCardListItem(
+                journalId = journal._id ?: "",
+                name = journal.patientInfo.patientData?.name ?: "",
+                securityNumber = journal.patientInfo.patientData?.personalId ?: "",
+                // TODO: Navigate using real patientID
+                onNavigateToPatient = { onNavigateToPatient("<patientId goes here>") },
+                onNavigateToJournal = { onNavigateToJournal(it) }
+            )*/
+
+            JournalListSummaryCard(
+                /*modifier = Modifier.clickable { journal._id?.let { onNavigateToJournal(it) } },
+                title = journal.patientInfo.patientData?.name ?: "",*/
+                journal = journal,
+                onNavigateToPatient = { onNavigateToPatient("<patientId goes here>") },
+                onNavigateToJournal = { onNavigateToJournal(it) }
+            )
+
         }
+    }
+}
+
+@Composable
+fun JournalListSummaryCard(
+    journal: JournalEntryDto,
+    onNavigateToPatient: () -> Unit,
+    onNavigateToJournal: (journalId: String) -> Unit
+    ) {
+    TitledSectionWithRettsColor(
+        modifier = Modifier.clickable { journal._id?.let { onNavigateToJournal(it) } },
+        title = journal.patientInfo.patientData?.name ?: "Patient",
+    ) {
+
     }
 }
