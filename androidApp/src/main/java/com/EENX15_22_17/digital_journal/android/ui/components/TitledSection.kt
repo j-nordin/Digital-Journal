@@ -6,12 +6,14 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -70,10 +72,12 @@ fun TitledSectionWithRettsColor(
     color: Color = Color.White,
     content: @Composable () -> Unit
 ) {
+
     Box(modifier) {
-        Row(modifier = Modifier
-            .zIndex(1f)
-            .fillMaxWidth(),
+        Row(
+            modifier = Modifier
+                .zIndex(1f)
+                .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Spacer(Modifier.size(10.dp))
@@ -94,18 +98,17 @@ fun TitledSectionWithRettsColor(
             )
         }
 
-        Box(
+        Card(
             Modifier
                 .fillMaxWidth()
                 .padding(vertical = 12.dp)
+                .border(BorderStroke(1.dp, colorTextGray), shape = RoundedCornerShape(20.dp)),
+            elevation = 6.dp,
+            shape = RoundedCornerShape(20.dp)
         ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .border(BorderStroke(1.dp, colorTextGray), shape = RoundedCornerShape(20.dp))
-                    .padding(top = 30.dp, bottom = 10.dp, start = 10.dp, end = 10.dp),
-                content = { content() },
-            )
+            Box(Modifier.padding(top = 20.dp, bottom = 10.dp, start = 15.dp, end = 15.dp)) {
+                content()
+            }
         }
     }
 }
