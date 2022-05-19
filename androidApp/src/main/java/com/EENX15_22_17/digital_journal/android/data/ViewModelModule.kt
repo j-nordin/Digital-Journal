@@ -1,6 +1,7 @@
 package com.EENX15_22_17.digital_journal.android.data
 
 import com.EENX15_22_17.digital_journal.android.screens.journal.JournalEntryViewModel
+import com.EENX15_22_17.digital_journal.android.screens.journal.arrival.patientInfo.PatientInfoViewModel
 import com.EENX15_22_17.digital_journal.android.screens.journalList.JournalListViewModel
 import com.EENX15_22_17.digital_journal.android.screens.journal.triage.contactReason.ContactReasonViewModel
 import org.kodein.di.DI
@@ -17,6 +18,10 @@ val ViewModelModule = DI.Module("ViewModelModule") {
     }
     bindMultiton<String, ContactReasonViewModel> { journalId ->
         ContactReasonViewModel(client = instance("azure"), journalId = journalId)
+    }
+
+    bindMultiton<String, PatientInfoViewModel> { journalId ->
+        PatientInfoViewModel(client = instance("azure"), journalId = journalId)
     }
 
 }
