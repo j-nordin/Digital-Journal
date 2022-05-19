@@ -20,7 +20,7 @@ import se.predicare.journal.screens.SomaticHealthDto
 
 @Composable
 fun JournalEntrySummaryCard(journal: JournalEntryDto) {
-    Text(text = journal?._id ?: "")
+    /*Text(text = journal?._id ?: "")*/
     TitledSectionWithRettsColor(title = "Journal") {
         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
             Row(horizontalArrangement = Arrangement.spacedBy(30.dp)) {
