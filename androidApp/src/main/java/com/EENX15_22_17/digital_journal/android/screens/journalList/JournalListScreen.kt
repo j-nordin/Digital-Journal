@@ -75,10 +75,12 @@ fun JournalListScreen(
 
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
                 Button(
-                    onClick = ::switchStateCreatePatientModal
+                    onClick = ::switchStateCreatePatientModal,
+                    shape = MaterialTheme.shapes.small,
+                    elevation = ButtonDefaults.elevation(defaultElevation = 7.dp)
                 ) {
                     Icon(imageVector = Icons.Default.Add, contentDescription = "Ny patient")
-                    Spacer(Modifier.size(2.dp))
+                    Spacer(Modifier.size(5.dp))
                     Text(text = "Ny Patient".uppercase())
                 }
             }

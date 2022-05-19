@@ -9,8 +9,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
@@ -51,6 +53,15 @@ fun TitledSection(
     }
 }
 
+@Preview(showBackground = true)
+@Composable
+private fun PreviewTitledSectionWithRettsColor() {
+    TitledSectionWithRettsColor(
+        title = "Titel",
+        color = Color.Yellow
+    ) {}
+}
+
 
 @Composable
 fun TitledSectionWithRettsColor(
@@ -60,12 +71,17 @@ fun TitledSectionWithRettsColor(
     content: @Composable () -> Unit
 ) {
     Box(modifier) {
-        Row(modifier = Modifier.zIndex(1f)) {
+        Row(modifier = Modifier
+            .zIndex(1f)
+            .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Spacer(Modifier.size(10.dp))
             Box(
                 modifier = Modifier
-                    .size(30.dp)
+                    .size(24.dp)
                     .background(color = color, CircleShape)
-                    .border(2.dp, Color.Black, CircleShape)
+                    .border(1.dp, lerp(color, Color.Black, 0.2f), CircleShape)
             )
             Text(
                 text = title,
@@ -73,22 +89,20 @@ fun TitledSectionWithRettsColor(
                 color = Color.Black,
                 modifier = Modifier
                     .zIndex(1f)
-                    .padding(horizontal = 20.dp)
+                    .padding(horizontal = 10.dp)
                     .background(color = Color.White, shape = CircleShape)
-                    .padding(horizontal = 2.dp)
-
             )
         }
 
         Box(
             Modifier
                 .fillMaxWidth()
-                .padding(vertical = 15.dp)
+                .padding(vertical = 12.dp)
         ) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .border(BorderStroke(1.dp, colorTextGray), shape = RoundedCornerShape(5))
+                    .border(BorderStroke(1.dp, colorTextGray), shape = RoundedCornerShape(20.dp))
                     .padding(top = 30.dp, bottom = 10.dp, start = 10.dp, end = 10.dp),
                 content = { content() },
             )
