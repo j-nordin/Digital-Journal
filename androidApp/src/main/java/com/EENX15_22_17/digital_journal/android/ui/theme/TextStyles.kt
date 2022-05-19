@@ -6,7 +6,7 @@ import androidx.compose.ui.unit.sp
 
 object TextStyles {
     val pageTitle = TextStyle(
-        fontSize = 36.sp,
+        fontSize = 32.sp,
         fontWeight = FontWeight.Normal,
         letterSpacing = 0.15.sp
     )
