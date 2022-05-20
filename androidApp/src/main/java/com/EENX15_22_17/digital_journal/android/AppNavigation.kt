@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.EENX15_22_17.digital_journal.android.screens.journal.arrival.hazardAssessment.HazardAssessmentScreen
 import com.EENX15_22_17.digital_journal.android.screens.journal.arrival.patientInfo.PatientInfoScreen
+import com.EENX15_22_17.digital_journal.android.screens.journal.arrival.patientInfo.PatientInfoViewModel
 import com.EENX15_22_17.digital_journal.android.screens.journal.events.JournalEventsScreen
 import com.EENX15_22_17.digital_journal.android.screens.journal.treatment.interim.InterimJournalScreen
 import com.EENX15_22_17.digital_journal.android.screens.journal.treatment.interim.InterimViewModel
@@ -148,8 +149,10 @@ private fun NavGraphBuilder.addPatientMeetingGraph(
         composable(
             route = JournalScreenRoute.PatientInfo.createRoute()
         ) { backStackEntry ->
+            val viewModel: PatientInfoViewModel by di.instance(arg = backStackEntry.getJournalId())
+            viewModel.update()
             PatientInfoScreen(
-                journalId = backStackEntry.getJournalId(),
+                viewModel,
                 onBackClicked = navController::popBackStack,
                 onMenuClicked = switchScaffoldDrawerState
             )

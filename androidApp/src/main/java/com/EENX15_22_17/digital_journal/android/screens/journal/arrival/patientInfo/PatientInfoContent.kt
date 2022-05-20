@@ -19,12 +19,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.text.isDigitsOnly
 import com.EENX15_22_17.digital_journal.android.R
-import com.EENX15_22_17.digital_journal.android.dataModel.YesAndNoAndNoAnswer
 import com.EENX15_22_17.digital_journal.android.dataModel.YesNo
 import com.EENX15_22_17.digital_journal.android.dataModel.yesNoLabels
-import com.EENX15_22_17.digital_journal.android.dataModel.yesNoNoAnswerLabels
 import com.EENX15_22_17.digital_journal.android.ui.components.EnumRadioButtonsHorizontal
-import com.EENX15_22_17.digital_journal.android.ui.components.LabeledCheckbox
 import com.EENX15_22_17.digital_journal.android.ui.components.TitledTextField
 import com.EENX15_22_17.digital_journal.android.ui.components.TitledTextFieldDigitKeyboard
 import com.EENX15_22_17.digital_journal.android.ui.theme.danger
@@ -50,7 +47,7 @@ fun DateField(date: String) {
 }
 
 @Composable
-fun ArrivalTime(setTimestamp: (ts: String) -> Unit, timeStamp: String) {
+fun ArrivalTime(setTimestamp: (time: Time?) -> Unit, time: Time) {
     Row(
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -61,8 +58,8 @@ fun ArrivalTime(setTimestamp: (ts: String) -> Unit, timeStamp: String) {
         )
         TitledTextFieldDigitKeyboard(
             title = stringResource(id = R.string.arrivalTime),
-            onChangeText = { setTimestamp(it) },
-            textValue = timeStamp
+            onChangeText = { setTimestamp(parseTime(it)) },
+            textValue = time.toString()
         )
     }
 }
@@ -76,82 +73,6 @@ fun EssNumber(setEssNumber: (ess: String) -> Unit, essNumber: String) {
             setEssNumber(it)
         },
         textValue = essNumber
-    )
-}
-
-@Composable
-fun BelongingsContent(
-    noBelongings: Boolean,
-    onHospital: Boolean,
-    byRelative: Boolean,
-    lockNumber: String,
-    onLockNumberChange: (lockNumber: String) -> Unit,
-    signature: String,
-    onSignatureChange: (sign: String) -> Unit
-) {
-    var noBelongingsChecked by rememberSaveable { mutableStateOf(noBelongings) }
-    var inHospitalChecked by rememberSaveable { mutableStateOf(onHospital) }
-    var byRelativeChecked by rememberSaveable { mutableStateOf(byRelative) }
-    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-        Row {
-            LabeledCheckbox(
-                label = "Finns inga på akutmottagningen",
-                checked = noBelongingsChecked,
-                onCheckedChange = { noBelongingsChecked = it }
-            )
-        }
-        Row(horizontalArrangement = Arrangement.spacedBy(40.dp)) {
-            LabeledCheckbox(
-                label = "Lämnat på akutmottagningen",
-                checked = inHospitalChecked,
-                onCheckedChange = { inHospitalChecked = it }
-            )
-            TitledTextField(
-                title = "Skåpsnummer",
-                onChangeText = onLockNumberChange,
-                textValue = lockNumber,
-                isEnabled = inHospitalChecked
-            )
-        }
-        Row(horizontalArrangement = Arrangement.spacedBy(40.dp)) {
-            LabeledCheckbox(
-                label = "Lämnat till anhörig/signering",
-                checked = byRelativeChecked,
-                onCheckedChange = { byRelativeChecked = it }
-            )
-            TitledTextField(
-                title = "Signering",
-                onChangeText = onSignatureChange,
-                textValue = signature,
-                isEnabled = byRelativeChecked
-            )
-        }
-    }
-
-}
-
-@Composable
-fun Secrecy(
-    value: YesAndNoAndNoAnswer,
-    onChange: (value: YesAndNoAndNoAnswer) -> Unit
-) {
-    EnumRadioButtonsHorizontal(
-        choices = yesNoNoAnswerLabels.keys.toTypedArray(),
-        labels = yesNoNoAnswerLabels,
-        currentChoice = value,
-        onSelection = onChange
-    )
-}
-
-@Composable
-fun SecrecyReservation(
-    setSecrecyReservation: (reservation: String) -> Unit,
-    reservation: String
-) {
-    TitledTextField(
-        title = stringResource(id = R.string.reservation),
-        textValue = reservation,
-        onChangeText = { setSecrecyReservation(it) }
     )
 }
 
