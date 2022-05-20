@@ -74,7 +74,7 @@ fun UnclickableChip(
     icon: ImageVector? = null
 ) {
     Surface(
-        modifier = modifier.padding(8.dp),
+        modifier = modifier.padding(4.dp),
         shape = CircleShape,
         border = BorderStroke(width = 1.dp, color = color)
     ) {

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -12,7 +13,9 @@ import androidx.compose.ui.unit.dp
 import com.EENX15_22_17.digital_journal.android.ui.components.CardChip
 import com.EENX15_22_17.digital_journal.android.ui.components.CardChipWithBorders
 import com.EENX15_22_17.digital_journal.android.ui.components.TitledSectionWithRettsColor
+import com.EENX15_22_17.digital_journal.android.ui.components.UnclickableChip
 import com.EENX15_22_17.digital_journal.android.ui.theme.Colors
+import com.EENX15_22_17.digital_journal.android.ui.theme.summarySuicideCard
 import se.predicare.journal.data.JournalEntryDto
 import se.predicare.journal.screens.HazardAssessmentDto
 import se.predicare.journal.screens.SomaticHealthDto
@@ -22,7 +25,7 @@ import se.predicare.journal.screens.SomaticHealthDto
 fun JournalEntrySummaryCard(journal: JournalEntryDto) {
     /*Text(text = journal?._id ?: "")*/
     TitledSectionWithRettsColor(title = "Patientjournal") {
-        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        Column(verticalArrangement = Arrangement.spacedBy(15.dp)) {
             Row(horizontalArrangement = Arrangement.spacedBy(30.dp)) {
                 Text(
                     text = "Namn: ${journal.patientInfo.patientData?.name}",
@@ -44,9 +47,10 @@ fun JournalEntrySummaryCard(journal: JournalEntryDto) {
 fun NursingCareContent(
     somaticHealthDto: SomaticHealthDto
 ) {
-    Row(modifier = Modifier.padding(top = 16.dp)) {
+    Row(verticalAlignment = Alignment.CenterVertically
+    ) {
         Text(
-            text = "Omvårdnatdsbehov: ",
+            text = "Omvårdnadsbehov: ",
             fontWeight = FontWeight.ExtraBold
         )
         //TODO: Value should be Ja or Nej
@@ -56,44 +60,16 @@ fun NursingCareContent(
         )
         Row(
             modifier = Modifier.padding(start = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(10.dp)
+            horizontalArrangement = Arrangement.Start
         ) {
             if (somaticHealthDto.requiredNursingCare.size > 0) {
                 somaticHealthDto.requiredNursingCare.forEach { nursingCare ->
-                    //TODO: value should be real nursingCare Strings
-                    CardChipWithBorders(
-                        modifier = Modifier
-                            .width(120.dp)
-                            .height(30.dp),
-                        value = nursingCare.name,
-                        backgroundColor = Color.White,
-                        color = Colors.triagePrimary,
-                        shape = CircleShape,
-                        border = BorderStroke(2.dp, Colors.triagePrimary)
-                    )
+                    UnclickableChip(text = nursingCare.name, color = summarySuicideCard)
                 }
             } else {
                 //TODO: Remove, just temporary to see how it looks
-                CardChipWithBorders(
-                    modifier = Modifier
-                        .width(120.dp)
-                        .height(30.dp),
-                    value = "VÄTSKEINTAG",
-                    backgroundColor = Color.White,
-                    color = Colors.triagePrimary,
-                    shape = CircleShape,
-                    border = BorderStroke(2.dp, Colors.triagePrimary)
-                )
-                CardChipWithBorders(
-                    modifier = Modifier
-                        .width(120.dp)
-                        .height(30.dp),
-                    value = "GÅ+STÅ",
-                    color = Colors.triagePrimary,
-                    backgroundColor = Color.White,
-                    shape = CircleShape,
-                    border = BorderStroke(2.dp, Colors.triagePrimary)
-                )
+                UnclickableChip(text = "Vätskeintag", color = summarySuicideCard)
+                UnclickableChip(text = "Ambulanssida", color = summarySuicideCard)
             }
         }
     }
@@ -104,7 +80,10 @@ fun NursingCareContent(
 fun BVCActions(
     hazardAssessmentDto: HazardAssessmentDto,
 ) {
-    Row(horizontalArrangement = Arrangement.spacedBy(30.dp)) {
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(30.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
         Row {
             Text(
                 text = "BVC-poäng: ",
