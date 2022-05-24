@@ -18,7 +18,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             val appState = rememberAppState()
             appState.navController.addOnDestinationChangedListener { controller, destination, arguments ->
-                Toast.makeText(this@MainActivity, "Navigating to \"${destination.route} (${destination.arguments.keys.joinToString(", ")})\"", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this@MainActivity, "Navigating to \"${destination.route} (${destination.arguments.keys.joinToString(", ")})\"", Toast.LENGTH_SHORT).show()
+                println("Navigating to \\\"${destination.route} (${destination.arguments.keys.joinToString(", ")})\\\"\"")
             }
             DigitalJournalScaffold(
                 scaffoldState = appState.scaffoldState,
